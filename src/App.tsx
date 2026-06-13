@@ -1,22 +1,28 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, type ReactNode, type MouseEvent } from 'react';
 import { 
   MonitorPlay, Wand2, PenTool, Cpu, Video, Download, 
   FileText, Shield, ArrowRight, PlayCircle, Settings, 
-  Layers, Mic, ChevronRight, Menu, X, Youtube,
+  Layers, Mic, ChevronRight, Menu, X,
   Code, Zap, Layout, Lightbulb, Users, CheckCircle, 
   AlertTriangle, ExternalLink
 } from 'lucide-react';
 
 // --- Reusable Intersection Observer Component for Scroll Animations ---
-const FadeInSection = ({ children, delay = '0ms', className = '' }) => {
+type FadeInProps = {
+  children: ReactNode;
+  delay?: string;
+  className?: string;
+} & React.HTMLAttributes<HTMLDivElement>;
+
+const FadeInSection = ({ children, delay = '0ms', className = '', ...props }: FadeInProps) => {
   const [isVisible, setVisible] = useState(false);
-  const domRef = useRef();
+  const domRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(entries => {
       if (entries[0].isIntersecting) {
         setVisible(true);
-        observer.unobserve(domRef.current);
+        if (domRef.current) observer.unobserve(domRef.current);
       }
     }, { threshold: 0.1 });
 
@@ -30,6 +36,7 @@ const FadeInSection = ({ children, delay = '0ms', className = '' }) => {
       ref={domRef} 
       className={`transform transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'} ${className}`} 
       style={{ transitionDelay: delay }}
+      {...props}
     >
       {children}
     </div>
@@ -50,7 +57,7 @@ const App = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navigate = (page, sectionId = null) => {
+  const navigate = (page: string, sectionId?: string) => {
     setCurrentPage(page);
     setIsMobileMenuOpen(false);
     
@@ -113,7 +120,7 @@ const App = () => {
       .docs-sidebar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
     `;
     document.head.appendChild(style);
-    return () => document.head.removeChild(style);
+    return () => { document.head.removeChild(style); };
   }, []);
 
   const Navbar = () => (
@@ -131,10 +138,16 @@ const App = () => {
 
           {/* Center: Vampro Creative Lab */}
           <div className="flex-shrink-0 flex flex-col items-center justify-center cursor-pointer group" onClick={() => navigate('home')}>
-            <span className="font-bank-gothic text-2xl md:text-3xl text-white tracking-[0.15em] leading-none mb-1 group-hover:text-blue-400 transition-colors duration-300">
-              VAMPRO
+            <span
+               style={{
+               fontFamily: "Orbitron, BankGothic Md BT",
+               color: "blue",
+               fontSize: "30px"
+             }}
+            >  
+             VAMPRO
             </span>
-            <span className="text-[10px] md:text-xs uppercase tracking-[0.3em] text-blue-400 font-semibold bg-blue-900/30 px-3 py-0.5 rounded-full border border-blue-500/20 shadow-[0_0_10px_rgba(59,130,246,0.2)]">
+            <span className="text-[10px] md:text-xs uppercase tracking-[0.3em] text--400 font-semibold bg-blue-900/30 px-3 py-0.5 rounded-full border border-blue-500/20 shadow-[0_0_10px_rgba(59,130,246,0.2)]">
               Creative Lab
             </span>
           </div>
@@ -150,8 +163,8 @@ const App = () => {
             <button onClick={() => navigate('plugin')} className={`text-sm font-medium transition-colors ${currentPage === 'plugin' ? 'text-blue-400' : 'text-slate-300 hover:text-white'}`}>
               Plugins
             </button>
-            <button onClick={() => window.open('https://youtube.com', '_blank')} className="text-sm font-medium text-slate-300 hover:text-red-400 transition-colors flex items-center gap-1.5 group">
-              YouTube <ExternalLink size={14} className="group-hover:translate-x-0.5 transition-transform"/>
+            <button onClick={() => window.open('https://YoutubeIcon.com', '_blank')} className="text-sm font-medium text-slate-300 hover:text-red-400 transition-colors flex items-center gap-1.5 group">
+              YoutubeIcon <PlayCircle size={14} className="group-hover:translate-x-0.5 transition-transform"/>
             </button>
           </div>
 
@@ -171,7 +184,7 @@ const App = () => {
           <button onClick={() => navigate('home', 'services')} className="block w-full text-left px-4 py-3 text-white font-medium hover:bg-slate-800 rounded-lg">Services</button>
           <button onClick={() => navigate('plugin')} className="block w-full text-left px-4 py-3 text-white font-medium hover:bg-slate-800 rounded-lg">Plugins</button>
           <button onClick={() => navigate('docs')} className="block w-full text-left px-4 py-3 text-white font-medium hover:bg-slate-800 rounded-lg">Documentation & Legal</button>
-          <button onClick={() => window.open('https://youtube.com', '_blank')} className="block w-full text-left px-4 py-3 text-red-400 font-medium hover:bg-slate-800 rounded-lg flex items-center gap-2">YouTube <ExternalLink size={16}/></button>
+          <button onClick={() => window.open('https://YoutubeIcon.com', '_blank')} className="block w-full text-left px-4 py-3 text-red-400 font-medium hover:bg-slate-800 rounded-lg flex items-center gap-2">YoutubeIcon <ExternalLink size={16}/></button>
         </div>
       )}
     </nav>
@@ -196,15 +209,15 @@ const App = () => {
             <li><button onClick={() => navigate('home', 'about')} className="hover:text-blue-400 transition-colors">About Us</button></li>
             <li><button onClick={() => navigate('home', 'services')} className="hover:text-blue-400 transition-colors">Services</button></li>
             <li><button onClick={() => navigate('plugin')} className="hover:text-blue-400 transition-colors">Plugins</button></li>
-            <li><button onClick={() => window.open('https://youtube.com', '_blank')} className="hover:text-red-400 transition-colors flex items-center gap-2">YouTube <ExternalLink size={12}/></button></li>
+            <li><button onClick={() => window.open('https://YoutubeIcon.com', '_blank')} className="hover:text-red-400 transition-colors flex items-center gap-2">YoutubeIcon <ExternalLink size={12}/></button></li>
           </ul>
         </div>
         <div>
           <h4 className="text-white font-semibold mb-6 uppercase tracking-wider text-sm">Knowledge Base</h4>
           <ul className="space-y-3">
             <li><button onClick={() => navigate('docs')} className="hover:text-blue-400 transition-colors">Documentation</button></li>
-            <li><button onClick={() => {navigate('docs'); setTimeout(()=> document.getElementById('terms').scrollIntoView({behavior:'smooth'}), 200)}} className="hover:text-blue-400 transition-colors">Terms of Use</button></li>
-            <li><button onClick={() => {navigate('docs'); setTimeout(()=> document.getElementById('privacy').scrollIntoView({behavior:'smooth'}), 200)}} className="hover:text-blue-400 transition-colors">Privacy Policy</button></li>
+            <li><button onClick={() => { navigate('docs'); setTimeout(() => { const el = document.getElementById('terms'); if (el) el.scrollIntoView({ behavior: 'smooth' }); }, 200); }} className="hover:text-blue-400 transition-colors">Terms of Use</button></li>
+            <li><button onClick={() => { navigate('docs'); setTimeout(() => { const el = document.getElementById('privacy'); if (el) el.scrollIntoView({ behavior: 'smooth' }); }, 200); }} className="hover:text-blue-400 transition-colors">Privacy Policy</button></li>
           </ul>
         </div>
       </div>
@@ -373,7 +386,7 @@ const App = () => {
         </div>
       </section>
 
-      {/* YouTube Section */}
+      {/* YoutubeIcon Section */}
       <section className="py-32 relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeInSection className="bg-white/80 backdrop-blur-xl border border-slate-200 rounded-[3rem] p-10 md:p-20 relative overflow-hidden flex flex-col lg:flex-row items-center justify-between gap-16 shadow-2xl">
@@ -382,19 +395,19 @@ const App = () => {
             
             <div className="relative z-10 lg:w-1/2">
               <div className="bg-red-50 text-red-600 w-16 h-16 rounded-2xl flex items-center justify-center mb-8 shadow-sm">
-                <Youtube size={36} />
+                <PlayCircle size={36} />
               </div>
               <h2 className="text-4xl md:text-6xl font-extrabold text-slate-900 mb-6 tracking-tight">Stories Behind <br/>the Build</h2>
               <p className="text-xl text-slate-600 mb-10 leading-relaxed font-light">
                 Follow the journey behind the projects. From filmmaking and design to software, electronics, and creative experiments, the channel is where ideas are explored, built, and shared.
               </p>
-              <button onClick={() => window.open('https://youtube.com', '_blank')} className="bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all shadow-lg hover:shadow-red-600/40 hover:-translate-y-1 flex items-center gap-3 group">
+              <button onClick={() => window.open('https://YoutubeIconIcon.com', '_blank')} className="bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all shadow-lg hover:shadow-red-600/40 hover:-translate-y-1 flex items-center gap-3 group">
                 Explore the Channel <ExternalLink size={20} className="group-hover:translate-x-0.5 transition-transform" />
               </button>
             </div>
 
             <div className="relative z-10 lg:w-1/2 flex justify-center w-full">
-              <div onClick={() => window.open('https://youtube.com', '_blank')} className="relative w-full aspect-video bg-slate-900 rounded-[2rem] shadow-2xl flex items-center justify-center group cursor-pointer overflow-hidden transform hover:scale-[1.02] transition-transform duration-500">
+              <div onClick={() => window.open('https://YoutubeIcon.com', '_blank')} className="relative w-full aspect-video bg-slate-900 rounded-[2rem] shadow-2xl flex items-center justify-center group cursor-pointer overflow-hidden transform hover:scale-[1.02] transition-transform duration-500">
                  <img src="splash.jpg" alt="Vampro Channel" className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-700" />
                  <div className="w-24 h-24 bg-red-600 rounded-full flex items-center justify-center relative z-20 group-hover:scale-110 transition-transform duration-300 shadow-[0_0_30px_rgba(220,38,38,0.5)]">
                     <PlayCircle className="text-white" size={48} fill="white"/>
@@ -441,7 +454,7 @@ const App = () => {
 
           {/* Dual CTAs with Image Icon Provision */}
           <FadeInSection delay="200ms" className="flex flex-col sm:flex-row justify-center items-center gap-5">
-            <button onClick={() => { document.getElementById('download').scrollIntoView({ behavior: 'smooth' }); }} className="w-full sm:w-auto bg-blue-600 hover:bg-blue-500 text-white px-10 py-5 rounded-2xl font-bold text-xl transition-all shadow-[0_0_30px_rgba(37,99,235,0.4)] hover:-translate-y-1 flex items-center justify-center gap-3">
+            <button onClick={() => { const el = document.getElementById('download'); if (el) el.scrollIntoView({ behavior: 'smooth' }); }} className="w-full sm:w-auto bg-blue-600 hover:bg-blue-500 text-white px-10 py-5 rounded-2xl font-bold text-xl transition-all shadow-[0_0_30px_rgba(37,99,235,0.4)] hover:-translate-y-1 flex items-center justify-center gap-3">
               <Download size={24} /> Get the Extension
             </button>
             <button onClick={() => window.open('#', '_blank')} className="w-full sm:w-auto bg-slate-900/80 backdrop-blur-md hover:bg-slate-800 border border-slate-700 text-white px-10 py-5 rounded-2xl font-bold text-xl transition-all shadow-xl hover:-translate-y-1 flex items-center justify-center gap-3">
@@ -519,7 +532,7 @@ const App = () => {
               {[
                 { title: "Stay Inside Premiere Pro", desc: "No need to jump between voice generation tools and your editing timeline." },
                 { title: "Reduce Production Time", desc: "Generate narration in minutes instead of recording, cleaning, and exporting audio manually." },
-                { title: "Built for Content Workflows", desc: "Designed for editors creating YouTube videos, explainers, demos, and presentations." },
+                { title: "Built for Content Workflows", desc: "Designed for editors creating YoutubeIcon videos, explainers, demos, and presentations." },
                 { title: "Simple Voice Generation", desc: "Paste a script, select a voice, and generate audio with minimal setup." }
               ].map((item, i) => (
                 <div 
@@ -559,7 +572,7 @@ const App = () => {
                          {[
                            "Experience a unified workspace without leaving your timeline.",
                            "Skip the manual recording and cleaning process.",
-                           "Perfect for YouTube, explainers, and presentations.",
+                           "Perfect for YoutubeIcon, explainers, and presentations.",
                            "Just paste, select, and generate in a few clicks."
                          ][activeReason]}
                       </p>
@@ -597,7 +610,7 @@ const App = () => {
           </FadeInSection>
 
           <FadeInSection delay="400ms">
-            <div onClick={() => window.open('https://youtube.com', '_blank')} className="relative max-w-5xl mx-auto aspect-video bg-slate-900 rounded-[2.5rem] shadow-2xl overflow-hidden group cursor-pointer border border-slate-800">
+            <div onClick={() => window.open('https://YoutubeIcon.com', '_blank')} className="relative max-w-5xl mx-auto aspect-video bg-slate-900 rounded-[2.5rem] shadow-2xl overflow-hidden group cursor-pointer border border-slate-800">
                 <img src="splash.jpg" className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-70 transition-opacity duration-700" alt="Tutorial Video" />
                 <div className="absolute inset-0 flex flex-col items-center justify-center bg-slate-950/20 group-hover:bg-transparent transition-colors duration-500">
                   <div className="w-24 h-24 bg-blue-600/90 backdrop-blur-md rounded-full flex items-center justify-center border border-white/20 shadow-[0_0_40px_rgba(37,99,235,0.5)] group-hover:scale-110 transition-transform duration-300">
@@ -618,7 +631,7 @@ const App = () => {
            </FadeInSection>
            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {[
-                { title: "YouTube Creators", desc: "Create narration without recording equipment." },
+                { title: "YoutubeIcon Creators", desc: "Create narration without recording equipment." },
                 { title: "Video Editors", desc: "Generate placeholder or final voiceovers quickly." },
                 { title: "Marketing Teams", desc: "Produce product demos and promotional videos faster." },
                 { title: "Educators", desc: "Turn scripts into spoken explanations with minimal effort." }
@@ -720,14 +733,14 @@ const App = () => {
                  <span className="text-blue-600 font-bold flex items-center gap-2 group">Read Docs <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform"/></span>
               </div>
               
-              <div className="glow-card bg-slate-50 p-10 rounded-[2rem] border border-slate-100 text-center flex flex-col items-center hover:shadow-xl hover:-translate-y-2 transition-all duration-300 cursor-pointer" onClick={() => {navigate('docs'); setTimeout(()=> document.getElementById('terms').scrollIntoView({behavior:'smooth'}), 200)}}>
+              <div className="glow-card bg-slate-50 p-10 rounded-[2rem] border border-slate-100 text-center flex flex-col items-center hover:shadow-xl hover:-translate-y-2 transition-all duration-300 cursor-pointer" onClick={() => { navigate('docs'); setTimeout(() => { const el = document.getElementById('terms'); if (el) el.scrollIntoView({ behavior: 'smooth' }); }, 200); }}>
                  <div className="w-16 h-16 bg-slate-200 text-slate-700 rounded-2xl flex items-center justify-center mb-6"><Shield size={32} /></div>
                  <h3 className="text-2xl font-bold mb-4 text-slate-900">Terms of Use</h3>
                  <p className="text-slate-500 mb-8 flex-grow leading-relaxed font-light">Licensing, restrictions, and general usage agreements for software distribution.</p>
                  <span className="text-slate-700 font-bold flex items-center gap-2 group">Full Terms <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform"/></span>
               </div>
               
-              <div className="glow-card bg-slate-50 p-10 rounded-[2rem] border border-slate-100 text-center flex flex-col items-center hover:shadow-xl hover:-translate-y-2 transition-all duration-300 cursor-pointer" onClick={() => {navigate('docs'); setTimeout(()=> document.getElementById('privacy').scrollIntoView({behavior:'smooth'}), 200)}}>
+              <div className="glow-card bg-slate-50 p-10 rounded-[2rem] border border-slate-100 text-center flex flex-col items-center hover:shadow-xl hover:-translate-y-2 transition-all duration-300 cursor-pointer" onClick={() => { navigate('docs'); setTimeout(() => { const el = document.getElementById('privacy'); if (el) el.scrollIntoView({ behavior: 'smooth' }); }, 200); }}>
                  <div className="w-16 h-16 bg-slate-200 text-slate-700 rounded-2xl flex items-center justify-center mb-6"><Shield size={32} /></div>
                  <h3 className="text-2xl font-bold mb-4 text-slate-900">Privacy Policy</h3>
                  <p className="text-slate-500 mb-8 flex-grow leading-relaxed font-light">How we handle data, local processing, telemetry, and user information.</p>
@@ -742,7 +755,7 @@ const App = () => {
 
   const DocsPage = () => {
     // Knowledge Base scroll helper for local anchors
-    const scrollToDocSection = (e, id) => {
+    const scrollToDocSection = (e: MouseEvent, id: string) => {
       e.preventDefault();
       const element = document.getElementById(id);
       if (element) {
@@ -894,7 +907,7 @@ const App = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-6">
                 <div className="bg-slate-50 p-6 rounded-xl border border-slate-100"><strong>Professional:</strong> Corporate videos, Training, Presentations</div>
                 <div className="bg-slate-50 p-6 rounded-xl border border-slate-100"><strong>Documentary:</strong> Educational, Narration, Explainers</div>
-                <div className="bg-slate-50 p-6 rounded-xl border border-slate-100"><strong>Voiceover:</strong> General, YouTube, Tutorials</div>
+                <div className="bg-slate-50 p-6 rounded-xl border border-slate-100"><strong>Voiceover:</strong> General, YoutubeIcon, Tutorials</div>
                 <div className="bg-slate-50 p-6 rounded-xl border border-slate-100"><strong>Dynamic:</strong> Promotional, Product showcases</div>
                 <div className="bg-slate-50 p-6 rounded-xl border border-slate-100"><strong>Casual:</strong> Social content, Informal narration</div>
                 <div className="bg-slate-50 p-6 rounded-xl border border-slate-100"><strong>Serious:</strong> Dramatic content, Formal presentations</div>
