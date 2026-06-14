@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
-  MonitorPlay, Wand2, Download, FileText, Shield, ArrowRight, PlayCircle,
+  MonitorPlay, Wand2, Download, FileText, Shield, ArrowRight,
   Layers, Mic, Zap, Layout, CheckCircle, AlertTriangle
 } from 'lucide-react';
 import FadeInSection from '../components/FadeInSection';
@@ -33,9 +33,7 @@ const AdobeVoice = () => {
   const [autoPlayReason, setAutoPlayReason] = useState(true);
 
   const whoRef = useRef<HTMLDivElement>(null);
-  const [whoVisible, setWhoVisible] = useState(false);
-  const [activeWho, setActiveWho] = useState(-1);
-  const [autoPlayWho, setAutoPlayWho] = useState(false);
+  const [activeWho] = useState(-1);
 
   const handleWaitlist = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -65,7 +63,7 @@ const AdobeVoice = () => {
     const el = whoRef.current;
     if (!el) return;
     const obs = new IntersectionObserver(entries => {
-      if (entries[0].isIntersecting) { setWhoVisible(true); obs.disconnect(); }
+      if (entries[0].isIntersecting) { obs.disconnect(); }
     }, { threshold: 0.2 });
     obs.observe(el);
     return () => obs.disconnect();
@@ -101,13 +99,6 @@ const AdobeVoice = () => {
     { num: '3', title: 'Choose Voice', desc: 'Select a voice profile', icon: <Mic size={28} /> },
     { num: '4', title: 'Generate', desc: 'AI processes your audio', icon: <Zap size={28} /> },
     { num: '5', title: 'Download', desc: 'Use in your project', icon: <Download size={28} /> },
-  ];
-  const stepDescs = [
-    'Open Premiere Pro → Window → Extensions → Vampro Voice Generator Text-to-Speech.',
-    'Type or paste your voiceover script directly into the plugin panel.',
-    'Pick a voice profile that matches your content style and tone.',
-    'Click Generate — your audio is processed through our cloud AI engine.',
-    'The narration appears in your Premiere Pro project, ready to use.',
   ];
 
 
@@ -330,8 +321,6 @@ const AdobeVoice = () => {
               <FadeInSection key={i} delay={`${i * 80}ms`}>
                 <TiltCard>
                   <div
-                    onClick={() => { setActiveWho(i); setAutoPlayWho(false); }}
-                    onMouseEnter={() => { setActiveWho(i); setAutoPlayWho(false); }}
                     className={`group glass-card rounded-[2rem] h-[600px] flex flex-col justify-end p-7 relative overflow-hidden cursor-pointer transition-all duration-500 ${item.hoverShadow} ${activeWho === i ? `${item.shadow} scale-[1.02]` : 'border-transparent'}`}
                   >
                     <img src={item.image} className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${activeWho === i ? 'opacity-50 scale-105' : 'opacity-0 scale-100 group-hover:opacity-10 group-hover:scale-105'}`} alt={item.title} />

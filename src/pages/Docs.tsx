@@ -61,7 +61,7 @@ const Docs = () => {
               </DocSection>
 
               <DocSection id="installation" title="Installation Guide">
-                {[['Step 1 – Install Extension', 'Install from Adobe Marketplace and restart Premiere Pro. (App is still not launched in the marketplace*)'], ['Step 2 – Install Voice Service', 'Run Vampro Voice Generator Installer.exe. It sets up the service, configures auto-startup, installs AI components. Restart Premiere Pro.'], ['Step 3 – Open Extension', 'Go to Window → Extensions → Vampro Voice Generator Text-to-Speech.']].map(([t, b], i) => (
+                {[['Step 1 – Install Extension', 'Install from Adobe Marketplace and restart Premiere Pro. (App is still not launched in the marketplace*)'], ['Step 2 – Install Voice Service', 'Run Vampro Voice Generator Installer.exe. It sets up the service, configures auto-startup, installs AI components. Restart Premiere Pro.'], ['Step 3 – Open Extension', 'Go to Window → Extensions → Vampro Voice Generator Text-to-Speech.']].map(([t, b]) => (
                   <div key={t} className="mb-8">
                     <DocH3 blue>{t}</DocH3>
                     <p className="text-slate-400 text-sm leading-relaxed mb-4">{b}</p>
