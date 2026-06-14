@@ -61,21 +61,21 @@ const Docs = () => {
               </DocSection>
 
               <DocSection id="installation" title="Installation Guide">
-                {[['Step 1 – Install Extension', 'Install from Adobe Exchange and restart Premiere Pro.'], ['Step 2 – Install Voice Service', 'Run Vampro Voice Generator Installer.exe. It sets up the service, configures auto-startup, installs AI components. Restart Premiere Pro.'], ['Step 3 – Open Extension', 'Go to Window → Extensions → Vampro Voice Generator Text-to-Speech.']].map(([t, b], i) => (
+                {[['Step 1 – Install Extension', 'Install from Adobe Marketplace and restart Premiere Pro. (App is still not launched in the marketplace*)'], ['Step 2 – Install Voice Service', 'Run Vampro Voice Generator Installer.exe. It sets up the service, configures auto-startup, installs AI components. Restart Premiere Pro.'], ['Step 3 – Open Extension', 'Go to Window → Extensions → Vampro Voice Generator Text-to-Speech.']].map(([t, b], i) => (
                   <div key={t} className="mb-8">
                     <DocH3 blue>{t}</DocH3>
                     <p className="text-slate-400 text-sm leading-relaxed mb-4">{b}</p>
-                    <div className="w-full h-48 md:h-64 bg-indigo-900/20 border border-indigo-500/20 rounded-xl flex items-center justify-center text-indigo-500/50 text-sm font-semibold">
+                    {/* <div className="w-full h-48 md:h-64 bg-indigo-900/20 border border-indigo-500/20 rounded-xl flex items-center justify-center text-indigo-500/50 text-sm font-semibold">
                       [Image Placeholder {i + 1}]
-                    </div>
+                    </div> */}
                   </div>
                 ))}
               </DocSection>
 
               <DocSection id="quick-start" title="Quick Start">
-                <div className="w-full h-64 md:h-80 bg-indigo-900/20 border border-indigo-500/20 rounded-xl flex items-center justify-center text-indigo-500/50 text-sm font-semibold mb-8 mt-2">
+                {/* <div className="w-full h-64 md:h-80 bg-indigo-900/20 border border-indigo-500/20 rounded-xl flex items-center justify-center text-indigo-500/50 text-sm font-semibold mb-8 mt-2">
                   [GIF Placeholder 1]
-                </div>
+                </div> */}
                 <ol className="space-y-6">
                   {[
                     ['Enter Text', 'Type or paste your script.'],
@@ -92,11 +92,11 @@ const Docs = () => {
                         <div className="w-7 h-7 bg-[#3B3BFF] rounded-lg flex items-center justify-center text-white font-bold text-xs flex-shrink-0">{i + 1}</div>
                         <div className="text-sm"><strong className="text-white">{t}:</strong> <span className="text-slate-400">{b}</span></div>
                       </div>
-                      {i < 6 && (
+                      {/* {i < 6 && (
                         <div className="ml-10 w-full max-w-2xl h-40 bg-indigo-900/20 border border-indigo-500/20 rounded-xl flex items-center justify-center text-indigo-500/50 text-sm font-semibold">
                           [Image Placeholder {i + 1}]
                         </div>
-                      )}
+                      )} */}
                     </li>
                   ))}
                 </ol>
@@ -116,7 +116,7 @@ const Docs = () => {
               <DocSection id="audio-management" title="Audio Management">
                 <p className="text-slate-400 text-sm mb-6">Generated audio files are stored locally by the Vampro Voice Service with metadata (text, voice, tone, speed, pitch, creation time). Modify settings and regenerate as needed.</p>
 
-                <div className="w-full h-64 md:h-80 bg-indigo-900/20 border border-indigo-500/20 rounded-xl flex items-center justify-center text-indigo-500/50 text-sm font-semibold mb-6">
+                {/* <div className="w-full h-64 md:h-80 bg-indigo-900/20 border border-indigo-500/20 rounded-xl flex items-center justify-center text-indigo-500/50 text-sm font-semibold mb-6">
                   [GIF Placeholder 1]
                 </div>
 
@@ -126,7 +126,7 @@ const Docs = () => {
                       [Image Placeholder {i}]
                     </div>
                   ))}
-                </div>
+                </div> */}
               </DocSection>
 
               <DocSection id="troubleshooting" title="Troubleshooting" accent="text-red-400">

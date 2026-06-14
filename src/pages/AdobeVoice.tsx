@@ -17,6 +17,14 @@ const AdobeVoice = () => {
 
   const [activeStep, setActiveStep] = useState(0);
   const [activeReason, setActiveReason] = useState(0);
+
+  const reasonImages = [
+    "/reason1.png",
+    "/reason2.png",
+    "/reason3.png",
+    "/reason4.png",
+  ];
+
   const [stepsRevealed, setStepsRevealed] = useState(false);
   const [autoPlayHow, setAutoPlayHow] = useState(true);
 
@@ -26,8 +34,14 @@ const AdobeVoice = () => {
 
   const whoRef = useRef<HTMLDivElement>(null);
   const [whoVisible, setWhoVisible] = useState(false);
-  const [activeWho, setActiveWho] = useState(0);
-  const [autoPlayWho, setAutoPlayWho] = useState(true);
+  const [activeWho, setActiveWho] = useState(-1);
+  const [autoPlayWho, setAutoPlayWho] = useState(false);
+
+  const handleWaitlist = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    window.dispatchEvent(new CustomEvent('waitlist-join'));
+  };
 
   useEffect(() => {
     const el = reasonRef.current;
@@ -57,13 +71,7 @@ const AdobeVoice = () => {
     return () => obs.disconnect();
   }, []);
 
-  useEffect(() => {
-    if (!whoVisible || !autoPlayWho) return;
-    const interval = setInterval(() => {
-      setActiveWho(prev => (prev + 1) % 4);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, [whoVisible, autoPlayWho]);
+  // Autoscroll removed as per request
 
   useEffect(() => {
     const el = howRef.current;
@@ -102,6 +110,8 @@ const AdobeVoice = () => {
     'The narration appears in your Premiere Pro project, ready to use.',
   ];
 
+
+
   const navigate = (path: string) => {
     nav(path);
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -110,8 +120,11 @@ const AdobeVoice = () => {
   return (
     <div className="min-h-screen">
       {/* Announcement */}
-      <div className="bg-gradient-to-r from-[#3B3BFF] via-[#1B2A6B] to-[#3B3BFF] text-white py-2.5 px-4 text-center sticky top-[96px] z-40">
-        <span className="text-xs font-bold tracking-widest uppercase opacity-90">From script to voiceover — without leaving Premiere Pro</span>
+      <div className="bg-gradient-to-r from-[#3B3BFF] via-[#1B2A6B] to-[#3B3BFF] text-white py-2.5 px-4 flex items-center justify-center gap-4 sticky top-[96px] z-40">
+        <span className="text-xs font-bold tracking-widest uppercase opacity-90">From script to voiceover — without leaving Premiere Pro (App yet to be launched*)</span>
+        <button onClick={handleWaitlist} className="bg-white/20 hover:bg-white/30 text-white px-3 py-1 rounded-full text-[10px] sm:text-xs font-bold transition-colors shadow-sm">
+          Join Waitlist
+        </button>
       </div>
 
       {/* HERO — dark with waveform and text particles */}
@@ -135,14 +148,26 @@ const AdobeVoice = () => {
             </p>
           </FadeInSection>
           <FadeInSection delay="200ms" className="flex flex-col sm:flex-row justify-center items-center gap-4">
-            <button onClick={() => { document.getElementById('download')?.scrollIntoView({ behavior: 'smooth' }); }} className="group relative w-full sm:w-auto bg-[#3B3BFF] text-white px-9 py-4 rounded-2xl font-bold text-lg overflow-hidden transition-all shadow-[0_0_40px_rgba(59,59,255,0.4)] hover:-translate-y-1 flex items-center justify-center gap-2">
-              <span className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity" />
-              <Download size={20} className="relative z-10" /><span className="relative z-10">Get the Extension</span>
-            </button>
-            <button onClick={() => window.open('#', '_blank')} className="w-full sm:w-auto glass-card hover:border-indigo-500/40 text-white px-9 py-4 rounded-2xl font-bold text-lg transition-all hover:-translate-y-1 flex items-center justify-center gap-2">
-              <div className="w-6 h-6 bg-red-600 rounded flex items-center justify-center"><span className="text-[9px] font-black text-white">Ae</span></div>
-              View in Marketplace
-            </button>
+            <div className="relative group/plugin w-full sm:w-auto">
+              <div className="absolute -top-14 left-1/2 -translate-x-1/2 whitespace-nowrap bg-amber-500/10 backdrop-blur-md border border-amber-500/20 text-amber-400 px-3 py-1.5 rounded-full text-sm font-semibold flex items-center gap-2 opacity-0 group-hover/plugin:opacity-100 transition-opacity z-20 pointer-events-none group-hover/plugin:pointer-events-auto">
+                App yet to be launched
+                <button onClick={handleWaitlist} className="bg-amber-500/20 hover:bg-amber-500/40 text-amber-400 w-6 h-6 rounded-full flex items-center justify-center transition-colors pointer-events-auto" title="Join Waitlist">+</button>
+              </div>
+              <button onClick={() => { document.getElementById('download')?.scrollIntoView({ behavior: 'smooth' }); }} className="group relative w-full sm:w-auto bg-[#3B3BFF] text-white px-9 py-4 rounded-2xl font-bold text-lg overflow-hidden transition-all shadow-[0_0_40px_rgba(59,59,255,0.4)] hover:-translate-y-1 flex items-center justify-center gap-2">
+                <span className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity" />
+                <Download size={20} className="relative z-10" /><span className="relative z-10">Get the Extension</span>
+              </button>
+            </div>
+            <div className="relative group/plugin w-full sm:w-auto">
+              <div className="absolute -top-14 left-1/2 -translate-x-1/2 whitespace-nowrap bg-amber-500/10 backdrop-blur-md border border-amber-500/20 text-amber-400 px-3 py-1.5 rounded-full text-sm font-semibold flex items-center gap-2 opacity-0 group-hover/plugin:opacity-100 transition-opacity z-20 pointer-events-none group-hover/plugin:pointer-events-auto">
+                App yet to be launched
+                <button onClick={handleWaitlist} className="bg-amber-500/20 hover:bg-amber-500/40 text-amber-400 w-6 h-6 rounded-full flex items-center justify-center transition-colors pointer-events-auto" title="Join Waitlist">+</button>
+              </div>
+              <button onClick={() => window.open('#', '_blank')} className="w-full sm:w-auto glass-card hover:border-indigo-500/40 text-white px-9 py-4 rounded-2xl font-bold text-lg transition-all hover:-translate-y-1 flex items-center justify-center gap-2">
+                <div className="w-6 h-6 bg-red-600 rounded flex items-center justify-center"><span className="text-[9px] font-black text-white">Ae</span></div>
+                View in Marketplace
+              </button>
+            </div>
           </FadeInSection>
         </div>
       </section>
@@ -210,19 +235,17 @@ const AdobeVoice = () => {
             )}
           </div>
 
-          {/* Image panel — stable */}
-          <div className="mt-6">
-            <div className="relative w-full h-56 md:h-72 rounded-[2rem] overflow-hidden shadow-xl border border-slate-200" style={{ background: '#07060F' }}>
-              <img src="/splash.jpg" className="absolute inset-0 w-full h-full object-cover opacity-25 transition-opacity duration-500" alt={`Step ${activeStep + 1}`} />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#07060F]/95 via-[#07060F]/50 to-transparent" />
-              <div className="absolute inset-0 flex items-end p-8 md:p-10">
-                <div className="transition-all duration-500">
-                  <span className="text-[#3B3BFF] font-bold tracking-widest uppercase text-xs mb-1 block animate-fade-in">Step {activeStep + 1} — {steps[activeStep].title}</span>
-                  <h3 className="text-white font-bold text-xl md:text-3xl leading-tight animate-fade-up">{stepDescs[activeStep]}</h3>
-                </div>
-              </div>
+          <FadeInSection delay="200ms">
+            <div className="relative mt-10 max-w-5xl mx-auto aspect-video rounded-[2rem] overflow-hidden shadow-xl border border-slate-200">
+              <iframe
+                className="absolute inset-0 w-full h-full"
+                src="https://www.youtube.com/embed/_-GJ3CX9iuI"
+                title="Vampro Voice Generator Tutorial"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
             </div>
-          </div>
+          </FadeInSection>
         </div>
       </section>
 
@@ -250,8 +273,8 @@ const AdobeVoice = () => {
             </FadeInSection>
             <FadeInSection delay="200ms">
               <div className="relative aspect-video glass-card rounded-[2rem] overflow-hidden">
-                <img src="/splash.jpg" className="absolute inset-0 w-full h-full object-cover opacity-30 transition-opacity duration-500" alt="Feature" />
-                <div key={activeReason} className="absolute inset-0 bg-gradient-to-t from-[#07060F]/90 via-[#07060F]/40 to-transparent flex flex-col justify-end p-8 animate-fade-up">
+                <img key={activeReason} src={reasonImages[activeReason]} className="absolute inset-0 w-full h-full object-contain bg-black" alt="Feature" />
+                <div key={activeReason} className="absolute inset-0 bg-gradient-to-t from-[#07060F]/70 via-[#07060F]/20 to-transparent flex flex-col justify-end p-8 animate-fade-up">
                   <div className="w-10 h-10 bg-[#3B3BFF] rounded-xl flex items-center justify-center mb-4 animate-glow-pulse">
                     {[<Layers size={18} />, <Zap size={18} />, <MonitorPlay size={18} />, <Wand2 size={18} />][activeReason]}
                   </div>
@@ -272,7 +295,7 @@ const AdobeVoice = () => {
       <section className="py-24 md:py-32 sketchbook-bg relative">
         <div className="w-full px-6 md:px-10 lg:px-16 relative z-10">
           <FadeInSection><h2 className="text-3xl md:text-5xl font-extrabold text-[#07060F] mb-12 text-center">Built Around Your Workflow</h2></FadeInSection>
-          <FadeInSection delay="100ms" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+          <FadeInSection delay="100ms" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               { icon: <Zap size={22} />, title: 'AI Voice Generation', desc: 'Convert text into natural-sounding speech directly from Premiere Pro.' },
               { icon: <Mic size={22} />, title: 'Multiple Profiles', desc: 'Choose from available voices based on your project\'s tone.' },
@@ -288,15 +311,7 @@ const AdobeVoice = () => {
               </TiltCard>
             ))}
           </FadeInSection>
-          <FadeInSection delay="200ms">
-            <div onClick={() => window.open('https://youtube.com', '_blank')} className="relative max-w-5xl mx-auto aspect-video rounded-[2rem] overflow-hidden group cursor-pointer shadow-xl border border-slate-200">
-              <img src="/splash.jpg" className="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:opacity-50 transition-opacity duration-700" alt="Tutorial" />
-              <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#07060F]/30">
-                <div className="w-16 h-16 bg-[#3B3BFF]/80 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform animate-glow-pulse"><PlayCircle size={36} className="text-white ml-1" /></div>
-                <span className="mt-4 text-white font-bold tracking-widest uppercase text-xs bg-[#07060F]/70 px-4 py-2 rounded-full">Watch Tutorial</span>
-              </div>
-            </div>
-          </FadeInSection>
+
         </div>
       </section>
 
@@ -307,10 +322,10 @@ const AdobeVoice = () => {
           <FadeInSection className="text-center mb-12"><h2 className="text-3xl md:text-5xl font-extrabold text-white">Who Is It For?</h2></FadeInSection>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { title: 'YouTube Creators', desc: 'Narration without recording equipment.', colorClass: 'red', shadow: 'shadow-[0_0_24px_rgba(239,68,68,0.15)] border-red-500/30', hoverShadow: 'group-hover:shadow-[0_0_24px_rgba(239,68,68,0.15)] group-hover:border-red-500/30', bgGlow: 'from-red-500/20', bar: 'bg-red-500' },
-              { title: 'Video Editors', desc: 'Generate voiceovers quickly.', colorClass: 'violet', shadow: 'shadow-[0_0_24px_rgba(139,92,246,0.15)] border-violet-500/30', hoverShadow: 'group-hover:shadow-[0_0_24px_rgba(139,92,246,0.15)] group-hover:border-violet-500/30', bgGlow: 'from-violet-500/20', bar: 'bg-violet-500' },
-              { title: 'Marketing Teams', desc: 'Produce demos faster.', colorClass: 'green', shadow: 'shadow-[0_0_24px_rgba(34,197,94,0.15)] border-green-500/30', hoverShadow: 'group-hover:shadow-[0_0_24px_rgba(34,197,94,0.15)] group-hover:border-green-500/30', bgGlow: 'from-green-500/20', bar: 'bg-green-500' },
-              { title: 'Educators', desc: 'Scripts into spoken explanations.', colorClass: 'yellow', shadow: 'shadow-[0_0_24px_rgba(234,179,8,0.15)] border-yellow-500/30', hoverShadow: 'group-hover:shadow-[0_0_24px_rgba(234,179,8,0.15)] group-hover:border-yellow-500/30', bgGlow: 'from-yellow-500/20', bar: 'bg-yellow-500' },
+              { title: 'YouTube Creators', desc: 'Narration without recording equipment.', image: '/creator.png', colorClass: 'red', shadow: 'shadow-[0_0_24px_rgba(239,68,68,0.15)] border-red-500/30', hoverShadow: 'group-hover:shadow-[0_0_24px_rgba(239,68,68,0.15)] group-hover:border-red-500/30', bgGlow: 'from-red-500/20', bar: 'bg-red-500' },
+              { title: 'Video Editors', desc: 'Generate voiceovers quickly.', image: '/editor.png', colorClass: 'violet', shadow: 'shadow-[0_0_24px_rgba(139,92,246,0.15)] border-violet-500/30', hoverShadow: 'group-hover:shadow-[0_0_24px_rgba(139,92,246,0.15)] group-hover:border-violet-500/30', bgGlow: 'from-violet-500/20', bar: 'bg-violet-500' },
+              { title: 'Marketing Teams', desc: 'Produce demos faster.', image: '/marketing.png', colorClass: 'green', shadow: 'shadow-[0_0_24px_rgba(34,197,94,0.15)] border-green-500/30', hoverShadow: 'group-hover:shadow-[0_0_24px_rgba(34,197,94,0.15)] group-hover:border-green-500/30', bgGlow: 'from-green-500/20', bar: 'bg-green-500' },
+              { title: 'Educators', desc: 'Scripts into spoken explanations.', image: '/educator.png', colorClass: 'yellow', shadow: 'shadow-[0_0_24px_rgba(234,179,8,0.15)] border-yellow-500/30', hoverShadow: 'group-hover:shadow-[0_0_24px_rgba(234,179,8,0.15)] group-hover:border-yellow-500/30', bgGlow: 'from-yellow-500/2₀', bar: 'bg-yellow-5₀' },
             ].map((item, i) => (
               <FadeInSection key={i} delay={`${i * 80}ms`}>
                 <TiltCard>
@@ -319,10 +334,10 @@ const AdobeVoice = () => {
                     onMouseEnter={() => { setActiveWho(i); setAutoPlayWho(false); }}
                     className={`group glass-card rounded-[2rem] h-[600px] flex flex-col justify-end p-7 relative overflow-hidden cursor-pointer transition-all duration-500 ${item.hoverShadow} ${activeWho === i ? `${item.shadow} scale-[1.02]` : 'border-transparent'}`}
                   >
-                    <img src="/splash.jpg" className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${activeWho === i ? 'opacity-25 scale-105' : 'opacity-0 scale-100 group-hover:opacity-10 group-hover:scale-105'}`} alt={item.title} />
+                    <img src={item.image} className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${activeWho === i ? 'opacity-50 scale-105' : 'opacity-0 scale-100 group-hover:opacity-10 group-hover:scale-105'}`} alt={item.title} />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#07060F]/95 via-[#07060F]/40 to-transparent pointer-events-none" />
                     <div className={`absolute inset-0 bg-gradient-to-t ${item.bgGlow} to-transparent opacity-0 transition-opacity duration-500 pointer-events-none ${activeWho === i ? 'opacity-100' : 'group-hover:opacity-100'}`} />
-                    <div className="relative z-10">
+                    <div className="relative z-10 transition-transform duration-500 -translate-y-[230px] group-hover:translate-y-0">
                       <h3 className="font-bold text-xl text-white mb-2">{item.title}</h3>
                       <p className="text-slate-400 text-sm">{item.desc}</p>
                       <div className={`mt-3 h-1 ${item.bar} transition-all duration-500 rounded-full ${activeWho === i ? 'w-10' : 'w-0 group-hover:w-4'}`} />
@@ -351,8 +366,8 @@ const AdobeVoice = () => {
                 </ul>
               </div>
               <div className="w-full md:w-auto flex flex-col items-center justify-center">
-                <div className="w-full max-w-[240px] aspect-video rounded-xl overflow-hidden border border-slate-700/50 shadow-[0_4px_20px_rgba(0,0,0,0.5)] relative">
-                  <img src="/splash.jpg" alt="Version preview" className="absolute inset-0 w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity" />
+                <div className="w-full max-w-[520px] aspect-[4/3] rounded-xl overflow-hidden border border-slate-700/50 shadow-[0_4px_20px_rgba(0,0,0,0.5)] relative">
+                  <img src="/header.png" alt="Version preview" className="absolute inset-0 w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity" />
                 </div>
                 <p className="mt-4 text-slate-500 text-sm font-medium tracking-wide">Version 1.1.0</p>
               </div>
@@ -360,13 +375,25 @@ const AdobeVoice = () => {
             <div className="space-y-8">
               <div><p className="text-4xl md:text-6xl font-black text-white mb-1 animate-blur-pulse tracking-tight">Completely free.</p></div>
               <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
-                <button className="group w-full sm:w-auto relative bg-[#3B3BFF] text-white px-9 py-4 rounded-2xl font-bold text-lg overflow-hidden transition-all shadow-[0_0_40px_rgba(59,59,255,0.4)] hover:-translate-y-1 flex items-center justify-center gap-2">
-                  <Download size={20} className="relative z-10" /><span className="relative z-10">Download for Windows</span>
-                </button>
-                <button className="w-full sm:w-auto glass-card text-white px-9 py-4 rounded-2xl font-bold text-lg hover:-translate-y-1 transition-all flex items-center justify-center gap-2">
-                  <div className="w-6 h-6 bg-red-600 rounded flex items-center justify-center"><span className="text-[9px] font-black">Ae</span></div>
-                  Adobe Exchange
-                </button>
+                <div className="relative group/plugin w-full sm:w-auto">
+                  <div className="absolute -top-14 left-1/2 -translate-x-1/2 whitespace-nowrap bg-amber-500/10 backdrop-blur-md border border-amber-500/20 text-amber-400 px-3 py-1.5 rounded-full text-sm font-semibold flex items-center gap-2 opacity-0 group-hover/plugin:opacity-100 transition-opacity z-20 pointer-events-none group-hover/plugin:pointer-events-auto">
+                    App yet to be launched
+                    <button onClick={handleWaitlist} className="bg-amber-500/20 hover:bg-amber-500/40 text-amber-400 w-6 h-6 rounded-full flex items-center justify-center transition-colors pointer-events-auto" title="Join Waitlist">+</button>
+                  </div>
+                  <button className="group w-full sm:w-auto relative bg-[#3B3BFF] text-white px-9 py-4 rounded-2xl font-bold text-lg overflow-hidden transition-all shadow-[0_0_40px_rgba(59,59,255,0.4)] hover:-translate-y-1 flex items-center justify-center gap-2">
+                    <Download size={20} className="relative z-10" /><span className="relative z-10">Download for Windows</span>
+                  </button>
+                </div>
+                <div className="relative group/plugin w-full sm:w-auto">
+                  <div className="absolute -top-14 left-1/2 -translate-x-1/2 whitespace-nowrap bg-amber-500/10 backdrop-blur-md border border-amber-500/20 text-amber-400 px-3 py-1.5 rounded-full text-sm font-semibold flex items-center gap-2 opacity-0 group-hover/plugin:opacity-100 transition-opacity z-20 pointer-events-none group-hover/plugin:pointer-events-auto">
+                    App yet to be launched
+                    <button onClick={handleWaitlist} className="bg-amber-500/20 hover:bg-amber-500/40 text-amber-400 w-6 h-6 rounded-full flex items-center justify-center transition-colors pointer-events-auto" title="Join Waitlist">+</button>
+                  </div>
+                  <button className="w-full sm:w-auto glass-card text-white px-9 py-4 rounded-2xl font-bold text-lg hover:-translate-y-1 transition-all flex items-center justify-center gap-2">
+                    <div className="w-6 h-6 bg-red-600 rounded flex items-center justify-center"><span className="text-[9px] font-black">Ae</span></div>
+                    Adobe Marketplace
+                  </button>
+                </div>
               </div>
               <p className="text-slate-500 text-sm">Need help? <button onClick={() => navigate('/docs')} className="text-indigo-400 hover:text-indigo-300 underline underline-offset-4 font-semibold">Read the installation guide.</button></p>
             </div>
@@ -385,7 +412,7 @@ const AdobeVoice = () => {
               </div>
               <div className="hidden xl:block h-8 w-px bg-amber-900/30"></div>
               <div className="flex-1 w-full flex flex-wrap xl:flex-nowrap items-center justify-between gap-4 text-amber-200/70 text-sm md:text-base">
-                {['Requires internet connection', 'Cloud-based processing', 'Voice quality may vary', 'Adobe Premiere Pro required'].map(l => (
+                {['Requires internet connection', 'Cloud-based processing', 'Voice quality may vary'].map(l => (
                   <div key={l} className="flex items-center gap-3 whitespace-nowrap"><div className="w-1.5 h-1.5 bg-amber-400 rounded-full flex-shrink-0 shadow-[0_0_8px_rgba(251,191,36,0.8)]" />{l}</div>
                 ))}
               </div>

@@ -13,6 +13,15 @@ const Navbar = ({ openSearch }: NavbarProps) => {
   const nav = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [waitlistCount, setWaitlistCount] = useState<number | null>(null);
+
+  useEffect(() => {
+    const handleJoin = () => {
+      setWaitlistCount(prev => (prev === null ? 15 : prev + 1));
+    };
+    window.addEventListener('waitlist-join', handleJoin);
+    return () => window.removeEventListener('waitlist-join', handleJoin);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 30);
@@ -88,10 +97,30 @@ const Navbar = ({ openSearch }: NavbarProps) => {
                 <span className="text-[10px] opacity-50 ml-2 hidden lg:inline border border-current/30 rounded px-1">⌘K</span>
               </button>
             )}
+
+            {/* Waitlist Counter */}
+            {waitlistCount !== null && (
+              <div className={`flex items-center gap-2 px-3 py-1.5 rounded-full border text-xs font-semibold transition-all duration-400 animate-fade-in ${scrolled ? 'border-amber-500/20 bg-amber-500/10 text-amber-500' : 'border-amber-500/30 bg-amber-500/20 text-amber-400'}`}>
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
+                </span>
+                Waitlist: {waitlistCount}
+              </div>
+            )}
           </div>
 
           {/* Mobile */}
           <div className="md:hidden flex items-center gap-3">
+            {waitlistCount !== null && (
+              <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full border text-[10px] font-bold transition-all duration-400 animate-fade-in ${scrolled ? 'border-amber-500/20 bg-amber-500/10 text-amber-500' : 'border-amber-500/30 bg-amber-500/20 text-amber-400'}`}>
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-amber-500"></span>
+                </span>
+                {waitlistCount}
+              </div>
+            )}
             {isDocsPage && (
               <button onClick={openSearch} className="text-slate-400 p-2"><Search size={20} /></button>
             )}

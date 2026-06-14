@@ -18,6 +18,12 @@ const Home = () => {
   const [parallaxActive, setParallaxActive] = useState(false);
   const [activeNote, setActiveNote] = useState(0);
 
+  const handleWaitlist = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    window.dispatchEvent(new CustomEvent('waitlist-join'));
+  };
+
   useEffect(() => {
     const timer = setInterval(() => {
       setActiveNote(prev => (prev + 1) % 3);
@@ -75,9 +81,15 @@ const Home = () => {
                 <span className="absolute inset-0 bg-gradient-to-r from-[#3B3BFF] to-[#6366f1] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <span className="relative z-10 flex items-center gap-2">Explore Services <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" /></span>
               </button>
-              <button onClick={() => navigate('/plugins/adobe-voice')} className="group glass-card-light text-[#07060F] px-9 py-4 rounded-2xl font-bold text-lg hover:shadow-lg hover:-translate-y-1 transition-all flex items-center justify-center gap-2">
-                View Plugins <Settings size={20} className="group-hover:rotate-90 transition-transform duration-500" />
-              </button>
+              <div className="relative group/plugin w-full sm:w-auto">
+                <button onClick={() => navigate('/plugins/adobe-voice')} className="w-full group glass-card-light text-[#07060F] px-9 py-4 rounded-2xl font-bold text-lg hover:shadow-lg hover:-translate-y-1 transition-all flex items-center justify-center gap-2">
+                  View Plugins <Settings size={20} className="group-hover:rotate-90 transition-transform duration-500" />
+                </button>
+                <div className="absolute -top-12 left-1/2 -translate-x-1/2 whitespace-nowrap bg-amber-500/10 backdrop-blur-md border border-amber-500/20 text-amber-500 px-3 py-1.5 rounded-full text-xs font-semibold flex items-center gap-2 opacity-0 group-hover/plugin:opacity-100 transition-opacity z-20 pointer-events-none group-hover/plugin:pointer-events-auto">
+                  App yet to be launched
+                  <button onClick={handleWaitlist} className="bg-amber-500/20 hover:bg-amber-500/40 text-amber-500 w-5 h-5 rounded-full flex items-center justify-center transition-colors pointer-events-auto" title="Join Waitlist">+</button>
+                </div>
+              </div>
             </div>
           </FadeInSection>
           {/* F1 decorative flags */}
@@ -117,19 +129,10 @@ const Home = () => {
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center justify-center">
             {/* Left Side: 16:9 Showreel */}
-            <div className="lg:col-span-6 w-full flex justify-center lg:justify-end">
-              <FadeInSection className="w-full max-w-[480px]">
-                <div onClick={() => window.open('https://youtube.com', '_blank')} className="relative w-full aspect-video glass-card rounded-[2rem] overflow-hidden group cursor-pointer hover:scale-[1.01] transition-transform duration-500 flex items-center justify-center shadow-2xl border border-indigo-500/20">
-                  <img src="/splash.jpg" alt="Showreel" className="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:opacity-40 transition-opacity duration-700" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#07060F]/80 via-transparent to-transparent" />
-                  <div className="relative z-10 flex flex-col items-center">
-                    <div className="w-20 h-20 glass-card rounded-full flex items-center justify-center group-hover:bg-[#3B3BFF]/80 transition-all duration-300 animate-glow-pulse mb-3">
-                      <PlayCircle size={40} className="text-white ml-1" />
-                    </div>
-                    <span className="text-white/90 font-bold text-sm tracking-widest uppercase mt-2">Play Showreel</span>
-                  </div>
-                </div>
-              </FadeInSection>
+            <div className="lg:col-span-6 relative w-full rounded-[2rem] overflow-hidden border border-indigo-500/20 shadow-[0_0_60px_rgba(59,59,255,0.15)]">
+              <video autoPlay loop muted className="w-full h-auto">
+              <source src="/showreel.mp4" type="video/mp4" />
+              </video>
             </div>
 
             {/* Right Side: Rectangular Sticky Notes (Stacked & Cycling) */}
@@ -320,10 +323,16 @@ const Home = () => {
             </div>
           </FadeInSection>
           <FadeInSection delay="300ms">
-            <button onClick={() => navigate('/plugins/adobe-voice')} className="group relative bg-[#3B3BFF] text-white px-10 py-4 rounded-2xl font-bold text-lg transition-all shadow-[0_0_40px_rgba(59,59,255,0.4)] hover:shadow-[0_0_60px_rgba(59,59,255,0.6)] hover:-translate-y-1 flex items-center mx-auto gap-3 overflow-hidden">
-              <span className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity" />
-              <span className="relative z-10 flex items-center gap-3">Explore Plugin <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" /></span>
-            </button>
+            <div className="relative group/plugin w-fit mx-auto">
+              <div className="absolute -top-14 left-1/2 -translate-x-1/2 whitespace-nowrap bg-amber-500/10 backdrop-blur-md border border-amber-500/20 text-amber-400 px-3 py-1.5 rounded-full text-sm font-semibold flex items-center gap-2 opacity-0 group-hover/plugin:opacity-100 transition-opacity z-20 pointer-events-none group-hover/plugin:pointer-events-auto">
+                App yet to be launched
+                <button onClick={handleWaitlist} className="bg-amber-500/20 hover:bg-amber-500/40 text-amber-400 w-6 h-6 rounded-full flex items-center justify-center transition-colors pointer-events-auto" title="Join Waitlist">+</button>
+              </div>
+              <button onClick={() => navigate('/plugins/adobe-voice')} className="group relative bg-[#3B3BFF] text-white px-10 py-4 rounded-2xl font-bold text-lg transition-all shadow-[0_0_40px_rgba(59,59,255,0.4)] hover:shadow-[0_0_60px_rgba(59,59,255,0.6)] hover:-translate-y-1 flex items-center mx-auto gap-3 overflow-hidden">
+                <span className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity" />
+                <span className="relative z-10 flex items-center gap-3">Explore Plugin <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" /></span>
+              </button>
+            </div>
           </FadeInSection>
         </div>
       </section>
