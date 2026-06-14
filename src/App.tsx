@@ -1,3 +1,5 @@
+//property or Vamprojects, Inc. All rights reserved.
+
 import { useState, useEffect, useRef } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 
