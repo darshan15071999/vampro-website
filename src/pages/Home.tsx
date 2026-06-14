@@ -303,15 +303,14 @@ const Home = () => {
             </p>
           </FadeInSection>
           <FadeInSection delay="200ms" className="relative max-w-5xl mx-auto mb-12">
-            <div className="aspect-video bg-[#0F1640]/60 rounded-3xl overflow-hidden">
-              <video
-                className="w-full h-full object-cover"
-                controls
-                preload="metadata"
-                poster="/thumbnail.jpg"
-              >
-                <source src="/demo.mp4" type="video/mp4" />
-              </video>
+            <div className="relative w-full aspect-video rounded-2xl overflow-hidden border border-indigo-500/20 shadow-[0_0_40px_rgba(59,59,255,0.15)]">
+              <iframe
+                className="absolute inset-0 w-full h-full"
+                src="https://www.youtube.com/embed/MKSFsz1PdB4"
+                title="Vampro Demo"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
             </div>
 
             <div className="flex flex-wrap justify-center gap-3 mt-6">
