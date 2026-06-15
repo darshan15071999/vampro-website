@@ -374,17 +374,17 @@ select,
 
 /* ═══ GLASS MORPHISM ═══ */
 .glass-card {
-  background: rgba(15, 15, 35, 0.65);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(30, 30, 75, 0.95);
+  backdrop-filter: blur(32px);
+  -webkit-backdrop-filter: blur(32px);
   border: 1px solid rgba(99, 102, 241, 0.2);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
 .glass-card-light {
   background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(32px);
+  -webkit-backdrop-filter: blur(32px);
   border: 1px solid rgba(59, 59, 255, 0.12);
   box-shadow: 0 8px 32px rgba(59, 59, 255, 0.08);
 }

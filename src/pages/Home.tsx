@@ -390,7 +390,7 @@ const Home = () => {
           <FadeInSection delay="300ms">
             <div className="relative group/plugin w-fit mx-auto">
 
-              <button onClick={() => navigate('/plugins/adobe-voice')} className="group relative bg-[#3B3BFF] text-white px-10 py-4 rounded-2xl font-bold text-lg transition-all shadow-[0_0_40px_rgba(59,59,255,0.4)] hover:shadow-[0_0_60px_rgba(59,59,255,0.6)] hover:-translate-y-1 flex items-center mx-auto gap-3 overflow-hidden">
+              <button onClick={() => navigate('/signalscope')} className="group relative bg-[#3B3BFF] text-white px-10 py-4 rounded-2xl font-bold text-lg transition-all shadow-[0_0_40px_rgba(59,59,255,0.4)] hover:shadow-[0_0_60px_rgba(59,59,255,0.6)] hover:-translate-y-1 flex items-center mx-auto gap-3 overflow-hidden">
                 <span className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity" />
                 <span className="relative z-10 flex items-center gap-3">Start tracking AI visibility <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" /></span>
               </button>
