@@ -125,21 +125,17 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     await resend.emails.send({
       from: "Vampro Waitlist <waitlist@vampro.in>",
       to: "support@vampro.in",
+      replyTo: normalizedEmail,
       subject: "Waitlist Request",
       text: `
 New Waitlist Request
 
 Name: ${name}
-
 Email: ${normalizedEmail}
-
 Creator Type: ${creatorType}
-
 Source: ${source || "Unknown"}
-
-Submitted At:
-${new Date().toLocaleString()}
-      `,
+Submitted At: ${new Date().toLocaleString()}
+`,
     });
 
     return Response.json({
