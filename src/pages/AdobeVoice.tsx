@@ -10,6 +10,27 @@ import WaveformCanvas from '../components/WaveformCanvas';
 import TextParticles from '../components/TextParticles';
 import SpeedStreaks from '../components/SpeedStreaks';
 import { useWaitlist } from '../context/WaitlistContext';
+import { Helmet } from "react-helmet-async";
+
+
+<Helmet>
+  <title>Adobe Voice Generator for Premiere Pro | Vampro</title>
+
+  <meta
+    name="description"
+    content="Generate realistic AI voiceovers directly inside Adobe Premiere Pro."
+  />
+
+  <meta
+    property="og:title"
+    content="Adobe Voice Generator for Premiere Pro | Vampro"
+  />
+
+  <meta
+    property="og:description"
+    content="Generate realistic AI voiceovers directly inside Adobe Premiere Pro."
+  />
+</Helmet>
 
 const AdobeVoice = () => {
   const nav = useNavigate();

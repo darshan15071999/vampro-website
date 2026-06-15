@@ -11,6 +11,16 @@ import Typewriter from '../components/Typewriter';
 import AntigravityParticles from '../components/AntigravityParticles';
 import SpeedStreaks from '../components/SpeedStreaks';
 import { useWaitlist } from '../context/WaitlistContext';
+import { Helmet } from "react-helmet-async";
+
+<Helmet>
+  <title>Vampro | Creative Technology Studio</title>
+
+  <meta
+    name="description"
+    content="Vampro builds software, media, AI tools and creative technology products."
+  />
+</Helmet>
 
 const Home = () => {
   const nav = useNavigate();
