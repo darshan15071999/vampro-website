@@ -178,7 +178,12 @@ const AdobeVoice = () => {
                   <button onClick={(e) => handleWaitlist(e, 'Adobe Voice Page')} className="bg-amber-500/20 hover:bg-amber-500/40 text-amber-400 w-6 h-6 rounded-full flex items-center justify-center transition-colors pointer-events-auto" title="Join Waitlist">+</button>
                 )}
               </div>
-              <button onClick={() => { document.getElementById('download')?.scrollIntoView({ behavior: 'smooth' }); }} className="group relative w-full sm:w-auto bg-[#3B3BFF] text-white px-9 py-4 rounded-2xl font-bold text-lg overflow-hidden transition-all shadow-[0_0_40px_rgba(59,59,255,0.4)] hover:-translate-y-1 flex items-center justify-center gap-2">
+              <button onClick={() => {
+                document.getElementById('download')?.scrollIntoView({
+                  behavior: 'smooth'
+                })
+              }}
+                className="group relative w-full sm:w-auto bg-[#3B3BFF] text-white px-9 py-4 rounded-2xl font-bold text-lg overflow-hidden transition-all shadow-[0_0_40px_rgba(59,59,255,0.4)] hover:-translate-y-1 flex items-center justify-center gap-2">
                 <span className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity" />
                 <Download size={20} className="relative z-10" /><span className="relative z-10">Get the Extension</span>
               </button>
@@ -411,9 +416,9 @@ const AdobeVoice = () => {
                       <button onClick={(e) => handleWaitlist(e, 'Adobe Voice Page')} className="bg-amber-500/20 hover:bg-amber-500/40 text-amber-400 w-6 h-6 rounded-full flex items-center justify-center transition-colors pointer-events-auto" title="Join Waitlist">+</button>
                     )}
                   </div>
-                  <button onClick={(e) => handleWaitlist(e, 'Download Button')} className="group w-full sm:w-auto relative bg-[#3B3BFF] text-white px-9 py-4 rounded-2xl font-bold text-lg overflow-hidden transition-all shadow-[0_0_40px_rgba(59,59,255,0.4)] hover:-translate-y-1 flex items-center justify-center gap-2">
-                    <Download size={20} className="relative z-10" /><span className="relative z-10">Download for Windows</span>
-                  </button>
+                  <button onClick={() => { window.open("https://pub-385a87554a7340a09de10ff1f708bf66.r2.dev/Vampro-Voiceover-Plugin/Vampro%20Voice%20Generator%20Installer.exe", "_blank"); }}
+                    className="group w-full sm:w-auto relative bg-[#3B3BFF] text-white px-9 py-4 rounded-2xl font-bold text-lg overflow-hidden transition-all shadow-[0_0_40px_rgba(59,59,255,0.4)] hover:-translate-y-1 flex items-center justify-center gap-2">
+                    <Download size={20} className="relative z-10" /><span className="relative z-10">Download for Windows</span></button>
                 </div>
                 <div className="relative group/plugin w-full sm:w-auto">
                   <div className="absolute -top-14 left-1/2 -translate-x-1/2 whitespace-nowrap bg-amber-500/10 backdrop-blur-md border border-amber-500/20 text-amber-400 px-3 py-1.5 rounded-full text-sm font-semibold flex items-center gap-2 opacity-0 group-hover/plugin:opacity-100 transition-opacity z-20 pointer-events-none group-hover/plugin:pointer-events-auto">
