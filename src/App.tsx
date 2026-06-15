@@ -16,6 +16,7 @@ import AdobeVoice from './pages/AdobeVoice';
 import Docs from './pages/Docs';
 import Privacy from './pages/Privacy';
 import Terms from './pages/Terms';
+import AEOTracker from './pages/AEOtracker';
 
 // Context & Modals
 import { WaitlistProvider } from './context/WaitlistContext';
@@ -71,6 +72,7 @@ const App = () => {
               <Route path="/" element={<Home />} />
               <Route path="/plugins" element={<Plugins />} />
               <Route path="/plugins/adobe-voice" element={<AdobeVoice />} />
+              <Route path="/signalscope" element={<AEOTracker />} />
               <Route path="/docs" element={<Docs />} />
               <Route path="/privacy" element={<Privacy />} />
               <Route path="/terms" element={<Terms />} />

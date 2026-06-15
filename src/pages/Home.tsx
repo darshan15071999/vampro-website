@@ -148,7 +148,7 @@ const Home = () => {
             {/* Left Side: 16:9 Showreel */}
             <div className="lg:col-span-6 relative w-full rounded-[2rem] overflow-hidden border border-indigo-500/20 shadow-[0_0_60px_rgba(59,59,255,0.15)]">
               <video autoPlay loop muted className="w-full h-auto">
-              <source src="/showreel.mp4" type="video/mp4" />
+                <source src="/showreel.mp4" type="video/mp4" />
               </video>
             </div>
 
@@ -313,7 +313,7 @@ const Home = () => {
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] pointer-events-none" style={{ background: 'radial-gradient(ellipse, rgba(59,59,255,0.15) 0%, transparent 70%)', filter: 'blur(40px)' }} />
         <div className="w-full px-6 md:px-10 lg:px-16 relative z-10 text-center">
           <FadeInSection>
-            <div className="inline-block mb-4 px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-sm font-semibold tracking-widest uppercase">Featured Software</div>
+            <div className="inline-block mb-4 px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-sm font-semibold tracking-widest uppercase">Featured Plugin</div>
             <h2 className="text-3xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight text-white">
               Vampro Voice Generator<br />
               <span className="gradient-blue-text">Text to Speech for Premiere Pro</span>
@@ -352,6 +352,47 @@ const Home = () => {
               <button onClick={() => navigate('/plugins/adobe-voice')} className="group relative bg-[#3B3BFF] text-white px-10 py-4 rounded-2xl font-bold text-lg transition-all shadow-[0_0_40px_rgba(59,59,255,0.4)] hover:shadow-[0_0_60px_rgba(59,59,255,0.6)] hover:-translate-y-1 flex items-center mx-auto gap-3 overflow-hidden">
                 <span className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity" />
                 <span className="relative z-10 flex items-center gap-3">Explore Plugin <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" /></span>
+              </button>
+            </div>
+          </FadeInSection>
+        </div>
+      </section>
+
+      {/* AEO tracker — dark grid bg */}
+      <section className="pt-8 pb-12 md:pt-8 md:pb-22 dark-grid-bg relative overflow-hidden">
+        <SpeedStreaks />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] pointer-events-none" style={{ background: 'radial-gradient(ellipse, rgba(59,59,255,0.15) 0%, transparent 70%)', filter: 'blur(40px)' }} />
+        <div className="w-full px-6 md:px-10 lg:px-16 relative z-10 text-center">
+          <FadeInSection>
+            <div className="inline-block mb-4 px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-sm font-semibold tracking-widest uppercase">Featured Software</div>
+            <h2 className="text-3xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight text-white">
+              See How<br />
+              <span className="gradient-blue-text">AI Sees Your Brand</span>
+            </h2>
+            <p className="text-lg text-slate-400 max-w-3xl mx-auto mb-12 font-light leading-relaxed">
+              Monitor how often your brand appears in AI-generated answers across ChatGPT, Gemini, Claude, Perplexity, Copilot, and more.
+            </p>
+          </FadeInSection>
+          <FadeInSection delay="200ms" className="relative max-w-5xl mx-auto mb-12">
+            <div className="relative w-full aspect-video rounded-2xl overflow-hidden border border-indigo-500/20 shadow-[0_0_40px_rgba(59,59,255,0.15)]">
+              <img
+                className="absolute inset-0 w-full h-full"
+                src="apppage.png"
+              />
+            </div>
+
+            <div className="flex flex-wrap justify-center gap-3 mt-6">
+              {['🔍 Visibility Monitoring', '📑 Citation Intelligence', '📊 Competitor Benchmarking'].map(tag => (
+                <div key={tag} className="glass-card px-5 py-2 rounded-full text-sm font-semibold text-slate-300 cursor-default">{tag}</div>
+              ))}
+            </div>
+          </FadeInSection>
+          <FadeInSection delay="300ms">
+            <div className="relative group/plugin w-fit mx-auto">
+
+              <button onClick={() => navigate('/plugins/adobe-voice')} className="group relative bg-[#3B3BFF] text-white px-10 py-4 rounded-2xl font-bold text-lg transition-all shadow-[0_0_40px_rgba(59,59,255,0.4)] hover:shadow-[0_0_60px_rgba(59,59,255,0.6)] hover:-translate-y-1 flex items-center mx-auto gap-3 overflow-hidden">
+                <span className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity" />
+                <span className="relative z-10 flex items-center gap-3">Start tracking AI visibility <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" /></span>
               </button>
             </div>
           </FadeInSection>

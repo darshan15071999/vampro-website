@@ -92,12 +92,15 @@ select,
 }
 
 @keyframes blur-pulse {
-  0%, 100% {
+
+  0%,
+  100% {
     filter: blur(0px);
     opacity: 1;
     transform: scale(1);
     text-shadow: 0 0 0px transparent;
   }
+
   50% {
     filter: blur(2px);
     opacity: 0.8;
@@ -224,20 +227,65 @@ select,
 }
 
 @keyframes pulse-slow {
-  0%, 100% { transform: scale(1); opacity: 0.8; }
-  50% { transform: scale(1.05); opacity: 1; }
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
 }
 
 @keyframes scatter-loop {
-  0%, 30% { transform: translate(0, 0) rotate(0); opacity: 1; filter: blur(0); }
-  45%, 55% { transform: translate(var(--tx), var(--ty)) rotate(var(--rot)) scale(0); opacity: 0; filter: blur(8px); }
-  70%, 100% { transform: translate(0, 0) rotate(0); opacity: 1; filter: blur(0); }
+
+  0%,
+  30% {
+    transform: translate(0, 0) rotate(0);
+    opacity: 1;
+    filter: blur(0);
+  }
+
+  45%,
+  55% {
+    transform: translate(var(--tx), var(--ty)) rotate(var(--rot)) scale(0);
+    opacity: 0;
+    filter: blur(8px);
+  }
+
+  70%,
+  100% {
+    transform: translate(0, 0) rotate(0);
+    opacity: 1;
+    filter: blur(0);
+  }
 }
 
 @keyframes scatter-capsule {
-  0%, 30% { opacity: 1; filter: blur(0); transform: scale(1); }
-  45%, 55% { opacity: 0; filter: blur(12px); transform: scale(0.6); }
-  70%, 100% { opacity: 1; filter: blur(0); transform: scale(1); }
+
+  0%,
+  30% {
+    opacity: 1;
+    filter: blur(0);
+    transform: scale(1);
+  }
+
+  45%,
+  55% {
+    opacity: 0;
+    filter: blur(12px);
+    transform: scale(0.6);
+  }
+
+  70%,
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    transform: scale(1);
+  }
 }
 
 .animate-scatter-capsule {
@@ -326,7 +374,7 @@ select,
 
 /* ═══ GLASS MORPHISM ═══ */
 .glass-card {
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(15, 15, 35, 0.65);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(99, 102, 241, 0.2);

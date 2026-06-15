@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { PlayCircle, Menu, X, Search } from 'lucide-react';
+import { PlayCircle, Menu, X, Search, ChevronDown } from 'lucide-react';
 import ScatterText from './ScatterText';
 import { useWaitlist } from '../context/WaitlistContext';
 
@@ -69,10 +69,52 @@ const Navbar = ({ openSearch }: NavbarProps) => {
             {[
               { label: 'About Us', action: () => navigate('/', 'about') },
               { label: 'Services', action: () => navigate('/', 'services') },
-              { label: 'Plugins', action: () => navigate('/plugins/adobe-voice') },
+              //{ label: 'Plugins', action: () => navigate('/plugins/adobe-voice') },
+
+              {
+                isCustom: true,
+                element: (
+                  <div key="Products" className="relative group">
+                    <button
+                      className={`text-sm font-medium transition-colors duration-400 hover:text-[#3B3BFF] flex items-center gap-1 ${scrolled
+                        ? (isLight ? 'text-slate-700' : 'text-slate-300')
+                        : (isLight ? 'text-slate-700' : 'text-slate-200')
+                        }`}
+                    >
+                      Products
+                      <ChevronDown size={14} />
+                    </button>
+
+                    <div className="absolute top-full left-0 h-3 w-full" />
+                    <div className="absolute top-full left-0 mt-2 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                      <div className="rounded-2xl p-2 bg-[#07060F]/95 backdrop-blur-xl border border-indigo-500/20 shadow-[0_10px_40px_rgba(0,0,0,0.5)]">
+                        <button onClick={() => navigate('/plugins/adobe-voice')} className="block w-full text-left p-4 rounded-xl hover:bg-white/5 transition-all">
+                          <div className="font-semibold text-white">
+                            Voice Generator
+                          </div>
+                          <div className="text-sm text-slate-400">
+                            AI voiceovers for Premiere Pro
+                          </div>
+                        </button>
+
+                        <button onClick={() => navigate('/signalscope')} className="block w-full text-left p-4 rounded-xl hover:bg-white/5 transition-all">
+                          <div className="font-semibold text-white">
+                            AEO Tracker
+                          </div>
+                          <div className="text-sm text-slate-400">
+                            Monitor AI search visibility
+                          </div>
+                        </button>
+
+                      </div>
+                    </div>
+                  </div>
+                )
+              },
+
               { label: 'Docs', action: () => navigate('/docs') },
-              { label: 'YouTube', action: () => window.open('https://youtube.com', '_blank'), icon: <PlayCircle size={13} /> },
-            ].map((item) => (
+              { label: 'YouTube', action: () => window.open('https://youtube.com/@vamprotech?si=vponnTvHyIzwDmON', '_blank'), icon: <PlayCircle size={13} /> },
+            ].map((item: any) => item.isCustom ? item.element : (
               <button key={item.label} onClick={item.action} className={`text-sm font-medium transition-colors duration-400 hover:text-[#3B3BFF] flex items-center gap-1.5 ${scrolled
                 ? (isLight ? 'text-slate-700' : 'text-slate-300')
                 : (isLight ? 'text-slate-700' : 'text-slate-200')
@@ -126,11 +168,12 @@ const Navbar = ({ openSearch }: NavbarProps) => {
 
       {isMobileMenuOpen && (
         <div className={`md:hidden pb-4 pt-2 px-4 space-y-1 absolute w-full shadow-xl ${isLight ? 'bg-white/95 backdrop-blur-xl' : 'bg-[#07060F]/95 backdrop-blur-xl border-t border-indigo-900/20'}`}>
-          {['About Us', 'Services', 'Plugins', 'Docs', 'YouTube'].map(item => (
+          {['About Us', 'Services', 'Plugins', 'AEO Tracker', 'Docs', 'YouTube'].map(item => (
             <button key={item} onClick={() => {
               if (item === 'About Us') navigate('/', 'about');
               else if (item === 'Services') navigate('/', 'services');
               else if (item === 'Plugins') navigate('/plugins/adobe-voice');
+              else if (item === 'AEO Tracker') navigate('/signalscope');
               else if (item === 'Docs') navigate('/docs');
               else window.open('https://youtube.com', '_blank');
             }} className={`block w-full text-left px-4 py-3 font-medium rounded-xl transition-colors ${isLight ? 'text-slate-700 hover:bg-slate-100' : 'text-white hover:bg-indigo-900/20'}`}>
