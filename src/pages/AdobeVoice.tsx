@@ -2,13 +2,14 @@ import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   MonitorPlay, Wand2, Download, FileText, Shield, ArrowRight,
-  Layers, Mic, Zap, Layout, CheckCircle, AlertTriangle
+  Layers, Mic, Zap, Layout, CheckCircle, AlertTriangle, Check
 } from 'lucide-react';
 import FadeInSection from '../components/FadeInSection';
 import TiltCard from '../components/TiltCard';
 import WaveformCanvas from '../components/WaveformCanvas';
 import TextParticles from '../components/TextParticles';
 import SpeedStreaks from '../components/SpeedStreaks';
+import { useWaitlist } from '../context/WaitlistContext';
 
 const AdobeVoice = () => {
   const nav = useNavigate();
@@ -35,10 +36,12 @@ const AdobeVoice = () => {
   const whoRef = useRef<HTMLDivElement>(null);
   const [activeWho] = useState(-1);
 
-  const handleWaitlist = (e: React.MouseEvent) => {
+  const { openModal, hasJoined } = useWaitlist();
+
+  const handleWaitlist = (e: React.MouseEvent, source: string) => {
     e.preventDefault();
     e.stopPropagation();
-    window.dispatchEvent(new CustomEvent('waitlist-join'));
+    openModal(source);
   };
 
   useEffect(() => {
@@ -113,9 +116,15 @@ const AdobeVoice = () => {
       {/* Announcement */}
       <div className="bg-gradient-to-r from-[#3B3BFF] via-[#1B2A6B] to-[#3B3BFF] text-white py-2.5 px-4 flex items-center justify-center gap-4 sticky top-[96px] z-40">
         <span className="text-xs font-bold tracking-widest uppercase opacity-90">From script to voiceover — without leaving Premiere Pro (App yet to be launched*)</span>
-        <button onClick={handleWaitlist} className="bg-white/20 hover:bg-white/30 text-white px-3 py-1 rounded-full text-[10px] sm:text-xs font-bold transition-colors shadow-sm">
-          Join Waitlist
-        </button>
+        {hasJoined ? (
+          <button disabled className="bg-white/10 text-white/50 px-3 py-1 rounded-full text-[10px] sm:text-xs font-bold shadow-sm flex items-center gap-1 cursor-not-allowed">
+            <Check size={12} /> Joined
+          </button>
+        ) : (
+          <button onClick={(e) => handleWaitlist(e, 'Adobe Voice Announcement')} className="bg-white/20 hover:bg-white/30 text-white px-3 py-1 rounded-full text-[10px] sm:text-xs font-bold transition-colors shadow-sm">
+            Join Waitlist
+          </button>
+        )}
       </div>
 
       {/* HERO — dark with waveform and text particles */}
@@ -142,7 +151,11 @@ const AdobeVoice = () => {
             <div className="relative group/plugin w-full sm:w-auto">
               <div className="absolute -top-14 left-1/2 -translate-x-1/2 whitespace-nowrap bg-amber-500/10 backdrop-blur-md border border-amber-500/20 text-amber-400 px-3 py-1.5 rounded-full text-sm font-semibold flex items-center gap-2 opacity-0 group-hover/plugin:opacity-100 transition-opacity z-20 pointer-events-none group-hover/plugin:pointer-events-auto">
                 App yet to be launched
-                <button onClick={handleWaitlist} className="bg-amber-500/20 hover:bg-amber-500/40 text-amber-400 w-6 h-6 rounded-full flex items-center justify-center transition-colors pointer-events-auto" title="Join Waitlist">+</button>
+                {hasJoined ? (
+                  <button disabled className="bg-green-500/20 text-green-400 w-6 h-6 rounded-full flex items-center justify-center transition-colors pointer-events-auto cursor-not-allowed" title="Joined Waitlist"><Check size={14} /></button>
+                ) : (
+                  <button onClick={(e) => handleWaitlist(e, 'Adobe Voice Page')} className="bg-amber-500/20 hover:bg-amber-500/40 text-amber-400 w-6 h-6 rounded-full flex items-center justify-center transition-colors pointer-events-auto" title="Join Waitlist">+</button>
+                )}
               </div>
               <button onClick={() => { document.getElementById('download')?.scrollIntoView({ behavior: 'smooth' }); }} className="group relative w-full sm:w-auto bg-[#3B3BFF] text-white px-9 py-4 rounded-2xl font-bold text-lg overflow-hidden transition-all shadow-[0_0_40px_rgba(59,59,255,0.4)] hover:-translate-y-1 flex items-center justify-center gap-2">
                 <span className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -152,7 +165,11 @@ const AdobeVoice = () => {
             <div className="relative group/plugin w-full sm:w-auto">
               <div className="absolute -top-14 left-1/2 -translate-x-1/2 whitespace-nowrap bg-amber-500/10 backdrop-blur-md border border-amber-500/20 text-amber-400 px-3 py-1.5 rounded-full text-sm font-semibold flex items-center gap-2 opacity-0 group-hover/plugin:opacity-100 transition-opacity z-20 pointer-events-none group-hover/plugin:pointer-events-auto">
                 App yet to be launched
-                <button onClick={handleWaitlist} className="bg-amber-500/20 hover:bg-amber-500/40 text-amber-400 w-6 h-6 rounded-full flex items-center justify-center transition-colors pointer-events-auto" title="Join Waitlist">+</button>
+                {hasJoined ? (
+                  <button disabled className="bg-green-500/20 text-green-400 w-6 h-6 rounded-full flex items-center justify-center transition-colors pointer-events-auto cursor-not-allowed" title="Joined Waitlist"><Check size={14} /></button>
+                ) : (
+                  <button onClick={(e) => handleWaitlist(e, 'Adobe Voice Page')} className="bg-amber-500/20 hover:bg-amber-500/40 text-amber-400 w-6 h-6 rounded-full flex items-center justify-center transition-colors pointer-events-auto" title="Join Waitlist">+</button>
+                )}
               </div>
               <button onClick={() => window.open('#', '_blank')} className="w-full sm:w-auto glass-card hover:border-indigo-500/40 text-white px-9 py-4 rounded-2xl font-bold text-lg transition-all hover:-translate-y-1 flex items-center justify-center gap-2">
                 <div className="w-6 h-6 bg-red-600 rounded flex items-center justify-center"><span className="text-[9px] font-black text-white">Ae</span></div>
@@ -316,7 +333,7 @@ const AdobeVoice = () => {
               { title: 'YouTube Creators', desc: 'Narration without recording equipment.', image: '/creator.png', colorClass: 'red', shadow: 'shadow-[0_0_24px_rgba(239,68,68,0.15)] border-red-500/30', hoverShadow: 'group-hover:shadow-[0_0_24px_rgba(239,68,68,0.15)] group-hover:border-red-500/30', bgGlow: 'from-red-500/20', bar: 'bg-red-500' },
               { title: 'Video Editors', desc: 'Generate voiceovers quickly.', image: '/editor.png', colorClass: 'violet', shadow: 'shadow-[0_0_24px_rgba(139,92,246,0.15)] border-violet-500/30', hoverShadow: 'group-hover:shadow-[0_0_24px_rgba(139,92,246,0.15)] group-hover:border-violet-500/30', bgGlow: 'from-violet-500/20', bar: 'bg-violet-500' },
               { title: 'Marketing Teams', desc: 'Produce demos faster.', image: '/marketing.png', colorClass: 'green', shadow: 'shadow-[0_0_24px_rgba(34,197,94,0.15)] border-green-500/30', hoverShadow: 'group-hover:shadow-[0_0_24px_rgba(34,197,94,0.15)] group-hover:border-green-500/30', bgGlow: 'from-green-500/20', bar: 'bg-green-500' },
-              { title: 'Educators', desc: 'Scripts into spoken explanations.', image: '/educator.png', colorClass: 'yellow', shadow: 'shadow-[0_0_24px_rgba(234,179,8,0.15)] border-yellow-500/30', hoverShadow: 'group-hover:shadow-[0_0_24px_rgba(234,179,8,0.15)] group-hover:border-yellow-500/30', bgGlow: 'from-yellow-500/2₀', bar: 'bg-yellow-5₀' },
+              { title: 'Educators', desc: 'Scripts into spoken explanations.', image: '/educator.png', colorClass: 'yellow', shadow: 'shadow-[0_0_24px_rgba(234,179,8,0.15)] border-yellow-500/30', hoverShadow: 'group-hover:shadow-[0_0_24px_rgba(234,179,8,0.15)] group-hover:border-yellow-500/30', bgGlow: 'from-yellow-500/20', bar: 'bg-yellow-500' },
             ].map((item, i) => (
               <FadeInSection key={i} delay={`${i * 80}ms`}>
                 <TiltCard>
@@ -367,7 +384,11 @@ const AdobeVoice = () => {
                 <div className="relative group/plugin w-full sm:w-auto">
                   <div className="absolute -top-14 left-1/2 -translate-x-1/2 whitespace-nowrap bg-amber-500/10 backdrop-blur-md border border-amber-500/20 text-amber-400 px-3 py-1.5 rounded-full text-sm font-semibold flex items-center gap-2 opacity-0 group-hover/plugin:opacity-100 transition-opacity z-20 pointer-events-none group-hover/plugin:pointer-events-auto">
                     App yet to be launched
-                    <button onClick={handleWaitlist} className="bg-amber-500/20 hover:bg-amber-500/40 text-amber-400 w-6 h-6 rounded-full flex items-center justify-center transition-colors pointer-events-auto" title="Join Waitlist">+</button>
+                    {hasJoined ? (
+                      <button disabled className="bg-green-500/20 text-green-400 w-6 h-6 rounded-full flex items-center justify-center transition-colors pointer-events-auto cursor-not-allowed" title="Joined Waitlist"><Check size={14} /></button>
+                    ) : (
+                      <button onClick={(e) => handleWaitlist(e, 'Adobe Voice Page')} className="bg-amber-500/20 hover:bg-amber-500/40 text-amber-400 w-6 h-6 rounded-full flex items-center justify-center transition-colors pointer-events-auto" title="Join Waitlist">+</button>
+                    )}
                   </div>
                   <button className="group w-full sm:w-auto relative bg-[#3B3BFF] text-white px-9 py-4 rounded-2xl font-bold text-lg overflow-hidden transition-all shadow-[0_0_40px_rgba(59,59,255,0.4)] hover:-translate-y-1 flex items-center justify-center gap-2">
                     <Download size={20} className="relative z-10" /><span className="relative z-10">Download for Windows</span>
@@ -376,7 +397,11 @@ const AdobeVoice = () => {
                 <div className="relative group/plugin w-full sm:w-auto">
                   <div className="absolute -top-14 left-1/2 -translate-x-1/2 whitespace-nowrap bg-amber-500/10 backdrop-blur-md border border-amber-500/20 text-amber-400 px-3 py-1.5 rounded-full text-sm font-semibold flex items-center gap-2 opacity-0 group-hover/plugin:opacity-100 transition-opacity z-20 pointer-events-none group-hover/plugin:pointer-events-auto">
                     App yet to be launched
-                    <button onClick={handleWaitlist} className="bg-amber-500/20 hover:bg-amber-500/40 text-amber-400 w-6 h-6 rounded-full flex items-center justify-center transition-colors pointer-events-auto" title="Join Waitlist">+</button>
+                    {hasJoined ? (
+                      <button disabled className="bg-green-500/20 text-green-400 w-6 h-6 rounded-full flex items-center justify-center transition-colors pointer-events-auto cursor-not-allowed" title="Joined Waitlist"><Check size={14} /></button>
+                    ) : (
+                      <button onClick={(e) => handleWaitlist(e, 'Adobe Voice Page')} className="bg-amber-500/20 hover:bg-amber-500/40 text-amber-400 w-6 h-6 rounded-full flex items-center justify-center transition-colors pointer-events-auto" title="Join Waitlist">+</button>
+                    )}
                   </div>
                   <button className="w-full sm:w-auto glass-card text-white px-9 py-4 rounded-2xl font-bold text-lg hover:-translate-y-1 transition-all flex items-center justify-center gap-2">
                     <div className="w-6 h-6 bg-red-600 rounded flex items-center justify-center"><span className="text-[9px] font-black">Ae</span></div>

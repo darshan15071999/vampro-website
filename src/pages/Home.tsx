@@ -3,13 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import {
   PenTool, Cpu, Video, ArrowRight, PlayCircle, Settings,
   Code, Zap, Lightbulb, Users, ExternalLink,
-  Sparkles, ChevronDown, Star, Rocket, Flag
+  Sparkles, ChevronDown, Star, Rocket, Flag, Check
 } from 'lucide-react';
 import FadeInSection from '../components/FadeInSection';
 import TiltCard from '../components/TiltCard';
 import Typewriter from '../components/Typewriter';
 import AntigravityParticles from '../components/AntigravityParticles';
 import SpeedStreaks from '../components/SpeedStreaks';
+import { useWaitlist } from '../context/WaitlistContext';
 
 const Home = () => {
   const nav = useNavigate();
@@ -18,10 +19,12 @@ const Home = () => {
   const [parallaxActive, setParallaxActive] = useState(false);
   const [activeNote, setActiveNote] = useState(0);
 
-  const handleWaitlist = (e: React.MouseEvent) => {
+  const { openModal, hasJoined } = useWaitlist();
+
+  const handleWaitlist = (e: React.MouseEvent, source: string) => {
     e.preventDefault();
     e.stopPropagation();
-    window.dispatchEvent(new CustomEvent('waitlist-join'));
+    openModal(source);
   };
 
   useEffect(() => {
@@ -87,7 +90,11 @@ const Home = () => {
                 </button>
                 <div className="absolute -top-12 left-1/2 -translate-x-1/2 whitespace-nowrap bg-amber-500/10 backdrop-blur-md border border-amber-500/20 text-amber-500 px-3 py-1.5 rounded-full text-xs font-semibold flex items-center gap-2 opacity-0 group-hover/plugin:opacity-100 transition-opacity z-20 pointer-events-none group-hover/plugin:pointer-events-auto">
                   App yet to be launched
-                  <button onClick={handleWaitlist} className="bg-amber-500/20 hover:bg-amber-500/40 text-amber-500 w-5 h-5 rounded-full flex items-center justify-center transition-colors pointer-events-auto" title="Join Waitlist">+</button>
+                  {hasJoined ? (
+                    <button disabled className="bg-green-500/20 text-green-500 w-5 h-5 rounded-full flex items-center justify-center pointer-events-auto cursor-not-allowed" title="Joined Waitlist"><Check size={12} /></button>
+                  ) : (
+                    <button onClick={(e) => handleWaitlist(e, 'Homepage Hero')} className="bg-amber-500/20 hover:bg-amber-500/40 text-amber-500 w-5 h-5 rounded-full flex items-center justify-center transition-colors pointer-events-auto" title="Join Waitlist">+</button>
+                  )}
                 </div>
               </div>
             </div>
@@ -148,7 +155,7 @@ const Home = () => {
                 <div
                   className={`absolute inset-0 glass-card p-6 md:p-8 rounded-[2rem] shadow-xl transition-all duration-700 ease-in-out cursor-pointer flex flex-col items-center justify-center text-center
                     ${activeNote === 0 ? 'z-30 opacity-100 scale-100 rotate-0 translate-y-0 border-indigo-400/50 bg-indigo-900/50 shadow-[0_20px_40px_rgba(79,70,229,0.2)]' :
-                      activeNote === 2 ? 'z-20 opacity-60 scale-95 -translate-y-8 rotate-3 border-indigo-400/20 bg-indigo-900/20' :
+                      activeNote === 2 ? 'z-20 opacity-100 scale-95 -translate-y-8 rotate-3 border-indigo-400/20 bg-indigo-900/20' :
                         'z-10 opacity-30 scale-90 -translate-y-16 -rotate-2 border-indigo-400/10 bg-indigo-900/10'}`}
                   onClick={() => setActiveNote(0)}
                 >
@@ -162,7 +169,7 @@ const Home = () => {
                 <div
                   className={`absolute inset-0 glass-card p-6 md:p-8 rounded-[2rem] shadow-xl transition-all duration-700 ease-in-out cursor-pointer flex flex-col items-center justify-center text-center
                     ${activeNote === 1 ? 'z-30 opacity-100 scale-100 rotate-0 translate-y-0 border-violet-400/50 bg-violet-900/50 shadow-[0_20px_40px_rgba(139,92,246,0.2)]' :
-                      activeNote === 0 ? 'z-20 opacity-60 scale-95 -translate-y-8 -rotate-2 border-violet-400/20 bg-violet-900/20' :
+                      activeNote === 0 ? 'z-20 opacity-100 scale-95 -translate-y-8 -rotate-2 border-violet-400/20 bg-violet-900/20' :
                         'z-10 opacity-30 scale-90 -translate-y-16 rotate-3 border-violet-400/10 bg-violet-900/10'}`}
                   onClick={() => setActiveNote(1)}
                 >
@@ -179,7 +186,7 @@ const Home = () => {
                 <div
                   className={`absolute inset-0 glass-card p-6 md:p-8 rounded-[2rem] shadow-xl transition-all duration-700 ease-in-out cursor-pointer flex flex-col items-center justify-center text-center
                     ${activeNote === 2 ? 'z-30 opacity-100 scale-100 rotate-0 translate-y-0 border-blue-400/50 bg-blue-900/50 shadow-[0_20px_40px_rgba(59,130,246,0.2)]' :
-                      activeNote === 1 ? 'z-20 opacity-60 scale-95 -translate-y-8 rotate-2 border-blue-400/20 bg-blue-900/20' :
+                      activeNote === 1 ? 'z-20 opacity-100 scale-95 -translate-y-8 rotate-2 border-blue-400/20 bg-blue-900/20' :
                         'z-10 opacity-30 scale-90 -translate-y-16 -rotate-3 border-blue-400/10 bg-blue-900/10'}`}
                   onClick={() => setActiveNote(2)}
                 >
@@ -267,12 +274,12 @@ const Home = () => {
                         </div>
                       )}
                       {s.animation === 'loading-bar' && (
-                        <div className="w-full h-1.5 bg-slate-200 rounded-full overflow-hidden">
+                        <div className="w-full h-1.5 bg-slate-200 rounded-full overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                           <div className="h-full bg-green-500 rounded-full w-0 service-anim-fill" />
                         </div>
                       )}
                       {s.animation === 'analog-waves' && (
-                        <div className="w-full h-full flex items-center overflow-hidden">
+                        <div className="w-full h-full flex items-center overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                           <svg className="w-[200%] h-full wave-anim" viewBox="0 0 200 20" preserveAspectRatio="none">
                             <path d="M 0 10 Q 12.5 0, 25 10 T 50 10 Q 62.5 0, 75 10 T 100 10 Q 112.5 0, 125 10 T 150 10 Q 162.5 0, 175 10 T 200 10" fill="none" stroke="#3B3BFF" strokeWidth="2" strokeLinecap="round" />
                           </svg>
@@ -326,7 +333,11 @@ const Home = () => {
             <div className="relative group/plugin w-fit mx-auto">
               <div className="absolute -top-14 left-1/2 -translate-x-1/2 whitespace-nowrap bg-amber-500/10 backdrop-blur-md border border-amber-500/20 text-amber-400 px-3 py-1.5 rounded-full text-sm font-semibold flex items-center gap-2 opacity-0 group-hover/plugin:opacity-100 transition-opacity z-20 pointer-events-none group-hover/plugin:pointer-events-auto">
                 App yet to be launched
-                <button onClick={handleWaitlist} className="bg-amber-500/20 hover:bg-amber-500/40 text-amber-400 w-6 h-6 rounded-full flex items-center justify-center transition-colors pointer-events-auto" title="Join Waitlist">+</button>
+                {hasJoined ? (
+                  <button disabled className="bg-green-500/20 text-green-400 w-6 h-6 rounded-full flex items-center justify-center pointer-events-auto cursor-not-allowed" title="Joined Waitlist"><Check size={14} /></button>
+                ) : (
+                  <button onClick={(e) => handleWaitlist(e, 'Homepage Featured')} className="bg-amber-500/20 hover:bg-amber-500/40 text-amber-400 w-6 h-6 rounded-full flex items-center justify-center transition-colors pointer-events-auto" title="Join Waitlist">+</button>
+                )}
               </div>
               <button onClick={() => navigate('/plugins/adobe-voice')} className="group relative bg-[#3B3BFF] text-white px-10 py-4 rounded-2xl font-bold text-lg transition-all shadow-[0_0_40px_rgba(59,59,255,0.4)] hover:shadow-[0_0_60px_rgba(59,59,255,0.6)] hover:-translate-y-1 flex items-center mx-auto gap-3 overflow-hidden">
                 <span className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity" />

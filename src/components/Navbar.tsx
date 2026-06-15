@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { PlayCircle, Menu, X, Search } from 'lucide-react';
 import ScatterText from './ScatterText';
+import { useWaitlist } from '../context/WaitlistContext';
 
 interface NavbarProps {
   searchOpen: boolean;
@@ -13,15 +14,7 @@ const Navbar = ({ openSearch }: NavbarProps) => {
   const nav = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [waitlistCount, setWaitlistCount] = useState<number | null>(null);
-
-  useEffect(() => {
-    const handleJoin = () => {
-      setWaitlistCount(prev => (prev === null ? 15 : prev + 1));
-    };
-    window.addEventListener('waitlist-join', handleJoin);
-    return () => window.removeEventListener('waitlist-join', handleJoin);
-  }, []);
+  const { waitlistCount } = useWaitlist();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 30);

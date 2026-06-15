@@ -82,10 +82,10 @@ const Docs = () => {
                     ['Select Voice', 'Choose from available voices.'],
                     ['Choose Tone', 'Optional presets: Professional, Voiceover, Documentary, etc.'],
                     ['Generate', 'Click Generate Voice. Audio appears in Premiere Pro.'],
-                    ['Placeholder Point 1', 'Description for placeholder point 1.'],
+                   /* ['Placeholder Point 1', 'Description for placeholder point 1.'],
                     ['Placeholder Point 2', 'Description for placeholder point 2.'],
                     ['Placeholder Point 3', 'Description for placeholder point 3.'],
-                    ['Placeholder Point 4', 'Description for placeholder point 4.']
+                    ['Placeholder Point 4', 'Description for placeholder point 4.']*/
                   ].map(([t, b], i) => (
                     <li key={i} className="flex flex-col gap-3">
                       <div className="flex gap-3">

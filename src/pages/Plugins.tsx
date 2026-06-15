@@ -1,16 +1,19 @@
 import { useNavigate } from 'react-router-dom';
-import { ArrowRight, Mic } from 'lucide-react';
+import { ArrowRight, Mic, Check } from 'lucide-react';
 import FadeInSection from '../components/FadeInSection';
 import TiltCard from '../components/TiltCard';
 import SpeedStreaks from '../components/SpeedStreaks';
+import { useWaitlist } from '../context/WaitlistContext';
 
 const Plugins = () => {
   const nav = useNavigate();
 
-  const handleWaitlist = (e: React.MouseEvent) => {
+  const { openModal, hasJoined } = useWaitlist();
+
+  const handleWaitlist = (e: React.MouseEvent, source: string) => {
     e.preventDefault();
     e.stopPropagation();
-    window.dispatchEvent(new CustomEvent('waitlist-join'));
+    openModal(source);
   };
 
   return (
@@ -49,7 +52,11 @@ const Plugins = () => {
                 </div>
                 <div className="absolute top-6 right-6 whitespace-nowrap bg-amber-500/10 backdrop-blur-md border border-amber-500/20 text-amber-400 px-3 py-1.5 rounded-full text-xs font-semibold flex items-center gap-2 opacity-0 group-hover/plugin:opacity-100 transition-opacity z-20 pointer-events-none group-hover/plugin:pointer-events-auto" onClick={(e) => e.stopPropagation()}>
                   App yet to be launched
-                  <button onClick={handleWaitlist} className="bg-amber-500/20 hover:bg-amber-500/40 text-amber-400 w-5 h-5 rounded-full flex items-center justify-center transition-colors pointer-events-auto" title="Join Waitlist">+</button>
+                  {hasJoined ? (
+                    <button disabled className="bg-green-500/20 text-green-400 w-5 h-5 rounded-full flex items-center justify-center transition-colors pointer-events-auto cursor-not-allowed" title="Joined Waitlist"><Check size={12} /></button>
+                  ) : (
+                    <button onClick={(e) => handleWaitlist(e, 'Plugins Page')} className="bg-amber-500/20 hover:bg-amber-500/40 text-amber-400 w-5 h-5 rounded-full flex items-center justify-center transition-colors pointer-events-auto" title="Join Waitlist">+</button>
+                  )}
                 </div>
               </div>
             </TiltCard>

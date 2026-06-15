@@ -17,6 +17,10 @@ import Docs from './pages/Docs';
 import Privacy from './pages/Privacy';
 import Terms from './pages/Terms';
 
+// Context & Modals
+import { WaitlistProvider } from './context/WaitlistContext';
+import WaitlistModal from './components/WaitlistModal';
+
 // ─────────────────────────────────────────────
 // Scroll to top on route change
 // ─────────────────────────────────────────────
@@ -54,26 +58,29 @@ const App = () => {
   const closeSearch = () => { setSearchOpen(false); };
 
   return (
-    <div className="min-h-screen font-space text-white bg-[#07060F]">
-      {/* Full-page particles — not on docs/legal pages */}
-      {showParticles && <FullPageParticles isDark={isDarkPage} />}
-      <div className="relative" style={{ zIndex: 2 }}>
-        <ScrollToTop />
-        <Navbar searchOpen={searchOpen} openSearch={openSearch} />
-        <SearchOverlay searchOpen={searchOpen} closeSearch={closeSearch} />
-        <main>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/plugins" element={<Plugins />} />
-            <Route path="/plugins/adobe-voice" element={<AdobeVoice />} />
-            <Route path="/docs" element={<Docs />} />
-            <Route path="/privacy" element={<Privacy />} />
-            <Route path="/terms" element={<Terms />} />
-          </Routes>
-        </main>
-        <Footer />
+    <WaitlistProvider>
+      <div className="min-h-screen font-space text-white bg-[#07060F]">
+        {/* Full-page particles — not on docs/legal pages */}
+        {showParticles && <FullPageParticles isDark={isDarkPage} />}
+        <div className="relative" style={{ zIndex: 2 }}>
+          <ScrollToTop />
+          <Navbar searchOpen={searchOpen} openSearch={openSearch} />
+          <SearchOverlay searchOpen={searchOpen} closeSearch={closeSearch} />
+          <main>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/plugins" element={<Plugins />} />
+              <Route path="/plugins/adobe-voice" element={<AdobeVoice />} />
+              <Route path="/docs" element={<Docs />} />
+              <Route path="/privacy" element={<Privacy />} />
+              <Route path="/terms" element={<Terms />} />
+            </Routes>
+          </main>
+          <Footer />
+        </div>
+        <WaitlistModal />
       </div>
-    </div>
+    </WaitlistProvider>
   );
 };
 
