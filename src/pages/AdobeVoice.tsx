@@ -193,7 +193,7 @@ const AdobeVoice = () => {
                 )}
               </div>
               <button onClick={() => window.open('#', '_blank')} className="w-full sm:w-auto glass-card hover:border-indigo-500/40 text-white px-9 py-4 rounded-2xl font-bold text-lg transition-all hover:-translate-y-1 flex items-center justify-center gap-2">
-                <div className="w-6 h-6 bg-red-600 rounded flex items-center justify-center"><span className="text-[9px] font-black text-white">Ae</span></div>
+                <div className="w-6 h-6 rounded overflow-hidden flex items-center justify-center"><img src="/marketplacelogo.png" alt="Marketplace" className="w-full h-full object-contain"></img></div>
                 View in Marketplace
               </button>
             </div>
@@ -411,7 +411,7 @@ const AdobeVoice = () => {
                       <button onClick={(e) => handleWaitlist(e, 'Adobe Voice Page')} className="bg-amber-500/20 hover:bg-amber-500/40 text-amber-400 w-6 h-6 rounded-full flex items-center justify-center transition-colors pointer-events-auto" title="Join Waitlist">+</button>
                     )}
                   </div>
-                  <button className="group w-full sm:w-auto relative bg-[#3B3BFF] text-white px-9 py-4 rounded-2xl font-bold text-lg overflow-hidden transition-all shadow-[0_0_40px_rgba(59,59,255,0.4)] hover:-translate-y-1 flex items-center justify-center gap-2">
+                  <button onClick={(e) => handleWaitlist(e, 'Download Button')} className="group w-full sm:w-auto relative bg-[#3B3BFF] text-white px-9 py-4 rounded-2xl font-bold text-lg overflow-hidden transition-all shadow-[0_0_40px_rgba(59,59,255,0.4)] hover:-translate-y-1 flex items-center justify-center gap-2">
                     <Download size={20} className="relative z-10" /><span className="relative z-10">Download for Windows</span>
                   </button>
                 </div>
@@ -425,7 +425,7 @@ const AdobeVoice = () => {
                     )}
                   </div>
                   <button className="w-full sm:w-auto glass-card text-white px-9 py-4 rounded-2xl font-bold text-lg hover:-translate-y-1 transition-all flex items-center justify-center gap-2">
-                    <div className="w-6 h-6 bg-red-600 rounded flex items-center justify-center"><span className="text-[9px] font-black">Ae</span></div>
+                    <div className="w-6 h-6 rounded overflow-hidden flex items-center justify-center"><img src="/marketplacelogo.png" alt="Marketplace" className="w-full h-full object-contain" /></div>
                     Adobe Marketplace
                   </button>
                 </div>
