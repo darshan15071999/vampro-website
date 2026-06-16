@@ -90,7 +90,7 @@ const Navbar = ({ openSearch }: NavbarProps) => {
                       <div className="rounded-2xl p-2 bg-[#07060F]/95 backdrop-blur-xl border border-indigo-500/20 shadow-[0_10px_40px_rgba(0,0,0,0.5)]">
                         <button onClick={() => navigate('/plugins/adobe-voice')} className="block w-full text-left p-4 rounded-xl hover:bg-white/5 transition-all">
                           <div className="font-semibold text-white">
-                            Voice Generator
+                            Vampro Voice Generator
                           </div>
                           <div className="text-sm text-slate-400">
                             AI voiceovers for Premiere Pro
@@ -99,7 +99,7 @@ const Navbar = ({ openSearch }: NavbarProps) => {
 
                         <button onClick={() => navigate('/signalscope')} className="block w-full text-left p-4 rounded-xl hover:bg-white/5 transition-all">
                           <div className="font-semibold text-white">
-                            AEO Tracker
+                            SignalScope AEO Tracker
                           </div>
                           <div className="text-sm text-slate-400">
                             Monitor AI search visibility

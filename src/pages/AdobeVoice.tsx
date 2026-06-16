@@ -119,10 +119,10 @@ const AdobeVoice = () => {
 
   const steps = [
     { num: '1', title: 'Open Plugin', desc: 'Launch inside Premiere Pro', icon: <Layout size={28} /> },
-    { num: '2', title: 'Enter Script', desc: 'Paste or write narration', icon: <FileText size={28} /> },
+    { num: '2', title: 'Enter Text', desc: 'Paste or write narration', icon: <FileText size={28} /> },
     { num: '3', title: 'Choose Voice', desc: 'Select a voice profile', icon: <Mic size={28} /> },
     { num: '4', title: 'Generate', desc: 'AI processes your audio', icon: <Zap size={28} /> },
-    { num: '5', title: 'Download', desc: 'Use in your project', icon: <Download size={28} /> },
+    { num: '5', title: 'Import', desc: 'Use in your project', icon: <Download size={28} /> },
   ];
 
 
@@ -165,7 +165,7 @@ const AdobeVoice = () => {
               <span className="gradient-blue-text">Text to Speech</span>
             </h1>
             <p className="text-lg text-slate-400 max-w-3xl mx-auto mb-12 leading-relaxed font-light">
-              Generate AI-powered voiceovers directly inside Adobe Premiere Pro. Write your script, choose a voice, and create narration.
+              Generate AI-powered voiceovers directly inside Adobe Premiere Pro. Write your script, choose a voice, and create narrations in minutes.
             </p>
           </FadeInSection>
           <FadeInSection delay="200ms" className="flex flex-col sm:flex-row justify-center items-center gap-4">
@@ -287,7 +287,7 @@ const AdobeVoice = () => {
       <section className="py-24 md:py-32 dark-grid-bg relative">
         <SpeedStreaks />
         <div className="w-full px-6 md:px-10 lg:px-16 relative z-10">
-          <FadeInSection><h2 className="text-3xl md:text-5xl font-extrabold text-white mb-12 text-center">Why Creators Use It</h2></FadeInSection>
+          <FadeInSection><h2 className="text-3xl md:text-5xl font-extrabold text-white mb-12 text-center">Why Should Creators Use It</h2></FadeInSection>
           <div ref={reasonRef} className="grid lg:grid-cols-2 gap-12 items-center">
             <FadeInSection className="space-y-3">
               {[

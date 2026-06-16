@@ -43,7 +43,7 @@ const Footer = () => {
       </div>
       <div className="w-full px-6 md:px-10 lg:px-16 mt-10 pt-6 border-t border-indigo-900/20 text-xs text-slate-600 flex flex-col md:flex-row justify-between items-center relative z-10">
         <p>© {new Date().getFullYear()} Vampro. All rights reserved.</p>
-        <p className="mt-2 md:mt-0">Built by Darshan · Creative Lab</p>
+        <p className="mt-2 md:mt-0">Built by Darshan</p>
       </div>
     </footer>
   );

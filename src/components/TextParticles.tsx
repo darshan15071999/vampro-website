@@ -18,7 +18,7 @@ const TextParticles = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       particles = [];
-      for (let i = 0; i < 120; i++) {
+      for (let i = 0; i < 250; i++) {
         particles.push({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
