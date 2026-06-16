@@ -1,6 +1,6 @@
-import { useNavigate } from 'react-router-dom';
+//import { useNavigate } from 'react-router-dom';
 import {
-  FileText, Shield, ArrowRight,
+  //FileText, Shield, ArrowRight,
   Bot, Activity, Eye, MessageSquare, Link as LinkIcon, BarChart2, Globe, TrendingUp, Check, CheckCircle, Search
 } from 'lucide-react';
 import FadeInSection from '../components/FadeInSection';
@@ -81,7 +81,7 @@ const HeroSearchAnimation = () => {
 };
 
 const AeoPage = () => {
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   const { openModal, hasJoined } = useWaitlist();
 
   const handleWaitlist = (e: React.MouseEvent, source: string) => {
