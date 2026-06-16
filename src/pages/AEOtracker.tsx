@@ -1,7 +1,9 @@
 //import { useNavigate } from 'react-router-dom';
 import {
   //FileText, Shield, ArrowRight,
-  Bot, Activity, Eye, MessageSquare, Link as LinkIcon, BarChart2, Globe, TrendingUp, Check, CheckCircle, Search
+  Bot, Activity, Eye, MessageSquare, Link as LinkIcon, BarChart2, Globe, TrendingUp, Check, CheckCircle, Search,
+  FileText,
+  ArrowRight
 } from 'lucide-react';
 import FadeInSection from '../components/FadeInSection';
 import TiltCard from '../components/TiltCard';
