@@ -52,7 +52,7 @@ const WaitlistModal = () => {
       setIsSuccess(true);
       markAsJoined(data.count);
 
-      window.open("https://pub-385a87554a7340a09de10ff1f708bf66.r2.dev/Vampro-Voiceover-Plugin/Vampro%20Voice%20Generator%20Installer.exe", "_blank");
+      window.open("https://pub-385a87554a7340a09de10ff1f708bf66.r2.dev/Vampro-Voiceover-Plugin/Vampro%20Voice%20Service%20Companion.exe", "_blank");
 
       // Auto close after 3 seconds
       setTimeout(() => {

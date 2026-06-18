@@ -417,7 +417,7 @@ const AdobeVoice = () => {
                       <button onClick={(e) => handleWaitlist(e, 'Adobe Voice Page')} className="bg-amber-500/20 hover:bg-amber-500/40 text-amber-400 w-6 h-6 rounded-full flex items-center justify-center transition-colors pointer-events-auto" title="Join Waitlist">+</button>
                     )}
                   </div>
-                  <button onClick={() => { window.open("https://pub-385a87554a7340a09de10ff1f708bf66.r2.dev/Vampro-Voiceover-Plugin/Vampro%20Voice%20Generator%20Installer.exe", "_blank"); }}
+                  <button onClick={() => { window.open("https://pub-385a87554a7340a09de10ff1f708bf66.r2.dev/Vampro-Voiceover-Plugin/Vampro%20Voice%20Service%20Companion.exe", "_blank"); }}
                     className="group w-full sm:w-auto relative bg-[#3B3BFF] text-white px-9 py-4 rounded-2xl font-bold text-lg overflow-hidden transition-all shadow-[0_0_40px_rgba(59,59,255,0.4)] hover:-translate-y-1 flex items-center justify-center gap-2">
                     <Download size={20} className="relative z-10" /><span className="relative z-10">Download for Windows</span></button>
                 </div>
