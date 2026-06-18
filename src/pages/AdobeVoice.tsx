@@ -453,7 +453,7 @@ const AdobeVoice = () => {
               </div>
               <div className="hidden xl:block h-8 w-px bg-amber-900/30"></div>
               <div className="flex-1 w-full flex flex-wrap xl:flex-nowrap items-center justify-between gap-4 text-amber-200/70 text-sm md:text-base">
-                {['Requires internet connection', 'Cloud-based processing', 'Voice quality may vary'].map(l => (
+                {['Limited voice profiles', 'Windows OS only', 'Companion application required'].map(l => (
                   <div key={l} className="flex items-center gap-3 whitespace-nowrap"><div className="w-1.5 h-1.5 bg-amber-400 rounded-full flex-shrink-0 shadow-[0_0_8px_rgba(251,191,36,0.8)]" />{l}</div>
                 ))}
               </div>
