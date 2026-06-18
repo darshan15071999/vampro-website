@@ -61,7 +61,7 @@ const Docs = () => {
               </DocSection>
 
               <DocSection id="installation" title="Installation Guide">
-                {[['Step 1 – Install Extension', 'Install from Adobe Marketplace and restart Premiere Pro. (App is still not launched in the marketplace*)'], ['Step 2 – Install Voice Service', 'Run Vampro Voice Generator Installer.exe. It sets up the service, configures auto-startup, installs AI components. Restart Premiere Pro.'], ['Step 3 – Open Extension', 'Go to Window → Extensions → Vampro Voice Generator Text-to-Speech.']].map(([t, b]) => (
+                {[['Step 1 – Install Extension', 'Install from Adobe Marketplace and restart Premiere Pro. (App is still not launched in the marketplace*)'], ['Step 2 – Install Voice Service', 'Run Vampro Voice Service Companion.exe. It sets up the service, configures auto-startup, installs AI components. Restart Premiere Pro.'], ['Step 3 – Open Extension', 'Go to Window → Extensions → Vampro Voice Generator Text-to-Speech.']].map(([t, b]) => (
                   <div key={t} className="mb-8">
                     <DocH3 blue>{t}</DocH3>
                     <p className="text-slate-400 text-sm leading-relaxed mb-4">{b}</p>
@@ -151,13 +151,17 @@ const Docs = () => {
               <DocSection id="releases" title="Release Notes">
                 <div className="glass-card rounded-xl p-5">
                   <h3 className="text-base font-bold text-white mb-2">Version 1.1.0</h3>
-                  <p className="text-slate-400 text-sm"><strong className="text-indigo-300">New:</strong> Improved installer, auto-startup, hidden service, enhanced integration, better stability.</p>
-                  <p className="text-slate-400 text-sm mt-2"><strong className="text-indigo-300">Fixes:</strong> Connection failures, startup reliability, installation workflow.</p>
+                  <p className="text-slate-400 text-sm"><strong className="text-indigo-300">New:</strong> Introduced AI-powered voice generation directly within Adobe Premiere Pro, allowing creators to generate narration, voiceovers, tutorials, explainer audio, and spoken content without leaving their editing workflow. Added support for multiple voice options, voice customization through speed and pitch controls, and built-in tone presets including Professional, Documentary, Voiceover, Dynamic, Casual, Serious, and Comedic. This release also includes audio preview capabilities, metadata support for generated voice clips, seamless integration with the Vampro Voice Service companion application, automatic service startup after Windows login, and an improved installation and onboarding experience for first-time users.</p>
+                  <p className="text-slate-400 text-sm mt-2"><strong className="text-indigo-300">Fixes:</strong> Improved communication between the Premiere Pro extension and the Vampro Voice Service companion application to provide a more reliable voice generation workflow. Enhanced error handling and validation to deliver clearer user feedback when the companion service is unavailable or encounters an issue, improved startup reliability and service initialization, refined installation behavior and startup configuration, resolved inconsistencies in product branding and naming across the plugin and companion application, and implemented overall stability and usability improvements to ensure a smoother experience across supported Windows environments.</p>
                 </div>
                 <div className="glass-card rounded-xl p-5 mt-4 border-[#3B3BFF]/20">
                   <h3 className="text-base font-bold text-white mb-1">Support</h3>
                   <p className="text-slate-400 text-sm">Contact <a href="mailto:support@vampro.in" className="gradient-blue-text font-bold">support@vampro.in</a></p>
                 </div>
+              </DocSection>
+
+              <DocSection id="audio-management" title="Important Disclosure">
+                <p className="text-slate-400 text-sm mb-6">Vampro Voice Generator Text-to-Speech requires installation and use of the Vampro Voice Service companion application, which enables AI-powered voice generation within Adobe Premiere Pro and must be installed for the plugin to function. This plugin requires installation and use of a companion application. Companion applications may include generative AI capabilities and be able to perform actions on your behalf, including accessing your files, exporting data, and generating content in your Adobe application. You are responsible for determining whether the use of this plugin and its companion application is appropriate for your project. Vampro Voice Service runs locally on your computer and is designed for use with Adobe Premiere Pro on Windows 10 (64-bit) and Windows 11 (64-bit). To get started, install the Vampro Voice Service companion application, install the Vampro Voice Generator Text-to-Speech plugin, restart Adobe Premiere Pro, and open the plugin from Window → Extensions → Vampro Voice Generator Text-to-Speech.</p>
               </DocSection>
 
             </div>
