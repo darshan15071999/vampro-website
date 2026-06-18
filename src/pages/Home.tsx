@@ -95,7 +95,7 @@ const Home = () => {
                 <span className="relative z-10 flex items-center gap-2">Explore Services <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" /></span>
               </button>
               <div className="relative group/plugin w-full sm:w-auto">
-                <button onClick={() => navigate('/plugins/adobe-voice')} className="w-full group glass-card-light text-[#07060F] px-9 py-4 rounded-2xl font-bold text-lg hover:shadow-lg hover:-translate-y-1 transition-all flex items-center justify-center gap-2">
+                <button onClick={() => navigate('/voice-generator')} className="w-full group glass-card-light text-[#07060F] px-9 py-4 rounded-2xl font-bold text-lg hover:shadow-lg hover:-translate-y-1 transition-all flex items-center justify-center gap-2">
                   View Plugins <Settings size={20} className="group-hover:rotate-90 transition-transform duration-500" />
                 </button>
                 <div className="absolute -top-12 left-1/2 -translate-x-1/2 whitespace-nowrap bg-amber-500/10 backdrop-blur-md border border-amber-500/20 text-amber-500 px-3 py-1.5 rounded-full text-xs font-semibold flex items-center gap-2 opacity-0 group-hover/plugin:opacity-100 transition-opacity z-20 pointer-events-none group-hover/plugin:pointer-events-auto">
@@ -349,7 +349,7 @@ const Home = () => {
                   <button onClick={(e) => handleWaitlist(e, 'Homepage Featured')} className="bg-amber-500/20 hover:bg-amber-500/40 text-amber-400 w-6 h-6 rounded-full flex items-center justify-center transition-colors pointer-events-auto" title="Join Waitlist">+</button>
                 )}
               </div>
-              <button onClick={() => navigate('/plugins/adobe-voice')} className="group relative bg-[#3B3BFF] text-white px-10 py-4 rounded-2xl font-bold text-lg transition-all shadow-[0_0_40px_rgba(59,59,255,0.4)] hover:shadow-[0_0_60px_rgba(59,59,255,0.6)] hover:-translate-y-1 flex items-center mx-auto gap-3 overflow-hidden">
+              <button onClick={() => navigate('/voice-generator')} className="group relative bg-[#3B3BFF] text-white px-10 py-4 rounded-2xl font-bold text-lg transition-all shadow-[0_0_40px_rgba(59,59,255,0.4)] hover:shadow-[0_0_60px_rgba(59,59,255,0.6)] hover:-translate-y-1 flex items-center mx-auto gap-3 overflow-hidden">
                 <span className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity" />
                 <span className="relative z-10 flex items-center gap-3">Explore Plugin <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" /></span>
               </button>

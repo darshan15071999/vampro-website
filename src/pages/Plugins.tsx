@@ -33,7 +33,7 @@ const Plugins = () => {
             <TiltCard>
               <div className="relative group/plugin h-full">
                 <div
-                  onClick={() => { nav('/plugins/adobe-voice'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                  onClick={() => { nav('/voice-generator'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
                   className="glass-card p-8 rounded-[2rem] cursor-pointer group hover:border-indigo-500/30 transition-all duration-300 h-full flex flex-col"
                 >
                   <div className="w-14 h-14 bg-[#3B3BFF] rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">

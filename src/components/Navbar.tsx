@@ -69,7 +69,7 @@ const Navbar = ({ openSearch }: NavbarProps) => {
             {[
               { label: 'About Us', action: () => navigate('/', 'about') },
               { label: 'Services', action: () => navigate('/', 'services') },
-              //{ label: 'Plugins', action: () => navigate('/plugins/adobe-voice') },
+              //{ label: 'Plugins', action: () => navigate('/voice-generator') },
 
               {
                 isCustom: true,
@@ -88,7 +88,7 @@ const Navbar = ({ openSearch }: NavbarProps) => {
                     <div className="absolute top-full left-0 h-3 w-full" />
                     <div className="absolute top-full left-0 mt-2 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
                       <div className="rounded-2xl p-2 bg-[#07060F]/95 backdrop-blur-xl border border-indigo-500/20 shadow-[0_10px_40px_rgba(0,0,0,0.5)]">
-                        <button onClick={() => navigate('/plugins/adobe-voice')} className="block w-full text-left p-4 rounded-xl hover:bg-white/5 transition-all">
+                        <button onClick={() => navigate('/voice-generator')} className="block w-full text-left p-4 rounded-xl hover:bg-white/5 transition-all">
                           <div className="font-semibold text-white">
                             Vampro Voice Generator
                           </div>
@@ -172,7 +172,7 @@ const Navbar = ({ openSearch }: NavbarProps) => {
             <button key={item} onClick={() => {
               if (item === 'About Us') navigate('/', 'about');
               else if (item === 'Services') navigate('/', 'services');
-              else if (item === 'Plugins') navigate('/plugins/adobe-voice');
+              else if (item === 'Plugins') navigate('/voice-generator');
               else if (item === 'AEO Tracker') navigate('/signalscope');
               else if (item === 'Docs') navigate('/docs');
               else window.open('https://youtube.com', '_blank');

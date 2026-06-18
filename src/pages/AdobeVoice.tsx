@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { Store } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import {
   MonitorPlay, Wand2, Download, FileText, Shield, ArrowRight,
@@ -14,7 +15,7 @@ import { Helmet } from "react-helmet-async";
 
 
 <Helmet>
-  <title>Adobe Voice Generator for Premiere Pro | Vampro</title>
+  <title>Vampro Voice Generator</title>
 
   <meta
     name="description"
@@ -23,7 +24,7 @@ import { Helmet } from "react-helmet-async";
 
   <meta
     property="og:title"
-    content="Adobe Voice Generator for Premiere Pro | Vampro"
+    content="Vampro Voice Generator"
   />
 
   <meta
@@ -198,7 +199,7 @@ const AdobeVoice = () => {
                 )}
               </div>
               <button onClick={() => window.open('#', '_blank')} className="w-full sm:w-auto glass-card hover:border-indigo-500/40 text-white px-9 py-4 rounded-2xl font-bold text-lg transition-all hover:-translate-y-1 flex items-center justify-center gap-2">
-                <div className="w-6 h-6 rounded overflow-hidden flex items-center justify-center"><img src="/marketplacelogo.png" alt="Marketplace" className="w-full h-full object-contain"></img></div>
+                <Store size={22} />
                 View in Marketplace
               </button>
             </div>
@@ -430,7 +431,7 @@ const AdobeVoice = () => {
                     )}
                   </div>
                   <button className="w-full sm:w-auto glass-card text-white px-9 py-4 rounded-2xl font-bold text-lg hover:-translate-y-1 transition-all flex items-center justify-center gap-2">
-                    <div className="w-6 h-6 rounded overflow-hidden flex items-center justify-center"><img src="/marketplacelogo.png" alt="Marketplace" className="w-full h-full object-contain" /></div>
+                    <Store size={22} />
                     Adobe Marketplace
                   </button>
                 </div>

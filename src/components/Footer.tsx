@@ -26,7 +26,7 @@ const Footer = () => {
         <div>
           <h4 className="text-white font-semibold mb-5 uppercase tracking-wider text-xs">Navigation</h4>
           <ul className="space-y-2.5 text-sm">
-            {[['About Us', () => navigate('/', 'about')], ['Services', () => navigate('/', 'services')], ['Plugins', () => navigate('/plugins/adobe-voice')], ['Documentation', () => navigate('/docs')]].map(([label, fn]) => (
+            {[['About Us', () => navigate('/', 'about')], ['Services', () => navigate('/', 'services')], ['Plugins', () => navigate('/voice-generator')], ['Documentation', () => navigate('/docs')]].map(([label, fn]) => (
               <li key={label as string}><button onClick={fn as () => void} className="hover:text-indigo-400 transition-colors">{label as string}</button></li>
             ))}
           </ul>

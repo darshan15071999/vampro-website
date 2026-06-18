@@ -71,7 +71,7 @@ const App = () => {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/plugins" element={<Plugins />} />
-              <Route path="/plugins/adobe-voice" element={<AdobeVoice />} />
+              <Route path="/voice-generator" element={<AdobeVoice />} />
               <Route path="/signalscope" element={<AEOTracker />} />
               <Route path="/docs" element={<Docs />} />
               <Route path="/privacy" element={<Privacy />} />
