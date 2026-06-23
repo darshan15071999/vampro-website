@@ -16,6 +16,7 @@ import AdobeVoice from './pages/AdobeVoice';
 import Docs from './pages/Docs';
 import Privacy from './pages/Privacy';
 import Terms from './pages/Terms';
+import Licenses from './pages/Licenses';
 import AEOTracker from './pages/AEOtracker';
 
 // Context & Modals
@@ -45,12 +46,14 @@ const App = () => {
   const isDarkPage = location.pathname.startsWith('/plugins') ||
                      location.pathname.startsWith('/docs') ||
                      location.pathname === '/privacy' ||
-                     location.pathname === '/terms';
+                     location.pathname === '/terms' ||
+                     location.pathname === '/licenses';
 
   // Hide particles on docs-style pages
   const showParticles = !location.pathname.startsWith('/docs') &&
                         location.pathname !== '/privacy' &&
-                        location.pathname !== '/terms';
+                        location.pathname !== '/terms' &&
+                        location.pathname !== '/licenses';
 
   const openSearch = () => {
     setSearchOpen(true);
@@ -76,6 +79,7 @@ const App = () => {
               <Route path="/docs" element={<Docs />} />
               <Route path="/privacy" element={<Privacy />} />
               <Route path="/terms" element={<Terms />} />
+              <Route path="/licenses" element={<Licenses />} />
             </Routes>
           </main>
           <Footer />

@@ -34,7 +34,7 @@ const Footer = () => {
         <div>
           <h4 className="text-white font-semibold mb-5 uppercase tracking-wider text-xs">Legal</h4>
           <ul className="space-y-2.5 text-sm">
-            {[['Terms of Use', '/terms'], ['Privacy Policy', '/privacy']].map(([label, path]) => (
+            {[['Terms of Use', '/terms'], ['Privacy Policy', '/privacy'], ['Licenses', '/licenses']].map(([label, path]) => (
               <li key={label}><button onClick={() => navigate(path)} className="hover:text-indigo-400 transition-colors">{label}</button></li>
             ))}
             <li><a href="mailto:support@vampro.in" className="hover:text-indigo-400 transition-colors">Contact Support</a></li>

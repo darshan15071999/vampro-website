@@ -1,0 +1,11 @@
+{
+  "service": {
+    "latest": "1.1.0",
+    "min_supported": "1.1.0",
+    "url": "https://vampro.in/plugins/voice-generator/download"
+  },
+  "panel": {
+    "latest": "1.1.0",
+    "url": "https://vampro.in/plugins/voice-generator"
+  }
+}

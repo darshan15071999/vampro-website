@@ -162,6 +162,15 @@ const Docs = () => {
 
               <DocSection id="audio-management" title="Important Disclosure">
                 <p className="text-slate-400 text-sm mb-6">Vampro Voice Generator Text-to-Speech requires installation and use of the Vampro Voice Service companion application, which enables AI-powered voice generation within Adobe Premiere Pro and must be installed for the plugin to function. This plugin requires installation and use of a companion application. Companion applications may include generative AI capabilities and be able to perform actions on your behalf, including accessing your files, exporting data, and generating content in your Adobe application. You are responsible for determining whether the use of this plugin and its companion application is appropriate for your project. Vampro Voice Service runs locally on your computer and is designed for use with Adobe Premiere Pro on Windows 10 (64-bit) and Windows 11 (64-bit). To get started, install the Vampro Voice Service companion application, install the Vampro Voice Generator Text-to-Speech plugin, restart Adobe Premiere Pro, and open the plugin from Window → Extensions → Vampro Voice Generator Text-to-Speech.</p>
+
+                <div className="glass-card rounded-xl p-5 border-indigo-500/20 mt-6">
+                  <h3 className="text-sm font-bold text-white mb-2 flex items-center gap-2">
+                    <div className="w-1.5 h-1.5 bg-indigo-500 rounded-full" /> Open-Source Attribution
+                  </h3>
+                  <p className="text-slate-400 text-sm leading-relaxed">
+                    Voices powered by <span className="text-indigo-300 font-medium">Kokoro</span>, <span className="text-indigo-300 font-medium">DeepPhonemizer</span>, <span className="text-indigo-300 font-medium">OpenPhonemizer</span>, and <span className="text-indigo-300 font-medium">inflect</span> — open-source models licensed under <span className="text-white font-medium">Apache 2.0</span>, <span className="text-white font-medium">MIT</span>, and <span className="text-white font-medium">BSD-3-Clause-Clear</span> permissive licenses.
+                  </p>
+                </div>
               </DocSection>
 
             </div>
