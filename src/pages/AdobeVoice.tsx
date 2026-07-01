@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Store } from 'lucide-react';
+import { Store, Grid2x2 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import {
   MonitorPlay, Wand2, Download, FileText, Shield, ArrowRight,
@@ -186,7 +186,7 @@ const AdobeVoice = () => {
               }}
                 className="group relative w-full sm:w-auto bg-[#3B3BFF] text-white px-9 py-4 rounded-2xl font-bold text-lg overflow-hidden transition-all shadow-[0_0_40px_rgba(59,59,255,0.4)] hover:-translate-y-1 flex items-center justify-center gap-2">
                 <span className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity" />
-                <Download size={20} className="relative z-10" /><span className="relative z-10">Get the Extension</span>
+                <Grid2x2 size={25} className="relative z-10" /><span className="relative z-10">Get the Extension</span>
               </button>
             </div>
             <div className="relative group/plugin w-full sm:w-auto">
@@ -351,11 +351,11 @@ const AdobeVoice = () => {
       </section>
 
       {/* WHO IS IT FOR — dark dot bg */}
-      <section className="py-24 md:py-32 dark-dot-bg relative">
+      <section className="py-16 md:py-20 dark-dot-bg relative">
         <SpeedStreaks />
         <div ref={whoRef} className="w-full px-6 md:px-10 lg:px-16 relative z-10">
-          <FadeInSection className="text-center mb-12"><h2 className="text-3xl md:text-5xl font-extrabold text-white">Who Is It For?</h2></FadeInSection>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <FadeInSection className="text-center mb-8"><h2 className="text-2xl md:text-4xl font-extrabold text-white">Who Is It For?</h2></FadeInSection>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {[
               { title: 'YouTube Creators', desc: 'Narration without recording equipment.', image: '/creator.png', colorClass: 'red', shadow: 'shadow-[0_0_24px_rgba(239,68,68,0.15)] border-red-500/30', hoverShadow: 'group-hover:shadow-[0_0_24px_rgba(239,68,68,0.15)] group-hover:border-red-500/30', bgGlow: 'from-red-500/20', bar: 'bg-red-500' },
               { title: 'Video Editors', desc: 'Generate voiceovers quickly.', image: '/editor.png', colorClass: 'violet', shadow: 'shadow-[0_0_24px_rgba(139,92,246,0.15)] border-violet-500/30', hoverShadow: 'group-hover:shadow-[0_0_24px_rgba(139,92,246,0.15)] group-hover:border-violet-500/30', bgGlow: 'from-violet-500/20', bar: 'bg-violet-500' },
@@ -365,21 +365,51 @@ const AdobeVoice = () => {
               <FadeInSection key={i} delay={`${i * 80}ms`}>
                 <TiltCard>
                   <div
-                    className={`group glass-card rounded-[2rem] h-[600px] flex flex-col justify-end p-7 relative overflow-hidden cursor-pointer transition-all duration-500 ${item.hoverShadow} ${activeWho === i ? `${item.shadow} scale-[1.02]` : 'border-transparent'}`}
+                    className={`group glass-card rounded-[2rem] h-[360px] flex flex-col justify-end p-6 relative overflow-hidden cursor-pointer transition-all duration-500 ${item.hoverShadow} ${activeWho === i ? `${item.shadow} scale-[1.02]` : 'border-transparent'}`}
                   >
                     <img src={item.image} className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${activeWho === i ? 'opacity-50 scale-105' : 'opacity-0 scale-100 group-hover:opacity-10 group-hover:scale-105'}`} alt={item.title} />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#07060F]/95 via-[#07060F]/40 to-transparent pointer-events-none" />
                     <div className={`absolute inset-0 bg-gradient-to-t ${item.bgGlow} to-transparent opacity-0 transition-opacity duration-500 pointer-events-none ${activeWho === i ? 'opacity-100' : 'group-hover:opacity-100'}`} />
-                    <div className="relative z-10 transition-transform duration-500 -translate-y-[230px] group-hover:translate-y-0">
-                      <h3 className="font-bold text-xl text-white mb-2">{item.title}</h3>
-                      <p className="text-slate-400 text-sm">{item.desc}</p>
-                      <div className={`mt-3 h-1 ${item.bar} transition-all duration-500 rounded-full ${activeWho === i ? 'w-10' : 'w-0 group-hover:w-4'}`} />
+                    <div className="relative z-10 transition-transform duration-500 -translate-y-[120px] group-hover:translate-y-0">
+                      <h3 className="font-bold text-lg text-white mb-1">{item.title}</h3>
+                      <p className="text-slate-400 text-xs">{item.desc}</p>
+                      <div className={`mt-2 h-1 ${item.bar} transition-all duration-500 rounded-full ${activeWho === i ? 'w-10' : 'w-0 group-hover:w-4'}`} />
                     </div>
                   </div>
                 </TiltCard>
               </FadeInSection>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* GETTING STARTED — light bg */}
+      <section className="py-24 md:py-32 light-dot-bg relative">
+        <div className="w-full px-6 md:px-10 lg:px-16 relative z-10">
+          <FadeInSection className="text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-extrabold text-[#07060F] mb-4">Getting Started</h2>
+            <p className="text-lg text-slate-600 font-light max-w-2xl mx-auto">Three quick steps to set everything up and start generating voiceovers.</p>
+          </FadeInSection>
+          <FadeInSection delay="100ms">
+            <div className="max-w-4xl mx-auto space-y-6">
+              {[
+                { num: '1', title: 'Install the Extension', desc: 'Get the Vampro Voice Generator Text-to-Speech extension from the Adobe Marketplace and install it.', icon: <Store size={24} /> },
+                { num: '2', title: 'Install and Run/Open the Companion App', desc: 'Download and install the Vampro Voice Service companion app from the Microsoft Store, then launch it.', icon: <Download size={24} /> },
+                { num: '3', title: 'Open in Premiere Pro', desc: 'Inside Premiere Pro, go to Window → Extensions and select Vampro Voice Generator to start using the plugin.', icon: <MonitorPlay size={24} /> },
+              ].map((step, i) => (
+                <div key={i} className="flex items-start gap-6 p-6 md:p-8 rounded-[2rem] bg-white shadow-md border border-slate-200 hover:shadow-lg hover:border-indigo-200 transition-all duration-300 group">
+                  <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-[#3B3BFF] text-white flex items-center justify-center shadow-[0_0_20px_rgba(59,59,255,0.3)] group-hover:scale-110 transition-transform duration-300">
+                    {step.icon}
+                  </div>
+                  <div className="flex-1">
+                    <div className="text-[10px] font-black text-indigo-400 tracking-widest uppercase mb-1">Step {step.num}</div>
+                    <h3 className="text-lg md:text-xl font-bold text-[#07060F] mb-1">{step.title}</h3>
+                    <p className="text-slate-500 text-sm leading-relaxed">{step.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </FadeInSection>
         </div>
       </section>
 
@@ -393,7 +423,7 @@ const AdobeVoice = () => {
               <div className="flex-1">
                 <h4 className="font-bold text-slate-400 mb-6 uppercase tracking-widest text-xs flex items-center gap-2"><CheckCircle size={14} className="text-green-400" /> Requirements</h4>
                 <ul className="space-y-4">
-                  {['Adobe Premiere Pro (26.0+)', 'Active internet connection', 'Windows 10/11 (64-bit)'].map(r => (
+                  {['Adobe Premiere Pro (26.0+)', 'Windows 10/11 (64-bit)'].map(r => (
                     <li key={r} className="flex items-center gap-3 text-white"><span className="text-green-400 font-bold">✔</span>{r}</li>
                   ))}
                 </ul>
@@ -417,9 +447,9 @@ const AdobeVoice = () => {
                       <button onClick={(e) => handleWaitlist(e, 'Adobe Voice Page')} className="bg-amber-500/20 hover:bg-amber-500/40 text-amber-400 w-6 h-6 rounded-full flex items-center justify-center transition-colors pointer-events-auto" title="Join Waitlist">+</button>
                     )}
                   </div>
-                  <button onClick={() => { window.open("https://pub-385a87554a7340a09de10ff1f708bf66.r2.dev/Vampro-Voiceover-Plugin/Vampro%20Voice%20Service%20Companion.exe", "_blank"); }}
+                  <button onClick={() => { window.open("https://apps.microsoft.com/detail/9nltft936rk2?hl=en-US&gl=IN&ocid=pdpshare", "_blank"); }}
                     className="group w-full sm:w-auto relative bg-[#3B3BFF] text-white px-9 py-4 rounded-2xl font-bold text-lg overflow-hidden transition-all shadow-[0_0_40px_rgba(59,59,255,0.4)] hover:-translate-y-1 flex items-center justify-center gap-2">
-                    <Download size={20} className="relative z-10" /><span className="relative z-10">Download for Windows</span></button>
+                    <Grid2x2 size={25} className="relative z-10" /><span className="relative z-10">Microsoft Store</span></button>
                 </div>
                 <div className="relative group/plugin w-full sm:w-auto">
                   <div className="absolute -top-14 left-1/2 -translate-x-1/2 whitespace-nowrap bg-amber-500/10 backdrop-blur-md border border-amber-500/20 text-amber-400 px-3 py-1.5 rounded-full text-sm font-semibold flex items-center gap-2 opacity-0 group-hover/plugin:opacity-100 transition-opacity z-20 pointer-events-none group-hover/plugin:pointer-events-auto">

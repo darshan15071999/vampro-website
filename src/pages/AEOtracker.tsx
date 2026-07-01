@@ -256,7 +256,7 @@ const AeoPage = () => {
               <TiltCard>
                 <div className="glow-card p-8 md:p-10 rounded-3xl border-[#3B3BFF]/30 bg-indigo-900/10 relative overflow-hidden group h-full">
                   <div className="absolute top-0 right-0 w-48 h-48 bg-[#3B3BFF]/10 rounded-full blur-3xl group-hover:bg-[#3B3BFF]/20 transition-all"></div>
-                  <div className="text-[#3B3BFF] font-bold mb-6 flex items-center gap-3 text-sm tracking-widest uppercase">
+                  <div className="text-[#3B3B] font-bold mb-6 flex items-center gap-3 text-sm tracking-widest uppercase">
                     <motion.div
                       className="w-2.5 h-2.5 rounded-full bg-[#3B3BFF]"
                       animate={{ scale: [1, 1.5, 1], opacity: [1, 0.5, 1] }}

@@ -18,6 +18,7 @@ import Privacy from './pages/Privacy';
 import Terms from './pages/Terms';
 import Licenses from './pages/Licenses';
 import AEOTracker from './pages/AEOtracker';
+import Spoch from './pages/Spoch';
 
 // Context & Modals
 import { WaitlistProvider } from './context/WaitlistContext';
@@ -53,7 +54,8 @@ const App = () => {
   const showParticles = !location.pathname.startsWith('/docs') &&
                         location.pathname !== '/privacy' &&
                         location.pathname !== '/terms' &&
-                        location.pathname !== '/licenses';
+                        location.pathname !== '/licenses' &&
+                        location.pathname !== '/spoch';
 
   const openSearch = () => {
     setSearchOpen(true);
@@ -80,6 +82,7 @@ const App = () => {
               <Route path="/privacy" element={<Privacy />} />
               <Route path="/terms" element={<Terms />} />
               <Route path="/licenses" element={<Licenses />} />
+              <Route path="/spoch" element={<Spoch />} />
             </Routes>
           </main>
           <Footer />

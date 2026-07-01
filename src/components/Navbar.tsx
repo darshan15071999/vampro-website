@@ -111,7 +111,7 @@ const Navbar = ({ openSearch }: NavbarProps) => {
                   </div>
                 )
               },
-
+              { label: 'Games', action: () => navigate('/spoch') },
               { label: 'Docs', action: () => navigate('/docs') },
               { label: 'YouTube', action: () => window.open('https://youtube.com/@vamprotech?si=vponnTvHyIzwDmON', '_blank'), icon: <PlayCircle size={13} /> },
             ].map((item: any) => item.isCustom ? item.element : (
@@ -168,12 +168,13 @@ const Navbar = ({ openSearch }: NavbarProps) => {
 
       {isMobileMenuOpen && (
         <div className={`md:hidden pb-4 pt-2 px-4 space-y-1 absolute w-full shadow-xl ${isLight ? 'bg-white/95 backdrop-blur-xl' : 'bg-[#07060F]/95 backdrop-blur-xl border-t border-indigo-900/20'}`}>
-          {['About Us', 'Services', 'Plugins', 'AEO Tracker', 'Docs', 'YouTube'].map(item => (
+          {['About Us', 'Services', 'Plugins', 'AEO Tracker', 'Games', 'Docs', 'YouTube'].map(item => (
             <button key={item} onClick={() => {
               if (item === 'About Us') navigate('/', 'about');
               else if (item === 'Services') navigate('/', 'services');
               else if (item === 'Plugins') navigate('/voice-generator');
               else if (item === 'AEO Tracker') navigate('/signalscope');
+              else if (item === 'Games') navigate('/spoch');
               else if (item === 'Docs') navigate('/docs');
               else window.open('https://youtube.com', '_blank');
             }} className={`block w-full text-left px-4 py-3 font-medium rounded-xl transition-colors ${isLight ? 'text-slate-700 hover:bg-slate-100' : 'text-white hover:bg-indigo-900/20'}`}>
