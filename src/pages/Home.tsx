@@ -3,14 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import {
   PenTool, Cpu, Video, ArrowRight, PlayCircle, Settings,
   Code, Zap, Lightbulb, Users, ExternalLink,
-  Sparkles, ChevronDown, Star, Rocket, Flag, Check, Gamepad2
+  Sparkles, ChevronDown, Star, Rocket, Flag, Gamepad2
 } from 'lucide-react';
 import FadeInSection from '../components/FadeInSection';
 import TiltCard from '../components/TiltCard';
 import Typewriter from '../components/Typewriter';
 import AntigravityParticles from '../components/AntigravityParticles';
 import SpeedStreaks from '../components/SpeedStreaks';
-import { useWaitlist } from '../context/WaitlistContext';
+//import { useWaitlist } from '../context/WaitlistContext';
 import { Helmet } from "react-helmet-async";
 
 <Helmet>
@@ -29,13 +29,13 @@ const Home = () => {
   const [parallaxActive, setParallaxActive] = useState(false);
   const [activeNote, setActiveNote] = useState(0);
 
-  const { openModal, hasJoined } = useWaitlist();
+  //const { openModal } = useWaitlist();
 
-  const handleWaitlist = (e: React.MouseEvent, source: string) => {
+  /*const handleWaitlist = (e: React.MouseEvent, source: string) => {
     e.preventDefault();
     e.stopPropagation();
     openModal(source);
-  };
+  };*/
 
   useEffect(() => {
     const timer = setInterval(() => {
