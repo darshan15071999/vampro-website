@@ -61,7 +61,7 @@ const Docs = () => {
               </DocSection>
 
               <DocSection id="installation" title="Installation Guide">
-                {[['Step 1 – Install Extension', 'Install from Adobe Marketplace and restart Premiere Pro. (App is still not launched in the marketplace*)'], ['Step 2 – Install Voice Service', 'Run Vampro Voice Service Companion.exe. It sets up the service, configures auto-startup, installs AI components. Restart Premiere Pro.'], ['Step 3 – Open Extension', 'Go to Window → Extensions → Vampro Voice Generator Text-to-Speech.']].map(([t, b]) => (
+                {[['Step 1 – Install Extension', 'Install plugin from Adobe Marketplace and restart Premiere Pro.'], ['Step 2 – Install Voice Service', 'Install and Run Vampro Voice Service Companion app from the Microsoft Store. It sets up the service, configures auto-startup, installs AI components.'], ['Step 3 – Open Extension', 'Go to Window → UXP Plugins → Vampro Voice Generator Text-to-Speech.']].map(([t, b]) => (
                   <div key={t} className="mb-8">
                     <DocH3 blue>{t}</DocH3>
                     <p className="text-slate-400 text-sm leading-relaxed mb-4">{b}</p>
@@ -82,10 +82,10 @@ const Docs = () => {
                     ['Select Voice', 'Choose from available voices.'],
                     ['Choose Tone', 'Optional presets: Professional, Voiceover, Documentary, etc.'],
                     ['Generate', 'Click Generate Voice. Audio appears in Premiere Pro.'],
-                   /* ['Placeholder Point 1', 'Description for placeholder point 1.'],
-                    ['Placeholder Point 2', 'Description for placeholder point 2.'],
-                    ['Placeholder Point 3', 'Description for placeholder point 3.'],
-                    ['Placeholder Point 4', 'Description for placeholder point 4.']*/
+                    /* ['Placeholder Point 1', 'Description for placeholder point 1.'],
+                     ['Placeholder Point 2', 'Description for placeholder point 2.'],
+                     ['Placeholder Point 3', 'Description for placeholder point 3.'],
+                     ['Placeholder Point 4', 'Description for placeholder point 4.']*/
                   ].map(([t, b], i) => (
                     <li key={i} className="flex flex-col gap-3">
                       <div className="flex gap-3">

@@ -3,14 +3,14 @@ import { Store, Grid2x2 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import {
   MonitorPlay, Wand2, Download, FileText, Shield, ArrowRight,
-  Layers, Mic, Zap, Layout, CheckCircle, AlertTriangle, Check
+  Layers, Mic, Zap, Layout, CheckCircle, AlertTriangle
 } from 'lucide-react';
 import FadeInSection from '../components/FadeInSection';
 import TiltCard from '../components/TiltCard';
 import WaveformCanvas from '../components/WaveformCanvas';
 import TextParticles from '../components/TextParticles';
 import SpeedStreaks from '../components/SpeedStreaks';
-import { useWaitlist } from '../context/WaitlistContext';
+
 import { Helmet } from "react-helmet-async";
 
 
@@ -58,13 +58,7 @@ const AdobeVoice = () => {
   const whoRef = useRef<HTMLDivElement>(null);
   const [activeWho] = useState(-1);
 
-  const { openModal, hasJoined } = useWaitlist();
 
-  const handleWaitlist = (e: React.MouseEvent, source: string) => {
-    e.preventDefault();
-    e.stopPropagation();
-    openModal(source);
-  };
 
   useEffect(() => {
     const el = reasonRef.current;
@@ -121,9 +115,9 @@ const AdobeVoice = () => {
   const steps = [
     { num: '1', title: 'Open Plugin', desc: 'Launch inside Premiere Pro', icon: <Layout size={28} /> },
     { num: '2', title: 'Enter Text', desc: 'Paste or write narration', icon: <FileText size={28} /> },
-    { num: '3', title: 'Choose Voice', desc: 'Select a voice profile', icon: <Mic size={28} /> },
+    { num: '3', title: 'Choose Voice', desc: 'Select a voice profile and tone', icon: <Mic size={28} /> },
     { num: '4', title: 'Generate', desc: 'AI processes your audio', icon: <Zap size={28} /> },
-    { num: '5', title: 'Import', desc: 'Use in your project', icon: <Download size={28} /> },
+    { num: '5', title: 'Import', desc: 'Add to your project timeline or bin', icon: <Download size={28} /> },
   ];
 
 
@@ -137,16 +131,7 @@ const AdobeVoice = () => {
     <div className="min-h-screen">
       {/* Announcement */}
       <div className="bg-gradient-to-r from-[#3B3BFF] via-[#1B2A6B] to-[#3B3BFF] text-white py-2.5 px-4 flex items-center justify-center gap-4 sticky top-[96px] z-40">
-        <span className="text-xs font-bold tracking-widest uppercase opacity-90">From script to voiceover — without leaving Premiere Pro (App yet to be launched*)</span>
-        {hasJoined ? (
-          <button disabled className="bg-white/10 text-white/50 px-3 py-1 rounded-full text-[10px] sm:text-xs font-bold shadow-sm flex items-center gap-1 cursor-not-allowed">
-            <Check size={12} /> Joined
-          </button>
-        ) : (
-          <button onClick={(e) => handleWaitlist(e, 'Adobe Voice Announcement')} className="bg-white/20 hover:bg-white/30 text-white px-3 py-1 rounded-full text-[10px] sm:text-xs font-bold transition-colors shadow-sm">
-            Join Waitlist
-          </button>
-        )}
+        <span className="text-xs font-bold tracking-widest uppercase opacity-90">From script to voiceover: without leaving Premiere Pro</span>
       </div>
 
       {/* HERO — dark with waveform and text particles */}
@@ -157,52 +142,34 @@ const AdobeVoice = () => {
         <div className="w-full px-6 md:px-10 lg:px-16 relative z-10 text-center">
           <FadeInSection>
             <div className="flex flex-wrap justify-center gap-3 mb-8">
-              {['🏗 Built for Premiere Pro', '🎙 Multiple AI Voices', '☁️ Cloud Voice Generation', '🔌 Integrated Workflow'].map(b => (
+              {['🏗 Built for Premiere Pro', '🎙 Multiple AI Voices', '💾 Offilne Voice Generation', '🔌 Integrated Workflow'].map(b => (
                 <span key={b} className="glass-card px-4 py-2 rounded-full text-xs font-semibold text-indigo-200">{b}</span>
               ))}
             </div>
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight mb-6 leading-[1.1]">
               <span className="text-white">Vampro Voice Generator</span><br />
-              <span className="gradient-blue-text">Text to Speech</span>
+              <span className="gradient-blue-text">Text-to-Speech</span>
             </h1>
             <p className="text-lg text-slate-400 max-w-3xl mx-auto mb-12 leading-relaxed font-light">
-              Generate AI-powered voiceovers directly inside Adobe Premiere Pro. Write your script, choose a voice, and create narrations in minutes.
+              Generate natural sounding AI voiceovers from text in seconds directly inside Adobe Premiere Pro. Modify generated audio anytime by simply selecting the clip.
             </p>
           </FadeInSection>
           <FadeInSection delay="200ms" className="flex flex-col sm:flex-row justify-center items-center gap-4">
-            <div className="relative group/plugin w-full sm:w-auto">
-              <div className="absolute -top-14 left-1/2 -translate-x-1/2 whitespace-nowrap bg-amber-500/10 backdrop-blur-md border border-amber-500/20 text-amber-400 px-3 py-1.5 rounded-full text-sm font-semibold flex items-center gap-2 opacity-0 group-hover/plugin:opacity-100 transition-opacity z-20 pointer-events-none group-hover/plugin:pointer-events-auto">
-                App yet to be launched
-                {hasJoined ? (
-                  <button disabled className="bg-green-500/20 text-green-400 w-6 h-6 rounded-full flex items-center justify-center transition-colors pointer-events-auto cursor-not-allowed" title="Joined Waitlist"><Check size={14} /></button>
-                ) : (
-                  <button onClick={(e) => handleWaitlist(e, 'Adobe Voice Page')} className="bg-amber-500/20 hover:bg-amber-500/40 text-amber-400 w-6 h-6 rounded-full flex items-center justify-center transition-colors pointer-events-auto" title="Join Waitlist">+</button>
-                )}
-              </div>
-              <button onClick={() => {
-                document.getElementById('download')?.scrollIntoView({
-                  behavior: 'smooth'
-                })
-              }}
-                className="group relative w-full sm:w-auto bg-[#3B3BFF] text-white px-9 py-4 rounded-2xl font-bold text-lg overflow-hidden transition-all shadow-[0_0_40px_rgba(59,59,255,0.4)] hover:-translate-y-1 flex items-center justify-center gap-2">
-                <span className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity" />
-                <Grid2x2 size={25} className="relative z-10" /><span className="relative z-10">Get the Extension</span>
-              </button>
-            </div>
-            <div className="relative group/plugin w-full sm:w-auto">
-              <div className="absolute -top-14 left-1/2 -translate-x-1/2 whitespace-nowrap bg-amber-500/10 backdrop-blur-md border border-amber-500/20 text-amber-400 px-3 py-1.5 rounded-full text-sm font-semibold flex items-center gap-2 opacity-0 group-hover/plugin:opacity-100 transition-opacity z-20 pointer-events-none group-hover/plugin:pointer-events-auto">
-                App yet to be launched
-                {hasJoined ? (
-                  <button disabled className="bg-green-500/20 text-green-400 w-6 h-6 rounded-full flex items-center justify-center transition-colors pointer-events-auto cursor-not-allowed" title="Joined Waitlist"><Check size={14} /></button>
-                ) : (
-                  <button onClick={(e) => handleWaitlist(e, 'Adobe Voice Page')} className="bg-amber-500/20 hover:bg-amber-500/40 text-amber-400 w-6 h-6 rounded-full flex items-center justify-center transition-colors pointer-events-auto" title="Join Waitlist">+</button>
-                )}
-              </div>
-              <button onClick={() => window.open('#', '_blank')} className="w-full sm:w-auto glass-card hover:border-indigo-500/40 text-white px-9 py-4 rounded-2xl font-bold text-lg transition-all hover:-translate-y-1 flex items-center justify-center gap-2">
-                <Store size={22} />
-                View in Marketplace
-              </button>
-            </div>
+            <button onClick={() => {
+              document.getElementById('download')?.scrollIntoView({
+                behavior: 'smooth'
+              })
+            }}
+              className="group relative w-full sm:w-auto bg-[#3B3BFF] text-white px-9 py-4 rounded-2xl font-bold text-lg overflow-hidden transition-all shadow-[0_0_40px_rgba(59,59,255,0.4)] hover:-translate-y-1 flex items-center justify-center gap-2">
+              <span className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity" />
+              <Grid2x2 size={25} className="relative z-10" /><span className="relative z-10">Install Companion App</span>
+
+            </button>
+            <button onClick={() => document.getElementById('download')?.scrollIntoView({ behavior: 'smooth' })}
+              className="w-full sm:w-auto glass-card hover:border-indigo-500/40 text-white px-9 py-4 rounded-2xl font-bold text-lg transition-all hover:-translate-y-1 flex items-center justify-center gap-2">
+              <Store size={22} />
+              Get the Extension
+            </button>
           </FadeInSection>
         </div>
       </section>
@@ -251,6 +218,7 @@ const AdobeVoice = () => {
                           </div>
                           <div className="text-[9px] font-black text-indigo-400 mb-0.5">STEP {step.num}</div>
                           <div className="text-[#07060F] font-bold text-xs">{step.title}</div>
+                          <div className={`text-slate-500 text-[10px] leading-snug mt-1 transition-all duration-300 overflow-hidden ${activeStep === i ? 'max-h-12 opacity-100' : 'max-h-0 opacity-0'}`}>{step.desc}</div>
                         </button>
                       </div>
                     );
@@ -288,14 +256,14 @@ const AdobeVoice = () => {
       <section className="py-24 md:py-32 dark-grid-bg relative">
         <SpeedStreaks />
         <div className="w-full px-6 md:px-10 lg:px-16 relative z-10">
-          <FadeInSection><h2 className="text-3xl md:text-5xl font-extrabold text-white mb-12 text-center">Why Should Creators Use It</h2></FadeInSection>
+          <FadeInSection><h2 className="text-3xl md:text-5xl font-extrabold text-white mb-12 text-center">Complete Workflow Built Into Your Timeline</h2></FadeInSection>
           <div ref={reasonRef} className="grid lg:grid-cols-2 gap-12 items-center">
             <FadeInSection className="space-y-3">
               {[
                 { title: 'Stay Inside Premiere Pro', desc: 'No more jumping between tools and your editing timeline.' },
-                { title: 'Reduce Production Time', desc: 'Generate narration in minutes instead of manual recording.' },
-                { title: 'Built for Content Workflows', desc: 'Designed for YouTube, explainers, demos, and presentations.' },
-                { title: 'Simple Voice Generation', desc: 'Paste a script, select a voice, and generate. That\'s it.' },
+                { title: 'Reduce Production Time', desc: 'Generate narration in seconds and insert directly inside yor timeline at your playhead location.' },
+                { title: 'Built for Ultra-Smooth Workflows', desc: 'Change the generated voice instantly by simply selecting the clip and modifying the script, voice, and tone.' },
+                { title: 'Unlimited Offline Voice Generation', desc: 'Paste a script, select a voice, and generate audio, completely processed on your machine.' },
               ].map((item, i) => (
                 <div key={i} onClick={() => { setActiveReason(i); setAutoPlayReason(false); }} onMouseEnter={() => { setActiveReason(i); setAutoPlayReason(false); }} className={`flex gap-4 cursor-pointer p-5 rounded-2xl transition-all duration-200 ${activeReason === i ? 'glass-card border-indigo-500/30 bg-indigo-900/20 shadow-[0_0_24px_rgba(59,59,255,0.2)]' : 'hover:bg-indigo-900/10 border border-transparent'}`}>
                   <div className={`w-1 rounded-full flex-shrink-0 transition-colors ${activeReason === i ? 'bg-[#3B3BFF]' : 'bg-slate-700'}`} />
@@ -314,10 +282,10 @@ const AdobeVoice = () => {
                     {[<Layers size={18} />, <Zap size={18} />, <MonitorPlay size={18} />, <Wand2 size={18} />][activeReason]}
                   </div>
                   <h3 className="text-white font-bold text-xl md:text-2xl mb-2">
-                    {['Seamless Integration', 'Lightning Fast', 'Content Optimized', 'Intuitive Interface'][activeReason]}
+                    {['Seamless Integration', 'Lightning Fast', 'Content Optimized', 'Unlimited Voice Generation'][activeReason]}
                   </h3>
                   <p className="text-slate-400 text-sm">
-                    {['A unified workspace without leaving your timeline.', 'Skip manual recording and audio cleanup.', 'Perfect for YouTube, explainers, and presentations.', 'Just paste, select, and generate.'][activeReason]}
+                    {['A unified workspace without leaving your timeline.', 'Voice generated directly in your desired location on the timeline.', 'Instant script updates and voice modifications.', 'Generate and modify voices as many times as you require.'][activeReason]}
                   </p>
                 </div>
               </div>
@@ -329,13 +297,13 @@ const AdobeVoice = () => {
       {/* FEATURES — light grid bg */}
       <section className="py-24 md:py-32 sketchbook-bg relative">
         <div className="w-full px-6 md:px-10 lg:px-16 relative z-10">
-          <FadeInSection><h2 className="text-3xl md:text-5xl font-extrabold text-[#07060F] mb-12 text-center">Built Around Your Workflow</h2></FadeInSection>
+          <FadeInSection><h2 className="text-3xl md:text-5xl font-extrabold text-[#07060F] mb-12 text-center">Built for Creative Speed</h2></FadeInSection>
           <FadeInSection delay="100ms" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { icon: <Zap size={22} />, title: 'AI Voice Generation', desc: 'Convert text into natural-sounding speech directly from Premiere Pro.' },
-              { icon: <Mic size={22} />, title: 'Multiple Profiles', desc: 'Choose from available voices based on your project\'s tone.' },
-              { icon: <FileText size={22} />, title: 'Script-Based', desc: 'Generate narration from text without recording equipment.' },
-              { icon: <Layers size={22} />, title: 'Project Integration', desc: 'Keep voice generation close to your editing workflow.' },
+              { icon: <Zap size={22} />, title: 'Instant AI Voice Generation', desc: 'Generate narration from text in seconds. The companion application bundles the entire package for offline use with ultra fast processing.' },
+              { icon: <Mic size={22} />, title: 'Multiple Voice Profiles', desc: 'Choose from 27+ natural voices (both male and female) with 7+ unique tone profiles and dedicated presets for each voice.' },
+              { icon: <FileText size={22} />, title: 'Seamless Text-to-Speech Conversion', desc: 'Convert text into natural-sounding speech directly inside Premiere Pro and insert inside your project timeline or bin.' },
+              { icon: <Layers size={22} />, title: 'Complete workflow inside your project', desc: 'Insert generated voices directly inside your timeline. When a clip requires modification, simply select it and modify the contents.' },
             ].map((f, i) => (
               <TiltCard key={i}>
                 <div className="glass-card-light p-7 rounded-[2rem] h-full flex flex-col group cursor-default">
@@ -395,7 +363,7 @@ const AdobeVoice = () => {
               {[
                 { num: '1', title: 'Install the Extension', desc: 'Get the Vampro Voice Generator Text-to-Speech extension from the Adobe Marketplace and install it.', icon: <Store size={24} /> },
                 { num: '2', title: 'Install and Run/Open the Companion App', desc: 'Download and install the Vampro Voice Service companion app from the Microsoft Store, then launch it.', icon: <Download size={24} /> },
-                { num: '3', title: 'Open in Premiere Pro', desc: 'Inside Premiere Pro, go to Window → Extensions and select Vampro Voice Generator to start using the plugin.', icon: <MonitorPlay size={24} /> },
+                { num: '3', title: 'Open in Premiere Pro', desc: 'Inside Premiere Pro, go to Window → UXP Plugins and select Vampro Voice Generator to start using the plugin.', icon: <MonitorPlay size={24} /> },
               ].map((step, i) => (
                 <div key={i} className="flex items-start gap-6 p-6 md:p-8 rounded-[2rem] bg-white shadow-md border border-slate-200 hover:shadow-lg hover:border-indigo-200 transition-all duration-300 group">
                   <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-[#3B3BFF] text-white flex items-center justify-center shadow-[0_0_20px_rgba(59,59,255,0.3)] group-hover:scale-110 transition-transform duration-300">
@@ -438,33 +406,14 @@ const AdobeVoice = () => {
             <div className="space-y-8">
               <div><p className="text-4xl md:text-6xl font-black text-white mb-1 animate-blur-pulse tracking-tight">Completely free.</p></div>
               <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
-                <div className="relative group/plugin w-full sm:w-auto">
-                  <div className="absolute -top-14 left-1/2 -translate-x-1/2 whitespace-nowrap bg-amber-500/10 backdrop-blur-md border border-amber-500/20 text-amber-400 px-3 py-1.5 rounded-full text-sm font-semibold flex items-center gap-2 opacity-0 group-hover/plugin:opacity-100 transition-opacity z-20 pointer-events-none group-hover/plugin:pointer-events-auto">
-                    App yet to be launched
-                    {hasJoined ? (
-                      <button disabled className="bg-green-500/20 text-green-400 w-6 h-6 rounded-full flex items-center justify-center transition-colors pointer-events-auto cursor-not-allowed" title="Joined Waitlist"><Check size={14} /></button>
-                    ) : (
-                      <button onClick={(e) => handleWaitlist(e, 'Adobe Voice Page')} className="bg-amber-500/20 hover:bg-amber-500/40 text-amber-400 w-6 h-6 rounded-full flex items-center justify-center transition-colors pointer-events-auto" title="Join Waitlist">+</button>
-                    )}
-                  </div>
-                  <button onClick={() => { window.open("https://apps.microsoft.com/detail/9nltft936rk2?hl=en-US&gl=IN&ocid=pdpshare", "_blank"); }}
-                    className="group w-full sm:w-auto relative bg-[#3B3BFF] text-white px-9 py-4 rounded-2xl font-bold text-lg overflow-hidden transition-all shadow-[0_0_40px_rgba(59,59,255,0.4)] hover:-translate-y-1 flex items-center justify-center gap-2">
-                    <Grid2x2 size={25} className="relative z-10" /><span className="relative z-10">Microsoft Store</span></button>
-                </div>
-                <div className="relative group/plugin w-full sm:w-auto">
-                  <div className="absolute -top-14 left-1/2 -translate-x-1/2 whitespace-nowrap bg-amber-500/10 backdrop-blur-md border border-amber-500/20 text-amber-400 px-3 py-1.5 rounded-full text-sm font-semibold flex items-center gap-2 opacity-0 group-hover/plugin:opacity-100 transition-opacity z-20 pointer-events-none group-hover/plugin:pointer-events-auto">
-                    App yet to be launched
-                    {hasJoined ? (
-                      <button disabled className="bg-green-500/20 text-green-400 w-6 h-6 rounded-full flex items-center justify-center transition-colors pointer-events-auto cursor-not-allowed" title="Joined Waitlist"><Check size={14} /></button>
-                    ) : (
-                      <button onClick={(e) => handleWaitlist(e, 'Adobe Voice Page')} className="bg-amber-500/20 hover:bg-amber-500/40 text-amber-400 w-6 h-6 rounded-full flex items-center justify-center transition-colors pointer-events-auto" title="Join Waitlist">+</button>
-                    )}
-                  </div>
-                  <button className="w-full sm:w-auto glass-card text-white px-9 py-4 rounded-2xl font-bold text-lg hover:-translate-y-1 transition-all flex items-center justify-center gap-2">
-                    <Store size={22} />
-                    Adobe Marketplace
-                  </button>
-                </div>
+                <button onClick={() => { window.open("https://apps.microsoft.com/detail/9nltft936rk2?hl=en-US&gl=IN&ocid=pdpshare", "_blank"); }}
+                  className="group w-full sm:w-auto relative bg-[#3B3BFF] text-white px-9 py-4 rounded-2xl font-bold text-lg overflow-hidden transition-all shadow-[0_0_40px_rgba(59,59,255,0.4)] hover:-translate-y-1 flex items-center justify-center gap-2">
+                  <Grid2x2 size={25} className="relative z-10" /><span className="relative z-10">Microsoft Store</span></button>
+                <button onClick={() => { window.open("https://exchange.adobe.com/apps/cc/d6d01a94/vampro-voice-generator-text-to-speech", "_blank"); }}
+                  className="w-full sm:w-auto glass-card text-white px-9 py-4 rounded-2xl font-bold text-lg hover:-translate-y-1 transition-all flex items-center justify-center gap-2">
+                  <Store size={22} />
+                  Adobe Marketplace
+                </button>
               </div>
               <p className="text-slate-500 text-sm">Need help? <button onClick={() => navigate('/docs')} className="text-indigo-400 hover:text-indigo-300 underline underline-offset-4 font-semibold">Read the installation guide.</button></p>
             </div>

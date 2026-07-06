@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import {
   PenTool, Cpu, Video, ArrowRight, PlayCircle, Settings,
   Code, Zap, Lightbulb, Users, ExternalLink,
-  Sparkles, ChevronDown, Star, Rocket, Flag, Check
+  Sparkles, ChevronDown, Star, Rocket, Flag, Check, Gamepad2
 } from 'lucide-react';
 import FadeInSection from '../components/FadeInSection';
 import TiltCard from '../components/TiltCard';
@@ -77,7 +77,7 @@ const Home = () => {
         <div className="relative z-10 w-full px-6 md:px-10 lg:px-16 text-center py-24 md:py-32">
           <FadeInSection>
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-indigo-300/40 bg-indigo-50/60 backdrop-blur-md text-indigo-700 text-sm font-semibold mb-8 animate-blur-pulse">
-              <Sparkles size={14} /> Vampro Creative Lab — Where Ideas Come Alive
+              <Sparkles size={14} /> Vampro Creative Lab: Where Ideas Come Alive
             </div>
             <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tight mb-6 leading-[1.05] text-[#07060F]">
               Where Stories{' '}<br className="hidden md:block" />
@@ -94,19 +94,9 @@ const Home = () => {
                 <span className="absolute inset-0 bg-gradient-to-r from-[#3B3BFF] to-[#6366f1] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <span className="relative z-10 flex items-center gap-2">Explore Services <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" /></span>
               </button>
-              <div className="relative group/plugin w-full sm:w-auto">
-                <button onClick={() => navigate('/voice-generator')} className="w-full group glass-card-light text-[#07060F] px-9 py-4 rounded-2xl font-bold text-lg hover:shadow-lg hover:-translate-y-1 transition-all flex items-center justify-center gap-2">
-                  View Plugins <Settings size={20} className="group-hover:rotate-90 transition-transform duration-500" />
-                </button>
-                <div className="absolute -top-12 left-1/2 -translate-x-1/2 whitespace-nowrap bg-amber-500/10 backdrop-blur-md border border-amber-500/20 text-amber-500 px-3 py-1.5 rounded-full text-xs font-semibold flex items-center gap-2 opacity-0 group-hover/plugin:opacity-100 transition-opacity z-20 pointer-events-none group-hover/plugin:pointer-events-auto">
-                  App yet to be launched
-                  {hasJoined ? (
-                    <button disabled className="bg-green-500/20 text-green-500 w-5 h-5 rounded-full flex items-center justify-center pointer-events-auto cursor-not-allowed" title="Joined Waitlist"><Check size={12} /></button>
-                  ) : (
-                    <button onClick={(e) => handleWaitlist(e, 'Homepage Hero')} className="bg-amber-500/20 hover:bg-amber-500/40 text-amber-500 w-5 h-5 rounded-full flex items-center justify-center transition-colors pointer-events-auto" title="Join Waitlist">+</button>
-                  )}
-                </div>
-              </div>
+              <button onClick={() => navigate('/', 'featured-products')} className="w-full sm:w-auto group glass-card-light text-[#07060F] px-9 py-4 rounded-2xl font-bold text-lg hover:shadow-lg hover:-translate-y-1 transition-all flex items-center justify-center gap-2">
+                View Products <Settings size={20} className="group-hover:rotate-90 transition-transform duration-500" />
+              </button>
             </div>
           </FadeInSection>
           {/* F1 decorative flags */}
@@ -308,18 +298,18 @@ const Home = () => {
       </section>
 
       {/* FEATURED PLUGIN — dark grid bg */}
-      <section className="py-24 md:py-32 dark-grid-bg relative overflow-hidden">
+      <section id="featured-products" className="py-24 md:py-32 dark-grid-bg relative overflow-hidden scroll-mt-24">
         <SpeedStreaks />
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] pointer-events-none" style={{ background: 'radial-gradient(ellipse, rgba(59,59,255,0.15) 0%, transparent 70%)', filter: 'blur(40px)' }} />
         <div className="w-full px-6 md:px-10 lg:px-16 relative z-10 text-center">
           <FadeInSection>
             <div className="inline-block mb-4 px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-sm font-semibold tracking-widest uppercase">Featured Plugin</div>
             <h2 className="text-3xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight text-white">
-              Vampro Voice Generator<br />
-              <span className="gradient-blue-text">Text to Speech for Premiere Pro</span>
+              Vampro Voice Generator Text-to-Speech<br />
+              <span className="gradient-blue-text"> Plugin for Adobe Premiere Pro</span>
             </h2>
             <p className="text-lg text-slate-400 max-w-3xl mx-auto mb-12 font-light leading-relaxed">
-              Voice generation built into your creative workflow. Natural-sounding voiceovers directly inside Adobe applications.
+              Voice generation built into your creative workflow. Create natural-sounding AI voiceovers directly inside your timeline.
             </p>
           </FadeInSection>
           <FadeInSection delay="200ms" className="relative max-w-5xl mx-auto mb-12">
@@ -340,15 +330,7 @@ const Home = () => {
             </div>
           </FadeInSection>
           <FadeInSection delay="300ms">
-            <div className="relative group/plugin w-fit mx-auto">
-              <div className="absolute -top-14 left-1/2 -translate-x-1/2 whitespace-nowrap bg-amber-500/10 backdrop-blur-md border border-amber-500/20 text-amber-400 px-3 py-1.5 rounded-full text-sm font-semibold flex items-center gap-2 opacity-0 group-hover/plugin:opacity-100 transition-opacity z-20 pointer-events-none group-hover/plugin:pointer-events-auto">
-                App yet to be launched
-                {hasJoined ? (
-                  <button disabled className="bg-green-500/20 text-green-400 w-6 h-6 rounded-full flex items-center justify-center pointer-events-auto cursor-not-allowed" title="Joined Waitlist"><Check size={14} /></button>
-                ) : (
-                  <button onClick={(e) => handleWaitlist(e, 'Homepage Featured')} className="bg-amber-500/20 hover:bg-amber-500/40 text-amber-400 w-6 h-6 rounded-full flex items-center justify-center transition-colors pointer-events-auto" title="Join Waitlist">+</button>
-                )}
-              </div>
+            <div className="w-fit mx-auto">
               <button onClick={() => navigate('/voice-generator')} className="group relative bg-[#3B3BFF] text-white px-10 py-4 rounded-2xl font-bold text-lg transition-all shadow-[0_0_40px_rgba(59,59,255,0.4)] hover:shadow-[0_0_60px_rgba(59,59,255,0.6)] hover:-translate-y-1 flex items-center mx-auto gap-3 overflow-hidden">
                 <span className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity" />
                 <span className="relative z-10 flex items-center gap-3">Explore Plugin <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" /></span>
@@ -393,6 +375,51 @@ const Home = () => {
               <button onClick={() => navigate('/signalscope')} className="group relative bg-[#3B3BFF] text-white px-10 py-4 rounded-2xl font-bold text-lg transition-all shadow-[0_0_40px_rgba(59,59,255,0.4)] hover:shadow-[0_0_60px_rgba(59,59,255,0.6)] hover:-translate-y-1 flex items-center mx-auto gap-3 overflow-hidden">
                 <span className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity" />
                 <span className="relative z-10 flex items-center gap-3">Start tracking AI visibility <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" /></span>
+              </button>
+            </div>
+          </FadeInSection>
+        </div>
+      </section>
+
+      {/* SPOCH GAME — dark grid bg */}
+      <section className="pt-8 pb-12 md:pt-8 md:pb-22 dark-grid-bg relative overflow-hidden">
+        <SpeedStreaks />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] pointer-events-none" style={{ background: 'radial-gradient(ellipse, rgba(0,255,204,0.12) 0%, transparent 70%)', filter: 'blur(40px)' }} />
+        <div className="w-full px-6 md:px-10 lg:px-16 relative z-10 text-center">
+          <FadeInSection>
+            <div className="inline-block mb-4 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm font-semibold tracking-widest uppercase">Featured Game</div>
+            <h2 className="text-3xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight text-white">
+              SPOCH<br />
+              <span className="gradient-blue-text">An 8-bit Semi-3D Open World Adventure</span>
+            </h2>
+            <p className="text-lg text-slate-400 max-w-3xl mx-auto mb-12 font-light leading-relaxed">
+              Travel through time as Dr. Aran, right from the Stone Age to the far future. A story-driven adventure game with a 15-minute playable demo.
+            </p>
+          </FadeInSection>
+          <FadeInSection delay="200ms" className="relative max-w-5xl mx-auto mb-12">
+            <div className="relative w-full aspect-video rounded-2xl overflow-hidden border border-emerald-500/20 shadow-[0_0_40px_rgba(0,255,204,0.12)]">
+              <video
+                className="absolute inset-0 w-full h-full object-cover"
+                src="/spoch/glitch-video.mp4"
+                autoPlay
+                loop
+                muted
+                playsInline
+                poster="/spoch/dr-aran.png"
+              />
+            </div>
+
+            <div className="flex flex-wrap justify-center gap-3 mt-6">
+              {['🕹️ Open World', '⏳ Time Travel', '🪨 Survival'].map(tag => (
+                <div key={tag} className="glass-card px-5 py-2 rounded-full text-sm font-semibold text-slate-300 cursor-default">{tag}</div>
+              ))}
+            </div>
+          </FadeInSection>
+          <FadeInSection delay="300ms">
+            <div className="w-fit mx-auto">
+              <button onClick={() => navigate('/spoch')} className="group relative bg-emerald-500 text-white px-10 py-4 rounded-2xl font-bold text-lg transition-all shadow-[0_0_40px_rgba(0,255,204,0.3)] hover:shadow-[0_0_60px_rgba(0,255,204,0.5)] hover:-translate-y-1 flex items-center mx-auto gap-3 overflow-hidden">
+                <span className="absolute inset-0 bg-gradient-to-r from-emerald-600 to-teal-600 opacity-0 group-hover:opacity-100 transition-opacity" />
+                <span className="relative z-10 flex items-center gap-3"><Gamepad2 size={20} /> Play the Demo <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" /></span>
               </button>
             </div>
           </FadeInSection>

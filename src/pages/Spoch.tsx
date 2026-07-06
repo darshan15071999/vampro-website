@@ -1,7 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import { Check, Mail } from 'lucide-react';
 import './Spoch.css';
+import { useWaitlist } from '../context/WaitlistContext';
 
 const Spoch = () => {
+  const { openModal, hasJoined } = useWaitlist();
+
+  const handleWaitlist = (e: React.MouseEvent) => {
+    e.preventDefault();
+    openModal('SPOCH Page');
+  };
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [clickedElements, setClickedElements] = useState<Record<number, boolean>>({});
 
@@ -47,11 +55,22 @@ const Spoch = () => {
           <img src="/spoch/logo.png" alt="SPOCH Logo" className="spoch-logo" />
         </div>
 
-        <h2 className="spoch-subtitle" style={{ transform: `translate(${mousePos.x * 0.8}px, ${mousePos.y * 0.8}px)` }}>A Semi-3D Open World Adventure</h2>
+        <h2 className="spoch-subtitle" style={{ transform: `translate(${mousePos.x * 0.8}px, ${mousePos.y * 0.8}px)` }}>An 8-bit Semi-3D Open World Adventure</h2>
 
-        <button className="spoch-btn" onClick={() => window.open('https://game.vampro.in/', '_blank')} style={{ transform: `translate(${mousePos.x * 0.2}px, ${mousePos.y * 0.2}px)` }}>
-          Play 15 Min Demo
-        </button>
+        <div className="spoch-btn-group" style={{ transform: `translate(${mousePos.x * 0.2}px, ${mousePos.y * 0.2}px)` }}>
+          <button className="spoch-btn" onClick={() => window.open('https://game.vampro.in/', '_blank')}>
+            Play 15 Min Demo
+          </button>
+          {hasJoined ? (
+            <button className="spoch-btn spoch-btn-waitlist joined" disabled>
+              <Check size={16} /> Joined Waitlist
+            </button>
+          ) : (
+            <button className="spoch-btn spoch-btn-waitlist" onClick={handleWaitlist}>
+              <Mail size={16} /> Join the Waitlist
+            </button>
+          )}
+        </div>
       </section>
 
       {/* Story Section: Automated Perfection */}
@@ -151,9 +170,20 @@ const Spoch = () => {
       {/* Call to Action Footer */}
       <section className="spoch-footer-cta">
         <h2>Ready to Survive?</h2>
-        <button className="spoch-btn" onClick={() => window.open('https://game.vampro.in/', '_blank')}>
-          Start Level 1
-        </button>
+        <div className="spoch-btn-group">
+          <button className="spoch-btn" onClick={() => window.open('https://game.vampro.in/', '_blank')}>
+            Start Level 1
+          </button>
+          {hasJoined ? (
+            <button className="spoch-btn spoch-btn-waitlist joined" disabled>
+              <Check size={16} /> Joined Waitlist
+            </button>
+          ) : (
+            <button className="spoch-btn spoch-btn-waitlist" onClick={handleWaitlist}>
+              <Mail size={16} /> Join the Waitlist
+            </button>
+          )}
+        </div>
       </section>
     </div>
   );

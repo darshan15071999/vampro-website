@@ -234,6 +234,42 @@
   transform: scale(1.05);
 }
 
+.spoch-btn-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  position: relative;
+}
+
+.spoch-btn-waitlist {
+  background: transparent;
+  color: #00ffcc;
+  border-color: #00ffcc;
+  box-shadow: 0 0 15px rgba(0, 255, 204, 0.3), inset 0 0 15px rgba(0, 255, 204, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.spoch-btn-waitlist::before {
+  background: #00ffcc;
+}
+.spoch-btn-waitlist:hover {
+  color: #050510;
+  box-shadow: 0 0 30px rgba(0, 255, 204, 0.8);
+}
+.spoch-btn-waitlist.joined {
+  opacity: 0.6;
+  cursor: not-allowed;
+  color: #00ffcc;
+  border-color: #00ffcc;
+}
+.spoch-btn-waitlist.joined::before {
+  display: none;
+}
+
 .spoch-section {
   padding: 6rem 2rem;
   max-width: 1200px;
