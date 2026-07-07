@@ -10,7 +10,7 @@ import TiltCard from '../components/TiltCard';
 import TextParticles from '../components/TextParticles';
 import SpeedStreaks from '../components/SpeedStreaks';
 import { useWaitlist } from '../context/WaitlistContext';
-import { Helmet } from "react-helmet-async";
+import SEO from '../components/SEO';
 import { motion } from 'framer-motion';
 
 const TypingText = ({ text, delay = 0 }: { text: string, delay?: number }) => {
@@ -94,16 +94,12 @@ const AeoPage = () => {
 
   return (
     <div className="animate-in fade-in duration-500 bg-slate-950 min-h-screen text-white selection:bg-indigo-500/30 selection:text-indigo-200">
-      <Helmet>
-        <title>SignalScope | AI Visibility Tracker</title>
-        <meta name="title" content="SignalScope | AI Search Visibility & Reddit Intelligence Platform" />
-        <meta name="description" content="Track how Reddit conversations influence AI search results across ChatGPT, Gemini, Claude, Perplexity, and other AI assistants. Measure brand visibility and optimize for AI search." />
-        <meta property="og:title" content="SignalScope | AI Search Visibility & Reddit Intelligence Platform" />
-        <meta property="og:description" content="Track how Reddit conversations influence AI search results across ChatGPT, Gemini, Claude, Perplexity, and other AI assistants. Measure brand visibility and optimize for AI search." />
-        <meta property="og:image" content="" />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="" />
-      </Helmet>
+      <SEO 
+        title="SignalScope | AI Visibility Tracker"
+        metaTitle="SignalScope | AI Search Visibility & Reddit Intelligence Platform"
+        description="Track how Reddit conversations influence AI search results across ChatGPT, Gemini, Claude, Perplexity and other AI assistants. Measure brand visibility and optimize for AI search."
+        canonicalUrl="https://vampro.in/signalscope"
+      />
 
       {/* Top Banner */}
       <div className="bg-gradient-to-r from-[#3B3BFF] via-[#1B2A6B] to-[#3B3BFF] text-white py-1.5 px-4 flex items-center justify-center gap-3 sticky top-[96px] z-40 shadow-md border-b border-indigo-500/20">

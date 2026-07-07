@@ -11,7 +11,7 @@ import Typewriter from '../components/Typewriter';
 import AntigravityParticles from '../components/AntigravityParticles';
 import SpeedStreaks from '../components/SpeedStreaks';
 //import { useWaitlist } from '../context/WaitlistContext';
-import { Helmet } from "react-helmet-async";
+import SEO from '../components/SEO';
 
 const Home = () => {
   const nav = useNavigate();
@@ -51,15 +51,13 @@ const Home = () => {
 
   return (
     <div className="relative min-h-screen">
-      <Helmet>
-        <title>Vampro | Creative Technology Studio</title>
-        <meta name="description" content="Discover Vampro's collection of AI-powered creative software, professional plugins, and productivity tools. Build faster, create better, and explore what's next." />
-        <meta property="og:title" content="Vampro | Creative Technology Studio" />
-        <meta property="og:description" content="Discover Vampro's collection of AI-powered creative software, professional plugins, and productivity tools. Build faster, create better, and explore what's next." />
-        <meta property="og:image" content="" />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="" />
-      </Helmet>
+      <SEO 
+        title="Vampro | Creativity Meets Technology"
+        description="Discover Vampro's collection of AI-powered creative software, professional plugins, and productivity tools and professional services. Build faster, create better, and explore what's next."
+        canonicalUrl="https://vampro.in/"
+        ogTitle="Vampro | Creativity Meets Technology"
+        ogDescription="Explore Vampro's collection of AI-powered creative software, plugins and digital experiences."
+      />
 
       {/* HERO */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden sketchbook-bg pt-24" onMouseMove={handleAboutMouseMove}>

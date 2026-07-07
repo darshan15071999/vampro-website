@@ -1,4 +1,5 @@
 import { FileText, Scale, ShieldCheck, Mic, RefreshCw, AlertTriangle, Bookmark, Mail } from 'lucide-react';
+import SEO from '../components/SEO';
 
 const SectionBlock = ({ icon: Icon, number, title, children }: { icon: React.ElementType; number: string; title: string; children: React.ReactNode }) => (
   <div className="mb-8">
@@ -15,6 +16,11 @@ const SectionBlock = ({ icon: Icon, number, title, children }: { icon: React.Ele
 const Terms = () => {
   return (
     <div className="dark-grid-bg min-h-screen pt-28">
+      <SEO 
+        title="Terms of Service | Vampro Voice Generator"
+        description="Review the Vampro Voice Generator Terms of Service governing the use of our software, plugins and services."
+        canonicalUrl="https://vampro.in/terms"
+      />
       <div className="w-full px-6 md:px-10 lg:px-16 py-8">
         <div className="max-w-4xl mx-auto">
           <div className="glass-card rounded-[2rem] p-6 md:p-12 border-indigo-900/30" style={{ background: 'rgba(15,22,64,0.35)' }}>

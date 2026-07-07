@@ -1,6 +1,7 @@
 import { type MouseEvent as RMouseEvent } from 'react';
 import { CheckCircle, ChevronDown } from 'lucide-react';
 import { DocSection, DocH3, DocList } from '../components/DocHelpers';
+import SEO from '../components/SEO';
 
 const Docs = () => {
   const scrollToDocSection = (e: RMouseEvent, id: string) => {
@@ -19,6 +20,11 @@ const Docs = () => {
 
   return (
     <div className="dark-grid-bg min-h-screen pt-28">
+      <SEO 
+        title="Documentation | Vampro Voice Generator"
+        description="Browse Vampro Voice Generator documentation, guides, tutorials and technical resources."
+        canonicalUrl="https://vampro.in/docs"
+      />
       <div className="w-full px-6 md:px-10 lg:px-16 flex flex-col md:flex-row gap-10 py-8 items-start">
         {/* Sidebar */}
         <aside className="md:w-56 lg:w-64 sticky top-32 hidden md:block max-h-[calc(100vh-160px)] overflow-y-auto docs-sidebar pr-4 flex-shrink-0">

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Check, Mail } from 'lucide-react';
 import './Spoch.css';
 import { useWaitlist } from '../context/WaitlistContext';
-import { Helmet } from "react-helmet-async";
+import SEO from '../components/SEO';
 
 const Spoch = () => {
   const { openModal, hasJoined } = useWaitlist();
@@ -29,16 +29,12 @@ const Spoch = () => {
 
   return (
     <div className="spoch-container">
-      <Helmet>
-        <title>SPOCH | Open World Survival</title>
-        <meta name="title" content="SPOCH | 8-bit Semi 3D Open World Adventure Game" />
-        <meta name="description" content="Travel through time as Dr. Aran, right from the Stone Age to the far future. A story-driven adventure game with a 15-minute playable demo." />
-        <meta property="og:title" content="SPOCH | 8-bit Semi 3D Open World Adventure Game" />
-        <meta property="og:description" content="Travel through time as Dr. Aran, right from the Stone Age to the far future. A story-driven adventure game with a 15-minute playable demo." />
-        <meta property="og:image" content="" />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="" />
-      </Helmet>
+      <SEO 
+        title="Spoch | Open World Adventure"
+        metaTitle="Spoch | Open World Survival"
+        description="Travel through time as Dr. Aran, right from the Stone Age to the far future. A story-driven 8-bit Semi-3D Open World adventure game with a 15-minute playable demo."
+        canonicalUrl="https://vampro.in/spoch"
+      />
       {/* Hero Section */}
       <section className="spoch-hero" onMouseMove={handleMouseMove}>
         {/* Interactive background elements */}
