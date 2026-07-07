@@ -28,6 +28,11 @@
   <meta data-rh="true" name="twitter:title" content="Vampro | Creativity Meets Technology" />
   <meta data-rh="true" name="twitter:description" content="Explore Vampro's collection of AI-powered creative software, plugins and digital experiences." />
   <meta data-rh="true" name="twitter:image" content="https://vampro.in/thumbnail.jpg" />
+
+  <!-- Remove fallback tags before React mounts to prevent duplicates in React 19 -->
+  <script>
+    document.querySelectorAll('[data-rh="true"]').forEach(el => el.remove());
+  </script>
 </head>
 
 <body>

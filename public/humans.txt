@@ -1,0 +1,11 @@
+/* TEAM */
+Company: Vampro
+Founder: Vampro Team
+Contact: contact@vampro.in
+Website: https://vampro.in
+GitHub: https://github.com/vampro
+YouTube: https://www.youtube.com/@vampro
+
+/* SITE */
+Technology Stack: React, TypeScript, Vite, Tailwind CSS, Cloudflare Pages
+Products: Vampro Voice Generator, SignalScope, Spoch

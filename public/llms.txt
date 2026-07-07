@@ -1,0 +1,14 @@
+# Vampro
+
+Vampro develops AI-powered creative software, professional plugins, and developer tools.
+
+## Products
+- **Vampro Voice Generator:** AI voiceovers directly inside Adobe Premiere Pro.
+- **SignalScope:** AI Search Visibility & Reddit Intelligence Platform.
+- **Spoch:** Open World Survival Video Game.
+
+## Resources
+- **Documentation:** https://vampro.in/docs
+- **Privacy Policy:** https://vampro.in/privacy
+- **Terms of Service:** https://vampro.in/terms
+- **Licenses:** https://vampro.in/licenses

@@ -12,6 +12,8 @@ import AntigravityParticles from '../components/AntigravityParticles';
 import SpeedStreaks from '../components/SpeedStreaks';
 //import { useWaitlist } from '../context/WaitlistContext';
 import SEO from '../components/SEO';
+import HomeFooter from '../components/HomeFooter';
+import { homeMetadata } from '../seo/metadata';
 
 const Home = () => {
   const nav = useNavigate();
@@ -51,13 +53,7 @@ const Home = () => {
 
   return (
     <div className="relative min-h-screen">
-      <SEO 
-        title="Vampro | Creativity Meets Technology"
-        description="Discover Vampro's collection of AI-powered creative software, professional plugins, and productivity tools and professional services. Build faster, create better, and explore what's next."
-        canonicalUrl="https://vampro.in/"
-        ogTitle="Vampro | Creativity Meets Technology"
-        ogDescription="Explore Vampro's collection of AI-powered creative software, plugins and digital experiences."
-      />
+      <SEO {...homeMetadata} />
 
       {/* HERO */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden sketchbook-bg pt-24" onMouseMove={handleAboutMouseMove}>
@@ -452,6 +448,7 @@ const Home = () => {
           </FadeInSection>
         </div>
       </section>
+      <HomeFooter />
     </div>
   );
 };

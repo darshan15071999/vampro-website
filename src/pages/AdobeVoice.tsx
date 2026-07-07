@@ -8,10 +8,11 @@ import {
 import FadeInSection from '../components/FadeInSection';
 import TiltCard from '../components/TiltCard';
 import WaveformCanvas from '../components/WaveformCanvas';
+import SEO from '../components/SEO';
+import VoiceFooter from '../components/VoiceFooter';
+import { voiceMetadata } from '../seo/metadata';
 import TextParticles from '../components/TextParticles';
 import SpeedStreaks from '../components/SpeedStreaks';
-
-import SEO from '../components/SEO';
 
 
 const AdobeVoice = () => {
@@ -110,14 +111,7 @@ const AdobeVoice = () => {
 
   return (
     <div className="min-h-screen">
-      <SEO 
-        title="AI Voice Generator | Vampro"
-        metaTitle="AI Voice Generator for Adobe Premiere Pro | Vampro"
-        description="Generate natural AI voiceovers directly inside Adobe Premiere Pro. Write scripts, choose voices, and create professional narration without leaving your editing workflow."
-        canonicalUrl="https://vampro.in/voice-generator"
-        ogTitle="AI Voice Generator for Adobe Premiere Pro"
-        ogDescription="Generate studio-quality AI voiceovers directly inside Adobe Premiere Pro."
-      />
+      <SEO {...voiceMetadata} />
       {/* Announcement */}
       <div className="bg-gradient-to-r from-[#3B3BFF] via-[#1B2A6B] to-[#3B3BFF] text-white py-2.5 px-4 flex items-center justify-center gap-4 sticky top-[96px] z-40">
         <span className="text-xs font-bold tracking-widest uppercase opacity-90">From script to voiceover: without leaving Premiere Pro</span>
@@ -451,6 +445,7 @@ const AdobeVoice = () => {
           </FadeInSection>
         </div>
       </section>
+      <VoiceFooter />
     </div>
   );
 };

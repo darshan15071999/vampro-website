@@ -1,7 +1,8 @@
 import { type MouseEvent as RMouseEvent } from 'react';
 import { CheckCircle, ExternalLink } from 'lucide-react';
-import { DocSection, DocH3, DocList } from '../components/DocHelpers';
-import SEO from '../components/SEO';
+import { DocSection, DocH3, DocList } from '../../components/DocHelpers';
+import SEO from '../../components/SEO';
+import { licensesMetadata } from '../../seo/metadata';
 
 const Licenses = () => {
   const scrollToSection = (e: RMouseEvent, id: string) => {
@@ -20,11 +21,7 @@ const Licenses = () => {
 
   return (
     <div className="dark-grid-bg min-h-screen pt-28">
-      <SEO 
-        title="Licenses | Vampro Voice Generator"
-        description="View the open source licenses used throughout Vampro Voice Generator."
-        canonicalUrl="https://vampro.in/licenses"
-      />
+      <SEO {...licensesMetadata} />
       <div className="w-full px-6 md:px-10 lg:px-16 flex flex-col md:flex-row gap-10 py-8 items-start">
         {/* Sidebar */}
         <aside className="md:w-56 lg:w-64 sticky top-32 hidden md:block max-h-[calc(100vh-160px)] overflow-y-auto docs-sidebar pr-4 flex-shrink-0">

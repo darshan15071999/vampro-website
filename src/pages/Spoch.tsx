@@ -3,6 +3,8 @@ import { Check, Mail } from 'lucide-react';
 import './Spoch.css';
 import { useWaitlist } from '../context/WaitlistContext';
 import SEO from '../components/SEO';
+import SpochFooter from '../components/SpochFooter';
+import { spochMetadata } from '../seo/metadata';
 
 const Spoch = () => {
   const { openModal, hasJoined } = useWaitlist();
@@ -29,12 +31,7 @@ const Spoch = () => {
 
   return (
     <div className="spoch-container">
-      <SEO 
-        title="Spoch | Open World Adventure"
-        metaTitle="Spoch | Open World Survival"
-        description="Travel through time as Dr. Aran, right from the Stone Age to the far future. A story-driven 8-bit Semi-3D Open World adventure game with a 15-minute playable demo."
-        canonicalUrl="https://vampro.in/spoch"
-      />
+      <SEO {...spochMetadata} />
       {/* Hero Section */}
       <section className="spoch-hero" onMouseMove={handleMouseMove}>
         {/* Interactive background elements */}
@@ -188,6 +185,7 @@ const Spoch = () => {
           )}
         </div>
       </section>
+      <SpochFooter />
     </div>
   );
 };

@@ -1,5 +1,6 @@
-import { Shield, Lock, Eye, Server, Globe, Fingerprint, CheckCircle, Mail } from 'lucide-react';
-import SEO from '../components/SEO';
+import { CheckCircle, Shield, Eye, Lock, Server, Mail, Globe, Fingerprint } from 'lucide-react';
+import SEO from '../../components/SEO';
+import { privacyMetadata } from '../../seo/metadata';
 
 const SectionTitle = ({ icon: Icon, children }: { icon: React.ElementType; children: React.ReactNode }) => (
   <div className="flex items-center gap-3 mb-6">
@@ -20,11 +21,7 @@ const InfoCard = ({ title, children }: { title: string; children: React.ReactNod
 const Privacy = () => {
   return (
     <div className="dark-grid-bg min-h-screen pt-28">
-      <SEO 
-        title="Privacy Policy | Vampro Voice Generator"
-        description="Read the Vampro Voice Generator Privacy Policy and learn how your data is collected, stored and protected."
-        canonicalUrl="https://vampro.in/privacy"
-      />
+      <SEO {...privacyMetadata} />
       <div className="w-full px-6 md:px-10 lg:px-16 py-8">
         <div className="max-w-4xl mx-auto">
           <div className="glass-card rounded-[2rem] p-6 md:p-12 border-indigo-900/30" style={{ background: 'rgba(15,22,64,0.35)' }}>

@@ -2,8 +2,10 @@ import { type MouseEvent as RMouseEvent } from 'react';
 import { CheckCircle, ChevronDown } from 'lucide-react';
 import { DocSection, DocH3, DocList } from '../components/DocHelpers';
 import SEO from '../components/SEO';
+import VoiceFooter from '../components/VoiceFooter';
+import { docsVoiceMetadata } from '../seo/metadata';
 
-const Docs = () => {
+const DocsVoice = () => {
   const scrollToDocSection = (e: RMouseEvent, id: string) => {
     e.preventDefault();
     const el = document.getElementById(id);
@@ -19,13 +21,9 @@ const Docs = () => {
   ];
 
   return (
-    <div className="dark-grid-bg min-h-screen pt-28">
-      <SEO 
-        title="Documentation | Vampro Voice Generator"
-        description="Browse Vampro Voice Generator documentation, guides, tutorials and technical resources."
-        canonicalUrl="https://vampro.in/docs"
-      />
-      <div className="w-full px-6 md:px-10 lg:px-16 flex flex-col md:flex-row gap-10 py-8 items-start">
+    <div className="dark-grid-bg min-h-screen flex flex-col pt-28">
+      <SEO {...docsVoiceMetadata} />
+      <div className="flex-grow w-full px-6 md:px-10 lg:px-16 flex flex-col md:flex-row gap-10 py-8 items-start">
         {/* Sidebar */}
         <aside className="md:w-56 lg:w-64 sticky top-32 hidden md:block max-h-[calc(100vh-160px)] overflow-y-auto docs-sidebar pr-4 flex-shrink-0">
           <h3 className="font-bold text-slate-400 mb-5 tracking-widest uppercase text-xs border-b border-indigo-900/30 pb-3">Knowledge Base</h3>
@@ -136,14 +134,14 @@ const Docs = () => {
               </DocSection>
 
               <DocSection id="troubleshooting" title="Troubleshooting" accent="text-red-400">
-                {[['Voice Generation Fails', 'Check http://127.0.0.1:8000/health — should return {"status": "ok"}.'], ['Service Not Running', 'Restart Windows. The service auto-starts after login.'], ['Antivirus Warning', 'Use the official release from Vampro distribution channels.'], ['Can\'t Connect', 'Check firewall isn\'t blocking localhost. Verify Premiere Pro version.'], ['Extension Missing', 'Restart Premiere Pro → Window → Extensions.']].map(([t, b]) => (
+                {[['Voice Generation Fails', 'Check http://127.0.0.1:8000/health — should return {"status": "ok"}.'], ['Service Not Running', 'Restart Windows. The service auto-starts after login.'], ['Antivirus Warning', 'Use the official release from Vampro distribution channels.'], ['Can\'t Connect', 'Check firewall isn\'t blocking localhost. Verify Premiere Pro version.'], ['Extension Missing', 'Restart Premiere Pro → Window → UXP Plugins.']].map(([t, b]) => (
                   <div key={t}><DocH3>{t}</DocH3><p className="text-slate-400 text-sm leading-relaxed">{b}</p></div>
                 ))}
               </DocSection>
 
               <DocSection id="faq" title="FAQ">
                 <div className="space-y-3">
-                  {[['Internet required?', 'Cloud-based AI for voice generation. Service itself is local.'], ['macOS?', 'Windows only. macOS planned for future.'], ['Runs in background?', 'Yes, auto-starts and runs silently.'], ['Commercial use?', 'Yes, but users are responsible for compliance.']].map(([q, a]) => (
+                  {[['Internet required?', 'Internet required only for installation. AI for voice generation is completely local, on device.'], ['macOS?', 'Windows only. macOS planned for future.'], ['Runs in background?', 'Yes, auto-starts and runs silently.'], ['Commercial use?', 'Yes, but users are responsible for compliance.']].map(([q, a]) => (
                     <details key={q} className="glass-card rounded-xl overflow-hidden group">
                       <summary className="px-5 py-3.5 cursor-pointer font-bold text-white text-sm flex items-center justify-between select-none hover:bg-indigo-900/20 transition-colors">
                         {q}<ChevronDown size={16} className="text-indigo-400 group-open:rotate-180 transition-transform duration-300" />
@@ -183,8 +181,9 @@ const Docs = () => {
           </div>
         </div>
       </div>
+      <VoiceFooter />
     </div>
   );
 };
 
-export default Docs;
+export default DocsVoice;

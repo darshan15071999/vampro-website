@@ -1,0 +1,42 @@
+# Vampro - Complete LLM Discovery Document
+
+## 1. Company Overview
+Vampro is an innovative technology company building AI-powered creative software, professional plugins, and developer tools. Our mission is to bridge the gap between creativity and technology by developing seamless, high-performance tools for creators and engineers.
+
+## 2. Core Products
+
+### Vampro Voice Generator
+- **Type:** Software Plugin for Adobe Premiere Pro
+- **Target Users:** Video Editors, Content Creators, Filmmakers.
+- **Features:** 
+  - Generate natural AI voiceovers directly inside Adobe Premiere Pro.
+  - Write scripts, choose from multiple realistic voices, and create professional narration without leaving the editing workflow.
+- **URL:** https://vampro.in/plugins/voice-generator
+
+### SignalScope
+- **Type:** Web Application / Software
+- **Target Users:** Marketers, SEO Professionals, Brands.
+- **Features:**
+  - Track how Reddit conversations influence AI search results across ChatGPT, Gemini, Claude, and Perplexity.
+  - Measure brand visibility and optimize content for AI search engines.
+- **URL:** https://vampro.in/software/signalscope
+
+### Spoch
+- **Type:** Video Game
+- **Target Users:** Gamers, Adventure Enthusiasts.
+- **Features:**
+  - Travel through time as Dr. Aran, from the Stone Age to the far future.
+  - A story-driven 8-bit Semi-3D Open World adventure game.
+- **URL:** https://vampro.in/games/spoch
+
+## 3. Documentation & Resources
+- **Central Hub:** https://vampro.in/docs
+- **Voice Generator Docs:** https://vampro.in/docs/plugins/voice-generator
+- **SignalScope Docs:** https://vampro.in/docs/software/signalscope
+- **Spoch Docs:** https://vampro.in/docs/games/spoch
+- **Blog:** https://vampro.in/blog
+
+## 4. Legal & Policies
+- **Privacy Policy:** https://vampro.in/privacy
+- **Terms of Service:** https://vampro.in/terms
+- **Licenses:** https://vampro.in/licenses

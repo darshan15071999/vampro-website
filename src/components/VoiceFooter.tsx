@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import SpeedStreaks from './SpeedStreaks';
 
-const Footer = () => {
+const VoiceFooter = () => {
   const nav = useNavigate();
 
   const navigate = (path: string, sectionId?: string) => {
@@ -26,7 +26,7 @@ const Footer = () => {
         <div>
           <h4 className="text-white font-semibold mb-5 uppercase tracking-wider text-xs">Navigation</h4>
           <ul className="space-y-2.5 text-sm">
-            {[['About Us', () => navigate('/', 'about')], ['Services', () => navigate('/', 'services')], ['Plugins', () => navigate('/voice-generator')], ['Documentation', () => navigate('/docs')]].map(([label, fn]) => (
+            {[['About Us', () => navigate('/', 'about')], ['Services', () => navigate('/', 'services')], ['Plugins', () => navigate('/plugins/voice-generator')], ['Documentation', () => navigate('/docs/plugins/voice-generator')]].map(([label, fn]) => (
               <li key={label as string}><button onClick={fn as () => void} className="hover:text-indigo-400 transition-colors">{label as string}</button></li>
             ))}
           </ul>
@@ -34,7 +34,7 @@ const Footer = () => {
         <div>
           <h4 className="text-white font-semibold mb-5 uppercase tracking-wider text-xs">Legal</h4>
           <ul className="space-y-2.5 text-sm">
-            {[['Terms of Use', '/terms'], ['Privacy Policy', '/privacy'], ['Licenses', '/licenses']].map(([label, path]) => (
+            {[['Terms of Use', '/plugins/voice-generator/terms'], ['Privacy Policy', '/plugins/voice-generator/privacy'], ['Licenses', '/plugins/voice-generator/licenses']].map(([label, path]) => (
               <li key={label}><button onClick={() => navigate(path)} className="hover:text-indigo-400 transition-colors">{label}</button></li>
             ))}
             <li><a href="mailto:support@vampro.in" className="hover:text-indigo-400 transition-colors">Contact Support</a></li>
@@ -49,4 +49,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default VoiceFooter;
