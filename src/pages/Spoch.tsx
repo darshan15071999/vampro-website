@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Check, Mail } from 'lucide-react';
 import './Spoch.css';
 import { useWaitlist } from '../context/WaitlistContext';
+import { Helmet } from "react-helmet-async";
 
 const Spoch = () => {
   const { openModal, hasJoined } = useWaitlist();
@@ -12,10 +13,6 @@ const Spoch = () => {
   };
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [clickedElements, setClickedElements] = useState<Record<number, boolean>>({});
-
-  useEffect(() => {
-    document.title = 'SPOCH - 15 Min Playable Demo';
-  }, []);
 
   const handleMouseMove = (e: React.MouseEvent) => {
     const x = (e.clientX / window.innerWidth - 0.5) * 40;
@@ -32,6 +29,16 @@ const Spoch = () => {
 
   return (
     <div className="spoch-container">
+      <Helmet>
+        <title>SPOCH | Open World Survival</title>
+        <meta name="title" content="SPOCH | 8-bit Semi 3D Open World Adventure Game" />
+        <meta name="description" content="Travel through time as Dr. Aran, right from the Stone Age to the far future. A story-driven adventure game with a 15-minute playable demo." />
+        <meta property="og:title" content="SPOCH | 8-bit Semi 3D Open World Adventure Game" />
+        <meta property="og:description" content="Travel through time as Dr. Aran, right from the Stone Age to the far future. A story-driven adventure game with a 15-minute playable demo." />
+        <meta property="og:image" content="" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="" />
+      </Helmet>
       {/* Hero Section */}
       <section className="spoch-hero" onMouseMove={handleMouseMove}>
         {/* Interactive background elements */}

@@ -95,10 +95,14 @@ const AeoPage = () => {
   return (
     <div className="animate-in fade-in duration-500 bg-slate-950 min-h-screen text-white selection:bg-indigo-500/30 selection:text-indigo-200">
       <Helmet>
-        <title>SignalScope - AEO Tracker | Vampro</title>
-        <meta name="description" content="Discover the discussions influencing tomorrow's AI answers with SignalScope." />
-        <meta property="og:title" content="SignalScope - AEO Tracker | Vampro" />
-        <meta property="og:description" content="Discover the discussions influencing tomorrow's AI answers with SignalScope." />
+        <title>SignalScope | AI Visibility Tracker</title>
+        <meta name="title" content="SignalScope | AI Search Visibility & Reddit Intelligence Platform" />
+        <meta name="description" content="Track how Reddit conversations influence AI search results across ChatGPT, Gemini, Claude, Perplexity, and other AI assistants. Measure brand visibility and optimize for AI search." />
+        <meta property="og:title" content="SignalScope | AI Search Visibility & Reddit Intelligence Platform" />
+        <meta property="og:description" content="Track how Reddit conversations influence AI search results across ChatGPT, Gemini, Claude, Perplexity, and other AI assistants. Measure brand visibility and optimize for AI search." />
+        <meta property="og:image" content="" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="" />
       </Helmet>
 
       {/* Top Banner */}

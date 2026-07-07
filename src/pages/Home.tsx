@@ -13,15 +13,6 @@ import SpeedStreaks from '../components/SpeedStreaks';
 //import { useWaitlist } from '../context/WaitlistContext';
 import { Helmet } from "react-helmet-async";
 
-<Helmet>
-  <title>Vampro | Creative Technology Studio</title>
-
-  <meta
-    name="description"
-    content="Vampro builds software, media, AI tools and creative technology products."
-  />
-</Helmet>
-
 const Home = () => {
   const nav = useNavigate();
   const aboutRef = useRef<HTMLDivElement>(null);
@@ -60,6 +51,15 @@ const Home = () => {
 
   return (
     <div className="relative min-h-screen">
+      <Helmet>
+        <title>Vampro | Creative Technology Studio</title>
+        <meta name="description" content="Discover Vampro's collection of AI-powered creative software, professional plugins, and productivity tools. Build faster, create better, and explore what's next." />
+        <meta property="og:title" content="Vampro | Creative Technology Studio" />
+        <meta property="og:description" content="Discover Vampro's collection of AI-powered creative software, professional plugins, and productivity tools. Build faster, create better, and explore what's next." />
+        <meta property="og:image" content="" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="" />
+      </Helmet>
 
       {/* HERO */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden sketchbook-bg pt-24" onMouseMove={handleAboutMouseMove}>
