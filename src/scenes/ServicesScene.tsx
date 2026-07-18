@@ -37,7 +37,7 @@ const ServicesScene = forwardRef<HTMLElement>((_, ref) => (
 
       {/* The pipeline */}
       <div className="grid grid-cols-2 lg:grid-cols-5 gap-3 lg:gap-4 auto-rows-[120px] md:auto-rows-[130px]">
-        {stages.map((s, i) => (
+        {stages.map((s, _i) => (
           <div
             key={s.key}
             data-anim="svc-node"

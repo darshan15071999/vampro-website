@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { X, CheckCircle2, Loader2 } from 'lucide-react';
 import { useWaitlist } from '../context/WaitlistContext';
+import { validateEmail } from '../lib/validateEmail';
 
 const WaitlistModal = () => {
-  const { isModalOpen, closeModal, markAsJoined, modalSource } = useWaitlist();
+  const { isModalOpen, closeModal, markAsJoined } = useWaitlist();
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -12,8 +13,28 @@ const WaitlistModal = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [emailTouched, setEmailTouched] = useState(false);
 
   if (!isModalOpen) return null;
+
+  const handleEmailChange = useCallback((value: string) => {
+    setEmail(value);
+    if (emailTouched && value) {
+      const err = validateEmail(value);
+      setEmailError(err || '');
+    } else if (!value) {
+      setEmailError('');
+    }
+  }, [emailTouched]);
+
+  const handleEmailBlur = useCallback(() => {
+    setEmailTouched(true);
+    if (email) {
+      const err = validateEmail(email);
+      setEmailError(err || '');
+    }
+  }, [email]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -25,8 +46,10 @@ const WaitlistModal = () => {
       return;
     }
 
-    if (!/^\S+@\S+\.\S+$/.test(email)) {
-      setError('Please enter a valid email address.');
+    const emailValidationError = validateEmail(email);
+    if (emailValidationError) {
+      setEmailError(emailValidationError);
+      setEmailTouched(true);
       return;
     }
 
@@ -35,13 +58,15 @@ const WaitlistModal = () => {
     try {
       // Salesforce Web-to-Lead — submit via hidden iframe to avoid CORS issues
       const iframeName = 'sf_waitlist_iframe';
-      let iframe = document.querySelector<HTMLIFrameElement>(`iframe[name="${iframeName}"]`);
-      if (!iframe) {
-        iframe = document.createElement('iframe');
-        iframe.name = iframeName;
-        iframe.style.display = 'none';
-        document.body.appendChild(iframe);
-      }
+
+      // Always create a fresh iframe to avoid stale state
+      const existingIframe = document.querySelector<HTMLIFrameElement>(`iframe[name="${iframeName}"]`);
+      if (existingIframe) existingIframe.remove();
+
+      const iframe = document.createElement('iframe');
+      iframe.name = iframeName;
+      iframe.style.display = 'none';
+      document.body.appendChild(iframe);
 
       const [firstName, ...lastNames] = name.trim().split(' ');
       const lastName = lastNames.join(' ') || '-';
@@ -71,9 +96,37 @@ const WaitlistModal = () => {
       });
 
       document.body.appendChild(form);
-      form.submit();
-      form.remove();
 
+      // Wait for the iframe to load (i.e., Salesforce has received and responded to the POST)
+      // before cleaning up and showing success
+      await new Promise<void>((resolve, _reject) => {
+        const timeout = setTimeout(() => {
+          // Even if we don't get a load event (cross-origin may block it),
+          // treat as success after a reasonable wait since the POST was sent
+          cleanup();
+          resolve();
+        }, 5000);
+
+        const cleanup = () => {
+          clearTimeout(timeout);
+          iframe.removeEventListener('load', onLoad);
+        };
+
+        const onLoad = () => {
+          cleanup();
+          resolve();
+        };
+
+        iframe.addEventListener('load', onLoad);
+
+        // Now submit the form
+        form.submit();
+
+        // Remove the form after a short delay to ensure the browser has serialized the request
+        setTimeout(() => form.remove(), 500);
+      });
+
+      setIsSubmitting(false);
       setIsSuccess(true);
       markAsJoined(1);
 
@@ -151,11 +204,19 @@ const WaitlistModal = () => {
                 <input
                   type="email"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="w-full bg-white/5 border border-indigo-500/20 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-[#3B3BFF] focus:ring-1 focus:ring-[#3B3BFF] transition-all"
+                  onChange={(e) => handleEmailChange(e.target.value)}
+                  onBlur={handleEmailBlur}
+                  className={`w-full bg-white/5 border rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:ring-1 transition-all ${
+                    emailError && emailTouched
+                      ? 'border-red-500/50 focus:border-red-500 focus:ring-red-500/30'
+                      : 'border-indigo-500/20 focus:border-[#3B3BFF] focus:ring-[#3B3BFF]'
+                  }`}
                   placeholder="john@example.com"
                   required
                 />
+                {emailError && emailTouched && (
+                  <p className="text-red-400 text-xs mt-1.5 font-medium">{emailError}</p>
+                )}
               </div>
 
               <div>

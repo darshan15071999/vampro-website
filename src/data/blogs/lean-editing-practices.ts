@@ -5,7 +5,7 @@ export const lean_editing_practices: BlogPost = {
   title: "Lean Editing Practices: Build Faster, Edit Smarter, Deliver More",
   summary: "Discover how professional creators save hours on every project by keeping their editing workflow lean, organized, and distraction-free.",
   author: "Darshan",
-  authorImage: "https://scontent.cdninstagram.com/v/t51.82787-19/657204332_18410844328134435_535447924376555823_n.jpg?stp=dst-jpg_s150x150_tt6&_nc_cat=107&ccb=7-5&_nc_sid=f7ccc5&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy4xMDgwLkMzIn0%3D&_nc_ohc=agoGS84Jy1kQ7kNvwFL6v3E&_nc_oc=AdpGEto9e4G1r627IxG6GaadF3Zmq_5lgBYvNxbVttQjYNwkAb7QQJj7rxsfviIuVoA&_nc_zt=24&_nc_ht=scontent.cdninstagram.com&_nc_gid=BiAHl1N1t5t8cFT8ZuCMxg&_nc_ss=7b689&oh=00_AQBzicyiNXe-7W_y6yRwWDFiCUOV-VIoFUzRFoAcJHoJoA&oe=6A530579",
+  authorImage: "/author.jpg",
   date: "July 7, 2026",
   readingTime: "8 min read",
   category: "Workflow",

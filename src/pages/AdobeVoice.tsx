@@ -68,13 +68,13 @@ const AdobeVoice = () => {
   const nav = useNavigate();
   const { openSignup } = useSignup();
 
-  const handleDownloadWindows = () => {
+  const handleDownloadWindows = (_source?: string) => {
     openSignup('Windows App', () => {
       window.open("https://apps.microsoft.com/detail/9nltft936rk2?hl=en-US&gl=IN&ocid=pdpshare", "_blank");
     });
   };
 
-  const handleDownloadAdobe = () => {
+  const handleDownloadAdobe = (_source?: string) => {
     openSignup('Adobe Extension', () => {
       window.open("https://exchange.adobe.com/apps/cc/d6d01a94/vampro-voice-generator-text-to-speech", "_blank");
     });
@@ -164,7 +164,7 @@ const AdobeVoice = () => {
           />
         </div>
         {/* HERO — dark with waveform and text particles */}
-      <section className="relative min-h-[calc(100vh-96px)] flex flex-col items-center justify-start md:justify-center pt-[140px] md:pt-20 pb-10 overflow-hidden ">
+      <section className="relative min-h-[calc(100vh-96px)] flex flex-col items-center justify-start md:justify-center pt-[160px] md:pt-36 pb-10 overflow-hidden ">
           
           <div className="absolute inset-0 z-0 opacity-80" style={{ maskImage: 'radial-gradient(ellipse at 50% 50%, black 20%, transparent 80%)', WebkitMaskImage: 'radial-gradient(ellipse at 50% 50%, black 20%, transparent 80%)' }}>
             <SoftAurora
