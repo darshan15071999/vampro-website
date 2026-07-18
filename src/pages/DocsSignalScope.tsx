@@ -2,7 +2,7 @@ import { type MouseEvent as RMouseEvent } from 'react';
 import { Search, BarChart2, ChevronDown, Activity } from 'lucide-react';
 import { DocSection, DocH3, DocList } from '../components/DocHelpers';
 import SEO from '../components/SEO';
-import SignalScopeFooter from '../components/SignalScopeFooter';
+import HomeFooter from '../components/HomeFooter';
 import { docsSignalScopeMetadata } from '../seo/metadata';
 
 const DocsSignalScope = () => {
@@ -126,7 +126,7 @@ const DocsSignalScope = () => {
           </div>
         </div>
       </div>
-      <SignalScopeFooter />
+      <HomeFooter />
     </div>
   );
 };

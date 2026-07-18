@@ -309,15 +309,15 @@ const BlogTemplate = () => {
               </div>
             </div>
 
-            <Link to="/signalscope" className="rounded-2xl bg-indigo-50 border border-indigo-100 overflow-hidden shadow-sm relative group cursor-pointer block hover:shadow-md transition-shadow">
-              <div className="absolute top-2 right-2 bg-slate-900/40 backdrop-blur-md text-white text-[10px] uppercase font-bold px-2 py-0.5 rounded z-10">Software</div>
+            <Link to="/plugins/voice-generator" className="rounded-2xl bg-[#2b5be3]/5 border border-[#2b5be3]/15 overflow-hidden shadow-sm relative group cursor-pointer block hover:shadow-md transition-shadow">
+              <div className="absolute top-2 right-2 bg-slate-900/40 backdrop-blur-md text-white text-[10px] uppercase font-bold px-2 py-0.5 rounded z-10">Plugin</div>
               <div className="h-40 overflow-hidden relative">
-                <img src="/apppage.png" alt="Promo" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                <img src="/reason2.png" alt="Voice Generator" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
               </div>
               <div className="p-4">
-                <h5 className="font-bold text-indigo-900 mb-1 text-sm leading-tight">See how AI sees your brand</h5>
-                <p className="text-xs text-indigo-700 leading-relaxed mb-3">Unlock advanced AI insights and analyze your brand's realtime visibility in AI agents like ChatGPT, Gemini, etc.</p>
-                <div className="w-full py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-center text-xs font-semibold rounded-xl transition-colors">Try free beta</div>
+                <h5 className="font-bold text-[#183078] mb-1 text-sm leading-tight">AI Voiceovers in Premiere Pro</h5>
+                <p className="text-xs text-[#2548ab] leading-relaxed mb-3">Type your script, choose a voice profile, and generate natural voiceovers directly inside your timeline.</p>
+                <div className="w-full py-2 bg-[#2b5be3] hover:bg-[#2548ab] text-white text-center text-xs font-semibold rounded-xl transition-colors">Explore Plugin</div>
               </div>
             </Link>
           </aside>

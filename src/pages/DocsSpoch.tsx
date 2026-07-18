@@ -2,7 +2,7 @@ import { type MouseEvent as RMouseEvent } from 'react';
 import { Gamepad2, Crosshair, Cpu, ChevronDown } from 'lucide-react';
 import { DocSection, DocH3, DocList } from '../components/DocHelpers';
 import SEO from '../components/SEO';
-import SpochFooter from '../components/SpochFooter';
+import HomeFooter from '../components/HomeFooter';
 import { docsSpochMetadata } from '../seo/metadata';
 
 const DocsSpoch = () => {
@@ -140,7 +140,7 @@ const DocsSpoch = () => {
           </div>
         </div>
       </div>
-      <SpochFooter />
+      <HomeFooter />
     </div>
   );
 };

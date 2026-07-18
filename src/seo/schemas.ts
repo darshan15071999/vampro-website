@@ -9,7 +9,7 @@ export const organizationSchema: SchemaType = {
   "logo": "https://vampro.in/favicon.png",
   "image": "https://vampro.in/thumbnail.jpg",
   "foundingDate": "2020",
-  "description": "Vampro develops AI-powered creative software, professional plugins, developer tools and digital products.",
+  "description": "A creative technology lab that builds professional software and plugins for creators.",
   "sameAs": [
     "https://www.youtube.com/@vampro"
   ],
@@ -18,12 +18,11 @@ export const organizationSchema: SchemaType = {
     "name": "Vampro"
   },
   "knowsAbout": [
-    "Artificial Intelligence",
-    "Creative Software",
+    "Creative Plugins",
     "Adobe Premiere Pro",
-    "Developer Tools",
-    "Knowledge Management",
-    "AI Search",
+    "AI Voice Generation",
+    "Creative Software",
+    "Workflow Automation",
     "Content Creation"
   ]
 };
@@ -40,26 +39,70 @@ export const websiteSchema: SchemaType = {
   }
 };
 
-export const voiceGeneratorSchema: SchemaType = {
+export const pluginsCollectionSchema: SchemaType = {
   "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "name": "Vampro AI Voice Generator",
-  "applicationCategory": "MultimediaApplication",
-  "operatingSystem": "Windows",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD"
-  },
-  "description": "Generate natural AI voiceovers directly inside Adobe Premiere Pro.",
-  "url": "https://vampro.in/plugins/voice-generator",
-  "image": "https://vampro.in/thumbnail.jpg",
+  "@type": "CollectionPage",
+  "name": "Vampro Plugins",
+  "description": "Professional creative plugins for Adobe Premiere Pro and other creative tools.",
+  "url": "https://vampro.in/plugins",
   "publisher": {
     "@type": "Organization",
     "name": "Vampro"
   }
 };
 
+export const docsCollectionSchema: SchemaType = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Vampro Documentation",
+  "description": "Documentation, installation guides, and tutorials for Vampro plugins.",
+  "url": "https://vampro.in/docs",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Vampro"
+  }
+};
+
+export const voiceGeneratorSchema: SchemaType = [
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Vampro AI Voice Generator",
+    "applicationCategory": "MultimediaApplication",
+    "operatingSystem": "Windows",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "description": "Generate natural AI voiceovers directly inside Adobe Premiere Pro.",
+    "url": "https://vampro.in/plugins/voice-generator",
+    "image": "https://vampro.in/thumbnail.jpg",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Vampro"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Vampro AI Voice Generator",
+    "description": "AI-powered text-to-speech plugin for Adobe Premiere Pro. Generate natural voiceovers directly inside your timeline.",
+    "brand": {
+      "@type": "Brand",
+      "name": "Vampro"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock"
+    },
+    "url": "https://vampro.in/plugins/voice-generator"
+  }
+];
+
+// Preserved for future use — not publicly referenced
 export const signalScopeSchema: SchemaType = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
@@ -75,6 +118,7 @@ export const signalScopeSchema: SchemaType = {
   }
 };
 
+// Preserved for future use — not publicly referenced
 export const spochSchema: SchemaType = {
   "@context": "https://schema.org",
   "@type": "VideoGame",
@@ -96,7 +140,7 @@ export const docsSchema: SchemaType = {
   "@context": "https://schema.org",
   "@type": "TechArticle",
   "headline": "Vampro Documentation",
-  "about": "Documentation for Vampro products.",
+  "about": "Documentation for Vampro plugins.",
   "publisher": {
     "@type": "Organization",
     "name": "Vampro"

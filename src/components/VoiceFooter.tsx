@@ -12,7 +12,7 @@ const VoiceFooter = () => {
   };
 
   return (
-    <footer className="dark-grid-bg text-slate-400 py-16 border-t border-indigo-900/30 relative overflow-hidden">
+    <footer className=" text-slate-400 py-16 border-t border-indigo-900/30 relative overflow-hidden">
       <SpeedStreaks />
       <div className="w-full px-6 md:px-10 lg:px-16 grid grid-cols-1 md:grid-cols-4 gap-12 relative z-10">
         <div className="col-span-1 md:col-span-2">

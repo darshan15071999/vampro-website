@@ -1,0 +1,431 @@
+<USER_REQUEST>
+You are a Senior Product Designer, Brand Strategist, UX Designer, React Architect and Marketing Consultant.
+
+Refactor the Vampro website into a focused product-first experience.
+
+DO NOT redesign the visual identity.
+
+DO NOT change the color palette.
+
+DO NOT change typography.
+
+DO NOT change animations.
+
+DO NOT change component styling.
+
+DO NOT remove existing code for future products.
+
+Only restructure the public experience to focus on the first shipping product.
+
+==========================================================
+GOAL
+==========================================================
+
+Vampro is no longer presented as a company with multiple unfinished products.
+
+Instead, Vampro becomes:
+
+"A creative technology lab that builds professional software and plugins for creators."
+
+The AI Voice Generator becomes the flagship product.
+
+SignalScope and Spoch should remain in the codebase but should not be publicly promoted.
+
+==========================================================
+NAVIGATION
+==========================================================
+
+Simplify the navigation.
+
+Keep only
+
+Home
+
+Plugins
+
+Documentation
+
+Blog
+
+About
+
+YouTube
+
+Remove
+
+Software
+
+Games
+
+SignalScope
+
+Spoch
+
+from the public navigation.
+
+Do NOT delete their pages or routes.
+
+==========================================================
+HOMEPAGE
+==========================================================
+
+Do not mention unfinished products.
+
+This page should future-proof the brand without promising products that do not yet exist.
+
+Create a section for recent blog posts.
+
+Do not display placeholder content.
+
+Use cards prepared for future blog integration.
+
+==========================================================
+PLUGINS PAGE
+==========================================================
+
+This page becomes the product catalog.
+
+Currently only display
+
+AI Voice Generator
+
+The architecture should support multiple plugins in the future.
+
+Include a subtle
+
+More plugins coming soon
+
+message without fake products.
+
+===============================
+<truncated 21467 bytes>
+8,0,0],"hsb":[224,78,100],"hsl":[224,99,61],"lab":[50,34,-78]},{"name":"Sapphire","hex":"3758b2","rgb":[55,88,178],"cmyk":[69,51,0,30],"hsb":[224,69,70],"hsl":[224,53,46],"lab":[40,19,-52]},{"name":"French Blue","hex":"2a448c","rgb":[42,68,140],"cmyk":[70,51,0,45],"hsb":[224,70,55],"hsl":[224,54,36],"lab":[31,16,-43]}]
+
+- XML
+
+<palette>
+  <color name="Royal Azure" hex="2b5be3" r="43" g="91" b="227" />
+  <color name="Ocean Twilight" hex="2548ab" r="37" g="72" b="171" />
+  <color name="Royal Blue" hex="3e6cec" r="62" g="108" b="236" />
+  <color name="Glaucous" hex="6879aa" r="104" g="121" b="170" />
+  <color name="Glaucous" hex="6484e1" r="100" g="132" b="225" />
+  <color name="Imperial Blue" hex="183078" r="24" g="48" b="120" />
+  <color name="Bright Snow" hex="f9fafb" r="249" g="250" b="251" />
+  <color name="Electric Sapphire" hex="376bfe" r="55" g="107" b="254" />
+  <color name="Sapphire" hex="3758b2" r="55" g="88" b="178" />
+  <color name="French Blue" hex="2a448c" r="42" g="68" b="140" />
+</palette>
+
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-07-12T14:43:14+05:30.
+
+The user's current state is as follows:
+Active Document: c:\Users\rosha\Documents\vampro-website\src\pages\AdobeVoice.tsx (LANGUAGE_TSX)
+Cursor is on line: 1
+Other open documents:
+- c:\Users\rosha\Documents\vampro-website\src\components\Navbar.tsx (LANGUAGE_TSX)
+- c:\Users\rosha\Documents\vampro-website\src\pages\DocsSignalScope.tsx (LANGUAGE_TSX)
+- c:\Users\rosha\Documents\vampro-website\src\components\SignalScopeFooter.tsx (LANGUAGE_TSX)
+- c:\Users\rosha\Documents\vampro-website\src\components\VoiceFooter.tsx (LANGUAGE_TSX)
+- c:\Users\rosha\Documents\vampro-website\src\components\HomeFooter.tsx (LANGUAGE_TSX)
+</ADDITIONAL_METADATA>
+<USER_SETTINGS_CHANGE>
+The user changed setting `Model Selection` from None to Claude Opus 4.6 (Thinking). No need to comment on this change if the user doesn't ask about it. If reporting what model you are, please use a human readable name instead of the exact string.
+</USER_SETTINGS_CHANGE>
+
+---NEW MESSAGE---
+
+Comments on artifact URI: file:///c%3A/Users/rosha/.gemini/antigravity-ide/brain/4e61b047-9c65-4448-be89-9de444043b1a/implementation_plan.md
+
+The user has approved this document.
+
+
+
+Selection:
+>Footer consolidation: Currently there are 4 separate footer components (HomeFooter, VoiceFooter, SignalScopeFooter, SpochFooter). Should I create a single unified footer used across all public-facing pages, while keeping product-specific footers intact for their respective hidden pages? My recommendation: Yes — a single unified footer for all public pages.
+
+Comment: "Yes — a single unified footer for all public pages."
+
+Selection:
+>"About" page: The current site has no standalone About page — "About Us" scrolls to a section on the homepage. The new nav includes "About". Should I keep it as a scroll-to-section on the homepage, or create a dedicated /about route? My recommendation: Keep as homepage scroll-to-section for now; the nav item will scroll to #about on the homepage.
+
+Comment: "yes keep it as the same scroll to homepage"
+
+Selection:
+>Remove: Software (→ SignalScope), Games (→ Spoch), Services (→ homepage scroll)
+
+Comment: "dont remove Services (→ homepage scroll)"
+
+Selection:
+>2. Homepage — Product-First Messaging + Blog Section
+
+Comment: "dont change messaging in the hero section, our story section"
+
+Selection:
+>Update tagline from "Where Stories Become Experiences" to focus on creative plugins/tools
+
+Comment: "dont change this"
+
+Selection:
+>Update subtitle copy to position Vampro as "a creative technology lab that builds professional software and plugins for creators"
+
+Comment: "dont change this"
+
+Selection:
+>No code, styling, typography, color palette, or animations will be changed. Only the public-facing structure, navigation, SEO, and content flow are being refactored. All SignalScope and Spoch code/routes remain intact but hidden from the public experience.
+
+Comment: "use the color palette that I gave:
+
+- CSV
+
+2b5be3,2548ab,3e6cec,6879aa,6484e1,183078,f9fafb,376bfe,3758b2,2a448c
+
+- With #
+
+#2b5
+<truncated 1456 bytes>
+00],"hsl":[224,99,61],"lab":[50,34,-78]},{"name":"Sapphire","hex":"3758b2","rgb":[55,88,178],"cmyk":[69,51,0,30],"hsb":[224,69,70],"hsl":[224,53,46],"lab":[40,19,-52]},{"name":"French Blue","hex":"2a448c","rgb":[42,68,140],"cmyk":[70,51,0,45],"hsb":[224,70,55],"hsl":[224,54,36],"lab":[31,16,-43]}]
+
+- XML
+
+<palette>
+  <color name="Royal Azure" hex="2b5be3" r="43" g="91" b="227" />
+  <color name="Ocean Twilight" hex="2548ab" r="37" g="72" b="171" />
+  <color name="Royal Blue" hex="3e6cec" r="62" g="108" b="236" />
+  <color name="Glaucous" hex="6879aa" r="104" g="121" b="170" />
+  <color name="Glaucous" hex="6484e1" r="100" g="132" b="225" />
+  <color name="Imperial Blue" hex="183078" r="24" g="48" b="120" />
+  <color name="Bright Snow" hex="f9fafb" r="249" g="250" b="251" />
+  <color name="Electric Sapphire" hex="376bfe" r="55" g="107" b="254" />
+  <color name="Sapphire" hex="3758b2" r="55" g="88" b="178" />
+  <color name="French Blue" hex="2a448c" r="42" g="68" b="140" />
+</palette>"
+
+Selection:
+>No code, styling, typography, color palette, or animations will be changed. Only the public-facing structure, navigation, SEO, and content flow are being refactored. All SignalScope and Spoch code/routes remain intact but hidden from the public experience.
+
+Comment: "Improve the animations with the elements that I gave"
+<USER_REQUEST>
+
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-07-12T14:56:31+05:30.
+
+The user's current state is as follows:
+Active Document: c:\Users\rosha\Documents\vampro-website\src\pages\AdobeVoice.tsx (LANGUAGE_TSX)
+Cursor is on line: 1
+Other open documents:
+- c:\Users\rosha\Documents\vampro-website\src\App.tsx (LANGUAGE_TSX)
+- c:\Users\rosha\Documents\vampro-website\src\pages\legal\VoiceTerms.tsx (LANGUAGE_TSX)
+- c:\Users\rosha\Documents\vampro-website\src\pages\BlogTemplate.tsx (LANGUAGE_TSX)
+- c:\Users\rosha\Documents\vampro-website\public\robots.txt (LANGUAGE_UNSPECIFIED)
+- c:\Users\rosha\Documents\vampro-website\src\components\SEO.tsx (LANGUAGE_TSX)
+</ADDITIONAL_METADATA>
+
+---NEW MESSAGE---
+
+<USER_REQUEST>
+One more refinement, hide the new plugins and docs intro pages. Let the user directly navigate to the actual page itself, since there is only one product now. I feel it creates a friction in the discoverability.
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-07-12T15:14:13+05:30.
+
+The user's current state is as follows:
+Active Document: c:\Users\rosha\Documents\vampro-website\src\pages\AdobeVoice.tsx (LANGUAGE_TSX)
+Cursor is on line: 1
+Other open documents:
+- c:\Users\rosha\Documents\vampro-website\src\data\blogs\types.ts (LANGUAGE_TYPESCRIPT)
+- c:\Users\rosha\Documents\vampro-website\src\data\blogs\index.ts (LANGUAGE_TYPESCRIPT)
+- c:\Users\rosha\Documents\vampro-website\src\pages\DocsHub.tsx (LANGUAGE_TSX)
+- c:\Users\rosha\Documents\vampro-website\src\App.tsx (LANGUAGE_TSX)
+- c:\Users\rosha\Documents\vampro-website\src\pages\legal\VoiceTerms.tsx (LANGUAGE_TSX)
+Browser State:
+  Page 8DE7D88C6A5DA2FC9B92374BC319949C (SignalScope | AI Search Visibility & Reddit Intelligence Platform) - http://localhost:5174/software/signalscope [ACTIVE]
+    Viewport: 1536x739, Page Height: 8505
+</ADDITIONAL_METADATA>
+
+---NEW MESSAGE---
+
+<USER_REQUEST>
+One more refinement, hide the new plugins and docs intro pages. Let the user directly navigate to the actual page itself, since there is only one product now. I feel it creates a friction in the discoverability.
+
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-07-12T15:15:31+05:30.
+
+The user's current state is as follows:
+Active Document: c:\Users\rosha\Documents\vampro-website\src\pages\AdobeVoice.tsx (LANGUAGE_TSX)
+Cursor is on line: 1
+Other open documents:
+- c:\Users\rosha\Documents\vampro-website\src\pages\AdobeVoice.tsx (LANGUAGE_TSX)
+- c:\Users\rosha\Documents\vampro-website\public\humans.txt (LANGUAGE_PLAINTEXT)
+- c:\Users\rosha\Documents\vampro-website\public\sitemap.xml (LANGUAGE_XML)
+- c:\Users\rosha\Documents\vampro-website\src\pages\Spoch.tsx (LANGUAGE_TSX)
+- c:\Users\rosha\Documents\vampro-website\src\data\blogs\lean-editing-practices.ts (LANGUAGE_TYPESCRIPT)
+Browser State:
+  Page 8DE7D88C6A5DA2FC9B92374BC319949C (SignalScope | AI Search Visibility & Reddit Intelligence Platform) - http://localhost:5174/software/signalscope [ACTIVE]
+    Viewport: 1536x739, Page Height: 8505
+</ADDITIONAL_METADATA>
+<USER_SETTINGS_CHANGE>
+The user changed setting `Model Selection` from Claude Opus 4.6 (Thinking) to Gemini 3.1 Pro (High). No need to comment on this change if the user doesn't ask about it. If reporting what model you are, please use a human readable name instead of the exact string.
+</USER_SETTINGS_CHANGE>
+
+---NEW MESSAGE---
+
+<USER_REQUEST>
+use this element in the homepage about and services section
+"use client";
+import { useState, useEffect, useRef } from "react";
+import { ArrowRight, Link, Zap } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+
+interface TimelineItem {
+  id: number;
+  title: string;
+  date: string;
+  content: string;
+  category: string;
+  icon: React.ElementType;
+  relatedIds: number[];
+  status: "completed" | "in-progress" | "pending";
+  energy: number;
+}
+
+interface RadialOrbitalTimelineProps {
+  timelineData: TimelineItem[];
+}
+
+export default function RadialOrbitalTimeline({
+  timelineData,
+}: RadialOrbitalTimelineProps) {
+  const [expandedItems, setExpandedItems] = useState<Record<number, boolean>>(
+    {}
+  );
+  const [viewMode, setViewMode] = useState<"orbital">("orbital");
+  const [rotationAngle, setRotationAngle] = useState<number>(0);
+  const [autoRotate, setAutoRotate] = useState<boolean>(true);
+  const [pulseEffect, setPulseEffect] = useState<Record<number, boolean>>({});
+  const [centerOffset, setCenterOffset] = useState<{ x: number; y: number }>({
+    x: 0,
+    y: 0,
+  });
+  const [activeNodeId, setActiveNodeId] = useState<number | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const orbitRef = useRef<HTMLDivElement>(null);
+  const nodeRefs = useRef<Record<number, HTMLDivElement | null>>({});
+
+  const handleContainerClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.target === containerRef.current || e.target === orbitRef.current) {
+      setExpandedItems({});
+      setActiveNodeId(null);
+      setPulseEffect({});
+      setAutoRotate(true);
+    }
+  };
+
+  const toggleItem = (id: number) => {
+    setExpandedItems((prev) => {
+      const newState = { ...prev };
+      Object.keys(newState).forEach((key) => {
+        if (parseInt(key) !== id) {
+          newState[parseInt(key)
+<truncated 25846 bytes>
+0,53],"hsb":[225,80,47],"hsl":[225,67,28],"lab":[23,19,-44]},{"name":"Bright Snow","hex":"f9fafb","rgb":[249,250,251],"cmyk":[1,0,0,2],"hsb":[210,1,98],"hsl":[210,20,98],"lab":[98,0,-1]},{"name":"Electric Sapphire","hex":"376bfe","rgb":[55,107,254],"cmyk":[78,58,0,0],"hsb":[224,78,100],"hsl":[224,99,61],"lab":[50,34,-78]},{"name":"Sapphire","hex":"3758b2","rgb":[55,88,178],"cmyk":[69,51,0,30],"hsb":[224,69,70],"hsl":[224,53,46],"lab":[40,19,-52]},{"name":"French Blue","hex":"2a448c","rgb":[42,68,140],"cmyk":[70,51,0,45],"hsb":[224,70,55],"hsl":[224,54,36],"lab":[31,16,-43]}]
+
+- XML
+
+<palette>
+  <color name="Royal Azure" hex="2b5be3" r="43" g="91" b="227" />
+  <color name="Ocean Twilight" hex="2548ab" r="37" g="72" b="171" />
+  <color name="Royal Blue" hex="3e6cec" r="62" g="108" b="236" />
+  <color name="Glaucous" hex="6879aa" r="104" g="121" b="170" />
+  <color name="Glaucous" hex="6484e1" r="100" g="132" b="225" />
+  <color name="Imperial Blue" hex="183078" r="24" g="48" b="120" />
+  <color name="Bright Snow" hex="f9fafb" r="249" g="250" b="251" />
+  <color name="Electric Sapphire" hex="376bfe" r="55" g="107" b="254" />
+  <color name="Sapphire" hex="3758b2" r="55" g="88" b="178" />
+  <color name="French Blue" hex="2a448c" r="42" g="68" b="140" />
+</palette>
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-07-12T15:42:53+05:30.
+
+The user's current state is as follows:
+Active Document: c:\Users\rosha\Documents\vampro-website\src\pages\AdobeVoice.tsx (LANGUAGE_TSX)
+Cursor is on line: 1
+Other open documents:
+- c:\Users\rosha\Documents\vampro-website\src\pages\AdobeVoice.tsx (LANGUAGE_TSX)
+- c:\Users\rosha\Documents\vampro-website\public\humans.txt (LANGUAGE_PLAINTEXT)
+- c:\Users\rosha\Documents\vampro-website\public\sitemap.xml (LANGUAGE_XML)
+- c:\Users\rosha\Documents\vampro-website\src\pages\Spoch.tsx (LANGUAGE_TSX)
+- c:\Users\rosha\Documents\vampro-website\src\data\blogs\lean-editing-practices.ts (LANGUAGE_TYPESCRIPT)
+No browser pages are currently open.
+</ADDITIONAL_METADATA>
+
+---NEW MESSAGE---
+
+Comments on artifact URI: file:///c%3A/Users/rosha/.gemini/antigravity-ide/brain/4e61b047-9c65-4448-be89-9de444043b1a/implementation_plan.md
+
+The user has approved this document.
+
+
+<USER_REQUEST>
+
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-07-12T16:05:26+05:30.
+
+The user's current state is as follows:
+Active Document: c:\Users\rosha\Documents\vampro-website\src\pages\AdobeVoice.tsx (LANGUAGE_TSX)
+Cursor is on line: 1
+Other open documents:
+- c:\Users\rosha\Documents\vampro-website\src\pages\AEOtracker.tsx (LANGUAGE_TSX)
+- c:\Users\rosha\Documents\vampro-website\src\data\blogs\editing-with-your-eyes-closed.ts (LANGUAGE_TYPESCRIPT)
+- c:\Users\rosha\Documents\vampro-website\public\_redirects (LANGUAGE_UNSPECIFIED)
+- c:\Users\rosha\Documents\vampro-website\index.html (LANGUAGE_HTML)
+- c:\Users\rosha\Documents\vampro-website\src\pages\Spoch.css (LANGUAGE_CSS)
+No browser pages are currently open.
+</ADDITIONAL_METADATA>
+
+---NEW MESSAGE---
+
+<USER_REQUEST>
+Why did you change the homepage hero section color? Use the same background and just change the interactive particles with the one that I gave
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-07-12T16:19:16+05:30.
+
+The user's current state is as follows:
+Active Document: c:\Users\rosha\Documents\vampro-website\src\pages\AdobeVoice.tsx (LANGUAGE_TSX)
+Cursor is on line: 1
+Other open documents:
+- c:\Users\rosha\Documents\vampro-website\src\data\blogs\types.ts (LANGUAGE_TYPESCRIPT)
+- c:\Users\rosha\Documents\vampro-website\src\data\blogs\index.ts (LANGUAGE_TYPESCRIPT)
+- c:\Users\rosha\Documents\vampro-website\src\pages\DocsHub.tsx (LANGUAGE_TSX)
+- c:\Users\rosha\Documents\vampro-website\src\App.tsx (LANGUAGE_TSX)
+- c:\Users\rosha\Documents\vampro-website\src\pages\legal\VoiceTerms.tsx (LANGUAGE_TSX)
+No browser pages are currently open.
+</ADDITIONAL_METADATA>
+
+---NEW MESSAGE---
+
+<USER_REQUEST>
+I want it to be truly interactive
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-07-12T16:21:32+05:30.
+
+The user's current state is as follows:
+Active Document: c:\Users\rosha\Documents\vampro-website\src\pages\AdobeVoice.tsx (LANGUAGE_TSX)
+Cursor is on line: 1
+Other open documents:
+- c:\Users\rosha\Documents\vampro-website\src\pages\Spoch.css (LANGUAGE_CSS)
+- c:\Users\rosha\Documents\vampro-website\src\pages\Home.tsx (LANGUAGE_TSX)
+- c:\Users\rosha\Documents\vampro-website\public\llms.txt (LANGUAGE_PLAINTEXT)
+- c:\Users\rosha\Documents\vampro-website\public\.well-known\security.txt (LANGUAGE_PLAINTEXT)
+- c:\Users\rosha\Documents\vampro-website\src\pages\legal\VoiceLicenses.tsx (LANGUAGE_TSX)
+No browser pages are currently open.
+</ADDITIONAL_METADATA>

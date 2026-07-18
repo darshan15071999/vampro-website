@@ -2,7 +2,7 @@ import { CheckCircle, Shield, Eye, Lock, Server, Mail, Globe, Fingerprint } from
 import SEO from '../../components/SEO';
 import { privacyMetadata } from '../../seo/metadata';
 
-const SectionTitle = ({ icon: Icon, children }: { icon: React.ElementType; children: React.ReactNode }) => (
+const SectionTitle = ({ icon: Icon, children }: { icon: React.ComponentType<{ size?: number; className?: string }>; children: React.ReactNode }) => (
   <div className="flex items-center gap-3 mb-6">
     <div className="w-9 h-9 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center flex-shrink-0">
       <Icon size={16} className="text-indigo-400" />

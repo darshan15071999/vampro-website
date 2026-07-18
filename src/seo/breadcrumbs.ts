@@ -18,6 +18,11 @@ export const generateBreadcrumbSchema = (items: BreadcrumbItem[]) => {
 
 export const homeBreadcrumb = [];
 
+export const pluginsBreadcrumb = generateBreadcrumbSchema([
+  { name: 'Home', item: 'https://vampro.in' },
+  { name: 'Plugins', item: 'https://vampro.in/plugins' }
+]);
+
 export const voiceBreadcrumb = generateBreadcrumbSchema([
   { name: 'Home', item: 'https://vampro.in' },
   { name: 'Plugins', item: 'https://vampro.in/plugins' },

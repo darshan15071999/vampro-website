@@ -11,7 +11,7 @@ import TextParticles from '../components/TextParticles';
 import SpeedStreaks from '../components/SpeedStreaks';
 import { useWaitlist } from '../context/WaitlistContext';
 import SEO from '../components/SEO';
-import SignalScopeFooter from '../components/SignalScopeFooter';
+import HomeFooter from '../components/HomeFooter';
 import { signalScopeMetadata } from '../seo/metadata';
 import { motion } from 'framer-motion';
 
@@ -616,7 +616,7 @@ const AeoPage = () => {
         <div className="w-full px-6 md:px-10 lg:px-16 max-w-7xl mx-auto">
           <FadeInSection className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              { icon: <FileText size={24} />, title: 'Documentation', desc: 'Guides, installation, and troubleshooting.', cta: 'Read Docs', action: () => navigate('/docs') },
+              { icon: <FileText size={24} />, title: 'Documentation', desc: 'Guides, installation, and troubleshooting.', cta: 'Read Docs', action: () => navigate('/docs/software/signalscope') },
               { icon: <Shield size={24} />, title: 'Terms of Use', desc: 'Licensing, restrictions, and agreements.', cta: 'Full Terms', action: () => navigate('/terms') },
               { icon: <Shield size={24} />, title: 'Privacy Policy', desc: 'Data handling and user information.', cta: 'Read Privacy', action: () => navigate('/privacy') },
             ].map((item, i) => (
@@ -632,7 +632,7 @@ const AeoPage = () => {
           </FadeInSection>
         </div>
       </section>*/}
-      <SignalScopeFooter />
+      <HomeFooter />
     </div>
   );
 };

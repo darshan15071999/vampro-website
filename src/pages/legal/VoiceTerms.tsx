@@ -2,7 +2,7 @@ import { FileText, Scale, ShieldCheck, Mic, RefreshCw, AlertTriangle, Bookmark, 
 import SEO from '../../components/SEO';
 import { termsMetadata } from '../../seo/metadata';
 
-const SectionBlock = ({ icon: Icon, number, title, children }: { icon: React.ElementType; number: string; title: string; children: React.ReactNode }) => (
+const SectionBlock = ({ icon: Icon, number, title, children }: { icon: React.ComponentType<{ size?: number; className?: string }>; number: string; title: string; children: React.ReactNode }) => (
   <div className="mb-8">
     <div className="flex items-center gap-3 mb-3">
       <div className="w-7 h-7 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center flex-shrink-0">

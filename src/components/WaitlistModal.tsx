@@ -33,26 +33,49 @@ const WaitlistModal = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch('/api/waitlist', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, creatorType, source: modalSource }),
-      });
-
-      const text = await response.text();
-
-      console.log("API Response:", text);
-
-      const data = JSON.parse(text);
-
-      if (data.error) {
-        throw new Error(data.error);
+      // Salesforce Web-to-Lead — submit via hidden iframe to avoid CORS issues
+      const iframeName = 'sf_waitlist_iframe';
+      let iframe = document.querySelector<HTMLIFrameElement>(`iframe[name="${iframeName}"]`);
+      if (!iframe) {
+        iframe = document.createElement('iframe');
+        iframe.name = iframeName;
+        iframe.style.display = 'none';
+        document.body.appendChild(iframe);
       }
 
-      setIsSuccess(true);
-      markAsJoined(data.count);
+      const [firstName, ...lastNames] = name.trim().split(' ');
+      const lastName = lastNames.join(' ') || '-';
 
-      window.open("https://pub-385a87554a7340a09de10ff1f708bf66.r2.dev/Vampro-Voice-Service-Companion.exe", "_blank");
+      const form = document.createElement('form');
+      form.method = 'POST';
+      form.action = 'https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8';
+      form.target = iframeName;
+
+      const fields: Record<string, string> = {
+        oid: '00DdN000011GI3G',
+        retURL: window.location.href,
+        first_name: firstName,
+        last_name: lastName,
+        email: email,
+        company: creatorType,
+        title: 'Reader',
+        lead_source: 'Newsletter',
+      };
+
+      Object.entries(fields).forEach(([key, value]) => {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = key;
+        input.value = value;
+        form.appendChild(input);
+      });
+
+      document.body.appendChild(form);
+      form.submit();
+      form.remove();
+
+      setIsSuccess(true);
+      markAsJoined(1);
 
       // Auto close after 3 seconds
       setTimeout(() => {
@@ -97,16 +120,16 @@ const WaitlistModal = () => {
             </div>
             <h3 className="text-2xl font-bold text-white mb-3">Welcome to Vampro</h3>
             <p className="text-slate-400 font-light leading-relaxed">
-              You're on the list! We'll notify you when early access becomes available.
+              Thank you for subscribing!
             </p>
           </div>
         ) : (
           <>
             <div className="mb-8">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-500/20 bg-indigo-500/10 text-indigo-400 text-xs font-semibold mb-4 tracking-widest uppercase">
-                Early Access
+                Priority Access
               </div>
-              <h2 className="text-3xl font-extrabold text-white mb-2">Join Waitlist</h2>
+              <h2 className="text-3xl font-extrabold text-white mb-2">Get the latest updates</h2>
               <p className="text-slate-400 font-light">Be the first to experience Vampro's new creative tools.</p>
             </div>
 
@@ -161,10 +184,10 @@ const WaitlistModal = () => {
               >
                 {isSubmitting ? (
                   <>
-                    <Loader2 size={18} className="animate-spin" /> Joining...
+                    <Loader2 size={18} className="animate-spin" /> Subscribing...
                   </>
                 ) : (
-                  'Join Waitlist'
+                  'Subscribe'
                 )}
               </button>
             </form>

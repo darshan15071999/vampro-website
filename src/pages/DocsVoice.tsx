@@ -2,7 +2,7 @@ import { type MouseEvent as RMouseEvent } from 'react';
 import { CheckCircle, ChevronDown } from 'lucide-react';
 import { DocSection, DocH3, DocList } from '../components/DocHelpers';
 import SEO from '../components/SEO';
-import VoiceFooter from '../components/VoiceFooter';
+import HomeFooter from '../components/HomeFooter';
 import { docsVoiceMetadata } from '../seo/metadata';
 
 const DocsVoice = () => {
@@ -181,7 +181,7 @@ const DocsVoice = () => {
           </div>
         </div>
       </div>
-      <VoiceFooter />
+      <HomeFooter />
     </div>
   );
 };

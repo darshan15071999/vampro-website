@@ -3,7 +3,7 @@ import { Check, Mail } from 'lucide-react';
 import './Spoch.css';
 import { useWaitlist } from '../context/WaitlistContext';
 import SEO from '../components/SEO';
-import SpochFooter from '../components/SpochFooter';
+import HomeFooter from '../components/HomeFooter';
 import { spochMetadata } from '../seo/metadata';
 
 const Spoch = () => {
@@ -185,7 +185,7 @@ const Spoch = () => {
           )}
         </div>
       </section>
-      <SpochFooter />
+      <HomeFooter />
     </div>
   );
 };
