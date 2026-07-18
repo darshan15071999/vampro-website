@@ -47,7 +47,8 @@ export const homeMetadata: PageMetadata = {
 export const pluginsMetadata: PageMetadata = {
   title: 'Professional Creative Plugins | Vampro',
   description: 'Explore professional creative plugins from Vampro. AI-powered tools designed for Adobe Premiere Pro and creative workflows.',
-  canonical: 'https://vampro.in/plugins',
+  // /plugins client-redirects to the voice generator — canonical points at the target
+  canonical: 'https://vampro.in/plugins/voice-generator',
   keywords: 'Adobe Premiere Pro plugins, AI plugins, creative plugins, professional creative tools, voice generator plugin',
   schema: pluginsCollectionSchema,
   breadcrumbs: pluginsBreadcrumb
@@ -85,7 +86,8 @@ export const spochMetadata: PageMetadata = {
 export const docsHubMetadata: PageMetadata = {
   title: 'Plugin Documentation & Guides | Vampro',
   description: 'Browse Vampro plugin documentation, installation guides, tutorials, and technical references.',
-  canonical: 'https://vampro.in/docs',
+  // /docs client-redirects to the voice generator docs — canonical points at the target
+  canonical: 'https://vampro.in/docs/plugins/voice-generator',
   keywords: 'plugin documentation, installation guide, tutorials, Adobe Premiere Pro plugin docs',
   schema: docsCollectionSchema,
   breadcrumbs: docsHubBreadcrumb

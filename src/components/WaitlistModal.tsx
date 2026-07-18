@@ -16,8 +16,6 @@ const WaitlistModal = () => {
   const [emailError, setEmailError] = useState('');
   const [emailTouched, setEmailTouched] = useState(false);
 
-  if (!isModalOpen) return null;
-
   const handleEmailChange = useCallback((value: string) => {
     setEmail(value);
     if (emailTouched && value) {
@@ -35,6 +33,10 @@ const WaitlistModal = () => {
       setEmailError(err || '');
     }
   }, [email]);
+
+  // NOTE: keep this below every hook — an early return above a hook call
+  // changes the hook count between renders and crashes the whole app.
+  if (!isModalOpen) return null;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
