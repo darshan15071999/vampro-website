@@ -37,6 +37,7 @@ import { WaitlistProvider } from './context/WaitlistContext';
 import WaitlistModal from './components/WaitlistModal';
 import { SignupProvider } from './context/SignupContext';
 import SignupModal from './components/SignupModal';
+import { ThemeProvider } from './context/ThemeContext';
 
 // ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 // Scroll to top on route change
@@ -91,6 +92,7 @@ const App = () => {
   const closeSearch = () => { setSearchOpen(false); };
 
   return (
+    <ThemeProvider>
     <WaitlistProvider>
       <SignupProvider>
       <div className="min-h-screen font-space text-white bg-[#07060F]">
@@ -157,6 +159,7 @@ const App = () => {
       </div>
       </SignupProvider>
     </WaitlistProvider>
+    </ThemeProvider>
   );
 };
 

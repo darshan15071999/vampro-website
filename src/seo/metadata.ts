@@ -1,9 +1,9 @@
 import type { SchemaType } from './schemas';
-import { 
-  organizationSchema, websiteSchema, voiceGeneratorSchema, 
+import {
+  organizationSchema, websiteSchema, voiceGeneratorSchema,
   pluginsCollectionSchema, docsCollectionSchema,
-  signalScopeSchema, spochSchema, docsSchema, 
-  privacySchema, termsSchema, licensesSchema 
+  signalScopeSchema, spochSchema, docsSchema,
+  privacySchema, termsSchema, licensesSchema
 } from './schemas';
 import {
   homeBreadcrumb, pluginsBreadcrumb, voiceBreadcrumb, signalScopeBreadcrumb, spochBreadcrumb,
@@ -36,7 +36,7 @@ const architectureItemList = {
 };
 
 export const homeMetadata: PageMetadata = {
-  title: 'Vampro | Creative Technology Lab — Professional Plugins for Creators',
+  title: 'Vampro | Creative Technology Lab: Professional Plugins for Creators',
   description: "Vampro is a creative technology lab that builds professional software and plugins for creators. Explore our AI Voice Generator for Adobe Premiere Pro and more.",
   canonical: 'https://vampro.in/',
   keywords: 'creative technology lab, professional plugins, creator tools, workflow automation, Adobe Premiere Pro, AI voice generator',
@@ -147,7 +147,7 @@ export const licensesMetadata: PageMetadata = {
 };
 
 export const blogMetadata: PageMetadata = {
-  title: 'Blog — Editing Tips, AI Workflows & Creative Automation | Vampro',
+  title: 'Blog: Editing Tips, AI Workflows & Creative Automation | Vampro',
   description: 'Tutorials, editing tips, AI workflow guides, and creative automation insights from the Vampro team.',
   canonical: 'https://vampro.in/blog',
   keywords: 'editing tips, AI workflows, creative automation, Premiere Pro tutorials, voice generation tips',

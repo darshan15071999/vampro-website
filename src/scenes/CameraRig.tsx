@@ -287,10 +287,19 @@ const CameraRig = forwardRef<CameraRigHandle>((_, ref) => {
 
     const clock = new THREE.Clock();
 
+    // Follow the site theme: cyan lines on the dark sheet, deep blue ink on paper
+    let lastLight: boolean | null = null;
+
     const render = () => {
       raf = requestAnimationFrame(render);
       const t = clock.getElapsedTime();
       smooth += (progressRef.current - smooth) * 0.07;
+
+      const isLightTheme = document.documentElement.classList.contains('light');
+      if (isLightTheme !== lastLight) {
+        lastLight = isLightTheme;
+        parts.forEach(p => p.mat.color.set(isLightTheme ? 0x0a2a66 : 0x00e5ff));
+      }
 
       const seg = Math.min(Math.floor(smooth * 5), 4);
       const st = smooth * 5 - seg;

@@ -6,7 +6,7 @@ export const editing_with_your_eyes_closed: BlogPost = {
   summary: "Discover why professional editors build the emotional foundation of a video through sound before perfecting the visuals, and how a sound-first workflow can dramatically improve storytelling, viewer retention, and editing speed.",
   author: "Darshan",
   authorImage: "/author.jpg",
-  date: "July 11, 2026",
+  date: "July 6, 2026",
   readingTime: "9 min read",
   category: "Workflow",
   image: "/blog2.png",

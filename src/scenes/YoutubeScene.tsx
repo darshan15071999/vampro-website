@@ -32,9 +32,9 @@ const YoutubeScene = forwardRef<HTMLElement>((_, ref) => (
 
       <div data-anim="yt-head">
         <p className="bp-label mb-3">YouTube</p>
-        <h2 className="text-xl md:text-2xl font-bold tracking-wide text-white leading-tight">
+        <h2 className="bp-h2 text-[var(--bp-ink-strong)]">
           Stories behind
-          <span className="block text-white/60">The build</span>
+          <span className="block text-[var(--bp-ink)]/60">The build</span>
         </h2>
       </div>
 
@@ -49,7 +49,7 @@ const YoutubeScene = forwardRef<HTMLElement>((_, ref) => (
         >
           <source src="/showreel.mp4" type="video/mp4" />
         </video>
-        <div className="flex items-center justify-between px-2 py-2 border-t border-[#00e5ff]/15 mt-2" aria-hidden="true">
+        <div className="flex items-center justify-between px-2 py-2 border-t border-[var(--bp-accent)]/15 mt-2" aria-hidden="true">
           <span className="flex items-center gap-2">
             <svg viewBox="0 0 24 24" className="w-4 h-4"><polygon points="9,6 19,12 9,18" className="bp-stroke" /></svg>
             <span className="bp-label">Showreel · 2026</span>

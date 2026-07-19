@@ -6,7 +6,7 @@ export const lean_editing_practices: BlogPost = {
   summary: "Discover how professional creators save hours on every project by keeping their editing workflow lean, organized, and distraction-free.",
   author: "Darshan",
   authorImage: "/author.jpg",
-  date: "July 7, 2026",
+  date: "July 8, 2026",
   readingTime: "8 min read",
   category: "Workflow",
   image: "/blog1.png",

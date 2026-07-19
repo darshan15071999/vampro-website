@@ -6,7 +6,7 @@ export const premiere_workspace_design: BlogPost = {
   summary: "Learn how to build the ideal Adobe Premiere Pro workspace for your editing style. Whether you're a YouTube creator, documentary filmmaker, social media editor, or commercial producer, an optimized workspace can significantly improve your speed, focus, and creative flow.",
   author: "Darshan",
   authorImage: "/author.jpg",
-  date: "July 24, 2026",
+  date: "July 1, 2026",
   readingTime: "9 min read",
   category: "Workflow",
   image: "/blog4.png",

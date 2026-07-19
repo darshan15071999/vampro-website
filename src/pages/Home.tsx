@@ -147,15 +147,17 @@ const Home = () => {
 
       {/* The stage — six scenes, one continuous film.
           (The site-wide Navbar from App.tsx is the header on every page.) */}
-      <div ref={stageRef} className={cine ? 'bp-cine' : ''}>
-        {/* Wireframe camera dissecting behind the scenes — full stage breadth */}
-        {cine && (
-          <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-            <Suspense fallback={null}>
-              <CameraRig ref={rigRef} />
-            </Suspense>
-          </div>
-        )}
+      <div ref={stageRef} className={cine ? 'bp-cine' : 'relative'}>
+        {/* Wireframe camera — full stage in cinematic mode; on mobile/tablet it
+            idles assembled behind the hero (progress stays 0, gentle rotation) */}
+        <div
+          className={cine ? 'absolute inset-0 pointer-events-none' : 'absolute top-0 inset-x-0 h-screen pointer-events-none opacity-70'}
+          aria-hidden="true"
+        >
+          <Suspense fallback={null}>
+            <CameraRig ref={rigRef} />
+          </Suspense>
+        </div>
         <HeroScene ref={heroRef} />
         <StoryScene ref={storyRef} />
         <ServicesScene ref={servicesRef} />

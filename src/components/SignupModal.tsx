@@ -1,7 +1,9 @@
 import { useState, useCallback } from 'react';
 import { X, CheckCircle2, Loader2 } from 'lucide-react';
 import { useSignup } from '../context/SignupContext';
-import { validateEmail } from '../lib/validateEmail';
+import { validateEmail, verifyEmailExists } from '../lib/validateEmail';
+import SpecularButton from './SpecularButton';
+import ShinyText from './ShinyText';
 
 const SignupModal = () => {
   const { isModalOpen, closeModal, markAsSignedUp, modalSource } = useSignup();
@@ -56,6 +58,14 @@ const SignupModal = () => {
     }
 
     setIsSubmitting(true);
+
+    const existError = await verifyEmailExists(email);
+    if (existError) {
+      setEmailError(existError);
+      setEmailTouched(true);
+      setIsSubmitting(false);
+      return;
+    }
 
     try {
       // Salesforce Web-to-Lead — submit via hidden iframe to avoid CORS issues
@@ -154,61 +164,63 @@ const SignupModal = () => {
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
       {/* Backdrop */}
       <div
-        className="absolute inset-0 bg-[#07060F]/80 backdrop-blur-sm transition-opacity animate-fade-in"
+        className="absolute inset-0 bg-[#04030A]/80 backdrop-blur-md transition-opacity animate-fade-in"
         onClick={closeModal}
       />
 
-      {/* Modal Content */}
-      <div className="relative w-full max-w-md bg-[#07060F]/95 backdrop-blur-2xl border border-indigo-500/30 rounded-3xl p-8 shadow-[0_0_80px_rgba(59,59,255,0.2)] animate-fade-in transition-all">
+      {/* Modal Content - Styled like a plugin page Glass Card */}
+      <div className="relative w-full max-w-md bg-white/5 backdrop-blur-[40px] border border-white/10 rounded-[30px] p-10 shadow-[0_8px_32px_rgba(0,0,0,0.4)] animate-fade-in transition-all">
         {/* Close Button */}
         <button
           onClick={closeModal}
-          className="absolute top-6 right-6 text-slate-400 hover:text-white transition-colors"
+          className="absolute top-6 right-6 text-slate-400 hover:text-white transition-colors z-10"
         >
           <X size={20} />
         </button>
 
         {isSuccess ? (
           <div className="flex flex-col items-center justify-center text-center py-8">
-            <div className="w-16 h-16 bg-green-500/20 text-green-400 rounded-full flex items-center justify-center mb-6">
+            <div className="w-16 h-16 bg-white/5 border border-white/10 text-green-400 rounded-full flex items-center justify-center mb-6 shadow-[0_0_30px_rgba(74,222,128,0.2)]">
               <CheckCircle2 size={32} />
             </div>
-            <h3 className="text-2xl font-bold text-white mb-3">Redirecting...</h3>
+            <h3 className="text-2xl font-bold text-white mb-3"><ShinyText text="Redirecting..." speed={2} shineColor="#ffffff" color="#ffffff" /></h3>
             <p className="text-slate-400 font-light leading-relaxed">
               Thank you for signing up!
             </p>
           </div>
         ) : (
           <>
-            <div className="mb-8">
-              <h2 className="text-3xl font-extrabold text-white mb-2">Sign up to download</h2>
-              <p className="text-slate-400 font-light"></p>
+            <div className="mb-8 text-center">
+              <h2 className="text-3xl font-extrabold text-white mb-3">
+                <ShinyText text="Sign up to download" speed={3} shineColor="#ffffff" color="#ffffff" />
+              </h2>
+              <p className="text-slate-400 font-light text-sm tracking-wide">Join the ecosystem of professional creators.</p>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-5">
               <div>
-                <label className="block text-sm font-medium text-slate-300 mb-1.5">Full Name</label>
+                <label className="block text-xs font-semibold text-slate-400 uppercase tracking-widest mb-2">Full Name</label>
                 <input
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full bg-white/5 border border-indigo-500/20 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-[#3B3BFF] focus:ring-1 focus:ring-[#3B3BFF] transition-all"
+                  className="w-full bg-black/20 border border-white/10 rounded-2xl px-5 py-3.5 text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500/50 focus:ring-1 focus:ring-indigo-500/50 transition-all shadow-inner"
                   placeholder="John Doe"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-slate-300 mb-1.5">Email Address</label>
+                <label className="block text-xs font-semibold text-slate-400 uppercase tracking-widest mb-2">Email Address</label>
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => handleEmailChange(e.target.value)}
                   onBlur={handleEmailBlur}
-                  className={`w-full bg-white/5 border rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:ring-1 transition-all ${
+                  className={`w-full bg-black/20 border rounded-2xl px-5 py-3.5 text-white placeholder-slate-500 focus:outline-none focus:ring-1 transition-all shadow-inner ${
                     emailError && emailTouched
                       ? 'border-red-500/50 focus:border-red-500 focus:ring-red-500/30'
-                      : 'border-indigo-500/20 focus:border-[#3B3BFF] focus:ring-[#3B3BFF]'
+                      : 'border-white/10 focus:border-indigo-500/50 focus:ring-indigo-500/50'
                   }`}
                   placeholder="john@example.com"
                   required
@@ -219,15 +231,20 @@ const SignupModal = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-slate-300 mb-1.5">Creator Type</label>
+                <label className="block text-xs font-semibold text-slate-400 uppercase tracking-widest mb-2">Creator Type</label>
                 <select
                   value={creatorType}
                   onChange={(e) => setCreatorType(e.target.value)}
-                  className="w-full bg-white/5 border border-indigo-500/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#3B3BFF] focus:ring-1 focus:ring-[#3B3BFF] transition-all appearance-none cursor-pointer"
+                  className="w-full bg-black/20 border border-white/10 rounded-2xl px-5 py-3.5 text-white focus:outline-none focus:border-indigo-500/50 focus:ring-1 focus:ring-indigo-500/50 transition-all appearance-none cursor-pointer shadow-inner"
+                  style={{
+                    backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='rgba(255, 255, 255, 0.5)' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E")`,
+                    backgroundRepeat: 'no-repeat',
+                    backgroundPosition: 'right 16px center',
+                  }}
                 >
-                  <option value="Solo Creator" className="bg-[#07060F]">Solo Creator</option>
-                  <option value="Company" className="bg-[#07060F]">Company</option>
-                  <option value="Agency" className="bg-[#07060F]">Agency</option>
+                  <option value="Solo Creator" className="bg-[#04030A]">Solo Creator</option>
+                  <option value="Company" className="bg-[#04030A]">Company</option>
+                  <option value="Agency" className="bg-[#04030A]">Agency</option>
                 </select>
               </div>
 
@@ -237,19 +254,23 @@ const SignupModal = () => {
                 </div>
               )}
 
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full bg-[#3B3BFF] hover:bg-indigo-500 text-white font-bold py-3.5 px-4 rounded-xl transition-all shadow-[0_0_20px_rgba(59,59,255,0.3)] hover:shadow-[0_0_30px_rgba(59,59,255,0.5)] disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2 mt-2"
-              >
-                {isSubmitting ? (
-                  <>
-                    <Loader2 size={18} className="animate-spin" /> Signing up...
-                  </>
-                ) : (
-                  'Sign Up'
-                )}
-              </button>
+              <div className="pt-2">
+                <SpecularButton
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full rounded-2xl border border-white/10 bg-white/5 backdrop-blur-[40px] shadow-[0_8px_32px_rgba(0,0,0,0.4)] !px-4 !py-4"
+                >
+                  <div className="flex items-center justify-center gap-2 font-bold text-lg text-white">
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 size={20} className="animate-spin" /> Signing up...
+                      </>
+                    ) : (
+                      'Sign Up'
+                    )}
+                  </div>
+                </SpecularButton>
+              </div>
             </form>
           </>
         )}

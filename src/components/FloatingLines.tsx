@@ -461,13 +461,22 @@ export default function FloatingLines({
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
-    linesGradient,
-    enabledWaves,
-    lineCount,
-    lineDistance,
-    topWavePosition,
-    middleWavePosition,
-    bottomWavePosition,
+    // Serialize array/object props so reference changes don't re-create the
+    // entire WebGL context (which causes a visible flash / reload).
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    JSON.stringify(linesGradient),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    JSON.stringify(enabledWaves),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    JSON.stringify(lineCount),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    JSON.stringify(lineDistance),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    JSON.stringify(topWavePosition),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    JSON.stringify(middleWavePosition),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    JSON.stringify(bottomWavePosition),
     animationSpeed,
     interactive,
     bendRadius,

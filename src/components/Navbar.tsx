@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { PlayCircle, Menu, X, Search } from 'lucide-react';
+import { PlayCircle, Menu, X, Search, Sun, Moon } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ScatterText from './ScatterText';
+import { useTheme } from '../context/ThemeContext';
 
 
 interface NavbarProps {
@@ -39,6 +40,7 @@ const Navbar = ({ openSearch }: NavbarProps) => {
   const nav = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
 
   useEffect(() => {
@@ -52,8 +54,8 @@ const Navbar = ({ openSearch }: NavbarProps) => {
     setIsMobileMenuOpen(false);
   }, [location.pathname]);
 
-  // Home is the dark blueprint page now — only the blog keeps the light chrome
-  const isLight = location.pathname.startsWith('/blog');
+  // Light chrome when the theme is light; the blog is light in either theme
+  const isLight = theme === 'light' || location.pathname.startsWith('/blog');
   const isDocsPage = location.pathname.startsWith('/docs') || location.pathname === '/privacy' || location.pathname === '/terms';
 
   const navigate = (path: string, sectionId?: string) => {
@@ -102,11 +104,11 @@ const Navbar = ({ openSearch }: NavbarProps) => {
           : 'bg-[#07060F]/50 backdrop-blur-md border-b border-white/10 shadow-sm'
       }`}>
       <div className="w-full px-6 md:px-10 lg:px-16">
-        <div className="flex justify-between items-center h-24">
+        <div className="flex justify-between items-center h-16 md:h-24">
           {/* Logo */}
           <div className="flex items-center gap-3 cursor-pointer group" onClick={() => navigate('/')}>
-            <img src="/header.png" alt="Vampro Logo" className="h-14 w-14 rounded-2xl shadow-md object-cover border border-slate-200/20 group-hover:scale-105 transition-transform duration-300" />
-            <span className={`font-bank-gothic text-3xl tracking-[0.12em] transition-colors duration-400 ${scrolled
+            <img src="/header.png" alt="Vampro Logo" className="h-10 w-10 md:h-14 md:w-14 rounded-xl md:rounded-2xl shadow-md object-cover border border-slate-200/20 group-hover:scale-105 transition-transform duration-300" />
+            <span className={`font-bank-gothic text-xl md:text-3xl tracking-[0.12em] transition-colors duration-400 ${scrolled
               ? (isLight ? 'text-[#07060F]' : 'text-white')
               : (isLight ? 'text-[#07060F]' : 'text-white')
               }`} style={{ fontWeight: 700 }}>
@@ -120,8 +122,17 @@ const Navbar = ({ openSearch }: NavbarProps) => {
             </span>
           </div>
 
-          {/* Desktop nav links — nudged right toward the edge */}
-          <div className="hidden md:flex items-center gap-10 md:translate-x-3 lg:translate-x-5">
+          {/* Desktop nav links — tablet gets the mobile menu (six links don't fit) */}
+          <div className="hidden lg:flex items-center gap-6 xl:gap-10 lg:translate-x-5">
+            {isHomePage && (
+              <button
+                onClick={toggleTheme}
+                aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+                className={`p-2 rounded-full border transition-colors ${isLight ? 'border-slate-300 text-slate-600 hover:bg-slate-100' : 'border-white/20 text-slate-300 hover:bg-white/10'}`}
+              >
+                {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
+              </button>
+            )}
             {desktopNavItems.map((item, i) => (
               <motion.button
                 key={item.label}
@@ -152,8 +163,17 @@ const Navbar = ({ openSearch }: NavbarProps) => {
 
           </div>
 
-          {/* Mobile */}
-          <div className="md:hidden flex items-center gap-3">
+          {/* Mobile + tablet */}
+          <div className="lg:hidden flex items-center gap-3">
+            {isHomePage && (
+              <button
+                onClick={toggleTheme}
+                aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+                className={`p-2 rounded-full border transition-colors ${isLight ? 'border-slate-300 text-slate-600' : 'border-white/20 text-slate-300'}`}
+              >
+                {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
+              </button>
+            )}
 
             {isDocsPage && (
               <button onClick={openSearch} className="text-slate-400 p-2"><Search size={20} /></button>
@@ -172,7 +192,7 @@ const Navbar = ({ openSearch }: NavbarProps) => {
             initial="hidden"
             animate="visible"
             exit="exit"
-            className={`md:hidden pb-4 pt-2 px-4 space-y-1 absolute w-full shadow-xl overflow-hidden ${isLight ? 'bg-white/95 backdrop-blur-xl' : 'bg-[#07060F]/95 backdrop-blur-xl border-t border-indigo-900/20'}`}
+            className={`lg:hidden pb-4 pt-2 px-4 space-y-1 absolute w-full shadow-xl overflow-hidden ${isLight ? 'bg-white/95 backdrop-blur-xl' : 'bg-[#07060F]/95 backdrop-blur-xl border-t border-indigo-900/20'}`}
           >
             {mobileNavItems.map((item, i) => (
               <motion.button

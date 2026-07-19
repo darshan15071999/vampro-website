@@ -163,7 +163,8 @@ export default function RadialOrbitalTimeline({
 
   const calculateNodePosition = (index: number, total: number) => {
     const angle = ((index / total) * 360 + rotationAngle) % 360;
-    const radius = 200;
+    // Tighter orbit on phones so expanded cards stay inside the clipped container
+    const radius = typeof window !== 'undefined' && window.innerWidth < 640 ? 160 : 200;
     const radian = (angle * Math.PI) / 180;
     const floatY = 0;
 
@@ -181,11 +182,11 @@ export default function RadialOrbitalTimeline({
 
   return (
     <div
-      className="w-full h-[500px] flex flex-col items-center justify-center bg-transparent overflow-visible"
+      className="w-full h-[400px] sm:h-[500px] flex flex-col items-center justify-center bg-transparent overflow-hidden"
       ref={containerRef}
       onClick={handleContainerClick}
     >
-      <div className="relative w-full max-w-4xl h-full flex items-center justify-center">
+      <div className="relative w-full max-w-4xl h-full flex items-center justify-center scale-[0.68] sm:scale-90 lg:scale-100">
         <div
           className="absolute w-full h-full flex items-center justify-center"
           ref={orbitRef}

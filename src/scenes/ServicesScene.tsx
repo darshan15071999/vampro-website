@@ -8,11 +8,11 @@ import { FileText, Camera, Scissors, Activity, Mic, Palette, Film, Zap, Sparkles
 
 const stages = [
   { key: 'story', label: 'Storytelling', desc: 'Films & branded media', Icon: Film },
-  { key: 'writing', label: 'Writing', desc: 'Scripts & narrative', Icon: FileText },
-  { key: 'hardware', label: 'Hardware', desc: 'Custom electronics', Icon: Zap },
-  { key: 'filming', label: 'Filming', desc: 'Cameras & rigs', Icon: Camera },
-  { key: 'editing', label: 'Editing', desc: 'Cut & structure', Icon: Scissors },
-  { key: 'motion_design', label: 'Motion & Design', desc: 'Animation & UI/UX', Icon: Sparkles },
+  { key: 'writing', label: 'Writing', desc: 'Scripts & narration', Icon: FileText },
+  { key: 'hardware', label: 'Hardware', desc: 'Custom electronics & rigs', Icon: Zap },
+  { key: 'filming', label: 'Filming', desc: 'Videography & Photography', Icon: Camera },
+  { key: 'editing', label: 'Editing', desc: 'Cuts & Storyboard', Icon: Scissors },
+  { key: 'motion_design', label: 'Design', desc: 'Animation & UI/UX', Icon: Sparkles },
   { key: 'motion', label: 'Motion', desc: 'Graphics & design', Icon: Activity },
   { key: 'audio', label: 'Audio', desc: 'Voice & sound', Icon: Mic },
   { key: 'color', label: 'Color', desc: 'Grade & finish', Icon: Palette },
@@ -24,11 +24,11 @@ const ServicesScene = forwardRef<HTMLElement>((_, ref) => (
     <div className="w-full max-w-6xl mx-auto px-6 text-center">
       <div data-anim="svc-head">
         <p className="bp-label mb-3">Our Services</p>
-        <h2 className="text-xl md:text-2xl font-bold tracking-wide text-white leading-tight">
+        <h2 className="bp-h2 text-[var(--bp-ink-strong)]">
           One pipeline.
-          <span className="text-white/60"> Every discipline.</span>
+          <span className="text-[var(--bp-ink)]/60"> Every discipline.</span>
         </h2>
-        <p className="mt-3 text-xs md:text-sm font-light tracking-wider text-neutral-400 max-w-xl mx-auto leading-relaxed">
+        <p className="mt-3 text-xs md:text-sm font-light tracking-wider text-[var(--bp-muted2)] max-w-xl mx-auto leading-relaxed">
           Each craft is a stage in the same system that turns an idea into a finished film.
         </p>
       </div>
@@ -45,11 +45,11 @@ const ServicesScene = forwardRef<HTMLElement>((_, ref) => (
             className="bp-card relative w-full h-full px-2 flex flex-col items-center justify-center text-center"
           >
             <div data-anim={s.key === 'audio' ? "svc-audio-content" : undefined} className="flex flex-col items-center justify-center gap-1.5 w-full">
-              <div className="w-7 h-7 rounded-lg border border-[#00e5ff]/30 flex items-center justify-center mb-1">
-                <s.Icon size={14} className="text-[#00e5ff]" strokeWidth={1.5} />
+              <div className="w-7 h-7 rounded-lg border border-[var(--bp-accent)]/30 flex items-center justify-center mb-1">
+                <s.Icon size={14} className="text-[var(--bp-accent)]" strokeWidth={1.5} />
               </div>
-              <span className="text-[10px] md:text-[11px] font-bold tracking-[0.1em] text-[#00e5ff] uppercase leading-tight">{s.label}</span>
-              <span className="text-[9px] font-light tracking-wider text-neutral-400 leading-tight">{s.desc}</span>
+              <span className="text-[10px] md:text-[11px] font-bold tracking-[0.1em] text-[var(--bp-accent)] uppercase leading-tight">{s.label}</span>
+              <span className="text-[9px] font-light tracking-wider text-[var(--bp-muted2)] leading-tight">{s.desc}</span>
             </div>
             {s.key === 'audio' && (
               <div data-anim="svc-audio-wave" className="cine-only absolute bottom-3 w-full left-0 px-4">

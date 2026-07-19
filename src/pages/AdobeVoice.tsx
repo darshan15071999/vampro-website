@@ -145,7 +145,7 @@ const AdobeVoice = () => {
     <div className="min-h-screen bg-[#04030A] text-white flex flex-col">
       <SEO {...voiceMetadata} />
       {/* Announcement */}
-      <div className="bg-gradient-to-r from-[#3B3BFF] via-[#1B2A6B] to-[#3B3BFF] text-white py-2.5 px-4 flex items-center justify-center gap-4 sticky top-[96px] z-40">
+      <div className="bg-gradient-to-r from-[#3B3BFF] via-[#1B2A6B] to-[#3B3BFF] text-white py-2.5 px-4 flex items-center justify-center gap-4 sticky top-[64px] md:top-[96px] z-40">
         <span className="text-[10px] sm:text-xs font-bold tracking-widest uppercase opacity-90 text-center leading-relaxed">From script to voiceover: without leaving Premiere Pro</span>
       </div>
 
@@ -296,7 +296,7 @@ const AdobeVoice = () => {
                 { title: 'Built for Ultra-Smooth Workflows', desc: 'Change the generated voice instantly by simply selecting the clip and modifying the script, voice, and tone.' },
                 { title: 'Unlimited Offline Voice Generation', desc: 'Paste a script, select a voice, and generate audio, completely processed on your machine.' },
               ].map((item, i) => (
-                  <div key={i} onClick={() => { setActiveReason(i); setAutoPlayReason(false); }} onMouseEnter={() => { setActiveReason(i); setAutoPlayReason(false); }} className="flex gap-4 cursor-pointer p-5 rounded-3xl transition-all duration-300 bg-white/5 backdrop-blur-[40px] border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.4)] hover:bg-white/10 group">
+                  <div key={i} onClick={() => { setActiveReason(i); setAutoPlayReason(false); }} onMouseEnter={() => { setActiveReason(i); setAutoPlayReason(false); }} className="flex gap-4 cursor-pointer p-5 rounded-3xl transition-all duration-300 bg-transparent backdrop-blur-xl border border-white/5 shadow-[0_8px_32px_rgba(0,0,0,0.4)] hover:bg-white/5 group">
                     <div className="flex flex-col items-center pt-1.5">
                       <div className={`w-3 h-3 rounded-full transition-all duration-500 ${activeReason === i ? 'bg-[#3B3BFF] shadow-[0_0_15px_#3B3BFF] scale-125' : 'bg-white/20'}`} />
                       <div className={`w-[2px] h-full mt-3 rounded-full transition-all duration-500 ${activeReason === i ? 'bg-gradient-to-b from-[#3B3BFF]/50 to-transparent' : 'bg-white/10'}`} />
@@ -309,9 +309,20 @@ const AdobeVoice = () => {
                 ))}
             </FadeInSection>
             <FadeInSection delay="200ms">
-              <div className="relative aspect-video glass-card rounded-[2rem] overflow-hidden">
-                <img key={activeReason} src={reasonImages[activeReason]} className="absolute inset-0 w-full h-full object-contain bg-black" alt="Feature" />
-                <div key={activeReason} className="absolute inset-0 bg-gradient-to-t from-[#07060F]/70 via-[#07060F]/20 to-transparent flex flex-col justify-end p-8 animate-fade-up">
+              <div className="relative aspect-video rounded-[30px] border border-white/5 bg-transparent overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.4)] backdrop-blur-xl transition-colors duration-300">
+                {reasonImages.map((src, index) => (
+                  <img 
+                    key={index} 
+                    src={src} 
+                    className={`absolute inset-0 w-full h-full object-contain transition-all duration-700 ease-in-out ${
+                      activeReason === index 
+                        ? 'opacity-100 scale-100 blur-0 z-10' 
+                        : 'opacity-0 scale-95 blur-sm z-0'
+                    }`} 
+                    alt={`Feature ${index + 1}`} 
+                  />
+                ))}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#07060F]/70 via-[#07060F]/20 to-transparent flex flex-col justify-end p-8 animate-fade-up z-20">
                   <div className="w-10 h-10 bg-[#3B3BFF] rounded-xl flex items-center justify-center mb-4 animate-glow-pulse">
                     {[<Layers size={18} />, <Zap size={18} />, <MonitorPlay size={18} />, <Wand2 size={18} />][activeReason]}
                   </div>
@@ -460,7 +471,22 @@ const AdobeVoice = () => {
               <p className="text-lg text-slate-400 font-light max-w-2xl mx-auto">Three quick steps to set everything up and start generating voiceovers.</p>
             </FadeInSection>
           </div>
-          <div className="w-full relative max-w-5xl mx-auto flex items-center justify-center" style={{ height: '650px' }}>
+          {/* Mobile: simple stacked steps — CardSwap's fixed 450px cards don't fit phones */}
+          <div className="md:hidden w-full px-6 space-y-5 max-w-md mx-auto">
+            {[
+              { icon: <Store size={32} />, title: '1. Install Extension', desc: 'Get the Vampro Voice Generator Text-to-Speech extension from the Adobe Marketplace and install it.' },
+              { icon: <Download size={32} />, title: '2. Run Companion App', desc: 'Download and install the Vampro Voice Service companion app from the Microsoft Store, then launch it.' },
+              { icon: <MonitorPlay size={32} />, title: '3. Open Premiere Pro', desc: 'Inside Premiere Pro, go to Window → UXP Plugins and select Vampro Voice Generator to start using the plugin.' }
+            ].map(step => (
+              <div key={step.title} className="rounded-2xl border border-white/10 bg-white/5 p-6 flex flex-col items-center text-center shadow-[0_0_20px_rgba(59,59,255,0.15)]">
+                <div className="mb-4 text-white p-3.5 bg-white/10 rounded-xl">{step.icon}</div>
+                <h3 className="text-xl font-bold text-white mb-2">{step.title}</h3>
+                <p className="text-slate-300 text-sm leading-relaxed">{step.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="hidden md:flex w-full relative max-w-5xl mx-auto items-center justify-center" style={{ height: '650px' }}>
             <CardSwap
               width={450}
               height={500}

@@ -12,11 +12,11 @@ const VoiceScene = forwardRef<HTMLElement>((_, ref) => (
     <div className="w-full max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
       <div data-anim="vo-copy">
         <p className="bp-label mb-5">Featured Plugin</p>
-        <h2 className="text-4xl md:text-4xl font-bold tracking-wide text-white leading-tight">
+        <h2 className="bp-h2 text-[var(--bp-ink-strong)]">
           Voice Generator
-          <span className="block text-white/60">for Adobe Premiere Pro</span>
+          <span className="block text-[var(--bp-ink)]/60">for Adobe Premiere Pro</span>
         </h2>
-        <p className="mt-6 text-sm md:text-base font-light tracking-wider text-neutral-400 leading-relaxed max-w-md">
+        <p className="mt-6 text-sm md:text-base font-light tracking-wider text-[var(--bp-muted2)] leading-relaxed max-w-md">
           Type a script, choose a voice, and natural narration lands on your timeline in seconds. 27+ voices, fully offline, without leaving Premiere Pro.
         </p>
         <div className="mt-8 flex flex-col sm:flex-row items-start gap-4">
@@ -28,28 +28,28 @@ const VoiceScene = forwardRef<HTMLElement>((_, ref) => (
       {/* Wireframe Premiere panel */}
       <div data-anim="vo-panel" className="bp-card relative p-4">
         <CornerMarks inset={6} />
-        <div className="flex items-center justify-between border-b border-[#00e5ff]/15 pb-3 mb-4">
+        <div className="flex items-center justify-between border-b border-[var(--bp-accent)]/15 pb-3 mb-4">
           <span className="bp-label">Vampro Voice Generator</span>
           <span className="flex gap-1.5" aria-hidden="true">
-            <span className="w-2 h-2 border border-[#00e5ff]/40" />
-            <span className="w-2 h-2 border border-[#00e5ff]/40" />
+            <span className="w-2 h-2 border border-[var(--bp-accent)]/40" />
+            <span className="w-2 h-2 border border-[var(--bp-accent)]/40" />
           </span>
         </div>
 
         {/* Script input */}
-        <div data-anim="vo-input" className="border border-[#00e5ff]/20 px-4 py-3 text-left">
+        <div data-anim="vo-input" className="border border-[var(--bp-accent)]/20 px-4 py-3 text-left">
           <span className="bp-label block mb-1.5">Script</span>
-          <span className="text-sm md:text-base font-light tracking-wider text-white">
+          <span className="text-sm md:text-base font-light tracking-wider text-[var(--bp-ink-strong)]">
             {SCRIPT_TEXT.split('').map((ch, i) => (
               <span key={i} data-anim="vo-char" className="whitespace-pre">{ch}</span>
             ))}
-            <span data-anim="vo-caret" className="cine-only inline-block w-px h-4 bg-[#00e5ff] align-middle ml-0.5" aria-hidden="true" />
+            <span data-anim="vo-caret" className="cine-only inline-block w-px h-4 bg-[var(--bp-accent)] align-middle ml-0.5" aria-hidden="true" />
           </span>
         </div>
 
-        <div className="flex items-center gap-3 mt-4">
-          <span data-anim="vo-voice" className="bp-label border border-[#00e5ff]/25 px-3 py-1.5">Voice · Heart</span>
-          <span data-anim="vo-voice" className="bp-label border border-[#00e5ff]/25 px-3 py-1.5">Tone · Narration</span>
+        <div className="flex flex-wrap items-center gap-3 mt-4">
+          <span data-anim="vo-voice" className="bp-label border border-[var(--bp-accent)]/25 px-3 py-1.5">Voice · Heart</span>
+          <span data-anim="vo-voice" className="bp-label border border-[var(--bp-accent)]/25 px-3 py-1.5">Tone · Narration</span>
           <span data-anim="vo-generate" className="bp-btn px-4 py-1.5 text-[10px] pointer-events-none">Generate</span>
         </div>
 
@@ -57,17 +57,17 @@ const VoiceScene = forwardRef<HTMLElement>((_, ref) => (
         <div className="mt-5 space-y-2 text-left">
           <div data-anim="vo-track-v" className="flex items-center gap-3">
             <span className="bp-label w-7 shrink-0">V1</span>
-            <div className="border border-[#00e5ff]/20 h-8 flex-1 flex gap-1 p-1" aria-hidden="true">
+            <div className="border border-[var(--bp-accent)]/20 h-8 flex-1 flex gap-1 p-1" aria-hidden="true">
               {Array.from({ length: 8 }, (_, i) => (
-                <span key={i} className="flex-1 border border-[#00e5ff]/15" />
+                <span key={i} className="flex-1 border border-[var(--bp-accent)]/15" />
               ))}
             </div>
           </div>
           <div data-anim="vo-track-a" className="flex items-center gap-3">
             <span className="bp-label w-7 shrink-0">A1</span>
-            <div className="border border-[#00e5ff]/40 h-10 flex-1 px-1 flex items-center relative overflow-hidden">
+            <div className="border border-[var(--bp-accent)]/40 h-10 flex-1 px-1 flex items-center relative overflow-hidden">
               <WaveformBars bars={56} height={30} dataAnim="vo-wave" />
-              <span data-anim="vo-playhead" className="cine-only absolute top-0 bottom-0 left-0 w-px bg-[#00e5ff]" aria-hidden="true" />
+              <span data-anim="vo-playhead" className="cine-only absolute top-0 bottom-0 left-0 w-px bg-[var(--bp-accent)]" aria-hidden="true" />
             </div>
           </div>
         </div>

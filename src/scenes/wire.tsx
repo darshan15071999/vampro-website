@@ -4,10 +4,10 @@
 
 export const CornerMarks = ({ inset = 10, size = 14, className = '' }: { inset?: number; size?: number; className?: string }) => (
   <span aria-hidden="true" className={`pointer-events-none absolute inset-0 ${className}`} style={{ padding: inset }}>
-    <span className="absolute border-t border-l border-[#00e5ff]/50" style={{ top: inset, left: inset, width: size, height: size }} />
-    <span className="absolute border-t border-r border-[#00e5ff]/50" style={{ top: inset, right: inset, width: size, height: size }} />
-    <span className="absolute border-b border-l border-[#00e5ff]/50" style={{ bottom: inset, left: inset, width: size, height: size }} />
-    <span className="absolute border-b border-r border-[#00e5ff]/50" style={{ bottom: inset, right: inset, width: size, height: size }} />
+    <span className="absolute border-t border-l border-[var(--bp-accent)]/50" style={{ top: inset, left: inset, width: size, height: size }} />
+    <span className="absolute border-t border-r border-[var(--bp-accent)]/50" style={{ top: inset, right: inset, width: size, height: size }} />
+    <span className="absolute border-b border-l border-[var(--bp-accent)]/50" style={{ bottom: inset, left: inset, width: size, height: size }} />
+    <span className="absolute border-b border-r border-[var(--bp-accent)]/50" style={{ bottom: inset, right: inset, width: size, height: size }} />
   </span>
 );
 
@@ -82,7 +82,7 @@ export const SketchFrame = ({ n, kind, label, dataAnim }: { n: string; kind: Ske
   <div data-anim={dataAnim} className="bp-card relative p-2 flex flex-col gap-1">
     <div className="flex items-center justify-between px-1">
       <span className="bp-label">FR {n}</span>
-      {label && <span className="bp-label text-[#00e5ff]/40">{label}</span>}
+      {label && <span className="bp-label text-[var(--bp-accent)]/40">{label}</span>}
     </div>
     <svg viewBox="0 0 64 52" className="w-full" aria-hidden="true">
       {sketches[kind]}
@@ -117,10 +117,10 @@ export const WaveformBars = ({ bars = 48, height = 56, dataAnim }: { bars?: numb
 // Blueprint dimension line with end ticks:  |———— label ————|
 export const DimLine = ({ label, className = '' }: { label?: string; className?: string }) => (
   <div className={`flex items-center gap-3 ${className}`} aria-hidden="true">
-    <span className="w-px h-3 bg-[#00e5ff]/40" />
-    <span className="flex-1 h-px bg-[#00e5ff]/25" />
+    <span className="w-px h-3 bg-[var(--bp-accent)]/40" />
+    <span className="flex-1 h-px bg-[var(--bp-accent)]/25" />
     {label && <span className="bp-label whitespace-nowrap">{label}</span>}
-    <span className="flex-1 h-px bg-[#00e5ff]/25" />
-    <span className="w-px h-3 bg-[#00e5ff]/40" />
+    <span className="flex-1 h-px bg-[var(--bp-accent)]/25" />
+    <span className="w-px h-3 bg-[var(--bp-accent)]/40" />
   </div>
 );

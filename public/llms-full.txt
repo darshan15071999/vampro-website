@@ -3,24 +3,62 @@
 ## 1. Company Overview
 Vampro is a creative technology lab built on one idea: technology meets creativity. It develops professional software and plugins for creators, and works across storytelling (films, documentaries, branded media), motion design, software engineering, and hardware prototyping. Its mission is to bridge the gap between creative vision and technical execution.
 
-## 2. Core Product
-
-### Vampro Voice Generator (Text-to-Speech)
+## 2. Core Product: Vampro Voice Generator (Text-to-Speech)
 - **Type:** Software Plugin (UXP) for Adobe Premiere Pro, with a Windows companion app.
 - **Target Users:** Video editors, YouTube creators, marketing teams, educators.
-- **Features:**
-  - Generate natural-sounding AI voiceovers from text directly inside Adobe Premiere Pro.
-  - 27+ natural voices (male and female) with 7+ tone profiles and per-voice presets.
-  - Fully offline voice generation — audio is processed on the user's machine.
-  - Insert generated narration directly into the timeline at the playhead, or into the project bin.
-  - Modify a generated clip anytime by selecting it and changing the script, voice, or tone.
-- **Requirements:** Adobe Premiere Pro 26.0+, Windows 10/11.
-- **Installation:** Extension from the Adobe Marketplace + Vampro Voice Service companion app from the Microsoft Store.
 - **URL:** https://vampro.in/plugins/voice-generator
 - **Documentation:** https://vampro.in/docs/plugins/voice-generator
 
+### 2.1 Documentation: Key Features
+- AI voiceovers inside Premiere Pro
+- Multiple voice options
+- Adjustable speed and pitch
+- Tone presets for narration styles
+- Local processing (offline voice generation on your machine)
+- Auto-startup
+- Fast workflow integration
+
+### 2.2 Documentation: System Requirements
+- **Operating System:** Windows 10 (64-bit), Windows 11 (64-bit) (macOS planned for future)
+- **Adobe Software:** Adobe Premiere Pro 26.0 or later
+- **Hardware Minimum:** i5 / Ryzen 5, 8 GB RAM, 5 GB disk
+- **Hardware Recommended:** i7 / Ryzen 7, 16 GB RAM, SSD
+
+### 2.3 Documentation: Installation Guide
+- **Step 1 – Install Extension:** Install plugin from Adobe Marketplace and restart Premiere Pro.
+- **Step 2 – Install Voice Service:** Install and Run Vampro Voice Service Companion app from the Microsoft Store. It sets up the service, configures auto-startup, installs AI components.
+- **Step 3 – Open Extension:** Go to Window → UXP Plugins → Vampro Voice Generator Text-to-Speech.
+
+### 2.4 Documentation: Quick Start
+1. **Enter Text:** Type or paste your script.
+2. **Select Voice:** Choose from available voices.
+3. **Choose Tone:** Optional presets: Professional, Voiceover, Documentary, etc.
+4. **Generate:** Click Generate Voice. Audio appears in Premiere Pro.
+
+### 2.5 Documentation: Voice Controls
+- **Speed:** 0.8x (Slow), 1.0x (Normal), 1.2x (Fast)
+- **Pitch:** Negative (deeper), Positive (higher)
+- **Tone Presets:** Professional, Documentary, Voiceover, Dynamic, Casual, Serious, Comedic.
+
+### 2.6 Documentation: Troubleshooting & FAQ
+- **Voice Generation Fails:** Check http://127.0.0.1:8000/health — should return {"status": "ok"}.
+- **Service Not Running:** Restart Windows. The service auto-starts after login.
+- **Can't Connect:** Check firewall isn't blocking localhost. Verify Premiere Pro version.
+- **Internet required?** Internet required only for installation. AI for voice generation is completely local, on device.
+- **Commercial use?** Yes, but users are responsible for compliance.
+
 ## 3. Content & Resources
 - **Blog (editing tips, AI workflows, creative automation):** https://vampro.in/blog
+  - [7 Ways AI Can Speed Up Your Video Editing Workflow](https://vampro.in/blog/ai-speed-up-video-editing-workflow)
+  - [AI Voiceovers vs Human Voiceovers: Which Should You Choose?](https://vampro.in/blog/ai-voiceovers-vs-human-voiceovers)
+  - [15 Adobe Premiere Pro Best Practices Every Video Editor Should Follow](https://vampro.in/blog/premiere-pro-best-practices)
+  - [12 Video Editing Mistakes That Make Your Videos Look Unprofessional](https://vampro.in/blog/video-editing-mistakes-to-avoid)
+  - [How to Generate Professional AI Voiceovers in Adobe Premiere Pro](https://vampro.in/blog/generate-professional-ai-voiceovers-premiere-pro)
+  - [Getting Started with the Vampro Voice Generator for Adobe Premiere Pro](https://vampro.in/blog/getting-started-with-vampro-voice-generator)
+  - [Lean Editing Practices for Creators](https://vampro.in/blog/lean-editing-practices)
+  - [Editing With Your Eyes Closed](https://vampro.in/blog/editing-with-your-eyes-closed)
+  - [Folder Management Workflow](https://vampro.in/blog/folder-management-workflow)
+  - [Premiere Workspace Design](https://vampro.in/blog/premiere-workspace-design)
 - **YouTube (stories behind the build):** https://youtube.com/@vamprotech
 - **Support:** support@vampro.in
 

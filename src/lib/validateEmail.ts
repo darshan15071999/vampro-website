@@ -96,3 +96,43 @@ export function validateEmail(email: string): string | null {
 
   return null; // ✅ valid
 }
+
+/**
+ * Verify an email exists using the check-if-email-exists backend.
+ * @returns `null` if valid (or if backend is unreachable), otherwise a user-facing error string.
+ */
+export async function verifyEmailExists(email: string): Promise<string | null> {
+  const baseUrl = import.meta.env.VITE_REACHER_URL || 'http://localhost:8080';
+  
+  try {
+    const res = await fetch(`${baseUrl}/v0/check_email`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ to_email: email })
+    });
+
+    if (res.ok) {
+      const data = await res.json();
+      
+      // "is_reachable" can be "safe", "risky", "invalid", "unknown"
+      if (data.is_reachable === 'invalid') {
+        return 'This email address does not exist.';
+      }
+      
+      // We can also reject if smtp.is_disabled is explicitly true
+      if (data.smtp?.is_disabled) {
+        return 'This email account has been disabled.';
+      }
+      
+      if (data.smtp?.has_full_inbox) {
+        return 'This email inbox is full.';
+      }
+    }
+  } catch (err) {
+    // If the backend isn't running or network fails, we gracefully degrade
+    // and assume it's valid so we don't block users from signing up.
+    console.warn('Email verification backend unreachable:', err);
+  }
+
+  return null;
+}

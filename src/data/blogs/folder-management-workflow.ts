@@ -6,7 +6,7 @@ export const folder_management_workflow: BlogPost = {
   summary: "Learn how proper folder structures, meaningful filenames, organized project bins, and Adobe Premiere Pro's Media Browser can dramatically improve your editing workflow. Discover why professional editors spend less time searching for files and more time creating.",
   author: "Darshan",
   authorImage: "/author.jpg",
-  date: "July 19, 2026",
+  date: "July 3, 2026",
   readingTime: "10 min read",
   category: "Workflow",
   image: "/blog3.png",

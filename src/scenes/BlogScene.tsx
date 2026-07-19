@@ -11,9 +11,9 @@ const BlogScene = forwardRef<HTMLElement>((_, ref) => (
     <div className="w-full max-w-6xl mx-auto px-6 text-center">
       <div data-anim="blog-head">
         <p className="bp-label mb-5">Blogs</p>
-        <h2 className="text-3xl md:text-5xl font-bold tracking-wide text-white leading-tight">
+        <h2 className="bp-h2 text-[var(--bp-ink-strong)]">
           Knowledge from
-          <span className="text-white/60"> the build.</span>
+          <span className="text-[var(--bp-ink)]/60"> the build.</span>
         </h2>
       </div>
 
@@ -25,15 +25,15 @@ const BlogScene = forwardRef<HTMLElement>((_, ref) => (
             <article data-anim="blog-card" className="bp-card p-6 h-full transition-colors">
               {/* Skeleton "document lines" that write themselves in */}
               <div className="space-y-1.5 mb-5" aria-hidden="true">
-                <span data-anim="blog-line" className="block h-px bg-[#00e5ff]/30 origin-left" />
-                <span data-anim="blog-line" className="block h-px bg-[#00e5ff]/20 origin-left w-4/5" />
-                <span data-anim="blog-line" className="block h-px bg-[#00e5ff]/10 origin-left w-3/5" />
+                <span data-anim="blog-line" className="block h-px bg-[var(--bp-accent)]/30 origin-left" />
+                <span data-anim="blog-line" className="block h-px bg-[var(--bp-accent)]/20 origin-left w-4/5" />
+                <span data-anim="blog-line" className="block h-px bg-[var(--bp-accent)]/10 origin-left w-3/5" />
               </div>
               <span className="bp-label">{post.category}</span>
-              <h3 className="mt-3 text-base md:text-lg font-bold tracking-wide text-[#00e5ff] leading-snug line-clamp-2 group-hover:text-[#00e5ff]/70 transition-colors">
+              <h3 className="mt-3 text-base md:text-lg font-bold tracking-wide text-[var(--bp-accent)] leading-snug line-clamp-2 group-hover:text-[var(--bp-accent)]/70 transition-colors">
                 {post.title}
               </h3>
-              <p className="mt-3 text-xs md:text-sm font-light tracking-wider text-neutral-500 leading-relaxed line-clamp-3">
+              <p className="mt-3 text-xs md:text-sm font-light tracking-wider text-[var(--bp-muted2)] leading-relaxed line-clamp-3">
                 {post.summary}
               </p>
             </article>

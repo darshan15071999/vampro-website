@@ -24,7 +24,7 @@ const HomeFooter = () => {
           <div className="f1-stripe w-40 mb-4" />
         </div>
         <div>
-          <h4 className="text-white font-semibold mb-5 uppercase tracking-wider text-xs">Navigation</h4>
+          <h4 className="text-[var(--bp-ink-strong)] font-semibold mb-5 uppercase tracking-wider text-xs">Navigation</h4>
           <ul className="space-y-2.5 text-sm">
             {[['About Us', () => navigate('/', 'about')], ['Services', () => navigate('/', 'services')], ['Plugins', () => navigate('/plugins/voice-generator')], ['Documentation', () => navigate('/docs')]].map(([label, fn]) => (
               <li key={label as string}><button onClick={fn as () => void} className="hover:text-indigo-400 transition-colors">{label as string}</button></li>
@@ -32,7 +32,7 @@ const HomeFooter = () => {
           </ul>
         </div>
         <div>
-          <h4 className="text-white font-semibold mb-5 uppercase tracking-wider text-xs">Connect</h4>
+          <h4 className="text-[var(--bp-ink-strong)] font-semibold mb-5 uppercase tracking-wider text-xs">Connect</h4>
           <ul className="space-y-2.5 text-sm">
             <li><a href="https://www.instagram.com/vampro.tech/" target="_blank" rel="noreferrer" className="hover:text-indigo-400 transition-colors">Instagram</a></li>
             <li><a href="https://youtube.com/@vamprotech?si=vponnTvHyIzwDmON" target="_blank" rel="noreferrer" className="hover:text-indigo-400 transition-colors">YouTube</a></li>

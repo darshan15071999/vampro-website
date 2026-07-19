@@ -14,11 +14,11 @@ const storyBoxes = [
 
 const StoryCard = ({ icon: Icon, title, subtitle, dataAnim }: any) => (
   <div data-anim={dataAnim} className="bp-card flex flex-col items-center justify-center p-5 text-center aspect-square">
-    <div className="w-10 h-10 rounded-xl border border-[#00e5ff]/30 flex items-center justify-center mb-3">
-      <Icon size={18} className="text-[#00e5ff]" strokeWidth={1.5} />
+    <div className="w-10 h-10 rounded-xl border border-[var(--bp-accent)]/30 flex items-center justify-center mb-3">
+      <Icon size={18} className="text-[var(--bp-accent)]" strokeWidth={1.5} />
     </div>
-    <h3 className="text-white font-semibold text-[13px] tracking-wide mb-1">{title}</h3>
-    <p className="text-[#00e5ff]/60 text-[10px] tracking-wider">{subtitle}</p>
+    <h3 className="text-[var(--bp-ink-strong)] font-semibold text-[13px] tracking-wide mb-1">{title}</h3>
+    <p className="text-[var(--bp-accent)]/60 text-[10px] tracking-wider">{subtitle}</p>
   </div>
 );
 
@@ -47,14 +47,14 @@ const StoryScene = forwardRef<HTMLElement>((_, ref) => (
 
       <div data-anim="story-copy">
         <p className="bp-label mb-5">Our Story</p>
-        <h2 className="text-1xl md:text-4xl font-bold tracking-wide text-white leading-tight">
+        <h2 className="bp-h2 text-[var(--bp-ink-strong)]">
           Ideas become stories
-          <span className="block text-white/60">Stories become visuals</span>
+          <span className="block text-[var(--bp-ink)]/60">Stories become visuals</span>
         </h2>
-        <p className="mt-6 text-sm md:text-base font-light tracking-wider text-neutral-400 leading-relaxed max-w-md">
+        <p className="mt-6 text-sm md:text-base font-light tracking-wider text-[var(--bp-muted2)] leading-relaxed max-w-md">
           Every finished film hides its own blueprint. We work where the plan and the picture meet: storytellers, designers, and engineers drawing on the same page.
         </p>
-        <blockquote className="mt-8 border-l border-[#00e5ff]/30 pl-5 text-sm md:text-base font-light tracking-wider text-[#00e5ff]/80 leading-relaxed max-w-md">
+        <blockquote className="mt-8 border-l border-[var(--bp-accent)]/30 pl-5 text-sm md:text-base font-light tracking-wider text-[var(--bp-accent)]/80 leading-relaxed max-w-md">
           "We don't choose between creativity and technology. We build where they meet."
         </blockquote>
       </div>

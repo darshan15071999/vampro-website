@@ -21,12 +21,52 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://vampro.in/blog/ai-speed-up-video-editing-workflow</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vampro.in/blog/ai-voiceovers-vs-human-voiceovers</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vampro.in/blog/premiere-pro-best-practices</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vampro.in/blog/video-editing-mistakes-to-avoid</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vampro.in/blog/generate-professional-ai-voiceovers-premiere-pro</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vampro.in/blog/getting-started-with-vampro-voice-generator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://vampro.in/blog/lean-editing-practices</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://vampro.in/blog/editing-with-your-eyes-closed</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vampro.in/blog/folder-management-workflow</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vampro.in/blog/premiere-workspace-design</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { Clock, User, ArrowLeft, Play, Pause, Square, Share2 } from 'lucide-react';
 import SEO from '../components/SEO';
@@ -12,6 +12,36 @@ const BlogTemplate = () => {
   const isPost = !!slug;
   const [speechState, setSpeechState] = useState<'idle' | 'playing' | 'paused'>('idle');
   const [activeHeading, setActiveHeading] = useState<string>('overview');
+
+  // Filter and Sort State
+  const [selectedTopic, setSelectedTopic] = useState('All');
+  const [selectedAuthor, setSelectedAuthor] = useState('All');
+  const [sortOrder, setSortOrder] = useState('newest'); // 'newest' | 'oldest'
+
+  // Extract unique topics and authors
+  const uniqueTopics = useMemo(() => ['All', ...Array.from(new Set(blogPosts.map(p => p.category)))], []);
+  const uniqueAuthors = useMemo(() => ['All', ...Array.from(new Set(blogPosts.map(p => p.author)))], []);
+
+  // Filtered and Sorted Posts
+  const filteredPosts = useMemo(() => {
+    let result = [...blogPosts];
+
+    if (selectedTopic !== 'All') {
+      result = result.filter(p => p.category === selectedTopic);
+    }
+
+    if (selectedAuthor !== 'All') {
+      result = result.filter(p => p.author === selectedAuthor);
+    }
+
+    result.sort((a, b) => {
+      const dateA = new Date(a.date).getTime();
+      const dateB = new Date(b.date).getTime();
+      return sortOrder === 'newest' ? dateB - dateA : dateA - dateB;
+    });
+
+    return result;
+  }, [selectedTopic, selectedAuthor, sortOrder]);
 
   const post = isPost ? blogPosts.find(p => p.slug === slug) : null;
 
@@ -76,37 +106,92 @@ const BlogTemplate = () => {
         <main className="flex-grow w-full max-w-7xl mx-auto px-6 md:px-10 lg:px-16 z-10 pb-20">
           <div className="text-center mb-16">
             <h1 className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight mb-6 font-space">
-              Vampro Blog
+              Vampro Blogs
             </h1>
             <p className="text-lg text-slate-600 max-w-2xl mx-auto font-light leading-relaxed">
-              Insights, updates, and tutorials from the Vampro team.
+              Insights, updates, tutorials and best practices.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {blogPosts.map((blogPost) => (
-              <Link key={blogPost.slug} to={`/blog/${blogPost.slug}`} className="group rounded-2xl border border-indigo-200/60 bg-white/60 backdrop-blur-md overflow-hidden hover:border-indigo-400 transition-all duration-300 shadow-sm hover:shadow-md">
-                <div className="h-48 overflow-hidden relative">
-                  <div className="absolute top-4 left-4 z-10 px-3 py-1 bg-white/90 backdrop-blur-md border border-indigo-200 text-indigo-600 text-xs font-semibold rounded-full shadow-sm">
-                    {blogPost.category}
-                  </div>
-                  <img src={blogPost.image} alt={blogPost.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-slate-900 mb-3 line-clamp-2 group-hover:text-indigo-600 transition-colors">{blogPost.title}</h3>
-                  <p className="text-slate-600 text-sm mb-4 line-clamp-3 leading-relaxed">{blogPost.summary}</p>
-                  <div className="flex items-center justify-between text-xs text-slate-500">
-                    <div className="flex items-center gap-2">
-                      {blogPost.authorImage ? <img src={blogPost.authorImage} alt={blogPost.author} className="w-4 h-4 rounded-full object-cover" /> : <User size={14} />} {blogPost.author}
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Clock size={14} /> {blogPost.readingTime}
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            ))}
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center bg-white/60 backdrop-blur-md border border-indigo-200/60 rounded-2xl p-5 mb-10 gap-5 shadow-sm">
+            <div className="flex flex-wrap gap-5 w-full md:w-auto">
+              <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+                <label className="text-sm font-semibold text-slate-700 whitespace-nowrap">Topic</label>
+                <select
+                  value={selectedTopic}
+                  onChange={(e) => setSelectedTopic(e.target.value)}
+                  className="bg-white border border-indigo-200 rounded-lg px-3 py-2 text-sm text-slate-700 focus:outline-none focus:border-indigo-400 focus:ring-1 focus:ring-indigo-400 min-w-[140px]"
+                >
+                  {uniqueTopics.map(topic => (
+                    <option key={topic} value={topic}>{topic}</option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+                <label className="text-sm font-semibold text-slate-700 whitespace-nowrap">Author</label>
+                <select
+                  value={selectedAuthor}
+                  onChange={(e) => setSelectedAuthor(e.target.value)}
+                  className="bg-white border border-indigo-200 rounded-lg px-3 py-2 text-sm text-slate-700 focus:outline-none focus:border-indigo-400 focus:ring-1 focus:ring-indigo-400 min-w-[140px]"
+                >
+                  {uniqueAuthors.map(author => (
+                    <option key={author} value={author}>{author}</option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            <div className="flex flex-col sm:flex-row sm:items-center gap-2 w-full md:w-auto border-t md:border-t-0 border-indigo-200/50 pt-4 md:pt-0">
+              <label className="text-sm font-semibold text-slate-700 whitespace-nowrap">Sort by</label>
+              <select
+                value={sortOrder}
+                onChange={(e) => setSortOrder(e.target.value)}
+                className="bg-white border border-indigo-200 rounded-lg px-3 py-2 text-sm text-slate-700 focus:outline-none focus:border-indigo-400 focus:ring-1 focus:ring-indigo-400 min-w-[140px]"
+              >
+                <option value="newest">Newest First</option>
+                <option value="oldest">Oldest First</option>
+              </select>
+            </div>
           </div>
+
+          {filteredPosts.length === 0 ? (
+            <div className="text-center py-20 bg-white/40 backdrop-blur-sm rounded-3xl border border-indigo-100">
+              <p className="text-xl text-slate-500 font-medium">No posts found matching your criteria.</p>
+              <button
+                onClick={() => { setSelectedTopic('All'); setSelectedAuthor('All'); setSortOrder('newest'); }}
+                className="mt-4 text-indigo-600 hover:text-indigo-700 font-semibold underline underline-offset-4"
+              >
+                Clear all filters
+              </button>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {filteredPosts.map((blogPost) => (
+                <Link key={blogPost.slug} to={`/blog/${blogPost.slug}`} className="group rounded-2xl border border-indigo-200/60 bg-white/60 backdrop-blur-md overflow-hidden hover:border-indigo-400 transition-all duration-300 shadow-sm hover:shadow-md flex flex-col">
+                  <div className="h-48 overflow-hidden relative shrink-0">
+                    <div className="absolute top-4 left-4 z-10 px-3 py-1 bg-white/90 backdrop-blur-md border border-indigo-200 text-indigo-600 text-xs font-semibold rounded-full shadow-sm">
+                      {blogPost.category}
+                    </div>
+                    <img src={blogPost.image} alt={blogPost.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  </div>
+                  <div className="p-6 flex flex-col grow">
+                    <h3 className="text-xl font-bold text-slate-900 mb-3 line-clamp-2 group-hover:text-indigo-600 transition-colors">{blogPost.title}</h3>
+                    <p className="text-slate-600 text-sm mb-4 line-clamp-3 leading-relaxed grow">{blogPost.summary}</p>
+                    <div className="flex items-center justify-between text-xs text-slate-500 mt-auto pt-4 border-t border-slate-100">
+                      <div className="flex items-center gap-2">
+                        {blogPost.authorImage ? <img src={blogPost.authorImage} alt={blogPost.author} className="w-5 h-5 rounded-full object-cover shadow-sm" /> : <User size={14} />}
+                        <span className="font-medium">{blogPost.author}</span>
+                      </div>
+                      <div className="flex items-center gap-1.5 font-medium">
+                        <Clock size={14} className="text-indigo-400" /> {blogPost.readingTime}
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          )}
         </main>
         <div className="mt-auto relative z-20">
           <HomeFooter />
