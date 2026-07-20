@@ -1,6 +1,8 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import express from 'express';
+import puppeteer from 'puppeteer';
 import { allRoutesMetadata } from './src/seo/metadata';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -14,78 +16,92 @@ if (!fs.existsSync(indexPath)) {
   process.exit(1);
 }
 
-const baseHtml = fs.readFileSync(indexPath, 'utf-8');
-const regex = /<!-- Fallback SEO for SPA[\s\S]*?(?=<!-- Remove fallback tags)/;
+async function runPrerender() {
+  console.log('Starting local server for prerendering...');
+  const app = express();
+  app.use(express.static(distDir));
+  
+  // Fallback to index.html for SPA routing
+  app.use((req, res) => {
+    res.sendFile(indexPath);
+  });
 
-allRoutesMetadata.forEach(route => {
-  const metaTitle = route.title;
-  const description = route.description;
-  const canonical = route.canonical;
-  const keywords = route.keywords || '';
-  const author = 'Vampro';
-  const robots = route.robots || 'index,follow';
-  const themeColor = '#0F1640';
-  const ogType = route.type || 'website';
-  const ogTitle = route.title;
-  const ogDescription = route.description;
-  const ogImage = route.image || 'https://vampro.in/thumbnail.jpg';
-  const twitterCard = 'summary_large_image';
+  const server = app.listen(0, async () => {
+    const port = (server.address() as any).port;
+    console.log(`Local server listening on port ${port}`);
 
-  // Handle schemas
-  const schemaMarkup = route.schema
-    ? Array.isArray(route.schema)
-      ? route.schema.map(s => `<script type="application/ld+json">${JSON.stringify(s)}</script>`).join('\n  ')
-      : `<script type="application/ld+json">${JSON.stringify(route.schema)}</script>`
-    : '';
-
-  const metaBlock = `<!-- Fallback SEO for SPA (Managed by react-helmet-async) -->
-  <title data-rh="true">${metaTitle}</title>
-  <meta data-rh="true" name="title" content="${metaTitle}" />
-  <meta data-rh="true" name="description" content="${description}" />
-  <meta data-rh="true" name="author" content="${author}" />
-  ${keywords ? `<meta data-rh="true" name="keywords" content="${keywords}" />` : ''}
-  <meta data-rh="true" name="theme-color" content="${themeColor}" />
-  <meta data-rh="true" name="robots" content="${robots}" />
-  <link data-rh="true" rel="canonical" href="${canonical}" />
-  <meta data-rh="true" property="og:type" content="${ogType}" />
-  <meta data-rh="true" property="og:url" content="${canonical}" />
-  <meta data-rh="true" property="og:title" content="${ogTitle}" />
-  <meta data-rh="true" property="og:description" content="${ogDescription}" />
-  <meta data-rh="true" property="og:image" content="${ogImage}" />
-  <meta data-rh="true" name="twitter:card" content="${twitterCard}" />
-  <meta data-rh="true" name="twitter:url" content="${canonical}" />
-  <meta data-rh="true" name="twitter:title" content="${ogTitle}" />
-  <meta data-rh="true" name="twitter:description" content="${ogDescription}" />
-  <meta data-rh="true" name="twitter:image" content="${ogImage}" />
-  ${schemaMarkup}
-  `;
-
-  const newHtml = baseHtml.replace(regex, metaBlock);
-
-  if (route.path === '/') {
-    fs.writeFileSync(indexPath, newHtml);
-    console.log('Updated metadata for homepage');
-  } else {
-    // Generate both folder/index.html AND file.html for maximum compatibility
-    const routeName = route.path.substring(1);
+    console.log('Launching Puppeteer...');
+    const browser = await puppeteer.launch({ headless: true });
     
-    // 1. Generate file.html
-    const htmlFilePath = path.join(distDir, `${routeName}.html`);
-    const htmlFileDir = path.dirname(htmlFilePath);
-    if (!fs.existsSync(htmlFileDir)) {
-      fs.mkdirSync(htmlFileDir, { recursive: true });
+    try {
+      for (const route of allRoutesMetadata) {
+        console.log(`Prerendering route: ${route.path}`);
+        
+        const page = await browser.newPage();
+        
+        // Optional: Block non-essential external requests to speed up rendering
+        await page.setRequestInterception(true);
+        page.on('request', (req) => {
+          const url = req.url();
+          // Block analytics scripts, can add more if needed
+          if (url.includes('google-analytics.com') || url.includes('clarity.ms')) {
+            req.abort();
+          } else {
+            req.continue();
+          }
+        });
+
+        // Wait until there are no more than 0 network connections for at least 500 ms.
+        // This ensures the React app has fully hydrated and rendered, and Helmet has injected SEO tags.
+        await page.goto(`http://localhost:${port}${route.path}`, { 
+          waitUntil: 'networkidle0', 
+          timeout: 60000 
+        });
+        
+        // Brief delay to ensure any immediate useEffect state updates or initial animations settle
+        await new Promise(r => setTimeout(r, 1000));
+        
+        // Extract the fully rendered HTML
+        let html = await page.evaluate(() => document.documentElement.outerHTML);
+        
+        // Add DOCTYPE because outerHTML omits it
+        html = '<!DOCTYPE html>\n' + html;
+
+        // Save generated HTML to dist directory
+        if (route.path === '/') {
+          fs.writeFileSync(indexPath, html);
+          console.log('  -> Updated root index.html');
+        } else {
+          const routeName = route.path.substring(1);
+          
+          // Generate file.html (e.g. plugins.html)
+          const htmlFilePath = path.join(distDir, `${routeName}.html`);
+          const htmlFileDir = path.dirname(htmlFilePath);
+          if (!fs.existsSync(htmlFileDir)) {
+            fs.mkdirSync(htmlFileDir, { recursive: true });
+          }
+          fs.writeFileSync(htmlFilePath, html);
+          
+          // Generate folder/index.html (e.g. plugins/index.html)
+          const routeDir = path.join(distDir, routeName);
+          if (!fs.existsSync(routeDir)) {
+            fs.mkdirSync(routeDir, { recursive: true });
+          }
+          fs.writeFileSync(path.join(routeDir, 'index.html'), html);
+          
+          console.log(`  -> Generated static HTML for ${route.path}`);
+        }
+        
+        await page.close();
+      }
+    } catch (err) {
+      console.error('Error during prerendering:', err);
+    } finally {
+      await browser.close();
+      server.close();
+      console.log('SEO Prerendering complete!');
     }
-    fs.writeFileSync(htmlFilePath, newHtml);
-    
-    // 2. Generate folder/index.html
-    const routeDir = path.join(distDir, routeName);
-    if (!fs.existsSync(routeDir)) {
-      fs.mkdirSync(routeDir, { recursive: true });
-    }
-    fs.writeFileSync(path.join(routeDir, 'index.html'), newHtml);
-    
-    console.log(`Generated HTML for ${route.path}`);
-  }
-});
+  });
+}
 
-console.log('SEO Prerendering complete!');
+runPrerender();
