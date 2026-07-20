@@ -114,7 +114,7 @@ const Navbar = ({ openSearch }: NavbarProps) => {
               }`} style={{ fontWeight: 700 }}>
               <ScatterText text="VAMPRO" />
             </span>
-            <span className={`hidden md:inline-block text-[11px] uppercase tracking-[0.3em] font-semibold px-3.5 py-1.5 rounded-full transition-all duration-400 animate-scatter-capsule ${scrolled
+            <span className={`hidden md:inline-flex items-center justify-center text-[11px] leading-normal uppercase tracking-[0.3em] font-semibold px-3.5 py-1.5 rounded-full transition-all duration-400 animate-scatter-capsule ${scrolled
               ? (isLight ? 'bg-indigo-100 text-indigo-700 border border-indigo-200' : 'bg-indigo-900/30 text-indigo-300 border border-indigo-700/30')
               : (isLight ? 'bg-indigo-100/70 text-indigo-700 border border-indigo-200/60' : 'bg-white/5 text-indigo-300 border border-indigo-500/20')
               }`}>

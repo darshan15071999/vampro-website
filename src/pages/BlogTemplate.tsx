@@ -78,21 +78,30 @@ const BlogTemplate = () => {
   useEffect(() => {
     if (!post) return;
 
-    const elements = post.toc.map(item => document.getElementById(item.id)).filter(Boolean) as HTMLElement[];
+    const handleScroll = () => {
+      const headingElements = post.toc.map(item => document.getElementById(item.id)).filter(Boolean) as HTMLElement[];
+      if (headingElements.length === 0) return;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            setActiveHeading(entry.target.id);
-          }
-        });
-      },
-      { rootMargin: '-100px 0px -40% 0px' }
-    );
+      let currentActive = headingElements[0].id;
+      const scrollPosition = window.scrollY + 200;
 
-    elements.forEach(el => observer.observe(el));
-    return () => observer.disconnect();
+      for (let i = headingElements.length - 1; i >= 0; i--) {
+        const el = headingElements[i];
+        const elementTop = el.getBoundingClientRect().top + window.scrollY;
+        
+        if (scrollPosition >= elementTop) {
+          currentActive = el.id;
+          break;
+        }
+      }
+
+      setActiveHeading(prev => prev !== currentActive ? currentActive : prev);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+
+    return () => window.removeEventListener('scroll', handleScroll);
   }, [post]);
 
   if (isPost && !post) {
@@ -103,7 +112,7 @@ const BlogTemplate = () => {
     return (
       <div className="sketchbook-bg min-h-screen pt-32 flex flex-col relative">
         <SEO {...blogMetadata} />
-        <main className="flex-grow w-full max-w-7xl mx-auto px-6 md:px-10 lg:px-16 z-10 pb-20">
+        <main className="flex-grow w-full max-w-[1800px] mx-auto px-6 md:px-10 lg:px-16 2xl:px-24 z-10 pb-20">
           <div className="text-center mb-16">
             <h1 className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight mb-6 font-space">
               Vampro Blogs
@@ -242,12 +251,12 @@ const BlogTemplate = () => {
 
       <div className="flex-grow">
         {/* Banner */}
-        <div className="w-full max-w-7xl mx-auto px-6 md:px-10 lg:px-16 mt-8 mb-12 relative z-10">
-          <Link to="/blog" className="inline-flex items-center gap-2 text-sm text-indigo-600 hover:text-indigo-500 transition-colors mb-8 font-medium">
+        <div className="w-full max-w-[1800px] mx-auto px-6 md:px-10 lg:px-16 2xl:px-24 mt-4 mb-8 relative z-10">
+          <Link to="/blog" className="inline-flex items-center gap-2 text-sm text-indigo-600 hover:text-indigo-500 transition-colors mb-4 font-medium">
             <ArrowLeft size={16} /> Back to Blog
           </Link>
 
-          <div className="rounded-3xl overflow-hidden h-64 md:h-96 relative border border-slate-200 shadow-xl mb-10">
+          <div className="rounded-3xl overflow-hidden aspect-[3840/1116] min-h-[200px] sm:min-h-0 relative border border-slate-200 shadow-xl mb-6">
             <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent z-10 opacity-70"></div>
             <img src={currentPost.image} alt={currentPost.title} className="w-full h-full object-cover" />
             <div className="absolute bottom-6 left-6 z-20 px-3 py-1 bg-white/90 backdrop-blur-md border border-indigo-200 text-indigo-600 text-xs font-semibold rounded-full shadow-sm">
@@ -255,25 +264,14 @@ const BlogTemplate = () => {
             </div>
           </div>
 
-          <header className="max-w-4xl mx-auto text-center px-4 mb-12">
-            <h1 className="text-3xl md:text-5xl font-black text-slate-900 mb-6 leading-tight tracking-tight">
+          <header className="w-full text-center mb-8">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-black text-slate-900 mb-4 leading-tight tracking-tight">
               {currentPost.title}
             </h1>
 
-            <p className="text-lg md:text-xl text-slate-600 mb-8 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-base md:text-lg lg:text-xl text-slate-600 leading-relaxed">
               {currentPost.summary}
             </p>
-
-            <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-slate-500 font-medium">
-              <div className="flex items-center gap-2 bg-white/60 backdrop-blur px-4 py-2 rounded-full border border-slate-200/60 shadow-sm">
-                {currentPost.authorImage ? <img src={currentPost.authorImage} alt={currentPost.author} className="w-5 h-5 rounded-full object-cover" /> : <User size={16} className="text-indigo-600" />}
-                <span className="text-slate-700">{currentPost.author}</span>
-              </div>
-              <div className="flex items-center gap-2 bg-white/60 backdrop-blur px-4 py-2 rounded-full border border-slate-200/60 shadow-sm">
-                <Clock size={16} className="text-indigo-600" />
-                <span className="text-slate-700"><time dateTime={new Date(currentPost.date).toISOString().split('T')[0]}>{currentPost.date}</time> &bull; {currentPost.readingTime}</span>
-              </div>
-            </div>
           </header>
 
           <div className="flex flex-wrap items-center justify-between gap-4 p-5 md:px-8 md:py-6 bg-white/60 backdrop-blur-md border border-indigo-100 shadow-sm rounded-3xl mb-12">
@@ -309,7 +307,7 @@ const BlogTemplate = () => {
           </div>
         </div>
 
-        <div className="w-full max-w-7xl mx-auto px-6 md:px-10 lg:px-16 flex flex-col lg:flex-row gap-8 xl:gap-12 relative z-10 pb-20">
+        <div className="w-full max-w-[1800px] mx-auto px-6 md:px-10 lg:px-16 2xl:px-24 flex flex-col lg:flex-row gap-8 lg:gap-12 xl:gap-20 2xl:gap-28 relative z-10 pb-20">
           {/* TOC Sidebar */}
           <aside className="w-full lg:w-64 flex-shrink-0 lg:sticky top-32 h-fit order-2 lg:order-1 flex flex-col gap-6">
             <div className="p-6 rounded-2xl bg-white/70 backdrop-blur-md border border-slate-200 shadow-sm">
@@ -354,7 +352,7 @@ const BlogTemplate = () => {
           </aside>
 
           {/* Article Body */}
-          <article className="flex-1 max-w-prose mx-auto order-1 lg:order-2 text-slate-800 w-full flex flex-col gap-8">
+          <article className="flex-1 min-w-0 mx-auto order-1 lg:order-2 text-slate-800 w-full flex flex-col gap-8">
 
             {/* Overview Box */}
             <div id="overview" className="bg-indigo-50/50 rounded-3xl p-8 shadow-sm border border-indigo-100 relative overflow-hidden">

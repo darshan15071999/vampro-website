@@ -22,7 +22,7 @@ export default function SEO({
   description, 
   canonical, 
   keywords,
-  image = 'https://vampro.in/thumbnail.jpg',
+  image = 'https://vampro.in/thumbnail.png',
   schema,
   breadcrumbs,
   robots = 'index,follow',

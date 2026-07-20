@@ -332,6 +332,8 @@ select,
 
 .scatter-char {
   display: inline-block;
+  padding: 4px 0;
+  line-height: normal;
   animation: scatter-loop 8s infinite ease-in-out;
 }
 

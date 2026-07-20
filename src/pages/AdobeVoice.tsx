@@ -445,8 +445,8 @@ const AdobeVoice = () => {
       </section>
 
       {/* GETTING STARTED */}
-      <section className="py-16 md:py-24 relative overflow-hidden">
-        <div className="absolute inset-0 z-0 pointer-events-none" style={{ opacity: 0.25, maskImage: 'linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)', WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)' }}>
+      <section className="py-16 md:py-24 relative">
+        <div className="absolute left-0 right-0 z-0 pointer-events-none" style={{ top: '-100px', bottom: '-200px', opacity: 0.25, maskImage: 'linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)', WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)' }}>
                       <ColorBends
               colors={["#ff5c7a", "#8a5cff", "#00ffd1"]}
               rotation={90}
@@ -515,9 +515,9 @@ const AdobeVoice = () => {
         
       </section>
 
-      {/* DOWNLOAD */}
-      <section id="download" className="py-16 md:py-24 text-center relative overflow-hidden scroll-mt-24">
-        <div className="absolute inset-0 z-0 pointer-events-none mix-blend-screen opacity-30" style={{ maskImage: 'linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)', WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)' }}>
+      {/* COMBINED DOWNLOAD & LEGAL WRAPPER */}
+      <div className="relative">
+        <div className="absolute inset-0 z-0 pointer-events-none mix-blend-screen opacity-30" style={{ top: '-200px', maskImage: 'linear-gradient(to bottom, transparent, black 20%, black 95%, transparent)', WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 20%, black 95%, transparent)' }}>
           <FloatingLines 
             enabledWaves={ENABLED_WAVES}
             lineCount={8}
@@ -530,81 +530,79 @@ const AdobeVoice = () => {
             linesGradient={LINES_GRADIENT}
           />
         </div>
-        
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[250px] pointer-events-none z-0" style={{ background: 'radial-gradient(ellipse, rgba(59,59,255,0.15) 0%, transparent 70%)' }} />
-        <div className="w-full px-6 md:px-10 lg:px-16 max-w-3xl mx-auto relative z-10 pointer-events-none">
-          <FadeInSection>
-            <h2 className="text-3xl md:text-5xl font-extrabold text-white mb-12"><ShinyText text="Before You Download" speed={3} shineColor="#ffffff" color="#ffffff" /></h2>
-            <TiltCard>
-              <div className="w-full h-full">
-                <div className="w-full h-full rounded-[30px] border border-white/10 bg-white/5 overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.4)] backdrop-blur-[40px] hover:bg-white/10 transition-colors duration-300 pointer-events-auto relative z-20 mb-12">
-                  <div className="p-10 text-left flex flex-col md:flex-row items-center justify-between gap-8 h-full w-full">
-                    <div className="flex-1">
-                      <h4 className="font-bold text-slate-400 mb-6 uppercase tracking-widest text-xs flex items-center gap-2"><CheckCircle size={14} className="text-green-400" /> Requirements</h4>
-                      <ul className="space-y-4">
-                        {REQUIREMENTS.map(r => (
-                          <li key={r} className="flex items-center gap-3 text-white"><span className="text-green-400 font-bold">✔</span>{r}</li>
-                        ))}
-                      </ul>
-                    </div>
-                    <div className="w-full md:w-auto flex flex-col items-center justify-center">
-                      <div className="w-full max-w-[520px] aspect-[4/3] rounded-xl overflow-hidden border border-slate-700/50 shadow-[0_4px_20px_rgba(0,0,0,0.5)] relative">
-                        <img src="/header.png" alt="Version preview" className="absolute inset-0 w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity" />
+
+        {/* DOWNLOAD */}
+        <section id="download" className="py-16 md:py-24 text-center relative scroll-mt-24 z-10">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[250px] pointer-events-none z-0" style={{ background: 'radial-gradient(ellipse, rgba(59,59,255,0.15) 0%, transparent 70%)' }} />
+          <div className="w-full px-6 md:px-10 lg:px-16 max-w-3xl mx-auto relative z-10 pointer-events-none">
+            <FadeInSection>
+              <h2 className="text-3xl md:text-5xl font-extrabold text-white mb-12"><ShinyText text="Before You Download" speed={3} shineColor="#ffffff" color="#ffffff" /></h2>
+              <TiltCard>
+                <div className="w-full h-full">
+                  <div className="w-full h-full rounded-[30px] border border-white/10 bg-white/5 overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.4)] backdrop-blur-[40px] hover:bg-white/10 transition-colors duration-300 pointer-events-auto relative z-20 mb-12">
+                    <div className="p-10 text-left flex flex-col md:flex-row items-center justify-between gap-8 h-full w-full">
+                      <div className="flex-1">
+                        <h4 className="font-bold text-slate-400 mb-6 uppercase tracking-widest text-xs flex items-center gap-2"><CheckCircle size={14} className="text-green-400" /> Requirements</h4>
+                        <ul className="space-y-4">
+                          {REQUIREMENTS.map(r => (
+                            <li key={r} className="flex items-center gap-3 text-white"><span className="text-green-400 font-bold">✔</span>{r}</li>
+                          ))}
+                        </ul>
                       </div>
-                      <p className="mt-4 text-slate-500 text-sm font-medium tracking-wide">Version 1.1.0</p>
+                      <div className="w-full md:w-auto flex flex-col items-center justify-center">
+                        <div className="w-full max-w-[520px] aspect-[4/3] rounded-xl overflow-hidden border border-slate-700/50 shadow-[0_4px_20px_rgba(0,0,0,0.5)] relative">
+                          <img src="/header.png" alt="Version preview" className="absolute inset-0 w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity" />
+                        </div>
+                        <p className="mt-4 text-slate-500 text-sm font-medium tracking-wide">Version 1.1.0</p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
-            </TiltCard>
-            <div className="space-y-8 pointer-events-none">
-              <div><p className="text-4xl md:text-6xl font-black text-white mb-1 animate-blur-pulse tracking-tight">Completely free.</p></div>
-              <div className="flex flex-col sm:flex-row justify-center items-center gap-4 pointer-events-auto relative z-20">
-                <SpecularButton onClick={() => handleDownloadWindows('Download')}
-                  className="w-full sm:w-auto rounded-2xl border border-white/10 bg-white/5 backdrop-blur-[40px] shadow-[0_8px_32px_rgba(0,0,0,0.4)] !px-5 !py-3 sm:!px-9 sm:!py-4">
-                  <div className="flex items-center justify-center gap-2 font-bold text-base sm:text-lg text-white">
-                    <Grid2x2 size={25} /> Microsoft Store
-                  </div>
-                </SpecularButton>
-                <SpecularButton onClick={() => handleDownloadAdobe('Download')}
-                  className="w-full sm:w-auto rounded-2xl border border-white/10 bg-white/5 backdrop-blur-[40px] shadow-[0_8px_32px_rgba(0,0,0,0.4)] !px-5 !py-3 sm:!px-9 sm:!py-4">
-                  <div className="flex items-center justify-center gap-2 font-bold text-base sm:text-lg text-white">
-                    <Store size={22} /> Adobe Marketplace
-                  </div>
-                </SpecularButton>
-              </div>
-              <p className="text-slate-500 text-sm pointer-events-auto relative z-20">Need help? <button onClick={() => navigate('/docs/plugins/voice-generator')} className="text-indigo-400 hover:text-indigo-300 underline underline-offset-4 font-semibold">Read the installation guide.</button></p>
-              
-              
-              
-            </div>
-          </FadeInSection>
-        </div>
-      </section>
-
-      
-
-      {/* DOCS & LEGAL */}
-      <section className="py-16 md:py-24 relative overflow-hidden">
-        <div className="w-full px-6 md:px-10 lg:px-16 relative z-10">
-          <FadeInSection className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              { icon: <FileText size={24} />, title: 'Documentation', desc: 'Guides, installation, and troubleshooting.', cta: 'Read Docs', action: () => navigate('/docs/plugins/voice-generator') },
-              { icon: <Shield size={24} />, title: 'Terms of Use', desc: 'Licensing, restrictions, and agreements.', cta: 'Full Terms', action: () => navigate('/terms') },
-              { icon: <Shield size={24} />, title: 'Privacy Policy', desc: 'Data handling and user information.', cta: 'Read Privacy', action: () => navigate('/privacy') },
-            ].map((item, i) => (
-              <TiltCard key={i}>
-                <div className="bg-white/5 backdrop-blur-[40px] border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.4)] p-8 rounded-[2rem] text-center flex flex-col items-center cursor-pointer h-full hover:bg-white/10 hover:border-white/20 transition-all duration-300" onClick={item.action}>
-                  <div className="w-12 h-12 bg-white/10 text-white rounded-xl flex items-center justify-center mb-4 border border-white/10">{item.icon}</div>
-                  <h3 className="text-lg font-bold text-white mb-2">{item.title}</h3>
-                  <p className="text-slate-400 mb-6 flex-grow text-sm">{item.desc}</p>
-                  <span className="text-white font-bold flex items-center gap-1.5 text-sm group-hover:text-slate-300 transition-colors">{item.cta} <ArrowRight size={14} /></span>
                 </div>
               </TiltCard>
-            ))}
-          </FadeInSection>
-        </div>
-      </section>
+              <div className="space-y-8 pointer-events-none">
+                <div><p className="text-4xl md:text-6xl font-black text-white mb-1 animate-blur-pulse tracking-tight">Completely free.</p></div>
+                <div className="flex flex-col sm:flex-row justify-center items-center gap-4 pointer-events-auto relative z-20">
+                  <SpecularButton onClick={() => handleDownloadWindows('Download')}
+                    className="w-full sm:w-auto rounded-2xl border border-white/10 bg-white/5 backdrop-blur-[40px] shadow-[0_8px_32px_rgba(0,0,0,0.4)] !px-5 !py-3 sm:!px-9 sm:!py-4">
+                    <div className="flex items-center justify-center gap-2 font-bold text-base sm:text-lg text-white">
+                      <Grid2x2 size={25} /> Microsoft Store
+                    </div>
+                  </SpecularButton>
+                  <SpecularButton onClick={() => handleDownloadAdobe('Download')}
+                    className="w-full sm:w-auto rounded-2xl border border-white/10 bg-white/5 backdrop-blur-[40px] shadow-[0_8px_32px_rgba(0,0,0,0.4)] !px-5 !py-3 sm:!px-9 sm:!py-4">
+                    <div className="flex items-center justify-center gap-2 font-bold text-base sm:text-lg text-white">
+                      <Store size={22} /> Adobe Marketplace
+                    </div>
+                  </SpecularButton>
+                </div>
+                <p className="text-slate-500 text-sm pointer-events-auto relative z-20">Need help? <button onClick={() => navigate('/docs/plugins/voice-generator')} className="text-indigo-400 hover:text-indigo-300 underline underline-offset-4 font-semibold">Read the installation guide.</button></p>
+              </div>
+            </FadeInSection>
+          </div>
+        </section>
+
+        {/* DOCS & LEGAL */}
+        <section className="py-16 md:py-24 relative z-10">
+          <div className="w-full px-6 md:px-10 lg:px-16 relative z-10">
+            <FadeInSection className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {[
+                { icon: <FileText size={24} />, title: 'Documentation', desc: 'Guides, installation, and troubleshooting.', cta: 'Read Docs', action: () => navigate('/docs/plugins/voice-generator') },
+                { icon: <Shield size={24} />, title: 'Terms of Use', desc: 'Licensing, restrictions, and agreements.', cta: 'Full Terms', action: () => navigate('/terms') },
+                { icon: <Shield size={24} />, title: 'Privacy Policy', desc: 'Data handling and user information.', cta: 'Read Privacy', action: () => navigate('/privacy') },
+              ].map((item, i) => (
+                <TiltCard key={i}>
+                  <div className="bg-white/5 backdrop-blur-[40px] border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.4)] p-8 rounded-[2rem] text-center flex flex-col items-center cursor-pointer h-full hover:bg-white/10 hover:border-white/20 transition-all duration-300" onClick={item.action}>
+                    <div className="w-12 h-12 bg-white/10 text-white rounded-xl flex items-center justify-center mb-4 border border-white/10">{item.icon}</div>
+                    <h3 className="text-lg font-bold text-white mb-2">{item.title}</h3>
+                    <p className="text-slate-400 mb-6 flex-grow text-sm">{item.desc}</p>
+                    <span className="text-white font-bold flex items-center gap-1.5 text-sm group-hover:text-slate-300 transition-colors">{item.cta} <ArrowRight size={14} /></span>
+                  </div>
+                </TiltCard>
+              ))}
+            </FadeInSection>
+          </div>
+        </section>
+      </div>
       <HomeFooter />
     </div>
   );
