@@ -14,7 +14,7 @@ const HomeFooter = () => {
   return (
     <footer className="dark-grid-bg text-slate-400 py-16 border-t border-indigo-900/30 relative overflow-hidden">
       <SpeedStreaks />
-      <div className="w-full px-6 md:px-10 lg:px-16 grid grid-cols-1 md:grid-cols-4 gap-12 relative z-10">
+      <div className="w-full px-6 md:px-10 lg:px-16 grid grid-cols-1 md:grid-cols-5 gap-12 relative z-10">
         <div className="col-span-1 md:col-span-2">
           <div className="flex items-center gap-3 mb-6">
             <img src="/header.png" alt="Vampro" className="h-10 w-10 rounded-xl border border-indigo-800/50" />
@@ -37,6 +37,14 @@ const HomeFooter = () => {
             <li><a href="https://www.instagram.com/vampro.tech/" target="_blank" rel="noreferrer" className="hover:text-indigo-400 transition-colors">Instagram</a></li>
             <li><a href="https://youtube.com/@vamprotech?si=vponnTvHyIzwDmON" target="_blank" rel="noreferrer" className="hover:text-indigo-400 transition-colors">YouTube</a></li>
             <li><a href="mailto:support@vampro.in" className="hover:text-indigo-400 transition-colors">Contact Support</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 className="text-[var(--bp-ink-strong)] font-semibold mb-5 uppercase tracking-wider text-xs">Legal</h4>
+          <ul className="space-y-2.5 text-sm">
+            <li><button onClick={() => navigate('/privacy')} className="hover:text-indigo-400 transition-colors">Privacy Policy</button></li>
+            <li><button onClick={() => navigate('/terms')} className="hover:text-indigo-400 transition-colors">Terms of Service</button></li>
+            <li><button onClick={() => navigate('/plugins/voice-generator/licenses')} className="hover:text-indigo-400 transition-colors">Licenses</button></li>
           </ul>
         </div>
       </div>
