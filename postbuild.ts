@@ -83,6 +83,9 @@ async function runPrerender() {
         
         // Add DOCTYPE because outerHTML omits it
         html = '<!DOCTYPE html>\n' + html;
+        
+        // Inject the intended route so main.tsx can safely fallback on 404s
+        html = html.replace('<head>', `<head>\n  <meta name="prerender-route" content="${route.path}">`);
 
         // Save generated HTML to dist directory
         if (route.path === '/') {

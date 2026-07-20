@@ -17,8 +17,19 @@ const app = (
   </React.StrictMode>
 );
 
-if (rootElement.hasChildNodes()) {
+const prerenderMeta = document.querySelector('meta[name="prerender-route"]');
+const expectedRoute = prerenderMeta ? prerenderMeta.getAttribute('content') : null;
+const currentPath = window.location.pathname;
+
+const isMatch = expectedRoute === currentPath || 
+                expectedRoute === currentPath + '/' || 
+                expectedRoute + '/' === currentPath;
+
+if (rootElement.hasChildNodes() && isMatch) {
   ReactDOM.hydrateRoot(rootElement, app);
 } else {
+  if (rootElement.hasChildNodes()) {
+    rootElement.innerHTML = '';
+  }
   ReactDOM.createRoot(rootElement).render(app);
 }
