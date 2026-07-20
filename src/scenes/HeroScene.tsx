@@ -64,9 +64,9 @@ const HeroScene = forwardRef<HTMLElement>((_, ref) => {
         <p className="mt-8 text-base md:text-lg font-light tracking-wider text-[var(--bp-accent)]/80 max-w-4xl mx-auto leading-relaxed">
           A creative lab at the intersection of creativity and technology.<br className="hidden md:block" /> From films to software, we turn ideas into real experiences.
         </p>
-        <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-6 w-full sm:w-auto">
-          <Link to="/plugins/voice-generator" className="px-10 py-4 text-sm font-medium tracking-widest uppercase border border-[var(--bp-accent)] text-[var(--bp-accent)] hover:bg-[var(--bp-accent)]/10 transition-colors duration-300 w-full sm:w-auto">Explore products</Link>
-          <button onClick={() => openModal('Hero')} className={`px-10 py-4 text-sm font-medium tracking-widest uppercase border transition-colors duration-300 w-full sm:w-auto ${hasJoined ? 'border-[var(--bp-accent)]/30 text-[var(--bp-accent)]/50 cursor-default' : 'border-[var(--bp-accent)] text-[var(--bp-accent)] hover:bg-[var(--bp-accent)]/10'}`}>
+        <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 w-full sm:w-auto">
+          <Link to="/plugins/voice-generator" className="px-6 py-3 sm:px-10 sm:py-4 text-xs sm:text-sm font-medium tracking-widest uppercase border border-[var(--bp-accent)] text-[var(--bp-accent)] hover:bg-[var(--bp-accent)]/10 transition-colors duration-300 w-full sm:w-auto">Explore products</Link>
+          <button onClick={() => openModal('Hero')} className={`px-6 py-3 sm:px-10 sm:py-4 text-xs sm:text-sm font-medium tracking-widest uppercase border transition-colors duration-300 w-full sm:w-auto ${hasJoined ? 'border-[var(--bp-accent)]/30 text-[var(--bp-accent)]/50 cursor-default' : 'border-[var(--bp-accent)] text-[var(--bp-accent)] hover:bg-[var(--bp-accent)]/10'}`}>
             {hasJoined ? 'Subscribed to newsletter' : 'Subscribe to newsletter'}
           </button>
         </div>

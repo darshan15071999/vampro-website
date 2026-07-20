@@ -141,7 +141,7 @@ const Home = () => {
   }, [cine]);
 
   return (
-    <div className={`bp-page bp-grid font-bank min-h-screen ${cine ? '' : 'home-static'}`}>
+    <div className={`bp-page bp-grid font-bank min-h-screen overflow-x-hidden ${cine ? '' : 'home-static'}`}>
       <CursorGrid />
       <SEO {...homeMetadata} />
 

@@ -68,75 +68,25 @@ const SignupModal = () => {
     }
 
     try {
-      // Salesforce Web-to-Lead — submit via hidden iframe to avoid CORS issues
-      const iframeName = 'sf_signup_iframe';
-
-      // Always create a fresh iframe to avoid stale state
-      const existingIframe = document.querySelector<HTMLIFrameElement>(`iframe[name="${iframeName}"]`);
-      if (existingIframe) existingIframe.remove();
-
-      const iframe = document.createElement('iframe');
-      iframe.name = iframeName;
-      iframe.style.display = 'none';
-      document.body.appendChild(iframe);
-
-      const [firstName, ...lastNames] = name.trim().split(' ');
-      const lastName = lastNames.join(' ') || '-';
-
-      const form = document.createElement('form');
-      form.method = 'POST';
-      form.action = 'https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8';
-      form.target = iframeName;
-
-      const fields: Record<string, string> = {
-        oid: '00DdN000011GI3G',
-        retURL: window.location.href,
-        first_name: firstName,
-        last_name: lastName,
-        email: email,
-        company: creatorType,
-        title: 'User',
-        lead_source: `Plugin: ${modalSource}`,
-      };
-
-      Object.entries(fields).forEach(([key, value]) => {
-        const input = document.createElement('input');
-        input.type = 'hidden';
-        input.name = key;
-        input.value = value;
-        form.appendChild(input);
+      const response = await fetch('/api/lead', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          creatorType,
+          source: `Plugin: ${modalSource}`,
+          title: 'User',
+        }),
       });
 
-      document.body.appendChild(form);
+      const data = await response.json().catch(() => ({}));
 
-      // Wait for the iframe to load (i.e., Salesforce has received and responded to the POST)
-      // before cleaning up and showing success
-      await new Promise<void>((resolve, _reject) => {
-        const timeout = setTimeout(() => {
-          // Even if we don't get a load event (cross-origin may block it),
-          // treat as success after a reasonable wait since the POST was sent
-          cleanup();
-          resolve();
-        }, 5000);
-
-        const cleanup = () => {
-          clearTimeout(timeout);
-          iframe.removeEventListener('load', onLoad);
-        };
-
-        const onLoad = () => {
-          cleanup();
-          resolve();
-        };
-
-        iframe.addEventListener('load', onLoad);
-
-        // Now submit the form
-        form.submit();
-
-        // Remove the form after a short delay to ensure the browser has serialized the request
-        setTimeout(() => form.remove(), 500);
-      });
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to submit signup.');
+      }
 
       setIsSubmitting(false);
       setIsSuccess(true);

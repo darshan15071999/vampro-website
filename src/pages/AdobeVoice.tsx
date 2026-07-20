@@ -166,7 +166,7 @@ const AdobeVoice = () => {
         {/* HERO — dark with waveform and text particles */}
       <section className="relative min-h-[calc(100vh-96px)] flex flex-col items-center justify-start md:justify-center pt-[160px] md:pt-36 pb-10 overflow-hidden ">
           
-          <div className="absolute inset-0 z-0 opacity-80" style={{ maskImage: 'radial-gradient(ellipse at 50% 50%, black 20%, transparent 80%)', WebkitMaskImage: 'radial-gradient(ellipse at 50% 50%, black 20%, transparent 80%)' }}>
+          <div className="absolute inset-0 z-0 opacity-40 md:opacity-80" style={{ maskImage: 'radial-gradient(ellipse at 50% 50%, black 20%, transparent 80%)', WebkitMaskImage: 'radial-gradient(ellipse at 50% 50%, black 20%, transparent 80%)' }}>
             <SoftAurora
               speed={0.6}
               scale={1.5}
@@ -208,14 +208,14 @@ const AdobeVoice = () => {
           </FadeInSection>
           <FadeInSection delay="200ms" className="flex flex-col sm:flex-row justify-center items-center gap-4">
             <SpecularButton onClick={() => handleDownloadWindows('Hero')}
-              className="w-full sm:w-auto rounded-2xl border border-white/10 bg-white/5 backdrop-blur-[40px] shadow-[0_8px_32px_rgba(0,0,0,0.4)] !px-9 !py-4">
-              <div className="flex items-center justify-center gap-2 font-bold text-lg text-white">
+              className="w-full sm:w-auto rounded-2xl border border-white/10 bg-white/5 backdrop-blur-[40px] shadow-[0_8px_32px_rgba(0,0,0,0.4)] !px-5 !py-3 sm:!px-9 sm:!py-4">
+              <div className="flex items-center justify-center gap-2 font-bold text-base sm:text-lg text-white">
                 <Grid2x2 size={25} /> Install Companion App
               </div>
             </SpecularButton>
             <SpecularButton onClick={() => handleDownloadAdobe('Hero')}
-              className="w-full sm:w-auto rounded-2xl border border-white/10 bg-white/5 backdrop-blur-[40px] shadow-[0_8px_32px_rgba(0,0,0,0.4)] !px-9 !py-4">
-              <div className="flex items-center justify-center gap-2 font-bold text-lg text-white">
+              className="w-full sm:w-auto rounded-2xl border border-white/10 bg-white/5 backdrop-blur-[40px] shadow-[0_8px_32px_rgba(0,0,0,0.4)] !px-5 !py-3 sm:!px-9 sm:!py-4">
+              <div className="flex items-center justify-center gap-2 font-bold text-base sm:text-lg text-white">
                 <Store size={22} /> Get the Extension
               </div>
             </SpecularButton>
@@ -561,14 +561,14 @@ const AdobeVoice = () => {
               <div><p className="text-4xl md:text-6xl font-black text-white mb-1 animate-blur-pulse tracking-tight">Completely free.</p></div>
               <div className="flex flex-col sm:flex-row justify-center items-center gap-4 pointer-events-auto relative z-20">
                 <SpecularButton onClick={() => handleDownloadWindows('Download')}
-                  className="w-full sm:w-auto rounded-2xl border border-white/10 bg-white/5 backdrop-blur-[40px] shadow-[0_8px_32px_rgba(0,0,0,0.4)] !px-9 !py-4">
-                  <div className="flex items-center justify-center gap-2 font-bold text-lg text-white">
+                  className="w-full sm:w-auto rounded-2xl border border-white/10 bg-white/5 backdrop-blur-[40px] shadow-[0_8px_32px_rgba(0,0,0,0.4)] !px-5 !py-3 sm:!px-9 sm:!py-4">
+                  <div className="flex items-center justify-center gap-2 font-bold text-base sm:text-lg text-white">
                     <Grid2x2 size={25} /> Microsoft Store
                   </div>
                 </SpecularButton>
                 <SpecularButton onClick={() => handleDownloadAdobe('Download')}
-                  className="w-full sm:w-auto rounded-2xl border border-white/10 bg-white/5 backdrop-blur-[40px] shadow-[0_8px_32px_rgba(0,0,0,0.4)] !px-9 !py-4">
-                  <div className="flex items-center justify-center gap-2 font-bold text-lg text-white">
+                  className="w-full sm:w-auto rounded-2xl border border-white/10 bg-white/5 backdrop-blur-[40px] shadow-[0_8px_32px_rgba(0,0,0,0.4)] !px-5 !py-3 sm:!px-9 sm:!py-4">
+                  <div className="flex items-center justify-center gap-2 font-bold text-base sm:text-lg text-white">
                     <Store size={22} /> Adobe Marketplace
                   </div>
                 </SpecularButton>
