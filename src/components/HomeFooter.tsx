@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import SpeedStreaks from './SpeedStreaks';
 
 const HomeFooter = () => {
@@ -26,8 +26,19 @@ const HomeFooter = () => {
         <div>
           <h4 className="text-[var(--bp-ink-strong)] font-semibold mb-5 uppercase tracking-wider text-xs">Navigation</h4>
           <ul className="space-y-2.5 text-sm">
-            {[['About Us', () => navigate('/', 'about')], ['Services', () => navigate('/', 'services')], ['Plugins', () => navigate('/plugins/voice-generator')], ['Documentation', () => navigate('/docs')]].map(([label, fn]) => (
-              <li key={label as string}><button onClick={fn as () => void} className="hover:text-indigo-400 transition-colors">{label as string}</button></li>
+            {[['About Us', '/', 'about'], ['Services', '/', 'services'], ['Plugins', '/plugins/voice-generator'], ['Documentation', '/docs']].map(([label, href, sectionId]) => (
+              <li key={label as string}>
+                <Link 
+                  to={href as string}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigate(href as string, sectionId as string | undefined);
+                  }}
+                  className="hover:text-indigo-400 transition-colors"
+                >
+                  {label as string}
+                </Link>
+              </li>
             ))}
           </ul>
         </div>
@@ -42,9 +53,9 @@ const HomeFooter = () => {
         <div>
           <h4 className="text-[var(--bp-ink-strong)] font-semibold mb-5 uppercase tracking-wider text-xs">Legal</h4>
           <ul className="space-y-2.5 text-sm">
-            <li><button onClick={() => navigate('/privacy')} className="hover:text-indigo-400 transition-colors">Privacy Policy</button></li>
-            <li><button onClick={() => navigate('/terms')} className="hover:text-indigo-400 transition-colors">Terms of Service</button></li>
-            <li><button onClick={() => navigate('/plugins/voice-generator/licenses')} className="hover:text-indigo-400 transition-colors">Licenses</button></li>
+            <li><Link to="/privacy" className="hover:text-indigo-400 transition-colors">Privacy Policy</Link></li>
+            <li><Link to="/terms" className="hover:text-indigo-400 transition-colors">Terms of Service</Link></li>
+            <li><Link to="/plugins/voice-generator/licenses" className="hover:text-indigo-400 transition-colors">Licenses</Link></li>
           </ul>
         </div>
       </div>

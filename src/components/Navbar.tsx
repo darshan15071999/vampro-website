@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { PlayCircle, Menu, X, Search, Sun, Moon } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ScatterText from './ScatterText';
@@ -74,24 +74,15 @@ const Navbar = ({ openSearch }: NavbarProps) => {
   };
 
   const desktopNavItems = [
-    { label: 'About', action: () => navigate('/', 'about') },
-    { label: 'Services', action: () => navigate('/', 'services') },
-    { label: 'Plugins', action: () => navigate('/plugins/voice-generator') },
-    { label: 'Blog', action: () => navigate('/blog') },
-    { label: 'Docs', action: () => navigate('/docs/plugins/voice-generator') },
-    { label: 'YouTube', action: () => window.open('https://youtube.com/@vamprotech?si=vponnTvHyIzwDmON', '_blank'), icon: <PlayCircle size={13} /> },
+    { label: 'About', href: '/', sectionId: 'about' },
+    { label: 'Services', href: '/', sectionId: 'services' },
+    { label: 'Plugins', href: '/plugins/voice-generator' },
+    { label: 'Blog', href: '/blog' },
+    { label: 'Docs', href: '/docs/plugins/voice-generator' },
+    { label: 'YouTube', href: 'https://youtube.com/@vamprotech?si=vponnTvHyIzwDmON', external: true, icon: <PlayCircle size={13} /> },
   ];
 
-  const mobileNavItems = ['About', 'Services', 'Plugins', 'Blog', 'Docs', 'YouTube'];
-
-  const handleMobileNav = (item: string) => {
-    if (item === 'About') navigate('/', 'about');
-    else if (item === 'Services') navigate('/', 'services');
-    else if (item === 'Plugins') navigate('/plugins/voice-generator');
-    else if (item === 'Blog') navigate('/blog');
-    else if (item === 'Docs') navigate('/docs/plugins/voice-generator');
-    else window.open('https://youtube.com/@vamprotech?si=vponnTvHyIzwDmON', '_blank');
-  };
+  const mobileNavItems = desktopNavItems;
 
   const isHomePage = location.pathname === '/';
 
@@ -133,22 +124,34 @@ const Navbar = ({ openSearch }: NavbarProps) => {
                 {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
               </button>
             )}
-            {desktopNavItems.map((item, i) => (
-              <motion.button
-                key={item.label}
-                custom={i}
-                variants={navItemVariants}
-                initial="hidden"
-                animate="visible"
-                onClick={item.action}
-                className={`text-base font-medium transition-colors duration-400 hover:text-[#2b5be3] flex items-center gap-1.5 ${scrolled
-                  ? (isLight ? 'text-slate-700' : 'text-slate-300')
-                  : (isLight ? 'text-slate-700' : 'text-slate-200')
-                  }`}
-              >
-                {item.label} {item.icon}
-              </motion.button>
-            ))}
+            {desktopNavItems.map((item, i) => {
+              const MotionLink = motion(item.external ? 'a' : Link);
+              return (
+                <MotionLink
+                  key={item.label}
+                  custom={i}
+                  variants={navItemVariants}
+                  initial="hidden"
+                  animate="visible"
+                  {...(item.external 
+                    ? { href: item.href, target: "_blank", rel: "noreferrer" } 
+                    : { 
+                        to: item.href, 
+                        onClick: (e: React.MouseEvent) => { 
+                          e.preventDefault(); 
+                          navigate(item.href, item.sectionId); 
+                        } 
+                      }
+                  )}
+                  className={`text-base font-medium transition-colors duration-400 hover:text-[#2b5be3] flex items-center gap-1.5 ${scrolled
+                    ? (isLight ? 'text-slate-700' : 'text-slate-300')
+                    : (isLight ? 'text-slate-700' : 'text-slate-200')
+                    }`}
+                >
+                  {item.label} {item.icon}
+                </MotionLink>
+              );
+            })}
 
             {/* Search bar — docs page */}
             {isDocsPage && (
@@ -194,19 +197,31 @@ const Navbar = ({ openSearch }: NavbarProps) => {
             exit="exit"
             className={`lg:hidden pb-4 pt-2 px-4 space-y-1 absolute w-full shadow-xl overflow-hidden ${isLight ? 'bg-white/95 backdrop-blur-xl' : 'bg-[#07060F]/95 backdrop-blur-xl border-t border-indigo-900/20'}`}
           >
-            {mobileNavItems.map((item, i) => (
-              <motion.button
-                key={item}
-                custom={i}
-                variants={mobileItemVariants}
-                initial="hidden"
-                animate="visible"
-                onClick={() => handleMobileNav(item)}
-                className={`block w-full text-left px-4 py-3 font-medium rounded-xl transition-colors ${isLight ? 'text-slate-700 hover:bg-slate-100' : 'text-white hover:bg-indigo-900/20'}`}
-              >
-                {item}
-              </motion.button>
-            ))}
+            {mobileNavItems.map((item, i) => {
+              const MotionLink = motion(item.external ? 'a' : Link);
+              return (
+                <MotionLink
+                  key={item.label}
+                  custom={i}
+                  variants={mobileItemVariants}
+                  initial="hidden"
+                  animate="visible"
+                  {...(item.external 
+                    ? { href: item.href, target: "_blank", rel: "noreferrer" } 
+                    : { 
+                        to: item.href, 
+                        onClick: (e: React.MouseEvent) => { 
+                          e.preventDefault(); 
+                          navigate(item.href, item.sectionId); 
+                        } 
+                      }
+                  )}
+                  className={`block w-full text-left px-4 py-3 font-medium rounded-xl transition-colors ${isLight ? 'text-slate-700 hover:bg-slate-100' : 'text-white hover:bg-indigo-900/20'}`}
+                >
+                  {item.label}
+                </MotionLink>
+              );
+            })}
           </motion.div>
         )}
       </AnimatePresence>
