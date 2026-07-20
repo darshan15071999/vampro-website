@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import ScatterText from './ScatterText';
 import { useTheme } from '../context/ThemeContext';
 
+const MotionLink = motion(Link as any);
 
 interface NavbarProps {
   searchOpen: boolean;
@@ -125,9 +126,9 @@ const Navbar = ({ openSearch }: NavbarProps) => {
               </button>
             )}
             {desktopNavItems.map((item, i) => {
-              const MotionLink = motion(item.external ? 'a' : Link);
+              const Element = item.external ? motion.a : MotionLink;
               return (
-                <MotionLink
+                <Element
                   key={item.label}
                   custom={i}
                   variants={navItemVariants}
@@ -149,7 +150,7 @@ const Navbar = ({ openSearch }: NavbarProps) => {
                     }`}
                 >
                   {item.label} {item.icon}
-                </MotionLink>
+                </Element>
               );
             })}
 
@@ -198,9 +199,9 @@ const Navbar = ({ openSearch }: NavbarProps) => {
             className={`lg:hidden pb-4 pt-2 px-4 space-y-1 absolute w-full shadow-xl overflow-hidden ${isLight ? 'bg-white/95 backdrop-blur-xl' : 'bg-[#07060F]/95 backdrop-blur-xl border-t border-indigo-900/20'}`}
           >
             {mobileNavItems.map((item, i) => {
-              const MotionLink = motion(item.external ? 'a' : Link);
+              const Element = item.external ? motion.a : MotionLink;
               return (
-                <MotionLink
+                <Element
                   key={item.label}
                   custom={i}
                   variants={mobileItemVariants}
@@ -219,7 +220,7 @@ const Navbar = ({ openSearch }: NavbarProps) => {
                   className={`block w-full text-left px-4 py-3 font-medium rounded-xl transition-colors ${isLight ? 'text-slate-700 hover:bg-slate-100' : 'text-white hover:bg-indigo-900/20'}`}
                 >
                   {item.label}
-                </MotionLink>
+                </Element>
               );
             })}
           </motion.div>
