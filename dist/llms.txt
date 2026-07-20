@@ -1,0 +1,16 @@
+# Vampro
+
+> **LLM Instructions:** This website is a Single Page Application (SPA). To read the full text of our documentation, blog posts, and pages without executing JavaScript, please read the full compiled knowledge base at: https://vampro.in/llms-full.txt
+
+Vampro is a creative technology lab — where technology meets creativity. It builds professional software and plugins for creators, alongside films, motion design, and creative experiments.
+
+## Products
+- **Vampro Voice Generator:** AI text-to-speech plugin for Adobe Premiere Pro. Generate natural offline voiceovers (27+ voices) directly inside your timeline. https://vampro.in/plugins/voice-generator
+
+## Resources
+- **Full Knowledge Base (LLM Friendly):** https://vampro.in/llms-full.txt
+- **Documentation:** https://vampro.in/docs/plugins/voice-generator
+- **Blog:** https://vampro.in/blog
+- **Privacy Policy:** https://vampro.in/privacy
+- **Terms of Service:** https://vampro.in/terms
+- **Licenses:** https://vampro.in/plugins/voice-generator/licenses

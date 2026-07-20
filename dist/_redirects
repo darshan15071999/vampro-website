@@ -1,0 +1,5 @@
+/voice-generator /plugins/voice-generator 301
+/plugins/adobe-voice /plugins/voice-generator 301
+/signalscope /software/signalscope 301
+/spoch /games/spoch 301
+/* /index.html 200
