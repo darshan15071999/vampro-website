@@ -57,7 +57,7 @@ Vampro is a creative technology lab built on one idea: technology meets creativi
   - [Getting Started with the Vampro Voice Generator for Adobe Premiere Pro](https://vampro.in/blog/getting-started-with-vampro-voice-generator)
   - [Lean Editing Practices for Creators](https://vampro.in/blog/lean-editing-practices)
   - [Editing With Your Eyes Closed](https://vampro.in/blog/editing-with-your-eyes-closed)
-  - [Folder Management Workflow](https://vampro.in/blog/folder-management-workflow)
+  - [Folder Management Workflow](https://vampro.in/blog/folder-management-editing-workflow)
   - [Premiere Workspace Design](https://vampro.in/blog/premiere-workspace-design)
 - **YouTube (stories behind the build):** https://youtube.com/@vamprotech
 - **Support:** support@vampro.in
