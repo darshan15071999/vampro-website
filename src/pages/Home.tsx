@@ -28,7 +28,7 @@ gsap.registerPlugin(ScrollTrigger);
 // fully readable stacked layout instead.
 // ─────────────────────────────────────────────────────────────
 
-const CINE_QUERY = '(prefers-reduced-motion: no-preference)';
+const CINE_QUERY = '(min-width: 1024px) and (prefers-reduced-motion: no-preference)';
 
 const Home = () => {
   const stageRef = useRef<HTMLDivElement>(null);
@@ -140,6 +140,27 @@ const Home = () => {
     };
   }, [cine]);
 
+  // Handle static mode camera scrub
+  useLayoutEffect(() => {
+    if (cine) return;
+    const stage = stageRef.current;
+    if (!stage) return;
+
+    const ctx = gsap.context(() => {
+      ScrollTrigger.create({
+        trigger: stage,
+        start: 'top top',
+        end: 'bottom bottom',
+        scrub: true,
+        onUpdate: self => {
+          rigRef.current?.setProgress(self.progress);
+        }
+      });
+    });
+
+    return () => ctx.revert();
+  }, [cine]);
+
   return (
     <div className={`bp-page bp-grid font-bank min-h-screen overflow-x-hidden ${cine ? '' : 'home-static'}`}>
       <CursorGrid />
@@ -149,9 +170,9 @@ const Home = () => {
           (The site-wide Navbar from App.tsx is the header on every page.) */}
       <div ref={stageRef} className={cine ? 'bp-cine' : 'relative'}>
         {/* Wireframe camera — full stage in cinematic mode; on mobile/tablet it
-            idles assembled behind the hero (progress stays 0, gentle rotation) */}
+            stays fixed in the background and scrubs its animation via natural scroll */}
         <div
-          className={cine ? 'absolute inset-0 pointer-events-none' : 'absolute top-0 inset-x-0 h-screen pointer-events-none opacity-70'}
+          className={cine ? 'absolute inset-0 pointer-events-none' : 'fixed inset-0 pointer-events-none opacity-70 z-0'}
           aria-hidden="true"
         >
           <Suspense fallback={null}>
