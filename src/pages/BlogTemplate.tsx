@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useRef } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { Clock, User, ArrowLeft, Play, Pause, Square, Share2 } from 'lucide-react';
 import SEO from '../components/SEO';
@@ -12,6 +12,7 @@ const BlogTemplate = () => {
   const isPost = !!slug;
   const [speechState, setSpeechState] = useState<'idle' | 'playing' | 'paused'>('idle');
   const [activeHeading, setActiveHeading] = useState<string>('overview');
+  const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
 
   // Filter and Sort State
   const [selectedTopic, setSelectedTopic] = useState('All');
@@ -63,6 +64,7 @@ const BlogTemplate = () => {
       const utterance = new SpeechSynthesisUtterance(post.title + ". " + post.summary + ". " + textToRead);
       utterance.onend = () => setSpeechState('idle');
       utterance.onerror = () => setSpeechState('idle');
+      utteranceRef.current = utterance; // Prevent Safari garbage collection
       window.speechSynthesis.speak(utterance);
       setSpeechState('playing');
     }
@@ -110,7 +112,7 @@ const BlogTemplate = () => {
 
   if (!isPost) {
     return (
-      <div className="sketchbook-bg min-h-screen pt-32 flex flex-col relative overflow-x-hidden w-full max-w-[100vw]">
+      <div className="sketchbook-bg min-h-screen pt-32 flex flex-col relative">
         <SEO {...blogMetadata} />
         <main className="flex-grow w-full max-w-[1800px] mx-auto px-6 md:px-10 lg:px-16 2xl:px-24 z-10 pb-20">
           <div className="text-center mb-16">
@@ -238,7 +240,7 @@ const BlogTemplate = () => {
   };
 
   return (
-    <div className="sketchbook-bg min-h-screen pt-28 flex flex-col relative overflow-x-hidden w-full max-w-[100vw]">
+    <div className="sketchbook-bg min-h-screen pt-28 flex flex-col relative">
       <SEO
         {...blogMetadata}
         title={`${currentPost.title} | Vampro Blog`}

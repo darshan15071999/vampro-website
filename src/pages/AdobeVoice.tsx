@@ -68,6 +68,14 @@ const AdobeVoice = () => {
   const nav = useNavigate();
   const { openSignup } = useSignup();
 
+  const [isMobile, setIsMobile] = useState(() => typeof window !== 'undefined' ? window.innerWidth < 768 : false);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const handleDownloadWindows = (_source?: string) => {
     openSignup('Windows App', () => {
       window.open("https://apps.microsoft.com/detail/9nltft936rk2?hl=en-US&gl=IN&ocid=pdpshare", "_blank");
@@ -142,7 +150,7 @@ const AdobeVoice = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#04030A] text-white flex flex-col overflow-x-hidden w-full max-w-[100vw]">
+    <div className="min-h-screen bg-[#04030A] text-white flex flex-col">
       <SEO {...voiceMetadata} />
       {/* Announcement */}
       <div className="bg-gradient-to-r from-[#3B3BFF] via-[#1B2A6B] to-[#3B3BFF] text-white py-2.5 px-4 flex items-center justify-center gap-4 sticky top-[64px] md:top-[96px] z-40">
@@ -151,7 +159,7 @@ const AdobeVoice = () => {
 
       <div className="relative">
         <div className="absolute left-0 right-0 z-0 pointer-events-none mix-blend-screen opacity-30" style={{ top: '70vh', bottom: '-250px', maskImage: 'linear-gradient(to bottom, transparent, black 15%, black 80%, transparent)', WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)' }}>
-          <FloatingLines 
+          {!isMobile && <FloatingLines 
             enabledWaves={["top","middle","bottom"]}
             lineCount={8}
             lineDistance={8}
@@ -161,13 +169,13 @@ const AdobeVoice = () => {
             parallax={true}
             animationSpeed={1}
             linesGradient={["#1f16b8", "#3476be", "#3438c2"]}
-          />
+          />}
         </div>
         {/* HERO — dark with waveform and text particles */}
       <section className="relative min-h-[calc(100vh-96px)] flex flex-col items-center justify-start md:justify-center pt-[160px] md:pt-36 pb-10 overflow-hidden ">
           
           <div className="absolute inset-0 z-0 opacity-40 md:opacity-80" style={{ maskImage: 'radial-gradient(ellipse at 50% 50%, black 20%, transparent 80%)', WebkitMaskImage: 'radial-gradient(ellipse at 50% 50%, black 20%, transparent 80%)' }}>
-            <SoftAurora
+            {!isMobile && <SoftAurora
               speed={0.6}
               scale={1.5}
               brightness={1}
@@ -182,13 +190,13 @@ const AdobeVoice = () => {
               colorSpeed={1}
               enableMouseInteraction
               mouseInfluence={0.25}
-            />
+            />}
           </div>
 
-          <WaveformCanvas />
+          {!isMobile && <WaveformCanvas />}
         
         
-        <TextParticles />
+        {!isMobile && <TextParticles />}
         <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 70% 60% at 50% 50%, rgba(59,59,255,0.1) 0%, transparent 70%)' }} />
         
         <div className="w-full px-6 md:px-10 lg:px-16 relative z-10 text-center">
@@ -263,7 +271,7 @@ const AdobeVoice = () => {
 {/* WHY CREATORS */}
         <section className="py-16 md:py-24 relative">
           <div className="absolute left-0 right-0 z-0 pointer-events-none opacity-25" style={{ top: '-200px', bottom: '-200px', maskImage: 'linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)', WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)' }}>
-            <ColorBends
+            {!isMobile && <ColorBends
               colors={["#ff5c7a", "#8a5cff", "#00ffd1"]}
               rotation={90}
               speed={0.2}
@@ -279,7 +287,7 @@ const AdobeVoice = () => {
               transparent
               autoRotate={0}
               color="#557ef7"
-            />
+            />}
           </div>
         
 
@@ -343,7 +351,7 @@ const AdobeVoice = () => {
       {/* FEATURES */}
         <section className="py-16 md:py-24 relative">
           <div className="absolute left-0 right-0 z-0 pointer-events-none opacity-25" style={{ top: '-200px', bottom: '-200px', maskImage: 'linear-gradient(to bottom, transparent, black 15%, black 75%, transparent)', WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 15%, black 75%, transparent)' }}>
-            <ColorBends
+            {!isMobile && <ColorBends
               colors={["#ff5c7a", "#8a5cff", "#00ffd1"]}
               rotation={90}
               speed={0.2}
@@ -359,7 +367,7 @@ const AdobeVoice = () => {
               transparent
               autoRotate={0}
               color="#557ef7"
-            />
+            />}
           </div>
           
           <div className="w-full px-6 md:px-10 lg:px-16 relative z-10">
@@ -393,7 +401,7 @@ const AdobeVoice = () => {
         {/* WHO IS IT FOR */}
         <section className="py-16 md:py-24 relative">
           <div className="absolute left-0 right-0 z-0 pointer-events-none" style={{ top: '-200px', bottom: '-200px', opacity: 0.25, maskImage: 'linear-gradient(to bottom, transparent, black 15%, black 75%, transparent)', WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 15%, black 75%, transparent)' }}>
-                        <ColorBends
+            {!isMobile && <ColorBends
               colors={["#ff5c7a", "#8a5cff", "#00ffd1"]}
               rotation={90}
               speed={0.2}
@@ -409,7 +417,7 @@ const AdobeVoice = () => {
               transparent
               autoRotate={0}
               color="#557ef7"
-            />
+            />}
         </div>
         
         
@@ -447,7 +455,7 @@ const AdobeVoice = () => {
       {/* GETTING STARTED */}
       <section className="py-16 md:py-24 relative">
         <div className="absolute left-0 right-0 z-0 pointer-events-none" style={{ top: '-100px', bottom: '-200px', opacity: 0.25, maskImage: 'linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)', WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)' }}>
-                      <ColorBends
+            {!isMobile && <ColorBends
               colors={["#ff5c7a", "#8a5cff", "#00ffd1"]}
               rotation={90}
               speed={0.2}
@@ -463,7 +471,7 @@ const AdobeVoice = () => {
               transparent
               autoRotate={0}
               color="#557ef7"
-            />
+            />}
         </div>
         <div className="w-full px-6 md:px-10 lg:px-16 relative z-10 mb-8">
             <FadeInSection className="text-center">
@@ -518,7 +526,7 @@ const AdobeVoice = () => {
       {/* COMBINED DOWNLOAD & LEGAL WRAPPER */}
       <div className="relative">
         <div className="absolute inset-0 z-0 pointer-events-none mix-blend-screen opacity-30" style={{ top: '-200px', maskImage: 'linear-gradient(to bottom, transparent, black 20%, black 95%, transparent)', WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 20%, black 95%, transparent)' }}>
-          <FloatingLines 
+          {!isMobile && <FloatingLines 
             enabledWaves={ENABLED_WAVES}
             lineCount={8}
             lineDistance={8}
@@ -528,7 +536,7 @@ const AdobeVoice = () => {
             parallax={true}
             animationSpeed={1}
             linesGradient={LINES_GRADIENT}
-          />
+          />}
         </div>
 
         {/* DOWNLOAD */}
