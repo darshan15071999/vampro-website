@@ -142,7 +142,7 @@ const AdobeVoice = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#04030A] text-white flex flex-col">
+    <div className="min-h-screen bg-[#04030A] text-white flex flex-col overflow-x-hidden w-full max-w-[100vw]">
       <SEO {...voiceMetadata} />
       {/* Announcement */}
       <div className="bg-gradient-to-r from-[#3B3BFF] via-[#1B2A6B] to-[#3B3BFF] text-white py-2.5 px-4 flex items-center justify-center gap-4 sticky top-[64px] md:top-[96px] z-40">
@@ -533,7 +533,7 @@ const AdobeVoice = () => {
 
         {/* DOWNLOAD */}
         <section id="download" className="py-16 md:py-24 text-center relative scroll-mt-24 z-10">
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[250px] pointer-events-none z-0" style={{ background: 'radial-gradient(ellipse, rgba(59,59,255,0.15) 0%, transparent 70%)' }} />
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[500px] h-[250px] pointer-events-none z-0" style={{ background: 'radial-gradient(ellipse, rgba(59,59,255,0.15) 0%, transparent 70%)' }} />
           <div className="w-full px-6 md:px-10 lg:px-16 max-w-3xl mx-auto relative z-10 pointer-events-none">
             <FadeInSection>
               <h2 className="text-3xl md:text-5xl font-extrabold text-white mb-12"><ShinyText text="Before You Download" speed={3} shineColor="#ffffff" color="#ffffff" /></h2>

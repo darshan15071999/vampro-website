@@ -126,7 +126,7 @@ const WaitlistModal = () => {
       />
 
       {/* Modal — blueprint card */}
-      <div className="relative w-full max-w-md bg-[var(--bp-bg)] border border-[var(--bp-accent)]/30 p-8 shadow-[0_0_60px_color-mix(in_srgb,var(--bp-accent)_15%,transparent)] animate-fade-in transition-all font-bank">
+      <div className="relative w-full max-w-md bg-[var(--bp-bg)] border border-[var(--bp-accent)]/30 p-6 sm:p-8 shadow-[0_0_60px_color-mix(in_srgb,var(--bp-accent)_15%,transparent)] animate-fade-in transition-all font-bank">
         {/* Corner marks */}
         <CornerMarks inset={8} size={12} />
 

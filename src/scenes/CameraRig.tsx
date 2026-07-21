@@ -334,9 +334,12 @@ const CameraRig = forwardRef<CameraRigHandle>((_, ref) => {
       const endShiftY = endProgress * -1.5;
       const endScaleShift = endProgress * -0.75;
       
-      rig.scale.setScalar(1.35 * heroFade + 1.25 * (1 - heroFade) + endScaleShift);
-      rig.position.x = endShiftX;
-      rig.position.y = 0.6 * heroFade - 0.2 * (1 - heroFade) + endShiftY;
+      const isMobile = window.innerWidth < 768;
+      const mobileScale = isMobile ? 0.55 : 1.0;
+      
+      rig.scale.setScalar(mobileScale * (1.35 * heroFade + 1.25 * (1 - heroFade) + endScaleShift));
+      rig.position.x = endShiftX * (isMobile ? 0.4 : 1.0);
+      rig.position.y = (0.6 * heroFade - 0.2 * (1 - heroFade) + endShiftY) * mobileScale;
       
       // Scrub-driven turn + idle drift + mouse interaction
       const targetRotY = 0.55 + smooth * Math.PI * 1.25 + Math.sin(t * 0.25) * 0.07 + mouseX * 0.5;

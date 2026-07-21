@@ -110,7 +110,7 @@ const BlogTemplate = () => {
 
   if (!isPost) {
     return (
-      <div className="sketchbook-bg min-h-screen pt-32 flex flex-col relative">
+      <div className="sketchbook-bg min-h-screen pt-32 flex flex-col relative overflow-x-hidden w-full max-w-[100vw]">
         <SEO {...blogMetadata} />
         <main className="flex-grow w-full max-w-[1800px] mx-auto px-6 md:px-10 lg:px-16 2xl:px-24 z-10 pb-20">
           <div className="text-center mb-16">
@@ -238,7 +238,7 @@ const BlogTemplate = () => {
   };
 
   return (
-    <div className="sketchbook-bg min-h-screen pt-28 flex flex-col relative">
+    <div className="sketchbook-bg min-h-screen pt-28 flex flex-col relative overflow-x-hidden w-full max-w-[100vw]">
       <SEO
         {...blogMetadata}
         title={`${currentPost.title} | Vampro Blog`}
@@ -256,7 +256,7 @@ const BlogTemplate = () => {
             <ArrowLeft size={16} /> Back to Blog
           </Link>
 
-          <div className="rounded-3xl overflow-hidden aspect-[3840/1116] min-h-[200px] sm:min-h-0 relative border border-slate-200 shadow-xl mb-6">
+          <div className="rounded-3xl overflow-hidden aspect-video sm:aspect-[21/9] lg:aspect-[3840/1116] w-full relative border border-slate-200 shadow-xl mb-6">
             <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent z-10 opacity-70"></div>
             <img src={currentPost.image} alt={currentPost.title} className="w-full h-full object-cover" />
             <div className="absolute bottom-6 left-6 z-20 px-3 py-1 bg-white/90 backdrop-blur-md border border-indigo-200 text-indigo-600 text-xs font-semibold rounded-full shadow-sm">

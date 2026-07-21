@@ -28,7 +28,7 @@ gsap.registerPlugin(ScrollTrigger);
 // fully readable stacked layout instead.
 // ─────────────────────────────────────────────────────────────
 
-const CINE_QUERY = '(min-width: 1024px) and (prefers-reduced-motion: no-preference)';
+const CINE_QUERY = '(prefers-reduced-motion: no-preference)';
 
 const Home = () => {
   const stageRef = useRef<HTMLDivElement>(null);

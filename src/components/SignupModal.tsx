@@ -119,7 +119,7 @@ const SignupModal = () => {
       />
 
       {/* Modal Content - Styled like a plugin page Glass Card */}
-      <div className="relative w-full max-w-md bg-white/5 backdrop-blur-[40px] border border-white/10 rounded-[30px] p-10 shadow-[0_8px_32px_rgba(0,0,0,0.4)] animate-fade-in transition-all">
+      <div className="relative w-full max-w-md bg-white/5 backdrop-blur-[40px] border border-white/10 rounded-[30px] p-6 sm:p-10 shadow-[0_8px_32px_rgba(0,0,0,0.4)] animate-fade-in transition-all">
         {/* Close Button */}
         <button
           onClick={closeModal}
@@ -154,7 +154,7 @@ const SignupModal = () => {
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full bg-black/20 border border-white/10 rounded-2xl px-5 py-3.5 text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500/50 focus:ring-1 focus:ring-indigo-500/50 transition-all shadow-inner"
+                  className="w-full bg-black/20 border border-white/10 rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500/50 focus:ring-1 focus:ring-indigo-500/50 transition-all shadow-inner"
                   placeholder="John Doe"
                   required
                 />
@@ -167,7 +167,7 @@ const SignupModal = () => {
                   value={email}
                   onChange={(e) => handleEmailChange(e.target.value)}
                   onBlur={handleEmailBlur}
-                  className={`w-full bg-black/20 border rounded-2xl px-5 py-3.5 text-white placeholder-slate-500 focus:outline-none focus:ring-1 transition-all shadow-inner ${
+                  className={`w-full bg-black/20 border rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white placeholder-slate-500 focus:outline-none focus:ring-1 transition-all shadow-inner ${
                     emailError && emailTouched
                       ? 'border-red-500/50 focus:border-red-500 focus:ring-red-500/30'
                       : 'border-white/10 focus:border-indigo-500/50 focus:ring-indigo-500/50'
@@ -185,7 +185,7 @@ const SignupModal = () => {
                 <select
                   value={creatorType}
                   onChange={(e) => setCreatorType(e.target.value)}
-                  className="w-full bg-black/20 border border-white/10 rounded-2xl px-5 py-3.5 text-white focus:outline-none focus:border-indigo-500/50 focus:ring-1 focus:ring-indigo-500/50 transition-all appearance-none cursor-pointer shadow-inner"
+                  className="w-full bg-black/20 border border-white/10 rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 text-white focus:outline-none focus:border-indigo-500/50 focus:ring-1 focus:ring-indigo-500/50 transition-all appearance-none cursor-pointer shadow-inner"
                   style={{
                     backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='rgba(255, 255, 255, 0.5)' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E")`,
                     backgroundRepeat: 'no-repeat',
