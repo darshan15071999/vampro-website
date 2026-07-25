@@ -100,7 +100,7 @@ const Navbar = ({ openSearch }: NavbarProps) => {
           {/* Logo */}
           <div className="flex items-center gap-3 cursor-pointer group" onClick={() => navigate('/')}>
             <img src="/header.png" alt="Vampro Logo" className="h-10 w-10 md:h-14 md:w-14 rounded-xl md:rounded-2xl shadow-md object-cover border border-slate-200/20 group-hover:scale-105 transition-transform duration-300" />
-            <span className={`text-xl md:text-3xl tracking-[0.12em] transition-colors duration-400 ${scrolled
+            <span className={`font-bank-gothic text-xl md:text-3xl tracking-[0.12em] transition-colors duration-400 ${scrolled
               ? (isLight ? 'text-[#07060F]' : 'text-white')
               : (isLight ? 'text-[#07060F]' : 'text-white')
               }`} style={{ fontWeight: 700 }}>
