@@ -54,7 +54,7 @@
 }
 
 body {
-  font-family: 'Space Grotesk', 'Inter', sans-serif;
+  font-family: 'Inter', sans-serif;
   background-color: var(--vp-black);
   color: #fff;
   overflow-x: hidden;

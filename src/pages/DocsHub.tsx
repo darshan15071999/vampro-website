@@ -53,7 +53,7 @@ const DocsHub = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
-            className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-6 font-space"
+            className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-6"
           >
             Documentation Hub
           </motion.h1>

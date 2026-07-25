@@ -63,7 +63,7 @@ const DocsSpoch = () => {
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-xs font-medium mb-6">
               <Gamepad2 size={14} /> Games
             </div>
-            <h1 className="text-3xl md:text-5xl font-bold text-white tracking-tight mb-4 leading-tight font-space">
+            <h1 className="text-3xl md:text-5xl font-bold text-white tracking-tight mb-4 leading-tight">
               Spoch
             </h1>
             <p className="text-lg text-slate-400 leading-relaxed font-light">

@@ -95,7 +95,7 @@ const App = () => {
     <ThemeProvider>
     <WaitlistProvider>
       <SignupProvider>
-      <div className="min-h-screen font-space text-white bg-[#07060F]">
+      <div className="min-h-screen text-white bg-[#07060F]">
         {/* Full-page particles - not on docs/legal pages */}
         {showParticles && <FullPageParticles isDark={isDarkPage} />}
         <div className="relative" style={{ zIndex: 2 }}>
