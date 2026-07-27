@@ -8,6 +8,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from './components/Navbar';
 import SearchOverlay from './components/SearchOverlay';
 import FullPageParticles from './components/FullPageParticles';
+import Chatbot from './components/Chatbot';
 
 // Pages — Home stays eager (primary landing page); the rest are code-split
 import Home from './pages/Home';
@@ -156,6 +157,7 @@ const App = () => {
         </div>
         <WaitlistModal />
         <SignupModal />
+        <Chatbot />
       </div>
       </SignupProvider>
     </WaitlistProvider>
