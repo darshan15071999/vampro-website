@@ -6,10 +6,10 @@ export async function onRequestPost(context: any) {
   };
 
   try {
-    const { request } = context;
+    const { request, env } = context;
     const body = await request.text();
     
-    const API_KEY = "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";
+    const API_KEY = env.NVIDIA_API_KEY;
     
     const response = await fetch("https://integrate.api.nvidia.com/v1/chat/completions", {
       method: "POST",

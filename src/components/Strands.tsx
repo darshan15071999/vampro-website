@@ -1,7 +1,6 @@
 import { Renderer, Program, Mesh, Color, Triangle, RenderTarget } from 'ogl';
-import { useEffect, useRef, type CSSProperties } from 'react';
-
-import './Strands.css';
+import { useEffect, useRef } from 'react';
+import type { CSSProperties } from 'react';
 
 const MAX_STRANDS = 12;
 const MAX_COLORS = 8;
@@ -97,9 +96,15 @@ void main() {
   col = max(mix(vec3(gray), col, uSaturation), 0.0);
 
   float lum = max(max(col.r, col.g), col.b);
-  float alpha = clamp(lum, 0.0, 1.0) * uOpacity;
+  vec3 rgb = col / max(lum, 0.0001);
 
-  fragColor = vec4(col * uOpacity, alpha);
+  // Soft spatial vignette to perfectly fade out at canvas edges
+  float dist = length(uv * vec2(1.0, 1.8));
+  float vignette = smoothstep(0.9, 0.3, dist);
+  
+  float alpha = clamp(lum, 0.0, 1.0) * uOpacity * vignette;
+
+  fragColor = vec4(rgb * alpha, alpha);
 }
 `;
 
@@ -393,5 +398,5 @@ export default function Strands({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return <div ref={ctnDom} className={`strands-container ${className}`} style={style} />;
+  return <div ref={ctnDom} className={`relative w-full h-full bg-transparent ${className}`} style={style} />;
 }
