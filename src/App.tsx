@@ -18,6 +18,9 @@ const Spoch = lazy(() => import('./pages/Spoch'));
 const DocsVoice = lazy(() => import('./pages/DocsVoice'));
 const DocsSpoch = lazy(() => import('./pages/DocsSpoch'));
 const DocsSignalScope = lazy(() => import('./pages/DocsSignalScope'));
+const UniversalPaste = lazy(() => import('./pages/UniversalPaste'));
+const DocsUniversalPaste = lazy(() => import('./pages/DocsUniversalPaste'));
+const DocsHub = lazy(() => import('./pages/DocsHub'));
 
 // Blogs
 const BlogTemplate = lazy(() => import('./pages/BlogTemplate'));
@@ -32,6 +35,9 @@ const SpochPrivacy = lazy(() => import('./pages/legal/SpochPrivacy'));
 const SpochTerms = lazy(() => import('./pages/legal/SpochTerms'));
 const SignalScopePrivacy = lazy(() => import('./pages/legal/SignalScopePrivacy'));
 const SignalScopeTerms = lazy(() => import('./pages/legal/SignalScopeTerms'));
+const UniversalPastePrivacy = lazy(() => import('./pages/legal/UniversalPastePrivacy'));
+const UniversalPasteTerms = lazy(() => import('./pages/legal/UniversalPasteTerms'));
+const UniversalPasteLicenses = lazy(() => import('./pages/legal/UniversalPasteLicenses'));
 
 // Context & Modals
 import { WaitlistProvider } from './context/WaitlistContext';
@@ -77,8 +83,9 @@ const App = () => {
     location.pathname.includes('licenses') ||
     location.pathname.startsWith('/blog');
 
-  // Hide particles on docs-style pages
+  // Hide particles on docs-style and universal-paste pages
   const showParticles = location.pathname !== '/' &&
+    !location.pathname.startsWith('/plugins/universal-paste') &&
     !location.pathname.startsWith('/docs') &&
     !location.pathname.includes('privacy') &&
     !location.pathname.includes('terms') &&
@@ -101,7 +108,9 @@ const App = () => {
         {showParticles && <FullPageParticles isDark={isDarkPage} />}
         <div className="relative" style={{ zIndex: 2 }}>
           <ScrollToTop />
-          <Navbar searchOpen={searchOpen} openSearch={openSearch} />
+          {location.pathname !== '/plugins/universal-paste' && (
+            <Navbar searchOpen={searchOpen} openSearch={openSearch} />
+          )}
           <SearchOverlay searchOpen={searchOpen} closeSearch={closeSearch} />
           <AnimatePresence mode="wait">
             <motion.main
@@ -117,6 +126,7 @@ const App = () => {
                 <Route path="/" element={<Home />} />
                 <Route path="/plugins" element={<Navigate to="/plugins/voice-generator" replace />} />
                 <Route path="/plugins/voice-generator" element={<AdobeVoice />} />
+                <Route path="/plugins/universal-paste" element={<UniversalPaste />} />
                 <Route path="/software/signalscope" element={<AEOTracker />} />
                 <Route path="/games/spoch" element={<Spoch />} />
 
@@ -130,8 +140,9 @@ const App = () => {
                 <Route path="/blog/:slug" element={<BlogTemplate />} />
 
                 {/* Docs Hub */}
-                <Route path="/docs" element={<Navigate to="/docs/plugins/voice-generator" replace />} />
+                <Route path="/docs" element={<DocsHub />} />
                 <Route path="/docs/plugins/voice-generator" element={<DocsVoice />} />
+                <Route path="/docs/plugins/universal-paste" element={<DocsUniversalPaste />} />
                 <Route path="/docs/games/spoch" element={<DocsSpoch />} />
                 <Route path="/docs/software/signalscope" element={<DocsSignalScope />} />
 
@@ -143,6 +154,9 @@ const App = () => {
                 <Route path="/plugins/voice-generator/privacy" element={<VoicePrivacy />} />
                 <Route path="/plugins/voice-generator/terms" element={<VoiceTerms />} />
                 <Route path="/plugins/voice-generator/licenses" element={<VoiceLicenses />} />
+                <Route path="/plugins/universal-paste/privacy" element={<UniversalPastePrivacy />} />
+                <Route path="/plugins/universal-paste/terms" element={<UniversalPasteTerms />} />
+                <Route path="/plugins/universal-paste/licenses" element={<UniversalPasteLicenses />} />
                 <Route path="/software/signalscope/privacy" element={<SignalScopePrivacy />} />
                 <Route path="/software/signalscope/terms" element={<SignalScopeTerms />} />
                 <Route path="/games/spoch/privacy" element={<SpochPrivacy />} />

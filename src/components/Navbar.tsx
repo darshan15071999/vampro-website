@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
-import { PlayCircle, Menu, X, Search, Sun, Moon } from 'lucide-react';
+import { PlayCircle, Menu, X, Search, Sun, Moon, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ScatterText from './ScatterText';
 import { useTheme } from '../context/ThemeContext';
@@ -40,6 +40,7 @@ const Navbar = ({ openSearch }: NavbarProps) => {
   const location = useLocation();
   const nav = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { theme, toggleTheme } = useTheme();
 
@@ -77,13 +78,28 @@ const Navbar = ({ openSearch }: NavbarProps) => {
   const desktopNavItems = [
     { label: 'About', href: '/', sectionId: 'about' },
     { label: 'Services', href: '/', sectionId: 'services' },
-    { label: 'Plugins', href: '/plugins/voice-generator' },
+    { 
+      label: 'Plugins', 
+      href: '#',
+      subItems: [
+        { label: 'Voice Generator', href: '/plugins/voice-generator', description: 'AI text-to-speech for Premiere Pro' },
+        { label: 'Universal Paste', href: '/plugins/universal-paste', description: 'Turn clipboard content into timeline assets' }
+      ]
+    },
     { label: 'Blog', href: '/blog' },
-    { label: 'Docs', href: '/docs/plugins/voice-generator' },
+    { label: 'Docs', href: '/docs' },
     { label: 'YouTube', href: 'https://youtube.com/@vamprotech?si=vponnTvHyIzwDmON', external: true, icon: <PlayCircle size={13} /> },
   ];
 
-  const mobileNavItems = desktopNavItems;
+  const mobileNavItems = [
+    { label: 'About', href: '/', sectionId: 'about' },
+    { label: 'Services', href: '/', sectionId: 'services' },
+    { label: 'Voice Generator', href: '/plugins/voice-generator' },
+    { label: 'Universal Paste', href: '/plugins/universal-paste' },
+    { label: 'Blog', href: '/blog' },
+    { label: 'Docs', href: '/docs' },
+    { label: 'YouTube', href: 'https://youtube.com/@vamprotech?si=vponnTvHyIzwDmON', external: true, icon: <PlayCircle size={13} /> },
+  ];
 
   const isHomePage = location.pathname === '/';
 
@@ -126,6 +142,47 @@ const Navbar = ({ openSearch }: NavbarProps) => {
               </button>
             )}
             {desktopNavItems.map((item, i) => {
+              if (item.subItems) {
+                return (
+                  <motion.div 
+                    key={item.label} 
+                    custom={i} 
+                    variants={navItemVariants} 
+                    initial="hidden" 
+                    animate="visible" 
+                    className="relative group" 
+                    onMouseEnter={() => setDropdownOpen(true)} 
+                    onMouseLeave={() => setDropdownOpen(false)}
+                  >
+                    <div className={`cursor-pointer text-base font-medium transition-colors duration-400 hover:text-[#2b5be3] flex items-center gap-1.5 py-2 ${scrolled ? (isLight ? 'text-slate-700' : 'text-slate-300') : (isLight ? 'text-slate-700' : 'text-slate-200')}`}>
+                      {item.label} <ChevronDown size={14} className={`transition-transform duration-300 ${dropdownOpen ? 'rotate-180' : ''}`} />
+                    </div>
+                    <AnimatePresence>
+                      {dropdownOpen && (
+                        <motion.div
+                          initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                          transition={{ duration: 0.2 }}
+                          className={`absolute top-full left-1/2 -translate-x-1/2 mt-1 py-2 w-72 rounded-2xl shadow-2xl border flex flex-col gap-1 px-2 ${isLight ? 'bg-white/95 backdrop-blur-md border-slate-200/60' : 'bg-[#0a0a14]/95 backdrop-blur-md border-white/10'}`}
+                        >
+                          {item.subItems.map((sub) => (
+                            <Link 
+                              key={sub.label} 
+                              to={sub.href} 
+                              onClick={() => { setDropdownOpen(false); setIsMobileMenuOpen(false); }}
+                              className={`block px-4 py-3 rounded-xl transition-all ${isLight ? 'hover:bg-slate-50' : 'hover:bg-white/5'}`}
+                            >
+                              <div className={`text-sm font-semibold mb-1 ${isLight ? 'text-slate-800' : 'text-white'}`}>{sub.label}</div>
+                              <div className={`text-xs ${isLight ? 'text-slate-500' : 'text-slate-400'}`}>{sub.description}</div>
+                            </Link>
+                          ))}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </motion.div>
+                );
+              }
               const Element = item.external ? motion.a : MotionLink;
               return (
                 <Element
@@ -144,7 +201,7 @@ const Navbar = ({ openSearch }: NavbarProps) => {
                         } 
                       }
                   )}
-                  className={`text-base font-medium transition-colors duration-400 hover:text-[#2b5be3] flex items-center gap-1.5 ${scrolled
+                  className={`text-base font-medium transition-colors duration-400 hover:text-[#2b5be3] flex items-center gap-1.5 py-2 ${scrolled
                     ? (isLight ? 'text-slate-700' : 'text-slate-300')
                     : (isLight ? 'text-slate-700' : 'text-slate-200')
                     }`}

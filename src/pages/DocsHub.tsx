@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { Settings, Activity, Gamepad2, ArrowRight, Sparkles } from 'lucide-react';
+import { Settings, Activity, Gamepad2, ArrowRight, Sparkles, Copy } from 'lucide-react';
 import { motion } from 'framer-motion';
 import SEO from '../components/SEO';
 import HomeFooter from '../components/HomeFooter';
@@ -8,13 +8,19 @@ import { docsHubMetadata } from '../seo/metadata';
 const DocsHub = () => {
   const navigate = useNavigate();
 
-  // Public categories — only Plugins shown
   const publicCategories = [
     {
-      title: 'Plugins',
+      title: 'Voice Generator',
       description: 'Documentation for Vampro Voice Generator and other Adobe integrations.',
       icon: <Settings className="text-[#6484e1] mb-4" size={32} />,
       link: '/docs/plugins/voice-generator',
+      bgClass: 'bg-[#2b5be3]/5 hover:bg-[#2b5be3]/10 border-[#2b5be3]/20 text-[#6484e1]'
+    },
+    {
+      title: 'Universal Paste',
+      description: 'Setup and workflow documentation for Vampro Universal Paste plugin.',
+      icon: <Copy className="text-[#6484e1] mb-4" size={32} />,
+      link: '/docs/plugins/universal-paste',
       bgClass: 'bg-[#2b5be3]/5 hover:bg-[#2b5be3]/10 border-[#2b5be3]/20 text-[#6484e1]'
     }
   ];
@@ -67,7 +73,7 @@ const DocsHub = () => {
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-1 gap-6 max-w-lg mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
           {publicCategories.map((cat, idx) => (
             <motion.button
               key={idx}

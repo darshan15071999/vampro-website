@@ -3,11 +3,12 @@ import {
   organizationSchema, websiteSchema, voiceGeneratorSchema,
   pluginsCollectionSchema, docsCollectionSchema,
   signalScopeSchema, spochSchema, docsSchema,
-  privacySchema, termsSchema, licensesSchema
+  privacySchema, termsSchema, licensesSchema,
+  universalPasteSchema, universalPasteFaqSchema, universalPasteHowToSchema
 } from './schemas';
 import {
-  homeBreadcrumb, pluginsBreadcrumb, voiceBreadcrumb, signalScopeBreadcrumb, spochBreadcrumb,
-  docsHubBreadcrumb, docsVoiceBreadcrumb, docsSignalScopeBreadcrumb, docsSpochBreadcrumb,
+  homeBreadcrumb, pluginsBreadcrumb, voiceBreadcrumb, universalPasteBreadcrumb, signalScopeBreadcrumb, spochBreadcrumb,
+  docsHubBreadcrumb, docsVoiceBreadcrumb, docsUniversalPasteBreadcrumb, docsSignalScopeBreadcrumb, docsSpochBreadcrumb,
   privacyBreadcrumb, termsBreadcrumb, licensesBreadcrumb, blogBreadcrumb
 } from './breadcrumbs';
 
@@ -30,8 +31,9 @@ const architectureItemList = {
   "itemListElement": [
     { "@type": "ListItem", "position": 1, "url": "https://vampro.in/plugins" },
     { "@type": "ListItem", "position": 2, "url": "https://vampro.in/plugins/voice-generator" },
-    { "@type": "ListItem", "position": 3, "url": "https://vampro.in/docs" },
-    { "@type": "ListItem", "position": 4, "url": "https://vampro.in/blog" }
+    { "@type": "ListItem", "position": 3, "url": "https://vampro.in/plugins/universal-paste" },
+    { "@type": "ListItem", "position": 4, "url": "https://vampro.in/docs" },
+    { "@type": "ListItem", "position": 5, "url": "https://vampro.in/blog" }
   ]
 };
 
@@ -39,7 +41,7 @@ export const homeMetadata: PageMetadata = {
   title: 'Vampro | Creative Technology Lab: Professional Plugins for Creators',
   description: "Vampro is a creative technology lab that builds professional software and plugins for creators. Explore our AI Voice Generator for Adobe Premiere Pro and more.",
   canonical: 'https://vampro.in/',
-  keywords: 'creative technology lab, professional plugins, creator tools, workflow automation, Adobe Premiere Pro, AI voice generator',
+  keywords: 'creative technology lab, professional plugins, creator tools, workflow automation, Adobe Premiere Pro, AI voice generator, universal paste',
   schema: [organizationSchema, websiteSchema, architectureItemList],
   breadcrumbs: homeBreadcrumb
 };
@@ -49,7 +51,7 @@ export const pluginsMetadata: PageMetadata = {
   description: 'Explore professional creative plugins from Vampro. AI-powered tools designed for Adobe Premiere Pro and creative workflows.',
   // /plugins client-redirects to the voice generator — canonical points at the target
   canonical: 'https://vampro.in/plugins/voice-generator',
-  keywords: 'Adobe Premiere Pro plugins, AI plugins, creative plugins, professional creative tools, voice generator plugin',
+  keywords: 'Adobe Premiere Pro plugins, AI plugins, creative plugins, professional creative tools, voice generator plugin, universal paste plugin',
   schema: pluginsCollectionSchema,
   breadcrumbs: pluginsBreadcrumb
 };
@@ -61,6 +63,20 @@ export const voiceMetadata: PageMetadata = {
   keywords: 'AI voice generator, text to speech, Adobe Premiere Pro plugin, voiceover, narration, creative plugin',
   schema: voiceGeneratorSchema,
   breadcrumbs: voiceBreadcrumb
+};
+
+export const universalPasteMetadata: PageMetadata = {
+  title: 'Vampro Universal Paste | Paste Images, URLs & Screen Snips Into Premiere Pro',
+  description: 'Vampro Universal Paste is the essential Adobe Premiere Pro plugin that pastes clipboard media, screenshots, window recordings, GIFs, and web URLs directly onto your timeline with zero file chasing.',
+  canonical: 'https://vampro.in/plugins/universal-paste',
+  keywords: 'universal paste, premiere pro paste clipboard, adobe premiere pro plugin, paste image into premiere pro, premiere pro screenshot, premiere pro screen recorder, paste url to timeline, uxp plugin, video editing workflow automation',
+  image: 'https://vampro.in/assets/universal-paste/superhero.png',
+  schema: [
+    ...(Array.isArray(universalPasteSchema) ? universalPasteSchema : [universalPasteSchema]),
+    universalPasteFaqSchema,
+    universalPasteHowToSchema
+  ],
+  breadcrumbs: universalPasteBreadcrumb
 };
 
 // Preserved for future use — hidden from public sitemap
@@ -100,6 +116,16 @@ export const docsVoiceMetadata: PageMetadata = {
   keywords: 'voice generator documentation, plugin installation, troubleshooting, tutorial',
   schema: docsSchema,
   breadcrumbs: docsVoiceBreadcrumb
+};
+
+export const docsUniversalPasteMetadata: PageMetadata = {
+  title: 'Universal Paste Documentation & Workflow Guide | Vampro',
+  description: 'Complete setup guide, clipboard workflows, screen recording, URL import, and troubleshooting for Vampro Universal Paste on Adobe Premiere Pro.',
+  canonical: 'https://vampro.in/docs/plugins/universal-paste',
+  keywords: 'universal paste documentation, premiere pro clipboard guide, uxp plugin setup, premiere pro asset organization, screen recording docs',
+  image: 'https://vampro.in/assets/universal-paste/superhero.png',
+  schema: docsSchema,
+  breadcrumbs: docsUniversalPasteBreadcrumb
 };
 
 // Preserved for future use — hidden from public sitemap
@@ -158,6 +184,10 @@ export const voicePrivacyMetadata: PageMetadata = { ...privacyMetadata, canonica
 export const voiceTermsMetadata: PageMetadata = { ...termsMetadata, canonical: 'https://vampro.in/plugins/voice-generator/terms' };
 export const voiceLicensesMetadata: PageMetadata = { ...licensesMetadata, canonical: 'https://vampro.in/plugins/voice-generator/licenses' };
 
+export const universalPastePrivacyMetadata: PageMetadata = { ...privacyMetadata, canonical: 'https://vampro.in/plugins/universal-paste/privacy' };
+export const universalPasteTermsMetadata: PageMetadata = { ...termsMetadata, canonical: 'https://vampro.in/plugins/universal-paste/terms' };
+export const universalPasteLicensesMetadata: PageMetadata = { ...licensesMetadata, canonical: 'https://vampro.in/plugins/universal-paste/licenses' };
+
 // Preserved for future use — noIndex applied
 export const signalScopePrivacyMetadata: PageMetadata = { ...privacyMetadata, canonical: 'https://vampro.in/software/signalscope/privacy', noIndex: true };
 export const signalScopeTermsMetadata: PageMetadata = { ...termsMetadata, canonical: 'https://vampro.in/software/signalscope/terms', noIndex: true };
@@ -179,4 +209,9 @@ export const allRoutesMetadata = [
   { path: '/plugins/voice-generator/privacy', ...voicePrivacyMetadata },
   { path: '/plugins/voice-generator/terms', ...voiceTermsMetadata },
   { path: '/plugins/voice-generator/licenses', ...voiceLicensesMetadata },
+  { path: '/plugins/universal-paste', ...universalPasteMetadata },
+  { path: '/docs/plugins/universal-paste', ...docsUniversalPasteMetadata },
+  { path: '/plugins/universal-paste/privacy', ...universalPastePrivacyMetadata },
+  { path: '/plugins/universal-paste/terms', ...universalPasteTermsMetadata },
+  { path: '/plugins/universal-paste/licenses', ...universalPasteLicensesMetadata },
 ];

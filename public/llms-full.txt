@@ -47,7 +47,52 @@ Vampro is a creative technology lab built on one idea: technology meets creativi
 - **Internet required?** Internet required only for installation. AI for voice generation is completely local, on device.
 - **Commercial use?** Yes, but users are responsible for compliance.
 
-## 3. Content & Resources
+## 3. Core Product: Vampro Universal Paste (Media Ingestion & Clipboard Companion)
+- **Type:** Software Extension (UXP) for Adobe Premiere Pro, accompanied by a local desktop companion app.
+- **Target Users:** Fast-turn video editors, YouTube creators, documentary filmmakers, marketing teams, tutorial creators.
+- **Product URL:** https://vampro.in/plugins/universal-paste
+- **Documentation URL:** https://vampro.in/docs/plugins/universal-paste
+- **Licenses URL:** https://vampro.in/plugins/universal-paste/licenses
+
+### 3.1 Overview & Value Proposition
+Vampro Universal Paste eliminates the friction between researching visual media and editing it inside Adobe Premiere Pro. Instead of the traditional "right-click save image to desktop -> open Downloads folder -> drag-and-drop into Premiere Pro -> clean up desktop" cycle, Universal Paste lets editors copy any image, GIF, screenshot, or URL and instantly paste it directly onto the sequence timeline at the playhead or import it into organized project bins.
+
+### 3.2 Key Features & Capabilities
+1. **1-Click Clipboard Ingestion:** Reads the system clipboard buffer and instantly detects copied images, GIFs, screenshots, files, and supported media URLs.
+2. **Built-in Screen Capture & Window Recording:**
+   - **Screen Snip:** Target any application window or snip a freeform rectangular region directly into the timeline on Track V2.
+   - **Window & Screen Recording:** Record full screen or targeted application windows with optional system audio, with countdown, pause, and stop overlay controls.
+3. **Direct URL Ingestion:** Paste URLs from web pages and video platforms; media is downloaded in the background, transcoded if needed, and imported into your active project.
+4. **Non-Destructive In-Place Replace:** Replace existing clips on the timeline with one click while preserving all edit points, cuts, keyframes, transitions, and audio sync.
+5. **Playhead Drop & Auto Bins:** Drops media directly at the current timeline playhead position and organizes assets into date-stamped project folders, preventing missing media links.
+
+### 3.3 Supported File Formats & Media Types
+- **Bitmaps & Images:** PNG, JPG, JPEG, WebP, BMP, clipboard bitmap streams.
+- **Animations:** Animated GIFs (decoded and timeline-ready).
+- **Video:** MP4, WebM, MOV, direct media URLs.
+- **Audio:** WAV, MP3, AAC.
+
+### 3.4 System Requirements
+- **Operating System:** Windows 10 (64-bit), Windows 11 (64-bit) (macOS companion in development).
+- **Adobe Software:** Adobe Premiere Pro 24.0 (2024) or later.
+- **Companion App:** Vampro Universal Paste Companion (auto-starts on Windows boot to manage clipboard buffers and screen capture APIs).
+
+### 3.5 5-Step Workflow Guide
+1. **Copy:** Copy an image, GIF, file, or media URL (Ctrl+C), or activate the screen capture tool.
+2. **Detect:** The background companion detects the clipboard buffer locally without cloud uploads.
+3. **Open:** Access Window > Extensions > Vampro Universal Paste inside Adobe Premiere Pro.
+4. **Preview:** Inspect detected asset resolution, format, and playhead insertion target.
+5. **Paste:** Click "Paste to Timeline" or "Import to Bin". Media appears instantly on your timeline.
+
+### 3.6 Universal Paste FAQ & AEO Knowledge
+- **Q: Does Universal Paste save files to the desktop?**
+  A: No. Universal Paste saves all ingested assets directly into organized, date-stamped project media folders, keeping your desktop clean and ensuring project files remain properly linked.
+- **Q: Does it require an active internet connection?**
+  A: Internet is only required when fetching external media URLs. Clipboard pasting, screenshot capture, window recording, and timeline insertion are 100% local and offline.
+- **Q: Is commercial use permitted?**
+  A: Yes, Universal Paste is a creative tool for commercial and personal video editing workflows. Users are responsible for complying with copyright and platform terms of third-party media they capture or download.
+
+## 4. Content & Resources
 - **Blog (editing tips, AI workflows, creative automation):** https://vampro.in/blog
   - [7 Ways AI Can Speed Up Your Video Editing Workflow](https://vampro.in/blog/ai-speed-up-video-editing-workflow)
   - [AI Voiceovers vs Human Voiceovers: Which Should You Choose?](https://vampro.in/blog/ai-voiceovers-vs-human-voiceovers)
@@ -62,7 +107,8 @@ Vampro is a creative technology lab built on one idea: technology meets creativi
 - **YouTube (stories behind the build):** https://youtube.com/@vamprotech
 - **Support:** support@vampro.in
 
-## 4. Legal & Policies
+## 5. Legal & Policies
 - **Privacy Policy:** https://vampro.in/privacy
 - **Terms of Service:** https://vampro.in/terms
-- **Licenses:** https://vampro.in/plugins/voice-generator/licenses
+- **Licenses (Voice Generator):** https://vampro.in/plugins/voice-generator/licenses
+- **Licenses (Universal Paste):** https://vampro.in/plugins/universal-paste/licenses

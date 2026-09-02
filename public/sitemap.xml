@@ -11,9 +11,19 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://vampro.in/plugins/universal-paste</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://vampro.in/docs/plugins/voice-generator</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vampro.in/docs/plugins/universal-paste</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://vampro.in/blog</loc>
@@ -92,6 +102,21 @@
   </url>
   <url>
     <loc>https://vampro.in/plugins/voice-generator/licenses</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://vampro.in/plugins/universal-paste/privacy</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://vampro.in/plugins/universal-paste/terms</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://vampro.in/plugins/universal-paste/licenses</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>

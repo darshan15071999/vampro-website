@@ -10,12 +10,15 @@ Vampro is a creative technology lab — where technology meets creativity. It bu
 
 ## Products
 - **[Vampro Voice Generator](https://vampro.in/plugins/voice-generator):** AI text-to-speech plugin for Adobe Premiere Pro. Generate natural offline voiceovers (27+ voices) directly inside your timeline.
+- **[Vampro Universal Paste](https://vampro.in/plugins/universal-paste):** The essential Premiere Pro clipboard and media ingestion plugin. Instantly turn clipboard images, GIFs, screenshots, window recordings, and URLs into timeline-ready assets without desktop clutter.
 
 ## Important Links
 - **Full Knowledge Base (LLM Friendly):** https://vampro.in/llms-full.txt
 - **Sitemap:** https://vampro.in/sitemap.xml
-- **Documentation:** https://vampro.in/docs/plugins/voice-generator
+- **Documentation (Voice Generator):** https://vampro.in/docs/plugins/voice-generator
+- **Documentation (Universal Paste):** https://vampro.in/docs/plugins/universal-paste
 - **Blog:** https://vampro.in/blog
 - **Privacy Policy:** https://vampro.in/privacy
 - **Terms of Service:** https://vampro.in/terms
-- **Licenses:** https://vampro.in/plugins/voice-generator/licenses
+- **Licenses (Voice Generator):** https://vampro.in/plugins/voice-generator/licenses
+- **Licenses (Universal Paste):** https://vampro.in/plugins/universal-paste/licenses

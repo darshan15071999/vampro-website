@@ -8,4 +8,4 @@ YouTube: https://www.youtube.com/@vampro
 
 /* SITE */
 Technology Stack: React, TypeScript, Vite, Tailwind CSS, Cloudflare Pages
-Products: Vampro Voice Generator, SignalScope, Spoch
+Products: Vampro Voice Generator, Vampro Universal Paste, SignalScope, Spoch

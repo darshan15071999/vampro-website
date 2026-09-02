@@ -180,3 +180,136 @@ export const licensesSchema: SchemaType = {
     "name": "Vampro"
   }
 };
+
+export const universalPasteSchema: SchemaType = [
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Vampro Universal Paste",
+    "applicationCategory": "MultimediaApplication",
+    "operatingSystem": "Windows 10, Windows 11, macOS",
+    "softwareRequirements": "Adobe Premiere Pro 24.0 or higher",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/PreOrder"
+    },
+    "description": "Adobe Premiere Pro plugin and workflow companion that enables video editors to paste clipboard media, capture application screenshots, record windows, and ingest web media directly onto the sequence timeline.",
+    "url": "https://vampro.in/plugins/universal-paste",
+    "image": "https://vampro.in/assets/universal-paste/superhero.png",
+    "screenshot": "https://vampro.in/assets/universal-paste/superhero.png",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Vampro"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Vampro Universal Paste for Adobe Premiere Pro",
+    "description": "The essential Premiere Pro plugin for editors. Paste clipboard media, grab URLs, capture window recordings, and drop assets directly into your timeline without desktop clutter.",
+    "brand": {
+      "@type": "Brand",
+      "name": "Vampro"
+    },
+    "category": "Video Editing Software Plugin",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/PreOrder"
+    },
+    "url": "https://vampro.in/plugins/universal-paste"
+  }
+];
+
+export const universalPasteFaqSchema: SchemaType = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is Vampro Universal Paste?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Vampro Universal Paste is an Adobe Premiere Pro extension (UXP) and desktop companion app that turns clipboard content, screenshots, window recordings, URLs, GIFs, images, and videos into timeline-ready assets with a single click."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I paste clipboard images directly into Adobe Premiere Pro?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "With Vampro Universal Paste installed, simply copy any image or GIF from your web browser or desktop (Ctrl+C), switch to Premiere Pro, open the Universal Paste panel, preview the detected asset, and click 'Paste to Timeline' or 'Import to Bin'. It places the asset directly at the playhead without requiring manual saving to your desktop."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I take screenshots or record screen videos directly into Premiere Pro?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. The integrated companion app includes region screenshot snipping and screen recording tools. Captured media is automatically encoded, saved into dedicated project media bins, and placed directly onto your timeline sequence."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does Universal Paste require saving files to my desktop first?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Universal Paste eliminates desktop clutter by automatically reading the system clipboard or downloading web media in the background, saving assets into an organized project folder, and importing them straight into Premiere Pro."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What media formats are supported by Universal Paste?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Universal Paste supports PNG, JPG, JPEG, WebP, animated GIFs, MP4, WebM, clipboard bitmap buffers, and direct video/media URLs."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which versions of Adobe Premiere Pro are compatible with Universal Paste?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Vampro Universal Paste is compatible with Adobe Premiere Pro 24.0 (2024) and later releases on Windows 10/11 64-bit (with macOS support planned)."
+      }
+    }
+  ]
+};
+
+export const universalPasteHowToSchema: SchemaType = {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to Paste Media Directly into Adobe Premiere Pro with Universal Paste",
+  "description": "Learn how to instantly paste web images, clipboard captures, screenshots, and URLs into your Adobe Premiere Pro sequence timeline without saving files to your desktop.",
+  "totalTime": "PT1M",
+  "step": [
+    {
+      "@type": "HowToStep",
+      "position": 1,
+      "name": "Copy Media or Capture Region",
+      "text": "Copy an image, GIF, file, or URL to your clipboard (Ctrl+C), or use the companion screen capture tool to snip a region."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 2,
+      "name": "Open Universal Paste in Premiere Pro",
+      "text": "Switch to Adobe Premiere Pro and access the Universal Paste panel (Window > Extensions > Vampro Universal Paste)."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 3,
+      "name": "Preview Detected Asset",
+      "text": "The panel immediately displays the clipboard asset with resolution, format, and playback controls."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 4,
+      "name": "Paste to Timeline or Import to Bin",
+      "text": "Click 'Paste to Timeline' to insert at your playhead position or 'Import to Bin' to add it to organized project folders."
+    }
+  ]
+};
+

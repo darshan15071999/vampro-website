@@ -56,66 +56,81 @@ async function runPrerender() {
       for (const route of finalRoutes) {
         console.log(`Prerendering route: ${route.path}`);
         
-        const page = await browser.newPage();
-        
-        // Block non-essential external requests to speed up rendering
-        await page.setRequestInterception(true);
-        page.on('request', (req) => {
-          const url = req.url();
-          if (url.includes('google-analytics.com') || url.includes('clarity.ms')) {
-            req.abort();
+        try {
+          const page = await browser.newPage();
+          
+          // Block heavy media and external analytics to speed up and stabilize prerendering
+          await page.setRequestInterception(true);
+          page.on('request', (req) => {
+            const url = req.url();
+            const resType = req.resourceType();
+            if (
+              resType === 'media' ||
+              url.endsWith('.mp4') ||
+              url.endsWith('.mp3') ||
+              url.endsWith('.webm') ||
+              url.endsWith('.ogg') ||
+              url.includes('google-analytics.com') ||
+              url.includes('clarity.ms')
+            ) {
+              req.abort();
+            } else {
+              req.continue();
+            }
+          });
+
+          // Wait until there are no more than 2 network connections
+          try {
+            await page.goto(`http://localhost:${port}${route.path}`, { 
+              waitUntil: 'networkidle2', 
+              timeout: 20000 
+            });
+          } catch (_timeoutErr) {
+            console.warn(`  ! Networkidle2 timed out for ${route.path}, continuing with current DOM state.`);
+          }
+          
+          // Brief delay to ensure any immediate useEffect state updates or initial animations settle
+          await new Promise(r => setTimeout(r, 600));
+          
+          // Extract the fully rendered HTML
+          let html = await page.evaluate(() => document.documentElement.outerHTML);
+          
+          // Add DOCTYPE because outerHTML omits it
+          html = '<!DOCTYPE html>\n' + html;
+          
+          // Inject the intended route so main.tsx can safely fallback on 404s
+          html = html.replace('<head>', `<head>\n  <meta name="prerender-route" content="${route.path}">`);
+
+          // Save generated HTML to dist directory
+          if (route.path === '/') {
+            fs.writeFileSync(indexPath, html);
+            console.log('  -> Updated root index.html');
           } else {
-            req.continue();
+            const routeName = route.path.substring(1);
+            
+            // Generate file.html (e.g. plugins.html)
+            const htmlFilePath = path.join(distDir, `${routeName}.html`);
+            const htmlFileDir = path.dirname(htmlFilePath);
+            if (!fs.existsSync(htmlFileDir)) {
+              fs.mkdirSync(htmlFileDir, { recursive: true });
+            }
+            fs.writeFileSync(htmlFilePath, html);
+            
+            // Generate folder/index.html (e.g. plugins/index.html)
+            const routeDir = path.join(distDir, routeName);
+            if (!fs.existsSync(routeDir)) {
+              fs.mkdirSync(routeDir, { recursive: true });
+            }
+            fs.writeFileSync(path.join(routeDir, 'index.html'), html);
+            
+            console.log(`  -> Generated static HTML for ${route.path}`);
           }
-        });
-
-        // Wait until there are no more than 0 network connections for at least 500 ms.
-        await page.goto(`http://localhost:${port}${route.path}`, { 
-          waitUntil: 'networkidle0', 
-          timeout: 60000 
-        });
-        
-        // Brief delay to ensure any immediate useEffect state updates or initial animations settle
-        await new Promise(r => setTimeout(r, 1000));
-        
-        // Extract the fully rendered HTML
-        let html = await page.evaluate(() => document.documentElement.outerHTML);
-        
-        // Add DOCTYPE because outerHTML omits it
-        html = '<!DOCTYPE html>\n' + html;
-        
-        // Inject the intended route so main.tsx can safely fallback on 404s
-        html = html.replace('<head>', `<head>\n  <meta name="prerender-route" content="${route.path}">`);
-
-        // Save generated HTML to dist directory
-        if (route.path === '/') {
-          fs.writeFileSync(indexPath, html);
-          console.log('  -> Updated root index.html');
-        } else {
-          const routeName = route.path.substring(1);
           
-          // Generate file.html (e.g. plugins.html)
-          const htmlFilePath = path.join(distDir, `${routeName}.html`);
-          const htmlFileDir = path.dirname(htmlFilePath);
-          if (!fs.existsSync(htmlFileDir)) {
-            fs.mkdirSync(htmlFileDir, { recursive: true });
-          }
-          fs.writeFileSync(htmlFilePath, html);
-          
-          // Generate folder/index.html (e.g. plugins/index.html)
-          const routeDir = path.join(distDir, routeName);
-          if (!fs.existsSync(routeDir)) {
-            fs.mkdirSync(routeDir, { recursive: true });
-          }
-          fs.writeFileSync(path.join(routeDir, 'index.html'), html);
-          
-          console.log(`  -> Generated static HTML for ${route.path}`);
+          await page.close();
+        } catch (routeErr) {
+          console.error(`  x Error prerendering route ${route.path}:`, routeErr);
         }
-        
-        await page.close();
       }
-    } catch (err) {
-      console.error('Error during prerendering:', err);
     } finally {
       await browser.close();
       server.close();

@@ -29,6 +29,12 @@ export const voiceBreadcrumb = generateBreadcrumbSchema([
   { name: 'Voice Generator', item: 'https://vampro.in/plugins/voice-generator' }
 ]);
 
+export const universalPasteBreadcrumb = generateBreadcrumbSchema([
+  { name: 'Home', item: 'https://vampro.in' },
+  { name: 'Plugins', item: 'https://vampro.in/plugins' },
+  { name: 'Universal Paste', item: 'https://vampro.in/plugins/universal-paste' }
+]);
+
 export const signalScopeBreadcrumb = generateBreadcrumbSchema([
   { name: 'Home', item: 'https://vampro.in' },
   { name: 'Software', item: 'https://vampro.in/software' },
@@ -51,6 +57,13 @@ export const docsVoiceBreadcrumb = generateBreadcrumbSchema([
   { name: 'Documentation', item: 'https://vampro.in/docs' },
   { name: 'Plugins', item: 'https://vampro.in/docs/plugins' },
   { name: 'Voice Generator Docs', item: 'https://vampro.in/docs/plugins/voice-generator' }
+]);
+
+export const docsUniversalPasteBreadcrumb = generateBreadcrumbSchema([
+  { name: 'Home', item: 'https://vampro.in' },
+  { name: 'Documentation', item: 'https://vampro.in/docs' },
+  { name: 'Plugins', item: 'https://vampro.in/docs/plugins' },
+  { name: 'Universal Paste Docs', item: 'https://vampro.in/docs/plugins/universal-paste' }
 ]);
 
 export const docsSignalScopeBreadcrumb = generateBreadcrumbSchema([
