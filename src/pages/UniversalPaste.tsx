@@ -35,7 +35,7 @@ const PAGE_FLIP_AUDIO_SRC = '/assets/universal-paste/page-flip.mp3';
 const INTRO_VIDEO_SRC = new URL('../Intro Animation.mp4', import.meta.url).href;
 const SECTION_SPIDERWEB_IN_SRC = new URL('../spiderweb in.mp4', import.meta.url).href;
 const HERO_SLIDE_DURATION_MS = 460;
-const SCROLL_GLITCH_DURATION_MS = 2000;
+const SCROLL_GLITCH_DURATION_MS = 800;
 
 /* ════════════════════════════════════════
    1. CONTINUOUSLY SCROLLING 2D CHECKERBOARD AMBIENT GRID
@@ -940,6 +940,9 @@ const UniversalPaste = () => {
   const [stripAnimWord, setStripAnimWord] = useState<StripAnimWord>('hero');
   const [soundEnabled, setSoundEnabled] = useState<boolean>(true);
 
+  // Track intro sound start to avoid double plays during transition
+  const introSoundStartedRef = useRef(false);
+
   // Track sections that have already played their transition sound in this user session
   const playedSectionsSession = useRef<Set<string>>(new Set());
 
@@ -1032,7 +1035,14 @@ const UniversalPaste = () => {
     });
   };
 
+  const startIntroAudio = useCallback(() => {
+    if (introSoundStartedRef.current) return;
+    introSoundStartedRef.current = true;
+    playPageFlipSound();
+  }, [playPageFlipSound]);
+
   const skipToMascotSequence = useCallback(() => {
+    startIntroAudio();
     if (introOverlayRef.current) {
       gsap.to(introOverlayRef.current, {
         opacity: 0,
@@ -1045,7 +1055,7 @@ const UniversalPaste = () => {
     } else {
       setIntroPhase('mascot-fade');
     }
-  }, []);
+  }, [startIntroAudio]);
 
   const skipAllToReady = useCallback(() => {
     setIntroPhase('ready');
@@ -1087,26 +1097,27 @@ const UniversalPaste = () => {
     if (introPhase !== 'mascot-fade') return;
 
     setStripAnimWord('hero');
-    playPageFlipSound();
+    // Ensure intro page flip sound has started (triggers at t=-0.35s before cut, or now if skipped)
+    startIntroAudio();
 
-    // 500ms: Exact synchronization as page flip whoosh concludes and comic card reveals the strike
+    // 250ms after mascot card appears (~550ms after page-flip started): spiderweb shot strikes HERO
     const timer1 = window.setTimeout(() => {
       setStripAnimWord('striking');
       playSpiderwebShotSound();
-    }, 500);
+    }, 250);
 
     const timer2 = window.setTimeout(() => {
       setStripAnimWord('struck');
-    }, 800);
+    }, 550);
 
     const timer3 = window.setTimeout(() => {
       setStripAnimWord('sidekick');
-    }, 1250);
+    }, 950);
 
     const timer4 = window.setTimeout(() => {
       setIntroPhase('ready');
       window.setTimeout(() => ScrollTrigger.refresh(), 100);
-    }, 2200);
+    }, 1800);
 
     return () => {
       window.clearTimeout(timer1);
@@ -1114,7 +1125,7 @@ const UniversalPaste = () => {
       window.clearTimeout(timer3);
       window.clearTimeout(timer4);
     };
-  }, [introPhase, playPageFlipSound, playSpiderwebShotSound]);
+  }, [introPhase, startIntroAudio, playSpiderwebShotSound]);
 
   useEffect(() => {
     if (introPhase === 'checkered-grid') {
@@ -1179,7 +1190,25 @@ const UniversalPaste = () => {
         const frame = page.querySelector<HTMLElement>('.sv-comic-panel-frame');
         const webStage = page.querySelector<HTMLElement>('.sv-section-spiderweb-stage');
         const videoIn = page.querySelector<HTMLVideoElement>('.sv-spiderweb-video--in');
-        let isRevealed = false;
+        const videoOut = page.querySelector<HTMLVideoElement>('.sv-spiderweb-video--out');
+
+        const resetFrame = () => {
+          if (!frame) return;
+          gsap.killTweensOf(frame);
+          frame.querySelectorAll<HTMLElement>('.sv-impact-smoke-burst').forEach((smoke) => {
+            smoke.remove();
+          });
+          gsap.set(frame, {
+            transformOrigin: 'center bottom',
+            scale: 0.05,
+            y: 40,
+            opacity: 0,
+            rotateX: 0,
+            force3D: true,
+          });
+        };
+
+        resetFrame();
 
         const alignWebStageToSectionBottom = () => {
           if (!frame || !webStage) return;
@@ -1191,8 +1220,6 @@ const UniversalPaste = () => {
         alignWebStageToSectionBottom();
 
         const triggerPasteIn = () => {
-          if (isRevealed) return;
-          isRevealed = true;
           alignWebStageToSectionBottom();
 
           const triggerImpact = () => {
@@ -1208,7 +1235,7 @@ const UniversalPaste = () => {
 
               window.setTimeout(() => {
                 smoke.remove();
-              }, 760);
+              }, 600);
             }
 
             page.classList.remove('sv-panel-impact-active');
@@ -1217,7 +1244,7 @@ const UniversalPaste = () => {
 
             window.setTimeout(() => {
               page.classList.remove('sv-panel-impact-active');
-            }, 680);
+            }, 550);
           };
 
           const revealFrame = () => {
@@ -1227,35 +1254,43 @@ const UniversalPaste = () => {
               .fromTo(
                 frame,
                 {
-                  y: 35,
-                  scale: 0.94,
-                  opacity: 0,
+                  y: 40,
+                  scale: 0.05,
+                  opacity: 0.2,
                   rotateX: 0,
                 },
                 {
-                  y: -6,
-                  scale: 1.02,
+                  y: -10,
+                  scale: 1.06,
                   opacity: 1,
                   rotateX: 0,
-                  duration: 0.6,
-                  ease: 'power3.out',
+                  duration: 0.42,
+                  ease: 'back.out(1.5)',
                   force3D: true,
                 }
               )
               .to(frame, {
-                y: 0,
-                scale: 1,
-                duration: 0.22,
-                ease: 'power2.out',
+                y: 2,
+                scaleX: 1.02,
+                scaleY: 0.97,
+                duration: 0.08,
+                ease: 'power3.out',
                 force3D: true,
                 onStart: triggerImpact,
+              })
+              .to(frame, {
+                y: 0,
+                scale: 1,
+                duration: 0.16,
+                ease: 'power2.out',
+                force3D: true,
               });
           };
 
+          resetFrame();
           playWebVideo(videoIn);
           revealFrame();
 
-          // Glitch triggers and stays for 2 seconds.
           page.classList.remove('sv-glitch-active');
           void page.offsetWidth;
           page.classList.add('sv-glitch-active');
@@ -1271,11 +1306,31 @@ const UniversalPaste = () => {
           }, SCROLL_GLITCH_DURATION_MS);
         };
 
+        const triggerWebPullOut = () => {
+          alignWebStageToSectionBottom();
+          page.classList.remove('sv-panel-impact-active');
+          if (frame) {
+            gsap.killTweensOf(frame);
+            gsap.to(frame, {
+              scale: 0.05,
+              y: 40,
+              opacity: 0,
+              duration: 0.22,
+              ease: 'power2.in',
+              force3D: true,
+            });
+          }
+          playWebVideo(videoOut);
+        };
+
         ScrollTrigger.create({
           trigger: page,
-          start: 'top 82%',
-          once: true,
+          start: 'top 78%',
+          end: 'bottom 22%',
           onEnter: () => triggerPasteIn(),
+          onLeave: () => triggerWebPullOut(),
+          onEnterBack: () => triggerPasteIn(),
+          onLeaveBack: () => triggerWebPullOut(),
         });
       });
 
@@ -1460,6 +1515,12 @@ const UniversalPaste = () => {
               playsInline
               autoPlay
               preload="auto"
+              onTimeUpdate={(e) => {
+                const video = e.currentTarget;
+                if (video.duration && video.currentTime >= video.duration - 0.35) {
+                  startIntroAudio();
+                }
+              }}
               onEnded={skipToMascotSequence}
               onError={(event) => {
                 event.currentTarget.style.display = 'none';
