@@ -42,7 +42,7 @@ const SCROLL_GLITCH_DURATION_MS = 2000;
    (Pans both horizontally and vertically across 100% space)
    ════════════════════════════════════════ */
 const AmbientAlternatingComicGrid = () => {
-  const cells = Array.from({ length: 144 }, (_, index) => index);
+  const cells = Array.from({ length: 24 }, (_, index) => index);
 
   return (
     <div className="sv-ambient-comic-grid-wrap" aria-hidden="true">
@@ -940,6 +940,9 @@ const UniversalPaste = () => {
   const [stripAnimWord, setStripAnimWord] = useState<StripAnimWord>('hero');
   const [soundEnabled, setSoundEnabled] = useState<boolean>(true);
 
+  // Track sections that have already played their transition sound in this user session
+  const playedSectionsSession = useRef<Set<string>>(new Set());
+
   // Interactive Companion State (Why This Plugin Section)
   const [simulatorStarted, setSimulatorStarted] = useState(true);
   const [simulatorAutopilot, setSimulatorAutopilot] = useState(true);
@@ -1086,23 +1089,24 @@ const UniversalPaste = () => {
     setStripAnimWord('hero');
     playPageFlipSound();
 
+    // 500ms: Exact synchronization as page flip whoosh concludes and comic card reveals the strike
     const timer1 = window.setTimeout(() => {
       setStripAnimWord('striking');
       playSpiderwebShotSound();
-    }, 1100);
+    }, 500);
 
     const timer2 = window.setTimeout(() => {
       setStripAnimWord('struck');
-    }, 1350);
+    }, 800);
 
     const timer3 = window.setTimeout(() => {
       setStripAnimWord('sidekick');
-    }, 1750);
+    }, 1250);
 
     const timer4 = window.setTimeout(() => {
       setIntroPhase('ready');
       window.setTimeout(() => ScrollTrigger.refresh(), 100);
-    }, 2800);
+    }, 2200);
 
     return () => {
       window.clearTimeout(timer1);
@@ -1110,7 +1114,7 @@ const UniversalPaste = () => {
       window.clearTimeout(timer3);
       window.clearTimeout(timer4);
     };
-  }, [introPhase]);
+  }, [introPhase, playPageFlipSound, playSpiderwebShotSound]);
 
   useEffect(() => {
     if (introPhase === 'checkered-grid') {
@@ -1171,29 +1175,11 @@ const UniversalPaste = () => {
       if (pages.length === 0) return;
 
       pages.forEach((page) => {
+        const pageId = page.id || 'sv-section';
         const frame = page.querySelector<HTMLElement>('.sv-comic-panel-frame');
         const webStage = page.querySelector<HTMLElement>('.sv-section-spiderweb-stage');
         const videoIn = page.querySelector<HTMLVideoElement>('.sv-spiderweb-video--in');
-        const videoOut = page.querySelector<HTMLVideoElement>('.sv-spiderweb-video--out');
-
-        const resetFrame = () => {
-          if (!frame) return;
-          gsap.killTweensOf(frame);
-          frame.querySelectorAll<HTMLElement>('.sv-impact-smoke-burst').forEach((smoke) => {
-            smoke.remove();
-          });
-          gsap.set(frame, {
-            transformOrigin: 'center bottom',
-            scale: 0.001,
-            y: 52,
-            opacity: 1,
-            filter: 'blur(10px)',
-            rotateX: 0,
-            force3D: true,
-          });
-        };
-
-        resetFrame();
+        let isRevealed = false;
 
         const alignWebStageToSectionBottom = () => {
           if (!frame || !webStage) return;
@@ -1205,6 +1191,8 @@ const UniversalPaste = () => {
         alignWebStageToSectionBottom();
 
         const triggerPasteIn = () => {
+          if (isRevealed) return;
+          isRevealed = true;
           alignWebStageToSectionBottom();
 
           const triggerImpact = () => {
@@ -1239,47 +1227,30 @@ const UniversalPaste = () => {
               .fromTo(
                 frame,
                 {
-                  y: 52,
-                  scale: 0.001,
-                  opacity: 1,
-                  filter: 'blur(10px)',
+                  y: 35,
+                  scale: 0.94,
+                  opacity: 0,
                   rotateX: 0,
                 },
                 {
-                  y: -14,
-                  scale: 1.12,
+                  y: -6,
+                  scale: 1.02,
                   opacity: 1,
-                  filter: 'blur(3px)',
                   rotateX: 0,
-                  duration: 0.9,
-                  ease: 'expo.out',
+                  duration: 0.6,
+                  ease: 'power3.out',
                   force3D: true,
                 }
               )
               .to(frame, {
-                y: 5,
-                scaleX: 1.05,
-                scaleY: 0.94,
-                filter: 'blur(1px)',
-                duration: 0.12,
-                ease: 'power3.out',
-                force3D: true,
-                onStart: triggerImpact,
-              })
-              .to(frame, {
                 y: 0,
                 scale: 1,
-                filter: 'blur(0px)',
                 duration: 0.22,
-                ease: 'elastic.out(1, 0.48)',
+                ease: 'power2.out',
                 force3D: true,
-                onComplete: () => {
-                  frame.style.filter = '';
-                },
+                onStart: triggerImpact,
               });
           };
-
-          resetFrame();
 
           playWebVideo(videoIn);
           revealFrame();
@@ -1288,28 +1259,23 @@ const UniversalPaste = () => {
           page.classList.remove('sv-glitch-active');
           void page.offsetWidth;
           page.classList.add('sv-glitch-active');
-          playSpiderwebShotSound();
+
+          // Play transition sound ONLY ONCE PER SESSION for this section!
+          if (!playedSectionsSession.current.has(pageId)) {
+            playedSectionsSession.current.add(pageId);
+            playSpiderwebShotSound();
+          }
 
           setTimeout(() => {
             page.classList.remove('sv-glitch-active');
           }, SCROLL_GLITCH_DURATION_MS);
         };
 
-        const triggerWebPullOut = () => {
-          alignWebStageToSectionBottom();
-          page.classList.remove('sv-panel-impact-active');
-          resetFrame();
-          playWebVideo(videoOut);
-        };
-
         ScrollTrigger.create({
           trigger: page,
-          start: 'top 75%',
-          end: 'bottom 25%',
+          start: 'top 82%',
+          once: true,
           onEnter: () => triggerPasteIn(),
-          onLeave: () => triggerWebPullOut(),
-          onEnterBack: () => triggerPasteIn(),
-          onLeaveBack: () => triggerWebPullOut(),
         });
       });
 
@@ -2286,7 +2252,7 @@ const UniversalPaste = () => {
                   Vampro Universal Paste gives Premiere Pro editors a faster bridge between what they find, what they capture, and what they create.
                 </p>
 
-                <div style={{ display: 'flex', justifyContent: 'center', gap: '16px', flexWrap: 'wrap' }}>
+                <div className="sv-cta-btn-group" style={{ display: 'flex', justifyContent: 'center', gap: '16px', flexWrap: 'wrap' }}>
                   <Link to="/docs/plugins/universal-paste" onClick={(e) => e.stopPropagation()}>
                     <Button variant="outline" size="lg" className="sv-interactive-glitch-elem">
                       EXPLORE SETUP & WORKFLOWS ➔

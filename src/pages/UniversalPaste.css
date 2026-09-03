@@ -3400,52 +3400,56 @@
 }
 
 @media (max-width: 760px) {
+  .sv-ambient-comic-grid-wrap {
+    display: none !important;
+  }
+
   .sv-comic-navbar {
     overflow: hidden;
   }
 
   .sv-comic-navbar-inner {
     width: 100%;
-    min-height: 64px;
-    padding: 6px 12px;
-    gap: 8px;
+    min-height: 60px;
+    padding: 6px 10px;
+    gap: 6px;
   }
 
   .sv-comic-navbar-left {
-    gap: 8px;
+    gap: 6px;
     flex: 1 1 auto;
     overflow: hidden;
   }
 
   .sv-comic-navbar-actions {
     flex: 0 0 auto;
-    gap: 6px;
+    gap: 4px;
   }
 
   .sv-comic-brand {
-    gap: 6px;
+    gap: 5px;
     min-width: 0;
     overflow: hidden;
   }
 
   .sv-comic-brand img {
-    width: 28px;
-    height: 28px;
+    width: 26px;
+    height: 26px;
     flex: 0 0 auto;
   }
 
   .sv-comic-brand span {
-    max-width: 114px;
+    max-width: 105px;
     overflow: hidden;
     text-overflow: ellipsis;
-    font-size: 12px;
+    font-size: 11px;
     line-height: 1.15;
     letter-spacing: 0.04em;
   }
 
   .sv-comic-nav-link {
-    padding: 6px 8px;
-    font-size: 10px;
+    padding: 5px 7px;
+    font-size: 9.5px;
   }
 
   .sv-comic-nav-link--home span {
@@ -3453,36 +3457,50 @@
   }
 
   .sv-coming-soon-banner {
-    top: 64px;
-    font-size: 9.5px;
-    line-height: 1.3;
-    padding: 4px 10px;
+    top: 60px;
+    font-size: 9px;
+    line-height: 1.25;
+    padding: 3px 8px;
   }
 
   .sv-vpage-container {
-    padding-top: 96px;
+    padding-top: 86px;
   }
 
   .sv-coming-soon-track {
     white-space: normal;
     text-align: center;
-    padding-inline: 8px;
+    padding-inline: 6px;
   }
 
   .sv-vpage {
-    padding-block: 24px 28px;
-    scroll-margin-top: 96px;
+    padding-block: 16px 20px !important;
+    scroll-margin-top: 76px !important;
+    min-height: auto !important;
   }
 
   .sv-ambient-pills-container {
-    display: none;
+    display: none !important;
   }
 
   .sv-comic-panel-frame {
-    width: calc(100% - 16px);
-    border-width: 4px;
-    box-shadow: 6px 6px 0 var(--comic-line), inset 0 0 0 1px rgba(255, 255, 255, 0.1);
-    padding: 22px 10px 18px;
+    width: calc(100% - 12px) !important;
+    border-width: 3px !important;
+    box-shadow: 4px 4px 0 var(--comic-line), inset 0 0 0 1px rgba(255, 255, 255, 0.1) !important;
+    padding: 16px 10px 14px !important;
+  }
+
+  .sv-panel-header-tab {
+    left: 10px !important;
+    top: -14px !important;
+    font-size: 8.5px !important;
+    padding: 2px 7px !important;
+  }
+
+  .sv-kicker {
+    font-size: 9px !important;
+    padding: 2px 7px !important;
+    margin-bottom: 6px !important;
   }
 
   .sv-wrap {
@@ -3490,51 +3508,135 @@
   }
 
   .sv-lead {
-    font-size: clamp(14px, 4.2vw, 17px);
+    font-size: clamp(11.5px, 3.2vw, 13.5px) !important;
+    line-height: 1.42 !important;
+    margin-bottom: 12px !important;
   }
 
   .sv-glitch-title {
-    font-size: clamp(24px, 7.5vw, 36px) !important;
-    line-height: 1.05;
-    word-break: normal;
-    overflow-wrap: break-word;
+    font-size: clamp(19px, 5.2vw, 26px) !important;
+    line-height: 1.12 !important;
+    word-break: normal !important;
+    overflow-wrap: break-word !important;
+    margin-bottom: 8px !important;
+  }
+
+  .sv-glitch-title--faq {
+    font-size: clamp(14px, 4.4vw, 20px) !important;
+    white-space: nowrap !important;
   }
 
   .sv-hero-comic-wrapper {
-    width: min(310px, 86vw);
+    width: min(270px, 86vw) !important;
+    margin: 0 auto !important;
   }
 
   .sv-comic-control-bar {
-    gap: 6px;
-    transform: scale(0.92);
-    transform-origin: top center;
+    gap: 4px !important;
+    transform: scale(0.8) !important;
+    transform-origin: top center !important;
+    margin-top: 4px !important;
+  }
+
+  .sv-hero-grid {
+    gap: 12px !important;
   }
 
   .sv-comic-card,
   .sv-step-card,
   .sv-why-card {
-    padding: 14px 11px;
+    padding: 10px 9px !important;
+    border-width: 2.5px !important;
+    box-shadow: 3px 3px 0 var(--comic-line) !important;
+  }
+
+  .sv-comic-card-tag {
+    font-size: 9px !important;
+    padding: 2px 6px !important;
+    margin-bottom: 4px !important;
+  }
+
+  .sv-comic-card h3,
+  .sv-why-card h3 {
+    font-size: 13px !important;
+    margin-bottom: 4px !important;
+    line-height: 1.25 !important;
+  }
+
+  .sv-comic-card p,
+  .sv-why-card p {
+    font-size: 11px !important;
+    line-height: 1.35 !important;
   }
 
   .sv-steps-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px !important;
+    margin-top: 10px !important;
+  }
+
+  .sv-step-num {
+    width: 22px !important;
+    height: 22px !important;
+    font-size: 11px !important;
+    border-width: 2px !important;
+    box-shadow: 2px 2px 0 var(--comic-line) !important;
+    margin-bottom: 4px !important;
+  }
+
+  .sv-step-card h4 {
+    font-size: 11.5px !important;
+    margin-bottom: 2px !important;
+  }
+
+  .sv-step-card p {
+    font-size: 10.5px !important;
+    line-height: 1.3 !important;
   }
 
   .sv-comic-card-grid,
   .sv-audience-grid,
   .sv-setup-grid,
   .sv-why-2x2-grid {
-    gap: 12px;
+    gap: 10px !important;
+  }
+
+  .sv-setup-card {
+    min-height: auto !important;
+    padding: 22px 10px 12px !important;
+    border-width: 3px !important;
+    box-shadow: 3.5px 3.5px 0 var(--comic-line) !important;
+  }
+
+  .sv-setup-num {
+    width: 30px !important;
+    height: 30px !important;
+    font-size: 14px !important;
+    top: -12px !important;
+    left: 10px !important;
+    border-width: 2px !important;
+    box-shadow: 2px 2px 0 var(--comic-line) !important;
+  }
+
+  .sv-setup-card h3 {
+    font-size: 13px !important;
+    margin-bottom: 4px !important;
+  }
+
+  .sv-setup-card p {
+    font-size: 11px !important;
+    line-height: 1.35 !important;
   }
 
   .sv-inspector-panel--enlarged {
     transform: none !important;
-    max-width: 100%;
+    max-width: 100% !important;
+    padding: 8px !important;
   }
 
   .sv-mock-tabs {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 4px !important;
   }
 
   .sv-timeline-block,
@@ -3545,21 +3647,71 @@
     white-space: nowrap;
   }
 
+  /* Compact spiderweb overlay on mobile */
   .sv-section-spiderweb-stage--bottom-aligned {
     overflow: hidden;
+    height: clamp(100px, 18vh, 160px) !important;
+    max-height: 20vh !important;
+    pointer-events: none !important;
+    bottom: 0 !important;
   }
 
   .sv-spiderweb-video {
-    height: 100%;
-    width: auto;
-    max-width: none;
+    height: 100% !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    object-fit: contain !important;
+    object-position: bottom center !important;
+    opacity: 0.82 !important;
   }
 
   .sv-intro-skip-btn {
-    top: 12px;
-    right: 12px;
-    font-size: 10px;
-    padding: 6px 10px;
+    top: 10px;
+    right: 10px;
+    font-size: 9px;
+    padding: 5px 8px;
+  }
+
+  .sv-faq-container {
+    gap: 8px !important;
+  }
+
+  .sv-faq-item {
+    border-width: 2.5px !important;
+    box-shadow: 3px 3px 0 #07080b !important;
+  }
+
+  .sv-faq-question-btn {
+    padding: 8px 10px !important;
+    font-size: 11.5px !important;
+    line-height: 1.35 !important;
+  }
+
+  .sv-faq-badge {
+    font-size: 14px !important;
+    width: 20px !important;
+    height: 20px !important;
+  }
+
+  .sv-faq-answer {
+    padding: 0 10px 8px !important;
+    font-size: 11px !important;
+    line-height: 1.35 !important;
+  }
+
+  .sv-cta-btn-group {
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 8px !important;
+  }
+
+  .sv-cta-btn-group a,
+  .sv-cta-btn-group button {
+    width: 100% !important;
+    font-size: 11px !important;
+    padding: 8px 12px !important;
+    justify-content: center !important;
+    text-align: center !important;
   }
 }
 
@@ -3569,52 +3721,53 @@
   .sv-steps-grid,
   .sv-setup-grid,
   .sv-why-2x2-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr !important;
   }
 
   .sv-hero-comic-wrapper {
-    width: min(290px, 88vw);
+    width: min(260px, 88vw) !important;
   }
 
   .sv-comic-panel-frame {
-    width: calc(100% - 12px);
-    padding-inline: 8px;
+    width: calc(100% - 10px) !important;
+    padding-inline: 8px !important;
   }
 
   .sv-footer-inner {
     flex-direction: column;
     text-align: center;
-    gap: 10px;
+    gap: 8px;
   }
 
   .sv-footer-links {
     justify-content: center;
     flex-wrap: wrap;
+    gap: 8px;
   }
 }
 
 @media (max-width: 430px) {
   .sv-comic-brand span {
-    max-width: 92px;
-    font-size: 11px;
+    max-width: 88px;
+    font-size: 10px;
   }
 
   .sv-comic-navbar-actions .sv-comic-nav-link:last-child {
-    max-width: 70px;
+    max-width: 65px;
     overflow: hidden;
     text-overflow: clip;
   }
 
   .sv-hero-comic-wrapper {
-    width: min(276px, 86vw);
+    width: min(250px, 86vw) !important;
   }
 
   .sv-story-heading--vintage {
-    font-size: clamp(10px, 3.2vw, 13px);
+    font-size: clamp(9.5px, 3vw, 12px);
   }
 
   .sv-story-desc--vintage {
-    font-size: clamp(8.5px, 2.8vw, 11px);
+    font-size: clamp(8px, 2.6vw, 10px);
   }
 }
 
