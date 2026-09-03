@@ -7,6 +7,7 @@ export interface BlogPost {
   date: string;
   readingTime: string;
   category: string;
+  product?: string;
   image: string;
   overview: string;
   content: string;

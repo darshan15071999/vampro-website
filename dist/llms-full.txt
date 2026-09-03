@@ -104,6 +104,11 @@ Vampro Universal Paste eliminates the friction between researching visual media 
   - [Editing With Your Eyes Closed](https://vampro.in/blog/editing-with-your-eyes-closed)
   - [Folder Management Workflow](https://vampro.in/blog/folder-management-editing-workflow)
   - [Premiere Workspace Design](https://vampro.in/blog/premiere-workspace-design)
+  - [Why Do We Still Have to Download Every Image Before Using It in Premiere Pro?](https://vampro.in/blog/why-do-we-still-have-to-download-every-image-premiere-pro)
+  - [The Screenshot Workflow in Premiere Pro Is More Complicated Than It Should Be](https://vampro.in/blog/screenshot-workflow-in-premiere-pro-friction)
+  - [Your Browser Is Part of Your Editing Workflow. Premiere Should Treat It Like One.](https://vampro.in/blog/browser-is-part-of-editing-workflow-premiere-pro)
+  - [You're Not a Slow Video Editor. Your Workflow Might Be.](https://vampro.in/blog/you-are-not-a-slow-video-editor-workflow-friction)
+  - [Premiere Pro Can Edit a Feature Film. So Why Is Pasting an Image Still Complicated?](https://vampro.in/blog/premiere-pro-feature-film-pasting-image-complicated)
 - **YouTube (stories behind the build):** https://youtube.com/@vamprotech
 - **Support:** support@vampro.in
 

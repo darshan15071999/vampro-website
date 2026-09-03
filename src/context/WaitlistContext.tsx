@@ -41,7 +41,6 @@ export const WaitlistProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   const openModal = (source: string = 'Unknown') => {
-    if (hasJoined) return; // Prevent opening if already joined
     setModalSource(source);
     setIsModalOpen(true);
   };

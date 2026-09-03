@@ -7,7 +7,7 @@ import SEO from '../components/SEO';
 import { universalPasteMetadata } from '../seo/metadata';
 import { Button } from '@/components/ui/button';
 import { useEventOnomatopoeia } from '@/components/ui/onomatopoeia';
-import { useWaitlist } from '../context/WaitlistContext';
+import { useSignup } from '../context/SignupContext';
 import {
   Volume2,
   VolumeX,
@@ -30,6 +30,8 @@ gsap.registerPlugin(ScrollTrigger);
 // Mouse click interaction: ONLY 'PASTE!'
 const SFX_WORDS = ['PASTE!'];
 const HERO_AUDIO_SRC = '/assets/universal-paste/heroaudio.mp3';
+const SPIDERWEB_SHOT_AUDIO_SRC = '/assets/universal-paste/spiderweb-shot.mp3';
+const PAGE_FLIP_AUDIO_SRC = '/assets/universal-paste/page-flip.mp3';
 const INTRO_VIDEO_SRC = new URL('../Intro Animation.mp4', import.meta.url).href;
 const SECTION_SPIDERWEB_IN_SRC = new URL('../spiderweb in.mp4', import.meta.url).href;
 const HERO_SLIDE_DURATION_MS = 460;
@@ -119,7 +121,7 @@ const SECTION_YELLOW_PILLS: Record<string, PillLayout[]> = {
     { text: 'LEVEL UP!', bottom: '8%', right: '5%', width: '130px', height: '36px', rotate: '5deg', delay: '0.8s' },
   ],
   faq: [
-    { text: 'AEO POWERED', top: '12%', right: '5%', width: '140px', height: '36px', rotate: '6deg', delay: '0.4s' },
+    { text: 'COPY & PASTE', top: '12%', right: '5%', width: '150px', height: '36px', rotate: '6deg', delay: '0.4s' },
     { text: 'ZERO GUESSWORK', top: '45%', left: '3%', width: '150px', height: '36px', rotate: '-5deg', delay: '1.6s' },
     { text: 'OFFLINE SPEED', bottom: '15%', right: '8%', width: '145px', height: '36px', rotate: '-7deg', delay: '2.2s' },
     { text: 'PRO WORKFLOW', bottom: '28%', left: '6%', width: '145px', height: '38px', rotate: '8deg', delay: '1.0s' },
@@ -129,7 +131,7 @@ const SECTION_YELLOW_PILLS: Record<string, PillLayout[]> = {
 const UNIVERSAL_PASTE_FAQS = [
   {
     q: 'What is Vampro Universal Paste?',
-    a: 'Vampro Universal Paste is an Adobe Premiere Pro extension (UXP) and desktop companion app that turns clipboard content, screenshots, window recordings, URLs, GIFs, images, and videos into timeline-ready assets with a single click.'
+    a: 'Vampro Universal Paste is an Adobe Premiere Pro extension (UXP) that turns clipboard content, screenshots, window recordings, URLs, GIFs, images, and videos into timeline-ready assets with a single click.'
   },
   {
     q: 'How do I paste clipboard images directly into Adobe Premiere Pro?',
@@ -149,7 +151,7 @@ const UNIVERSAL_PASTE_FAQS = [
   },
   {
     q: 'Which versions of Adobe Premiere Pro are compatible?',
-    a: 'Vampro Universal Paste is compatible with Adobe Premiere Pro 24.0 (2024) and later releases on Windows 10/11 64-bit (with macOS support planned).'
+    a: 'Vampro Universal Paste is compatible with Adobe Premiere Pro 25.6 and later releases on Windows 10/11 64-bit (with macOS support planned for the future).'
   }
 ];
 
@@ -256,9 +258,9 @@ const CinematicHeroTitle = () => {
         <path d="M 600 240 L 515 220 M 600 240 L 535 180 M 600 240 L 580 155" stroke="rgba(237, 28, 36, 0.6)" strokeWidth="1.5" />
       </svg>
 
-        <div className="sv-title-line-1">
-          THE UNIVERSAL
-        </div>
+      <div className="sv-title-line-1">
+        THE UNIVERSAL
+      </div>
 
       <div className="sv-title-line-dynamic">
         {animState !== 'sidekick' ? (
@@ -818,105 +820,119 @@ const SIMULATOR_AUTOPILOT_STEPS: Array<{
   captureReady: boolean;
   tracks: SimulatorTimelineItem[];
 }> = [
-  {
-    tab: 'clipboard',
-    assetIndex: 0,
-    playhead: 24,
-    captureReady: false,
-    tracks: [],
-  },
-  {
-    tab: 'capture',
-    assetIndex: 1,
-    playhead: 38,
-    captureReady: true,
-    tracks: [
-      {
-        id: 'autopilot-clipboard',
-        name: 'Hero Mark.png',
-        track: 'V1',
-        color: '#ec4899',
-        position: 38,
-        type: 'image',
-        src: SIMULATOR_ASSETS[1].src,
-        assetId: SIMULATOR_ASSETS[1].id,
-      },
-    ],
-  },
-  {
-    tab: 'capture',
-    assetIndex: 2,
-    playhead: 56,
-    captureReady: true,
-    tracks: [
-      {
-        id: 'autopilot-clipboard',
-        name: 'Hero Mark.png',
-        track: 'V1',
-        color: '#ec4899',
-        position: 38,
-        type: 'image',
-        src: SIMULATOR_ASSETS[1].src,
-        assetId: SIMULATOR_ASSETS[1].id,
-      },
-      {
-        id: 'autopilot-capture',
-        name: 'capture_tab_snapshot.png',
-        track: 'V2',
-        color: '#eab308',
-        position: 56,
-        type: 'capture',
-      },
-    ],
-  },
-  {
-    tab: 'video',
-    assetIndex: 3,
-    playhead: 72,
-    captureReady: true,
-    tracks: [
-      {
-        id: 'autopilot-clipboard',
-        name: 'Hero Mark.png',
-        track: 'V1',
-        color: '#ec4899',
-        position: 38,
-        type: 'image',
-        src: SIMULATOR_ASSETS[1].src,
-        assetId: SIMULATOR_ASSETS[1].id,
-      },
-      {
-        id: 'autopilot-video',
-        name: 'Intro Animation.mp4',
-        track: 'V1',
-        color: '#06b6d4',
-        position: 72,
-        type: 'video',
-      },
-    ],
-  },
-  {
-    tab: 'replace',
-    assetIndex: 4,
-    playhead: 72,
-    captureReady: true,
-    tracks: [
-      {
-        id: 'autopilot-replace',
-        name: 'Mascot 3_replacement.png',
-        track: 'V1',
-        color: '#22c55e',
-        position: 72,
-        type: 'image',
-        src: SIMULATOR_ASSETS[4].src,
-        assetId: SIMULATOR_ASSETS[4].id,
-      },
-    ],
-  },
-];
+    {
+      tab: 'clipboard',
+      assetIndex: 0,
+      playhead: 24,
+      captureReady: false,
+      tracks: [],
+    },
+    {
+      tab: 'capture',
+      assetIndex: 1,
+      playhead: 38,
+      captureReady: true,
+      tracks: [
+        {
+          id: 'autopilot-clipboard',
+          name: 'Hero Mark.png',
+          track: 'V1',
+          color: '#ec4899',
+          position: 38,
+          type: 'image',
+          src: SIMULATOR_ASSETS[1].src,
+          assetId: SIMULATOR_ASSETS[1].id,
+        },
+      ],
+    },
+    {
+      tab: 'capture',
+      assetIndex: 2,
+      playhead: 56,
+      captureReady: true,
+      tracks: [
+        {
+          id: 'autopilot-clipboard',
+          name: 'Hero Mark.png',
+          track: 'V1',
+          color: '#ec4899',
+          position: 38,
+          type: 'image',
+          src: SIMULATOR_ASSETS[1].src,
+          assetId: SIMULATOR_ASSETS[1].id,
+        },
+        {
+          id: 'autopilot-capture',
+          name: 'capture_tab_snapshot.png',
+          track: 'V2',
+          color: '#eab308',
+          position: 56,
+          type: 'capture',
+        },
+      ],
+    },
+    {
+      tab: 'video',
+      assetIndex: 3,
+      playhead: 72,
+      captureReady: true,
+      tracks: [
+        {
+          id: 'autopilot-clipboard',
+          name: 'Hero Mark.png',
+          track: 'V1',
+          color: '#ec4899',
+          position: 38,
+          type: 'image',
+          src: SIMULATOR_ASSETS[1].src,
+          assetId: SIMULATOR_ASSETS[1].id,
+        },
+        {
+          id: 'autopilot-video',
+          name: 'Intro Animation.mp4',
+          track: 'V1',
+          color: '#06b6d4',
+          position: 72,
+          type: 'video',
+        },
+      ],
+    },
+    {
+      tab: 'replace',
+      assetIndex: 4,
+      playhead: 72,
+      captureReady: true,
+      tracks: [
+        {
+          id: 'autopilot-replace',
+          name: 'Mascot 3_replacement.png',
+          track: 'V1',
+          color: '#22c55e',
+          position: 72,
+          type: 'image',
+          src: SIMULATOR_ASSETS[4].src,
+          assetId: SIMULATOR_ASSETS[4].id,
+        },
+      ],
+    },
+  ];
 
 const UniversalPaste = () => {
-  const { openModal } = useWaitlist();
+  const { openSignup } = useSignup();
+
+  const handleOpenWaitlist = (source: string) => {
+    openSignup({
+      product: 'Universal Paste',
+      source,
+      title: 'Join Universal Paste Waitlist',
+      subtitle: 'Be the first to paste images, GIFs, videos, and URLs directly into Adobe Premiere Pro.',
+      buttonText: 'Join Waitlist',
+      successTitle: "You're on the list!",
+      successMessage: 'Thank you for joining the Universal Paste early access waitlist. We will notify you when early access opens.',
+      alwaysShow: true,
+    });
+  };
+
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const introOverlayRef = useRef<HTMLDivElement>(null);
@@ -938,7 +954,27 @@ const UniversalPaste = () => {
     showClickBurst: true,
   });
 
-  /* ── Web swing audio placeholder: add heroaudio.mp3 in public/assets/universal-paste ── */
+  /* ── Audio helpers ── */
+  const playSpiderwebShotSound = useCallback(() => {
+    if (!soundEnabled) return;
+    try {
+      const audio = new Audio(SPIDERWEB_SHOT_AUDIO_SRC);
+      audio.volume = 0.72;
+      audio.currentTime = 0;
+      audio.play().catch(() => {});
+    } catch {}
+  }, [soundEnabled]);
+
+  const playPageFlipSound = useCallback(() => {
+    if (!soundEnabled) return;
+    try {
+      const audio = new Audio(PAGE_FLIP_AUDIO_SRC);
+      audio.volume = 0.72;
+      audio.currentTime = 0;
+      audio.play().catch(() => {});
+    } catch {}
+  }, [soundEnabled]);
+
   const playWebSwingSound = useCallback(() => {
     if (!soundEnabled) return;
     try {
@@ -949,12 +985,13 @@ const UniversalPaste = () => {
       audio.volume = 0.72;
       audio.currentTime = 0;
       audio.play().catch(() => {
-        // The placeholder file is expected to be added later.
+        // Fallback to spiderweb sound
+        playSpiderwebShotSound();
       });
     } catch {
       // Audio playback unavailable.
     }
-  }, [soundEnabled]);
+  }, [soundEnabled, playSpiderwebShotSound]);
 
   const stopWebVideo = useCallback((video?: HTMLVideoElement | null) => {
     if (!video) return;
@@ -1047,9 +1084,11 @@ const UniversalPaste = () => {
     if (introPhase !== 'mascot-fade') return;
 
     setStripAnimWord('hero');
+    playPageFlipSound();
 
     const timer1 = window.setTimeout(() => {
       setStripAnimWord('striking');
+      playSpiderwebShotSound();
     }, 1100);
 
     const timer2 = window.setTimeout(() => {
@@ -1061,8 +1100,9 @@ const UniversalPaste = () => {
     }, 1750);
 
     const timer4 = window.setTimeout(() => {
-      setIntroPhase('checkered-grid');
-    }, 3000);
+      setIntroPhase('ready');
+      window.setTimeout(() => ScrollTrigger.refresh(), 100);
+    }, 2800);
 
     return () => {
       window.clearTimeout(timer1);
@@ -1070,6 +1110,16 @@ const UniversalPaste = () => {
       window.clearTimeout(timer3);
       window.clearTimeout(timer4);
     };
+  }, [introPhase]);
+
+  useEffect(() => {
+    if (introPhase === 'checkered-grid') {
+      const timer = window.setTimeout(() => {
+        setIntroPhase('ready');
+        window.setTimeout(() => ScrollTrigger.refresh(), 100);
+      }, 300);
+      return () => window.clearTimeout(timer);
+    }
   }, [introPhase]);
 
   useEffect(() => {
@@ -1238,7 +1288,7 @@ const UniversalPaste = () => {
           page.classList.remove('sv-glitch-active');
           void page.offsetWidth;
           page.classList.add('sv-glitch-active');
-          playWebSwingSound();
+          playSpiderwebShotSound();
 
           setTimeout(() => {
             page.classList.remove('sv-glitch-active');
@@ -1380,13 +1430,13 @@ const UniversalPaste = () => {
       setTimelineTracks((prev) => prev.map((item) => (
         item.id === selectedTimelineItemId
           ? {
-              ...item,
-              name: `${selectedAsset.label}_replacement.png`,
-              color: '#22c55e',
-              type: 'image',
-              src: selectedAsset.src,
-              assetId: selectedAsset.id,
-            }
+            ...item,
+            name: `${selectedAsset.label}_replacement.png`,
+            color: '#22c55e',
+            type: 'image',
+            src: selectedAsset.src,
+            assetId: selectedAsset.id,
+          }
           : item
       )));
       playWebSwingSound();
@@ -1505,6 +1555,13 @@ const UniversalPaste = () => {
               {soundEnabled ? <Volume2 size={16} /> : <VolumeX size={16} />}
             </button>
             <Link
+              to="/blog"
+              className="sv-comic-nav-link"
+              style={{ background: '#ffffff', color: '#07080b', border: '2px solid #07080b' }}
+            >
+              Blogs ↗
+            </Link>
+            <Link
               to="/docs/plugins/universal-paste"
               className="sv-comic-nav-link"
               style={{ background: '#ffd437', color: '#07080b' }}
@@ -1516,14 +1573,21 @@ const UniversalPaste = () => {
       </header>
 
       {/* ── YELLOW COMING SOON BANNER JUST BELOW HEADER ── */}
-      <div className="sv-coming-soon-banner" onClick={(e) => e.stopPropagation()}>
+      <div
+        className="sv-coming-soon-banner"
+        onClick={() => handleOpenWaitlist('Top Yellow Bar')}
+        style={{ cursor: 'pointer' }}
+      >
         <div className="sv-coming-soon-track">
           <span>⚡ PLUGIN IN PROGRESS • COMING SOON TO ADOBE PREMIERE PRO • EARLY ACCESS WAITLIST OPEN ⚡</span>
         </div>
         <button
           type="button"
           className="sv-top-banner-waitlist-btn"
-          onClick={() => openModal('Universal Paste - Top Yellow Bar')}
+          onClick={(e) => {
+            e.stopPropagation();
+            handleOpenWaitlist('Top Yellow Bar');
+          }}
         >
           ★ JOIN WAITLIST
         </button>
@@ -1565,7 +1629,7 @@ const UniversalPaste = () => {
                 className="sv-header-tab-waitlist-btn"
                 onClick={(e) => {
                   e.stopPropagation();
-                  openModal('Universal Paste - Hero Callout');
+                  handleOpenWaitlist('Hero Callout');
                 }}
               >
                 ★ JOIN WAITLIST
@@ -1582,7 +1646,7 @@ const UniversalPaste = () => {
                   <CinematicHeroTitle />
 
                   <p className="sv-lead" style={{ color: '#cbd2dc', textShadow: '2px 2px 0 #000' }}>
-                    Copy an image, grab a GIF, paste a URL, capture a screen, or record a window - send it straight into your Premiere Pro timeline.
+                    Copy an image, grab a GIF, paste a video URL, capture a screen, or record a window, and send it straight into your Premiere Pro timeline.
                   </p>
 
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: '14px', marginTop: '24px' }}>
@@ -2152,7 +2216,7 @@ const UniversalPaste = () => {
                 <div className="sv-kicker sv-kicker-paste" style={{ margin: '0 auto 12px', background: '#ffd437', color: '#07080b' }}>
                   ★ ANSWERS & INTEL ★
                 </div>
-                <h2 className="sv-glitch-title">FREQUENTLY ASKED QUESTIONS</h2>
+                <h2 className="sv-glitch-title sv-glitch-title--faq">FREQUENTLY ASKED QUESTIONS</h2>
                 <p className="sv-lead" style={{ color: '#cbd2dc', maxWidth: '720px', margin: '0 auto' }}>
                   Direct answers to how Universal Paste operates with Adobe Premiere Pro, supported media, file handling, and workflow automation.
                 </p>
@@ -2228,13 +2292,30 @@ const UniversalPaste = () => {
                       EXPLORE SETUP & WORKFLOWS ➔
                     </Button>
                   </Link>
+                  <Link to="/blog" onClick={(e) => e.stopPropagation()}>
+                    <Button
+                      variant="outline"
+                      size="lg"
+                      className="sv-interactive-glitch-elem"
+                      style={{
+                        background: '#ffd437',
+                        color: '#07080b',
+                        borderColor: '#07080b',
+                        borderWidth: '2px',
+                        fontWeight: 900,
+                        boxShadow: '3px 3px 0 #07080b'
+                      }}
+                    >
+                      READ BLOGS ➔
+                    </Button>
+                  </Link>
                   <Button
                     variant="primary"
                     size="lg"
                     className="sv-interactive-glitch-elem sv-cta-waitlist-btn"
                     onClick={(e) => {
                       e.stopPropagation();
-                      openModal('Universal Paste - Bottom CTA');
+                      handleOpenWaitlist('Bottom CTA');
                     }}
                   >
                     ★ JOIN THE WAITLIST ➔
@@ -2247,6 +2328,7 @@ const UniversalPaste = () => {
                   <span>© 2026 Vampro. All rights reserved. Vampro Universal Paste for Adobe Premiere Pro.</span>
                   <div className="sv-footer-links">
                     <Link to="/docs/plugins/universal-paste">Docs</Link>
+                    <Link to="/blog">Blogs</Link>
                     <Link to="/plugins/universal-paste/licenses">Licenses</Link>
                     <Link to="/plugins/universal-paste/terms">Terms</Link>
                     <Link to="/plugins/universal-paste/privacy">Privacy</Link>

@@ -6,7 +6,7 @@ import SpecularButton from './SpecularButton';
 import ShinyText from './ShinyText';
 
 const SignupModal = () => {
-  const { isModalOpen, closeModal, markAsSignedUp, modalSource } = useSignup();
+  const { isModalOpen, closeModal, markAsSignedUp, modalConfig } = useSignup();
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -67,7 +67,16 @@ const SignupModal = () => {
       return;
     }
 
+    const isUniversalPaste = modalConfig.product === 'Universal Paste';
+    const distinctSource = isUniversalPaste
+      ? `Universal Paste - ${modalConfig.source}`
+      : `Plugin: Voice Generator - ${modalConfig.source}`;
+    const distinctTitle = isUniversalPaste
+      ? 'Universal Paste Waitlist'
+      : 'Voice Generator';
+
     try {
+      // 1. Submit lead to Brevo CRM via /api/lead
       const response = await fetch('/api/lead', {
         method: 'POST',
         headers: {
@@ -77,8 +86,9 @@ const SignupModal = () => {
           name,
           email,
           creatorType,
-          source: `Plugin: ${modalSource}`,
-          title: 'User',
+          source: distinctSource,
+          title: distinctTitle,
+          product: modalConfig.product,
         }),
       });
 
@@ -88,13 +98,28 @@ const SignupModal = () => {
         throw new Error(data.error || 'Failed to submit signup.');
       }
 
+      // 2. Also notify waitlist & KV storage
+      fetch('/api/waitlist', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          creatorType,
+          source: distinctSource,
+          product: modalConfig.product,
+        }),
+      }).catch(() => {});
+
       setIsSubmitting(false);
       setIsSuccess(true);
 
       // Auto close and execute callback after short delay
       setTimeout(() => {
         closeModal();
-        markAsSignedUp(); // This executes the callback!
+        markAsSignedUp(); // Executes any page-specific callback and saves distinct status
 
         setTimeout(() => {
           setIsSuccess(false);
@@ -102,23 +127,25 @@ const SignupModal = () => {
           setEmail('');
           setCreatorType('Solo Creator');
         }, 500);
-      }, 1500);
+      }, isUniversalPaste ? 2200 : 1500);
 
     } catch (err: any) {
-      setError(err.message || 'Failed to connect to Salesforce. Please try again.');
+      setError(err.message || 'Failed to complete signup. Please try again.');
       setIsSubmitting(false);
     }
   };
 
+  const isUniversalPaste = modalConfig.product === 'Universal Paste';
+
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-[999999] flex items-center justify-center p-4">
       {/* Backdrop */}
       <div
         className="absolute inset-0 bg-[#04030A]/80 backdrop-blur-md transition-opacity animate-fade-in"
         onClick={closeModal}
       />
 
-      {/* Modal Content - Styled like a plugin page Glass Card */}
+      {/* Modal Content - Styled like the plugin page Glass Card */}
       <div className="relative w-full max-w-md bg-white/5 backdrop-blur-[40px] border border-white/10 rounded-[30px] p-6 sm:p-10 shadow-[0_8px_32px_rgba(0,0,0,0.4)] animate-fade-in transition-all">
         {/* Close Button */}
         <button
@@ -133,18 +160,32 @@ const SignupModal = () => {
             <div className="w-16 h-16 bg-white/5 border border-white/10 text-green-400 rounded-full flex items-center justify-center mb-6 shadow-[0_0_30px_rgba(74,222,128,0.2)]">
               <CheckCircle2 size={32} />
             </div>
-            <h3 className="text-2xl font-bold text-white mb-3"><ShinyText text="Redirecting..." speed={2} shineColor="#ffffff" color="#ffffff" /></h3>
+            <h3 className="text-2xl font-bold text-white mb-3">
+              <ShinyText
+                text={modalConfig.successTitle || (isUniversalPaste ? "You're on the list!" : "Redirecting...")}
+                speed={2}
+                shineColor="#ffffff"
+                color="#ffffff"
+              />
+            </h3>
             <p className="text-slate-400 font-light leading-relaxed">
-              Thank you for signing up!
+              {modalConfig.successMessage || (isUniversalPaste ? "Thank you for joining the Universal Paste waitlist." : "Thank you for signing up!")}
             </p>
           </div>
         ) : (
           <>
             <div className="mb-8 text-center">
               <h2 className="text-3xl font-extrabold text-white mb-3">
-                <ShinyText text="Sign up to download" speed={3} shineColor="#ffffff" color="#ffffff" />
+                <ShinyText
+                  text={modalConfig.title || (isUniversalPaste ? "Join Early Access Waitlist" : "Sign up to download")}
+                  speed={3}
+                  shineColor="#ffffff"
+                  color="#ffffff"
+                />
               </h2>
-              <p className="text-slate-400 font-light text-sm tracking-wide">Join the ecosystem of professional creators.</p>
+              <p className="text-slate-400 font-light text-sm tracking-wide">
+                {modalConfig.subtitle || (isUniversalPaste ? "Be the first to paste web media directly into Adobe Premiere Pro." : "Join the ecosystem of professional creators.")}
+              </p>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-5">
@@ -213,10 +254,10 @@ const SignupModal = () => {
                   <div className="flex items-center justify-center gap-2 font-bold text-lg text-white">
                     {isSubmitting ? (
                       <>
-                        <Loader2 size={20} className="animate-spin" /> Signing up...
+                        <Loader2 size={20} className="animate-spin" /> {isUniversalPaste ? 'Joining Waitlist...' : 'Signing up...'}
                       </>
                     ) : (
-                      'Sign Up'
+                      modalConfig.buttonText || (isUniversalPaste ? 'Join Waitlist' : 'Sign Up')
                     )}
                   </div>
                 </SpecularButton>

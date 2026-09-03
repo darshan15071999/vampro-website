@@ -353,8 +353,8 @@
   z-index: 9999;
   display: grid;
   place-items: center;
-  pointer-events: auto;
-  cursor: pointer;
+  pointer-events: none;
+  cursor: default;
   background: rgba(7, 8, 11, 0.45);
   backdrop-filter: blur(4px);
   animation: sv-center-stage-fade-in 0.4s ease-out forwards;
@@ -371,6 +371,8 @@
 
 .sv-center-yellow-strip-card {
   position: relative;
+  pointer-events: auto;
+  cursor: pointer;
   background: linear-gradient(135deg, #ffd437 0%, #ffe685 100%);
   border: 5px solid var(--comic-line);
   box-shadow:
@@ -579,9 +581,8 @@
 }
 
 .sv-comic-brand img {
-  width: 42px;
-  /* Increased size */
-  height: 42px;
+  width: 34px;
+  height: 34px;
   object-fit: contain;
   filter: drop-shadow(2px 2px 0 var(--comic-line));
 }
@@ -589,10 +590,17 @@
 .sv-comic-brand span {
   font-family: Orbitron, "Space Grotesk", sans-serif;
   font-weight: 900;
-  font-size: 16px;
-  /* Increased font */
-  letter-spacing: 0.08em;
+  font-size: 13.5px;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
+}
+
+.sv-glitch-title--faq {
+  font-size: clamp(16px, 2.7vw, 42px) !important;
+  white-space: nowrap !important;
+  letter-spacing: -0.01em;
+  max-width: 100%;
+  margin-inline: auto;
 }
 
 .sv-comic-nav-links {

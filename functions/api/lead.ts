@@ -4,12 +4,13 @@ interface Env {
 
 export const onRequestPost: PagesFunction<Env> = async (context) => {
   try {
-    const { name, email, creatorType, source, title } = await context.request.json<{
+    const { name, email, creatorType, source, title, product } = await context.request.json<{
       name: string;
       email: string;
       creatorType: string;
       source: string;
       title?: string;
+      product?: string;
     }>();
 
     // Validation
@@ -41,16 +42,25 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       );
     }
 
+    // Determine distinct source marker and title per page/product
+    let distinctSource = source || "General";
+    if (product && !distinctSource.includes(product)) {
+      distinctSource = `${product} - ${distinctSource}`;
+    }
+
+    let distinctTitle = title || "User";
+    if (product && !distinctTitle.includes(product)) {
+      distinctTitle = `${product} ${title ? title : 'Lead'}`;
+    }
+
     const brevoPayload = {
       email: normalizedEmail,
       attributes: {
         FIRSTNAME: firstName,
         LASTNAME: lastName,
-        // Make sure these attributes exist in your Brevo account (Contact attributes)
-        // or remove them if you don't need them.
         COMPANY: creatorType,
-        SOURCE: source,
-        TITLE: title || "User",
+        SOURCE: distinctSource,
+        TITLE: distinctTitle,
       },
       updateEnabled: true, // Update contact if it already exists
     };

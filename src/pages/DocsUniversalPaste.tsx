@@ -1,4 +1,5 @@
 import { type MouseEvent as RMouseEvent } from 'react';
+import { AlertTriangle } from 'lucide-react';
 import { DocSection, DocH3, DocList } from '../components/DocHelpers';
 import SEO from '../components/SEO';
 import HomeFooter from '../components/HomeFooter';
@@ -13,6 +14,7 @@ const DocsUniversalPaste = () => {
 
   const navItems = [
     { id: 'intro', label: 'Introduction' },
+    { id: 'requirements', label: 'System Requirements' },
     { id: 'setup', label: 'Setup' },
     { id: 'clipboard', label: 'Clipboard Workflow' },
     { id: 'capture', label: 'Capture Workflow' },
@@ -44,6 +46,45 @@ const DocsUniversalPaste = () => {
                 <p className="gradient-blue-text font-semibold text-base">Vampro Universal Paste</p>
                 <p className="text-slate-400 mt-5 leading-relaxed">Use the UXP plugin inside Adobe Premiere Pro and the local companion app for clipboard, capture, URL, and media workflows.</p>
               </div>
+
+              <DocSection id="requirements" title="System Requirements">
+                <div className="grid md:grid-cols-2 gap-4 mb-6">
+                  <div className="glass-card p-5 rounded-2xl border border-indigo-900/30">
+                    <h4 className="font-bold text-white mb-3 text-sm flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-blue-400"></span> Software & Platform
+                    </h4>
+                    <DocList items={[
+                      'OS: Windows 10/11, 64-bit',
+                      'Adobe App: Adobe Premiere Pro 25.6.0 or newer (already configured in UXP manifest)',
+                      'Plugin Runtime: UXP support enabled in Premiere Pro',
+                      'Companion App: Vampro Universal Paste Companion installed and allowed to run in background/startup',
+                    ]} />
+                  </div>
+
+                  <div className="glass-card p-5 rounded-2xl border border-indigo-900/30">
+                    <h4 className="font-bold text-white mb-3 text-sm flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-indigo-400"></span> Hardware & Network
+                    </h4>
+                    <DocList items={[
+                      'CPU: 64-bit Intel / AMD processor',
+                      'RAM: 8 GB minimum, 16 GB recommended because Premiere itself benefits from it',
+                      'GPU: DirectX 11 compatible GPU/driver, especially for screen capture and recording',
+                      'Disk Space: Around 300–500 MB practical install space for companion, plugin, assets, cache, and downloaded media',
+                      'Network: Required for URL/video imports from the internet; not required for local clipboard images/files/captures',
+                    ]} />
+                  </div>
+                </div>
+
+                <div className="glass-card rounded-xl p-5 border-amber-500/30 bg-amber-500/10 mt-4">
+                  <h4 className="text-sm font-bold text-amber-400 mb-2 flex items-center gap-2">
+                    <AlertTriangle size={16} className="text-amber-400 flex-shrink-0" />
+                    Important Note: Screen Capture & GPU Requirements
+                  </h4>
+                  <p className="text-amber-200/90 text-sm leading-relaxed">
+                    Screen capture and recording depend on Windows Graphics Capture / Direct3D. If the machine has broken or outdated GPU drivers or runs in a restricted remote/virtual display session, capture may fail even if the plugin loads.
+                  </p>
+                </div>
+              </DocSection>
 
               <DocSection id="setup" title="Setup">
                 {[['1. Install the companion', 'Install and run Vampro Universal Paste Companion once. After first run, the companion registers itself as a background startup app so it is available when Premiere Pro opens.'], ['2. Load the UXP plugin', 'Install or load the Premiere Pro UXP plugin. When the panel opens, it connects to the local companion on the configured local port.'], ['3. Confirm connection', 'The top status bar should show that the companion is connected. If not, start the companion and use the reconnect control.'], ['4. Choose a workflow', 'Use Clipboard for copied media, Capture for screenshots and screen recordings, Video for supported video URLs, or Replace for replacing selected project media.']].map(([t, b]) => (

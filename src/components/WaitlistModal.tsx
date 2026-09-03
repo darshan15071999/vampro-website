@@ -118,7 +118,7 @@ const WaitlistModal = () => {
     `${inputBase} border-red-500/50 focus:border-red-500 focus:shadow-[0_0_0_1px_rgba(239,68,68,0.5)]`;
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-[999999] flex items-center justify-center p-4">
       {/* Backdrop — blueprint-tinted overlay */}
       <div
         className="absolute inset-0 bg-[var(--bp-bg)]/85 backdrop-blur-sm transition-opacity animate-fade-in"

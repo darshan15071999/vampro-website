@@ -10,29 +10,41 @@ import remarkGfm from 'remark-gfm';
 const API_URL = "/api/chat";
 
 const getContextualQuestions = (pathname: string) => {
-  if (pathname.startsWith('/plugins')) {
+  if (pathname.includes('/universal-paste')) {
     return [
-      "What are Vampro Plugins?",
+      "How does Universal Paste work?",
+      "Can I paste screenshots & URLs directly?",
+      "How do I join the early access waitlist?"
+    ];
+  } else if (pathname.includes('/voice-generator')) {
+    return [
       "How do I use the Voice Generator?",
-      "Are there premium plugins?"
+      "What voices and languages are supported?",
+      "How do I install the companion app?"
+    ];
+  } else if (pathname.startsWith('/plugins')) {
+    return [
+      "What plugins does Vampro make?",
+      "Tell me about Universal Paste",
+      "Tell me about Voice Generator"
     ];
   } else if (pathname.startsWith('/docs')) {
     return [
-      "How do I get started?",
       "What are the system requirements?",
-      "Where is the API reference?"
+      "How do I install Vampro plugins?",
+      "Where is the troubleshooting guide?"
     ];
   } else if (pathname.startsWith('/blog')) {
     return [
-      "What is this blog about?",
-      "How to speed up workflow?",
-      "Are there tutorials?"
+      "What is this article about?",
+      "How does Universal Paste speed up editing?",
+      "Where can I read more workflow tips?"
     ];
   } else {
     return [
       "What is Vampro?",
-      "What products are offered?",
-      "What services are provided?"
+      "Tell me about Universal Paste",
+      "What creative tools do you offer?"
     ];
   }
 };
@@ -98,14 +110,29 @@ const Chatbot: React.FC = () => {
       
       const systemPrompt = {
         role: 'system',
-        content: `You are the Vampro AI Assistant, a highly intelligent and helpful expert on all things related to Vampro. Vampro is a creative lab at the intersection of creativity and technology, turning ideas into real experiences from films to software. Products include Voice Generator, etc.
-Your goal is to provide accurate, helpful, and beautifully formatted answers to the user's questions.
+        content: `You are the Vampro AI Assistant, a highly intelligent and helpful expert on all things related to Vampro. Vampro is a creative lab at the intersection of creativity and technology, turning ideas into real experiences from films to software.
+
+Products & Plugins:
+1. Vampro Universal Paste:
+   - Purpose: Eliminates the tedious "save image -> locate Downloads folder -> import to Premiere" loop by letting editors paste clipboard images, GIFs, screenshots, window recordings, and video URLs directly onto their Adobe Premiere Pro timeline.
+   - Key Features:
+     • 1-Click Clipboard Ingestion: Directly reads clipboard buffers and pastes at current playhead position on Track V1/V2.
+     • Built-in Screen Capture & Window Recording: Instant region snip and full screen/window capture directly into the sequence.
+     • Direct URL Ingestion: Paste media links from the web without manual download dialogs.
+     • Non-Destructive In-Place Replace: Swap timeline clips while preserving keyframes, cuts, transitions, and audio sync.
+     • Clean Storage: Media files are organized into dedicated project bins, keeping the desktop and Downloads folder completely clean.
+     • 100% Local & Offline: Local companion app handles system buffers locally on device without cloud uploads.
+   - Requirements: Windows 10/11 (64-bit), Adobe Premiere Pro 25.6.0+, DirectX 11 GPU, Vampro Companion running in background.
+   - Current Status: Early access private waitlist is open! Direct users to join the waitlist at /plugins/universal-paste.
+
+2. Vampro Voice Generator:
+   - Purpose: Offline AI text-to-speech plugin for Adobe Premiere Pro. Generate natural narration directly into the timeline with 27+ voices, pitch/speed controls, and tone presets.
 
 Guidelines:
-1. Base your answers on the CURRENT PAGE CONTENT provided below, but use your advanced reasoning to infer and provide comprehensive answers about Vampro's services and products even if exact keywords aren't present.
-2. If asked about "services provided", synthesize a great answer from the content (e.g., film production, software development, creative tools).
-3. ALWAYS format your responses neatly using Markdown. Use bolding for emphasis, bullet points for lists, and paragraphs for readability.
-4. Include hyperlinks to relevant pages where appropriate (e.g., [Voice Generator](/plugins/voice-generator), [Contact](/contact)).
+1. Base your answers on the CURRENT PAGE CONTENT provided below and the product knowledge above.
+2. If the user is asking about Universal Paste or is on the Universal Paste page/docs: provide enthusiastic, technically accurate details about clipboard-native editing, screen snip, playhead drop, and encourage joining the early access waitlist.
+3. ALWAYS format your responses neatly using Markdown with bolding, bullet points, and clean paragraphs.
+4. Include helpful hyperlinks where relevant (e.g., [Universal Paste](/plugins/universal-paste), [Universal Paste Docs](/docs/plugins/universal-paste), [Voice Generator](/plugins/voice-generator), [Blogs](/blog)).
 5. If the question is completely irrelevant to Vampro, politely decline.
 
 CURRENT PAGE CONTENT:
