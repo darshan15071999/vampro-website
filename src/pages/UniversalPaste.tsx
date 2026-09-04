@@ -5,6 +5,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import SEO from '../components/SEO';
 import { universalPasteMetadata } from '../seo/metadata';
+import WorkflowSlideshow from '../components/WorkflowSlideshow';
 import { Button } from '@/components/ui/button';
 import { useEventOnomatopoeia } from '@/components/ui/onomatopoeia';
 import { useSignup } from '../context/SignupContext';
@@ -101,6 +102,12 @@ const SECTION_YELLOW_PILLS: Record<string, PillLayout[]> = {
     { text: 'COPY -> PASTE', top: '48%', right: '4%', width: '145px', height: '36px', rotate: '5deg', delay: '0.2s' },
     { text: 'SCREEN SNIP', bottom: '16%', left: '4%', width: '135px', height: '36px', rotate: '9deg', delay: '2.1s' },
     { text: 'PLAYHEAD DROP', bottom: '6%', right: '8%', width: '155px', height: '38px', rotate: '-4deg', delay: '0.9s' },
+  ],
+  workflow: [
+    { text: '3 SEC AUTOPLAY', top: '8%', left: '4%', width: '150px', height: '36px', rotate: '-7deg', delay: '0.4s' },
+    { text: 'PASTE IN SECONDS', top: '42%', right: '3%', width: '160px', height: '38px', rotate: '6deg', delay: '1.2s' },
+    { text: 'INSTANT SWAP', bottom: '12%', left: '5%', width: '140px', height: '36px', rotate: '7deg', delay: '2.0s' },
+    { text: 'ZERO LATENCY', bottom: '22%', right: '5%', width: '145px', height: '36px', rotate: '-5deg', delay: '0.8s' },
   ],
   for: [
     { text: 'FAST-TURN CUTS', top: '18%', left: '4%', width: '155px', height: '38px', rotate: '6deg', delay: '2.0s' },
@@ -1565,6 +1572,7 @@ const UniversalPaste = () => {
             <a href="#sv-hero" className="sv-comic-nav-link">Hero</a>
             <a href="#sv-benefits" className="sv-comic-nav-link">Benefits</a>
             <a href="#sv-how" className="sv-comic-nav-link">How It Works</a>
+            <a href="#sv-workflow" className="sv-comic-nav-link">Workflow</a>
             <a href="#sv-for" className="sv-comic-nav-link">For Editors</a>
             <a href="#sv-why" className="sv-comic-nav-link">Why Vampro</a>
             <a href="#sv-faq" className="sv-comic-nav-link">FAQ</a>
@@ -1797,6 +1805,47 @@ const UniversalPaste = () => {
                   </div>
                 ))}
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── SECTION: WORKFLOW SHOWCASE (BLACK BACKGROUND • RED BOX) ── */}
+        <section className="sv-vpage sv-vpage--noir sv-vpage--workflow" id="sv-workflow">
+          <AmbientAlternatingComicGrid />
+          <SectionYellowPills sectionId="workflow" />
+
+          {/* Comic Halftone dots on black background */}
+          <div className="sv-halftone sv-halftone--noir" />
+          <div className="sv-speed-lines" />
+
+          {/* Section-level Spiderweb Transition Overlay (Bottom-aligned) */}
+          <SectionSpiderwebOverlay />
+
+          <div className="sv-comic-panel-frame sv-comic-panel-frame--red">
+            {/* Box Internal Halftone Dots Layer */}
+            <div className="sv-box-halftone-dots" />
+
+            <div className="sv-panel-header-tab">
+              <span>COPY, CAPTURE, PASTE, REPLACE</span>
+            </div>
+
+            <div className="sv-wrap">
+              <div style={{ textAlign: 'center', marginBottom: '24px' }}>
+                <div
+                  className="sv-kicker sv-kicker-paste"
+                  style={{ margin: '0 auto 12px', background: '#ffd437', color: '#07080b' }}
+                >
+                  ★ 5-PART POWER WORKFLOW ★
+                </div>
+                <h2 className="sv-glitch-title" style={{ margin: '0 auto 12px' }}>
+                  COPY, CAPTURE, PASTE, REPLACE
+                </h2>
+                <p className="sv-lead" style={{ margin: '0 auto', color: '#cbd2dc', maxWidth: '720px' }}>
+                  Watch how fast you can ingest URLs, grab screen clips, paste clipboard assets, and replace timeline cuts without ever breaking your creative flow.
+                </p>
+              </div>
+
+              <WorkflowSlideshow />
             </div>
           </div>
         </section>
