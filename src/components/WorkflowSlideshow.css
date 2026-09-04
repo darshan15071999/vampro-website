@@ -1,55 +1,252 @@
 /* ════════════════════════════════════════
    WORKFLOW SLIDESHOW: COPY, CAPTURE, PASTE, REPLACE
-   Interactive 5-Card Autoscrolling Comic Carousel
+   Side-by-Side Split View (Left: 5 Boxes, Right: Scaled Slide Stage)
    ════════════════════════════════════════ */
 
 .sv-workflow-slideshow {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 14px;
   position: relative;
   z-index: 10;
   box-sizing: border-box;
 }
 
-/* ─── 1. MEDIA STAGE (16:9 MONITOR) ─── */
+/* ─── DESKTOP SPLIT LAYOUT (LEFT: 5 BOXES • RIGHT: 16:9 STAGE) ─── */
+.sv-workflow-split-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.32fr;
+  gap: clamp(14px, 2vw, 24px);
+  align-items: stretch;
+  width: 100%;
+  max-width: 1140px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* ─── LEFT COLUMN: 5 DETAIL BOXES ─── */
+.sv-workflow-boxes-col {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: space-between;
+  height: 100%;
+  min-width: 0;
+}
+
+.sv-workflow-box {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: linear-gradient(180deg, #131722 0%, #0a0d13 100%);
+  border: 2px solid var(--comic-line, #07080b);
+  border-radius: 4px;
+  box-shadow: 3px 3px 0 var(--comic-line, #07080b);
+  padding: 8px 12px 10px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.16s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+  min-height: 66px;
+  box-sizing: border-box;
+  overflow: hidden;
+  flex: 1;
+}
+
+.sv-workflow-box:hover {
+  transform: translateX(3px);
+  box-shadow: 4px 4px 0 var(--comic-line, #07080b);
+  border-color: rgba(255, 212, 55, 0.65);
+  background: linear-gradient(180deg, #1d2433 0%, #0f131c 100%);
+}
+
+.sv-workflow-box--active {
+  border-color: var(--card-accent, #ffd437) !important;
+  background: linear-gradient(180deg, #222b3b 0%, #121721 100%) !important;
+  box-shadow:
+    4px 4px 0 var(--comic-red, #ed1c24),
+    0 0 14px rgba(255, 212, 55, 0.22) !important;
+  transform: translateX(4px);
+}
+
+/* Box Header Line */
+.sv-workflow-box-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+  gap: 8px;
+}
+
+.sv-workflow-box-header-left {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+}
+
+.sv-workflow-box-header-right {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-shrink: 0;
+}
+
+.sv-workflow-box-num {
+  font-family: Orbitron, sans-serif;
+  font-size: 10px;
+  font-weight: 900;
+  color: #64748b;
+  letter-spacing: 0.05em;
+  flex-shrink: 0;
+}
+
+.sv-workflow-box--active .sv-workflow-box-num {
+  color: var(--card-accent, #ffd437);
+}
+
+.sv-workflow-box-badge {
+  font-family: Orbitron, sans-serif;
+  font-size: 8.5px;
+  font-weight: 900;
+  color: #07080b;
+  padding: 1.5px 5px;
+  border-radius: 2px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
+  flex-shrink: 0;
+}
+
+.sv-workflow-box-title {
+  font-family: Orbitron, sans-serif;
+  font-size: 12.5px;
+  font-weight: 900;
+  color: #ffffff;
+  text-transform: uppercase;
+  margin: 0;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sv-workflow-box--active .sv-workflow-box-title {
+  color: #ffffff;
+  text-shadow: 0 0 8px rgba(255, 212, 55, 0.35);
+}
+
+.sv-workflow-box-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #07080b;
+  border: 1px solid;
+  transition: all 0.15s ease;
+}
+
+.sv-workflow-box-check {
+  flex-shrink: 0;
+}
+
+.sv-workflow-box-desc {
+  font-size: 10.5px;
+  line-height: 1.35;
+  color: #94a3b8;
+  margin: 0 0 6px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sv-workflow-box--active .sv-workflow-box-desc {
+  color: #e2e8f0;
+}
+
+/* 3-Second Countdown Progress Bar */
+.sv-workflow-box-progress-track {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.07);
+  overflow: hidden;
+}
+
+.sv-workflow-box-progress-fill {
+  height: 100%;
+  width: 0%;
+  box-shadow: 0 0 6px currentColor;
+  animation: sv-workflow-bar-anim 3s linear forwards;
+}
+
+.sv-workflow-box-progress-fill.paused {
+  animation-play-state: paused;
+}
+
+@keyframes sv-workflow-bar-anim {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+.sv-workflow-box-progress-inactive {
+  height: 100%;
+  width: 0%;
+}
+
+/* ─── RIGHT COLUMN: SCALED SLIDE MONITOR STAGE ─── */
+.sv-workflow-stage-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+}
+
 .sv-workflow-stage {
   position: relative;
   width: 100%;
-  max-width: 1020px;
-  margin: 0 auto;
   background: #07080b;
-  border: 4px solid var(--comic-line, #07080b);
-  border-radius: 6px;
+  border: 3px solid var(--comic-line, #07080b);
+  border-radius: 5px;
   box-shadow:
-    8px 8px 0 var(--comic-line, #07080b),
+    6px 6px 0 var(--comic-line, #07080b),
     inset 0 0 0 1px rgba(255, 212, 55, 0.2),
-    0 18px 42px rgba(0, 0, 0, 0.7);
+    0 14px 34px rgba(0, 0, 0, 0.7);
   overflow: hidden;
   box-sizing: border-box;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 .sv-workflow-stage:hover {
   border-color: #07080b;
   box-shadow:
-    10px 10px 0 var(--comic-line, #07080b),
+    8px 8px 0 var(--comic-line, #07080b),
     inset 0 0 0 1px rgba(255, 212, 55, 0.35),
-    0 22px 48px rgba(0, 0, 0, 0.85);
+    0 18px 40px rgba(0, 0, 0, 0.85);
 }
 
-/* Stage Top Header Bar */
+/* Stage Header Bar */
 .sv-workflow-stage-bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8px 14px;
+  padding: 6px 12px;
   background: #111520;
-  border-bottom: 3px solid var(--comic-line, #07080b);
+  border-bottom: 2px solid var(--comic-line, #07080b);
   font-family: Orbitron, sans-serif;
-  gap: 12px;
-  flex-wrap: wrap;
+  gap: 8px;
   user-select: none;
 }
 
@@ -57,37 +254,36 @@
 .sv-workflow-stage-bar-right {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 }
 
 .sv-workflow-monitor-badge {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
   background: #07080b;
   color: var(--comic-yellow, #ffd437);
-  padding: 3px 8px;
+  padding: 2.5px 7px;
   border-radius: 2px;
-  font-size: 10px;
+  font-size: 9.5px;
   font-weight: 900;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
   border: 1px solid rgba(255, 212, 55, 0.35);
-  box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
 }
 
 .sv-workflow-pulse-dot {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
   border-radius: 50%;
   background: #10b981;
-  box-shadow: 0 0 8px #10b981;
+  box-shadow: 0 0 6px #10b981;
   animation: sv-workflow-pulse 1.4s infinite ease-in-out;
 }
 
 .sv-workflow-pulse-dot.paused {
   background: #f59e0b;
-  box-shadow: 0 0 8px #f59e0b;
+  box-shadow: 0 0 6px #f59e0b;
   animation: none;
 }
 
@@ -103,18 +299,18 @@
 }
 
 .sv-workflow-step-indicator {
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 900;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
 }
 
 .sv-workflow-counter {
-  font-size: 10.5px;
+  font-size: 10px;
   font-weight: 800;
   color: #a3afc2;
-  letter-spacing: 0.06em;
-  padding: 2px 8px;
+  letter-spacing: 0.05em;
+  padding: 2px 6px;
   background: rgba(7, 8, 11, 0.6);
   border-radius: 2px;
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -123,10 +319,10 @@
 .sv-workflow-ctrl-btn {
   background: #1c2332;
   color: #fff;
-  border: 2px solid var(--comic-line, #07080b);
-  box-shadow: 2px 2px 0 var(--comic-line, #07080b);
+  border: 1.5px solid var(--comic-line, #07080b);
+  box-shadow: 1.5px 1.5px 0 var(--comic-line, #07080b);
   border-radius: 2px;
-  padding: 4px 8px;
+  padding: 3px 6px;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -138,15 +334,13 @@
   background: var(--comic-yellow, #ffd437);
   color: #07080b;
   transform: translate(-1px, -1px);
-  box-shadow: 3px 3px 0 var(--comic-line, #07080b);
 }
 
 .sv-workflow-ctrl-btn:active {
   transform: translate(1px, 1px);
-  box-shadow: 1px 1px 0 var(--comic-line, #07080b);
 }
 
-/* 16:9 Viewport */
+/* 16:9 Scaled Viewport */
 .sv-workflow-viewport {
   position: relative;
   width: 100%;
@@ -158,18 +352,17 @@
   justify-content: center;
 }
 
-/* Screen Scanlines Texture */
 .sv-workflow-scanlines {
   position: absolute;
   inset: 0;
   background: linear-gradient(
     rgba(18, 16, 16, 0) 50%,
-    rgba(0, 0, 0, 0.28) 50%
+    rgba(0, 0, 0, 0.24) 50%
   );
-  background-size: 100% 4px;
+  background-size: 100% 3px;
   pointer-events: none;
   z-index: 4;
-  opacity: 0.45;
+  opacity: 0.35;
 }
 
 /* Image Slide */
@@ -181,7 +374,7 @@
   align-items: center;
   justify-content: center;
   background: #050608;
-  animation: sv-workflow-fade 0.28s ease-out;
+  animation: sv-workflow-fade 0.22s ease-out;
 }
 
 .sv-workflow-image {
@@ -190,7 +383,7 @@
   object-fit: contain;
   display: block;
   user-select: none;
-  filter: contrast(102%) brightness(98%);
+  filter: contrast(102%) brightness(99%);
 }
 
 .sv-workflow-image-overlay {
@@ -199,29 +392,29 @@
   left: 0;
   right: 0;
   background: linear-gradient(180deg, transparent 0%, rgba(7, 8, 11, 0.88) 100%);
-  padding: 24px 16px 12px;
+  padding: 18px 12px 8px;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   z-index: 6;
   pointer-events: none;
 }
 
 .sv-workflow-image-tag {
   font-family: Orbitron, sans-serif;
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 900;
   color: #07080b;
-  padding: 3px 8px;
+  padding: 2px 6px;
   border-radius: 2px;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   flex-shrink: 0;
-  box-shadow: 2px 2px 0 #000;
+  box-shadow: 1px 1px 0 #000;
 }
 
 .sv-workflow-image-caption {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
   color: #fff;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9);
@@ -236,7 +429,7 @@
   width: 100%;
   height: 100%;
   background: #000;
-  animation: sv-workflow-fade 0.28s ease-out;
+  animation: sv-workflow-fade 0.22s ease-out;
 }
 
 .sv-workflow-iframe {
@@ -249,17 +442,41 @@
   z-index: 3;
 }
 
+.sv-workflow-video-facade {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at center, #1b0709 0%, #07080b 100%);
+  cursor: pointer;
+  color: #fff;
+  gap: 8px;
+  z-index: 3;
+}
+
+.sv-workflow-play-icon {
+  color: var(--comic-yellow, #ffd437);
+  filter: drop-shadow(0 0 12px rgba(237, 28, 36, 0.6));
+  transition: transform 0.15s ease;
+}
+
+.sv-workflow-video-facade:hover .sv-workflow-play-icon {
+  transform: scale(1.15);
+}
+
 .sv-workflow-video-overlay-bar {
   position: absolute;
-  top: 10px;
-  right: 12px;
+  top: 8px;
+  right: 8px;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   z-index: 5;
   background: rgba(7, 8, 11, 0.75);
-  padding: 4px 8px;
-  border-radius: 3px;
+  padding: 3px 6px;
+  border-radius: 2px;
   border: 1px solid rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(4px);
 }
@@ -267,10 +484,10 @@
 .sv-workflow-yt-external-btn {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 3px;
   color: #ffd437;
   font-family: Orbitron, sans-serif;
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 800;
   text-decoration: none;
   text-transform: uppercase;
@@ -284,7 +501,7 @@
 
 @keyframes sv-workflow-fade {
   from {
-    opacity: 0.35;
+    opacity: 0.4;
     transform: scale(0.99);
   }
   to {
@@ -299,63 +516,62 @@
   top: 50%;
   transform: translateY(-50%);
   z-index: 8;
-  background: rgba(7, 8, 11, 0.88);
+  background: rgba(7, 8, 11, 0.85);
   color: var(--comic-yellow, #ffd437);
-  border: 2px solid var(--comic-line, #07080b);
-  box-shadow: 3px 3px 0 var(--comic-line, #07080b);
-  width: 44px;
-  height: 44px;
+  border: 1.5px solid var(--comic-line, #07080b);
+  box-shadow: 2px 2px 0 var(--comic-line, #07080b);
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  border-radius: 4px;
-  transition: all 0.15s ease;
+  border-radius: 3px;
+  transition: all 0.12s ease;
   user-select: none;
 }
 
 .sv-workflow-arrow--left {
-  left: 12px;
+  left: 8px;
 }
 
 .sv-workflow-arrow--right {
-  right: 12px;
+  right: 8px;
 }
 
 .sv-workflow-arrow:hover {
   background: var(--comic-yellow, #ffd437);
   color: #07080b;
   transform: translateY(-50%) scale(1.08);
-  box-shadow: 4px 4px 0 #07080b;
 }
 
 .sv-workflow-arrow:active {
   transform: translateY(-50%) scale(0.96);
 }
 
-/* Stage Bottom Caption Bar */
+/* Stage Bottom Caption Ribbon */
 .sv-workflow-stage-footer {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 10px 16px;
+  gap: 10px;
+  padding: 8px 12px;
   background: #0d1017;
   border-top: 2px solid var(--comic-line, #07080b);
-  font-size: 12.5px;
+  font-size: 11.5px;
   color: #cbd2dc;
-  line-height: 1.45;
+  line-height: 1.35;
 }
 
 .sv-workflow-stage-footer-icon {
-  width: 26px;
-  height: 26px;
-  border-radius: 3px;
+  width: 22px;
+  height: 22px;
+  border-radius: 2px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: #07080b;
   flex-shrink: 0;
-  box-shadow: 2px 2px 0 #000;
+  box-shadow: 1px 1px 0 #000;
 }
 
 .sv-workflow-stage-footer-text {
@@ -365,286 +581,121 @@
 .sv-workflow-stage-footer-text strong {
   color: #fff;
   font-family: Orbitron, sans-serif;
-  letter-spacing: 0.03em;
-}
-
-/* ─── 2. THE 5 INTERACTIVE CARDS RAIL / GRID ─── */
-.sv-workflow-cards-track {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 12px;
-  width: 100%;
-  max-width: 1020px;
-  margin: 0 auto;
-  box-sizing: border-box;
-}
-
-.sv-workflow-card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  background: linear-gradient(180deg, #161b26 0%, #0d1017 100%);
-  border: 3px solid var(--comic-line, #07080b);
-  border-radius: 4px;
-  box-shadow: 4px 4px 0 var(--comic-line, #07080b);
-  padding: 14px 12px 18px;
-  cursor: pointer;
-  text-align: left;
-  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
-  user-select: none;
-  min-height: 160px;
-  box-sizing: border-box;
-  overflow: hidden;
-}
-
-.sv-workflow-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 6px 6px 0 var(--comic-line, #07080b);
-  border-color: rgba(255, 212, 55, 0.65);
-  background: linear-gradient(180deg, #1f2535 0%, #111520 100%);
-}
-
-.sv-workflow-card--active {
-  border-color: var(--comic-yellow, #ffd437) !important;
-  background: linear-gradient(180deg, #242c3d 0%, #151a24 100%) !important;
-  box-shadow:
-    6px 6px 0 var(--comic-red, #ed1c24),
-    0 0 20px rgba(255, 212, 55, 0.28) !important;
-  transform: translateY(-4px);
-}
-
-.sv-workflow-card-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 8px;
-  gap: 6px;
-}
-
-.sv-workflow-card-num {
-  font-family: Orbitron, sans-serif;
-  font-size: 11px;
-  font-weight: 900;
-  color: #64748b;
-  letter-spacing: 0.06em;
-}
-
-.sv-workflow-card--active .sv-workflow-card-num {
-  color: var(--comic-yellow, #ffd437);
-}
-
-.sv-workflow-card-tag {
-  font-family: Orbitron, sans-serif;
-  font-size: 9px;
-  font-weight: 900;
-  color: #07080b;
-  padding: 2px 6px;
-  border-radius: 2px;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.4);
-}
-
-.sv-workflow-card-icon-wrap {
-  width: 24px;
-  height: 24px;
-  border-radius: 3px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #07080b;
-  color: #fff;
-  border: 1.5px solid;
-  flex-shrink: 0;
-}
-
-.sv-workflow-card-title {
-  font-family: Orbitron, sans-serif;
-  font-size: 13.5px;
-  font-weight: 900;
-  color: #ffffff;
-  text-transform: uppercase;
-  margin: 0 0 6px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 4px;
   letter-spacing: 0.02em;
 }
 
-.sv-workflow-card--active .sv-workflow-card-title {
-  color: #ffffff;
-  text-shadow: 0 0 10px rgba(255, 212, 55, 0.4);
-}
-
-.sv-workflow-card-active-check {
-  color: var(--comic-yellow, #ffd437);
-  flex-shrink: 0;
-}
-
-.sv-workflow-card-desc {
-  font-size: 11.5px;
-  line-height: 1.42;
-  color: #94a3b8;
-  margin: 0 0 12px;
-  display: -webkit-box;
-  -webkit-line-clamp: 4;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.sv-workflow-card--active .sv-workflow-card-desc {
-  color: #e2e8f0;
-}
-
-/* 3-Second Countdown Progress Bar */
-.sv-workflow-progress-track {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: rgba(255, 255, 255, 0.08);
-  overflow: hidden;
-  border-radius: 0 0 2px 2px;
-}
-
-.sv-workflow-progress-fill {
-  height: 100%;
-  width: 0%;
-  box-shadow: 0 0 8px currentColor;
-  animation: sv-workflow-progress-bar 3s linear forwards;
-}
-
-.sv-workflow-progress-fill.paused {
-  animation-play-state: paused;
-}
-
-@keyframes sv-workflow-progress-bar {
-  0% {
-    width: 0%;
-  }
-  100% {
-    width: 100%;
-  }
-}
-
-.sv-workflow-progress-inactive {
-  height: 100%;
-  width: 0%;
-}
-
-/* ─── 3. MOBILE PAGINATION DOTS ─── */
+/* ─── MOBILE PAGINATION DOTS ─── */
 .sv-workflow-dots-nav {
   display: none;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 6px;
   margin-top: 4px;
 }
 
 .sv-workflow-dot {
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   background: #252e40;
-  border: 2px solid var(--comic-line, #07080b);
-  box-shadow: 2px 2px 0 var(--comic-line, #07080b);
+  border: 1.5px solid var(--comic-line, #07080b);
+  box-shadow: 1.5px 1.5px 0 var(--comic-line, #07080b);
   cursor: pointer;
   padding: 0;
-  transition: all 0.15s ease;
+  transition: all 0.12s ease;
 }
 
 .sv-workflow-dot--active {
   transform: scale(1.3);
-  box-shadow: 2px 2px 0 #ed1c24;
+  box-shadow: 1.5px 1.5px 0 #ed1c24;
+}
+
+/* ─── WORKFLOW SINGLE-LINE HEADING ─── */
+.sv-workflow-title-single-line {
+  white-space: nowrap !important;
+  font-size: clamp(17px, 2.7vw, 38px) !important;
+  letter-spacing: -0.01em !important;
+  text-align: center !important;
+  margin: 0 auto 6px !important;
+  max-width: 100% !important;
+  line-height: 1.08 !important;
 }
 
 /* ─── RESPONSIVE BREAKPOINTS ─── */
-@media (max-width: 1100px) {
-  .sv-workflow-cards-track {
-    grid-template-columns: repeat(5, 1fr);
+@media (max-width: 1024px) {
+  .sv-workflow-split-layout {
+    grid-template-columns: 1fr 1.2fr;
+    gap: 12px;
+  }
+
+  .sv-workflow-box {
+    padding: 7px 10px 8px;
+    min-height: 60px;
+  }
+
+  .sv-workflow-box-title {
+    font-size: 11.5px;
+  }
+
+  .sv-workflow-box-desc {
+    font-size: 9.5px;
+  }
+}
+
+/* Mobile & Tablet Portrait (< 860px): Stacked Layout */
+@media (max-width: 860px) {
+  .sv-workflow-split-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .sv-workflow-title-single-line {
+    font-size: clamp(12px, 3.4vw, 20px) !important;
+    white-space: nowrap !important;
+    letter-spacing: -0.02em !important;
+  }
+
+  /* Slide Stage is placed on top for immediate visual impact */
+  .sv-workflow-stage-col {
+    order: 1;
+    width: 100%;
+  }
+
+  /* 5 Boxes placed below in a horizontally swipeable track */
+  .sv-workflow-boxes-col {
+    order: 2;
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
     gap: 8px;
+    padding: 2px 2px 8px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
   }
 
-  .sv-workflow-card {
-    padding: 12px 10px 16px;
+  .sv-workflow-boxes-col::-webkit-scrollbar {
+    display: none;
   }
 
-  .sv-workflow-card-title {
-    font-size: 12px;
+  .sv-workflow-box {
+    flex: 0 0 78%;
+    scroll-snap-align: center;
+    min-height: 74px;
+    padding: 8px 12px 10px;
   }
 
-  .sv-workflow-card-desc {
-    font-size: 10.5px;
-    -webkit-line-clamp: 4;
-  }
-}
-
-@media (max-width: 900px) {
-  .sv-workflow-cards-track {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
+  .sv-workflow-box:hover {
+    transform: none;
   }
 
-  .sv-workflow-card-desc {
-    -webkit-line-clamp: 3;
-  }
-}
-
-@media (max-width: 680px) {
-  .sv-workflow-stage-bar {
-    padding: 6px 10px;
-  }
-
-  .sv-workflow-monitor-badge {
-    font-size: 8.5px;
-    padding: 2px 6px;
+  .sv-workflow-box--active {
+    transform: none !important;
   }
 
   .sv-workflow-step-indicator {
     display: none;
-  }
-
-  .sv-workflow-counter {
-    font-size: 9.5px;
-  }
-
-  .sv-workflow-arrow {
-    width: 36px;
-    height: 36px;
-  }
-
-  .sv-workflow-arrow--left {
-    left: 8px;
-  }
-
-  .sv-workflow-arrow--right {
-    right: 8px;
-  }
-
-  .sv-workflow-stage-footer {
-    padding: 8px 12px;
-    font-size: 11.5px;
-  }
-
-  /* Horizontal swipe rail on mobile */
-  .sv-workflow-cards-track {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    gap: 10px;
-    padding: 4px 4px 12px;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: thin;
-  }
-
-  .sv-workflow-card {
-    flex: 0 0 82%;
-    scroll-snap-align: center;
-    min-height: 145px;
   }
 
   .sv-workflow-dots-nav {
@@ -652,15 +703,22 @@
   }
 }
 
-.sv-vpage--workflow .sv-glitch-title {
-  font-size: clamp(24px, 4.5vw, 54px);
-  letter-spacing: -0.01em;
-}
+@media (max-width: 480px) {
+  .sv-workflow-title-single-line {
+    font-size: clamp(10.5px, 3.2vw, 15px) !important;
+  }
 
-@media (max-width: 680px) {
-  .sv-vpage--workflow .sv-glitch-title {
-    font-size: clamp(20px, 5.5vw, 28px) !important;
-    line-height: 1.15;
+  .sv-workflow-box {
+    flex: 0 0 84%;
+  }
+
+  .sv-workflow-monitor-badge {
+    font-size: 8px;
+    padding: 2px 5px;
+  }
+
+  .sv-workflow-stage-footer {
+    font-size: 10.5px;
+    padding: 6px 10px;
   }
 }
-

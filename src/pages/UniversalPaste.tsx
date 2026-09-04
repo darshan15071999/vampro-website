@@ -1830,18 +1830,18 @@ const UniversalPaste = () => {
             </div>
 
             <div className="sv-wrap">
-              <div style={{ textAlign: 'center', marginBottom: '24px' }}>
+              <div style={{ textAlign: 'center', marginBottom: '14px' }}>
                 <div
                   className="sv-kicker sv-kicker-paste"
-                  style={{ margin: '0 auto 12px', background: '#ffd437', color: '#07080b' }}
+                  style={{ margin: '0 auto 8px', background: '#ffd437', color: '#07080b', fontSize: '11px', padding: '3px 12px' }}
                 >
                   ★ 5-PART POWER WORKFLOW ★
                 </div>
-                <h2 className="sv-glitch-title" style={{ margin: '0 auto 12px' }}>
+                <h2 className="sv-glitch-title sv-workflow-title-single-line">
                   COPY, CAPTURE, PASTE, REPLACE
                 </h2>
-                <p className="sv-lead" style={{ margin: '0 auto', color: '#cbd2dc', maxWidth: '720px' }}>
-                  Watch how fast you can ingest URLs, grab screen clips, paste clipboard assets, and replace timeline cuts without ever breaking your creative flow.
+                <p className="sv-lead" style={{ margin: '0 auto', color: '#cbd2dc', maxWidth: '780px', fontSize: '13px', lineHeight: '1.4' }}>
+                  Watch how fast you can ingest URLs, grab screen clips, paste clipboard assets, and replace timeline cuts without breaking your creative flow.
                 </p>
               </div>
 
