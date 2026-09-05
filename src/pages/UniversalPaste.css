@@ -49,54 +49,39 @@
   z-index: 1;
 }
 
+.sv-ambient-comic-grid,
 .sv-ambient-comic-grid--infinite-scroll {
   position: absolute;
-  top: -15%;
-  left: -15%;
-  width: 135%;
-  height: 135%;
-  min-height: 135%;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(clamp(115px, 9.5vw, 160px), 1fr));
-  grid-auto-rows: clamp(100px, 10.5vh, 145px);
-  opacity: 0.24;
-  background:
-    radial-gradient(circle, rgba(255, 255, 255, 0.14) 1px, transparent 1.35px) 0 0 / 12px 12px,
-    repeating-linear-gradient(112deg, rgba(255, 212, 55, 0.06) 0 1px, transparent 1px 28px);
-  filter: contrast(118%) grayscale(20%);
+  top: 0;
+  left: 0;
+  width: calc(100% + 280px);
+  height: calc(100% + 240px);
+  background-image: url('/assets/universal-paste/checkered-grid-tile.png');
+  background-repeat: repeat;
+  background-size: 280px 240px;
+  background-position: 0 0;
+  opacity: 0.34;
+  filter: contrast(115%);
   transform: translate3d(0, 0, 0);
   will-change: transform;
   backface-visibility: hidden;
-  animation: sv-ambient-infinite-scroll 46s linear infinite;
+  animation: sv-ambient-infinite-scroll 36s linear infinite;
 }
 
+.sv-vpage--noir .sv-ambient-comic-grid,
 .sv-vpage--noir .sv-ambient-comic-grid--infinite-scroll {
-  opacity: 0.22;
+  opacity: 0.32;
 }
 
+.sv-vpage--red .sv-ambient-comic-grid,
 .sv-vpage--red .sv-ambient-comic-grid--infinite-scroll {
-  opacity: 0.2;
-  background:
-    radial-gradient(circle, rgba(255, 212, 55, 0.14) 1px, transparent 1.35px) 0 0 / 12px 12px,
-    repeating-linear-gradient(112deg, rgba(7, 8, 11, 0.08) 0 1px, transparent 1px 28px);
-}
-
-@media (min-width: 1500px) {
-  .sv-ambient-comic-grid--infinite-scroll {
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    grid-auto-rows: 145px;
-  }
+  opacity: 0.3;
 }
 
 @media (max-width: 760px) {
+  .sv-ambient-comic-grid,
   .sv-ambient-comic-grid--infinite-scroll {
-    top: -15%;
-    left: -15%;
-    width: 135%;
-    height: 135%;
-    grid-template-columns: repeat(auto-fill, minmax(95px, 1fr));
-    grid-auto-rows: 95px;
-    opacity: 0.14;
+    opacity: 0.24;
   }
 }
 
@@ -106,55 +91,8 @@
   }
 
   100% {
-    transform: translate3d(-180px, -148px, 0);
+    transform: translate3d(-280px, -240px, 0);
   }
-}
-
-.sv-grid-cell {
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: clamp(18px, 2vw, 28px);
-  overflow: hidden;
-  background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0)),
-    rgba(255, 255, 255, 0.018);
-}
-
-.sv-grid-cell:nth-child(odd) {
-  background:
-    linear-gradient(135deg, rgba(255, 212, 55, 0.065), rgba(255, 255, 255, 0)),
-    rgba(7, 8, 11, 0.14);
-}
-
-.sv-grid-cell:nth-child(even) {
-  background:
-    linear-gradient(135deg, rgba(237, 28, 36, 0.06), rgba(255, 255, 255, 0)),
-    rgba(255, 255, 255, 0.04);
-}
-
-.sv-vpage--red .sv-grid-cell {
-  border-color: rgba(255, 212, 55, 0.16);
-}
-
-.sv-grid-cell-img {
-  width: 72%;
-  height: 72%;
-  object-fit: contain;
-  opacity: 0.42;
-  filter: contrast(135%) grayscale(32%);
-}
-
-.sv-grid-cell-img--logo {
-  max-width: 92px;
-  max-height: 58px;
-}
-
-.sv-grid-cell-img--mascot {
-  max-width: 92px;
-  max-height: 92px;
 }
 
 /* ════════════════════════════════════════
@@ -542,65 +480,219 @@
 }
 
 .sv-comic-navbar-inner {
-  width: min(var(--max-w), calc(100% - 32px));
-  min-height: 72px;
-  /* Increased height */
-  margin: 0 auto;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  min-height: 68px;
+  padding: 0 clamp(14px, 2.2vw, 40px);
+  margin: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
+  gap: clamp(10px, 1.4vw, 24px);
 }
 
-.sv-comic-navbar-left,
-.sv-comic-navbar-actions {
+.sv-comic-main-logo {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  text-decoration: none;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.sv-comic-main-logo:hover {
+  transform: scale(1.05);
+}
+
+.sv-comic-main-logo-img {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  object-fit: cover;
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 2px 10px rgba(43, 91, 227, 0.45);
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.sv-comic-main-logo:hover .sv-comic-main-logo-img {
+  border-color: #ffd437;
+  box-shadow: 0 2px 14px rgba(255, 212, 55, 0.5);
+}
+
+.sv-comic-main-logo-text {
+  font-family: "Bank Gothic", Orbitron, "Space Grotesk", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #ffffff;
+  transition: color 0.2s ease;
+}
+
+.sv-comic-main-logo:hover .sv-comic-main-logo-text {
+  color: #ffd437;
+}
+
+.sv-comic-main-logo {
   display: flex;
   align-items: center;
   gap: 10px;
-  min-width: 0;
+  text-decoration: none;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.sv-comic-creative-lab-capsule {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Orbitron, "Space Grotesk", sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  background: rgba(99, 102, 241, 0.12);
+  color: #a5b4fc;
+  border: 1px solid rgba(129, 140, 248, 0.35);
+  box-shadow: 0 0 12px rgba(99, 102, 241, 0.2);
+  white-space: nowrap;
+  transition: all 0.3s ease;
+}
+
+.sv-comic-main-logo:hover .sv-comic-creative-lab-capsule {
+  border-color: #ffd437;
+  color: #ffd437;
+  background: rgba(255, 212, 55, 0.12);
+  box-shadow: 0 0 14px rgba(255, 212, 55, 0.35);
 }
 
 .sv-comic-navbar-left {
-  gap: 16px;
-}
-
-.sv-comic-nav-link--home {
   display: flex;
   align-items: center;
-  gap: 6px;
-  background: #07080b;
-  color: #fff;
+  gap: clamp(6px, 0.8vw, 12px);
+  min-width: 0;
+  flex-shrink: 0;
+}
+
+.sv-comic-navbar-right {
+  display: flex;
+  align-items: center;
+  gap: clamp(6px, 0.75vw, 12px);
+  min-width: 0;
+  flex-shrink: 0;
+}
+
+.sv-comic-nav-link--intro {
+  background: var(--comic-yellow, #ffd437) !important;
+  color: #07080b !important;
+  border: 2px solid var(--comic-line, #07080b) !important;
+  font-weight: 900 !important;
+  box-shadow: 2px 2px 0 var(--comic-line, #07080b) !important;
+  padding: 5px 11px !important;
+  letter-spacing: 0.06em !important;
+  border-radius: 0;
+  cursor: pointer;
+}
+
+.sv-comic-nav-link--intro:hover {
+  background: #ffe685 !important;
+  color: #07080b !important;
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0 var(--comic-line, #07080b) !important;
+}
+
+.sv-comic-navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: clamp(6px, 0.8vw, 12px);
+  min-width: 0;
+  flex-shrink: 0;
+}
+
+.sv-comic-navbar-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  margin: 0 auto;
+  padding: 0 clamp(8px, 1.2vw, 20px);
+  z-index: 10;
+}
+
+.sv-comic-center-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: transform 0.2s ease, filter 0.2s ease;
+  outline: none;
+}
+
+.sv-comic-center-logo:hover {
+  transform: scale(1.15);
+  filter: drop-shadow(0 0 12px rgba(255, 212, 55, 0.75));
+}
+
+.sv-comic-center-logo img {
+  width: clamp(38px, 2.8vw, 46px);
+  height: clamp(38px, 2.8vw, 46px);
+  object-fit: contain;
+  filter: drop-shadow(2px 2px 0 var(--comic-line));
 }
 
 .sv-comic-brand {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 7px;
   text-decoration: none;
   color: #fff;
+  flex-shrink: 0;
+  margin-right: 0;
 }
 
 .sv-comic-brand img {
-  width: 34px;
-  height: 34px;
+  width: 22px;
+  height: 22px;
   object-fit: contain;
-  filter: drop-shadow(2px 2px 0 var(--comic-line));
+  filter: drop-shadow(1px 1px 0 var(--comic-line));
 }
 
 .sv-comic-brand span {
   font-family: Orbitron, "Space Grotesk", sans-serif;
   font-weight: 900;
-  font-size: 13.5px;
+  font-size: 13px;
   letter-spacing: 0.05em;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .sv-glitch-title--faq {
   font-size: clamp(16px, 2.7vw, 42px) !important;
   white-space: nowrap !important;
-  letter-spacing: -0.01em;
-  max-width: 100%;
-  margin-inline: auto;
+  letter-spacing: -0.01em !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 auto 12px !important;
+  text-align: center !important;
+  display: block !important;
+}
+
+.sv-faq-lead {
+  max-width: 100% !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+  text-align: center !important;
+  color: #cbd2dc !important;
+  font-size: clamp(12px, 1.15vw, 15px) !important;
+  line-height: 1.4 !important;
+}
+
+@media (min-width: 768px) {
+  .sv-faq-lead {
+    white-space: nowrap !important;
+  }
 }
 
 .sv-workflow-title-single-line {
@@ -615,19 +707,18 @@
 .sv-comic-nav-links {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: clamp(3px, 0.45vw, 8px);
+  flex-shrink: 0;
 }
 
 .sv-comic-nav-link {
-  padding: 8px 14px;
-  /* Increased padding */
+  padding: 5px clamp(6px, 0.55vw, 10px);
   border: 2px solid var(--comic-line);
   background: #181d28;
   color: #cbd2dc;
   font-family: Orbitron, sans-serif;
   font-weight: 800;
-  font-size: 12px;
-  /* Increased font */
+  font-size: clamp(9.5px, 0.72vw, 11px);
   text-transform: uppercase;
   box-shadow: 2px 2px 0 var(--comic-line);
   text-decoration: none;
@@ -773,33 +864,40 @@
   color: #fff;
 }
 
+#sv-how.sv-vpage,
 #sv-workflow.sv-vpage,
 .sv-vpage--workflow {
-  min-height: auto !important;
-  height: auto !important;
-  justify-content: center !important;
-  padding-top: clamp(20px, 2.5vh, 36px) !important;
-  padding-bottom: clamp(24px, 3vh, 40px) !important;
-  scroll-margin-top: 106px !important;
+  justify-content: center;
+  scroll-margin-top: 106px;
 }
 
+#sv-how .sv-comic-panel-frame,
 #sv-workflow .sv-comic-panel-frame,
 .sv-vpage--workflow .sv-comic-panel-frame {
-  margin-top: 8px !important;
-  padding: clamp(12px, 1.5vh, 20px) clamp(12px, 2vw, 22px) !important;
+  padding: clamp(20px, 2.6vh, 36px) clamp(18px, 2.6vw, 36px) !important;
+}
+
+.sv-workflow-lead-single-line {
+  color: #cbd2dc !important;
+  margin: 0 auto 16px !important;
+  text-align: center !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  font-size: clamp(11.5px, 1.12vw, 14.5px) !important;
+  line-height: 1.4 !important;
+}
+
+@media (min-width: 860px) {
+  .sv-workflow-lead-single-line {
+    white-space: nowrap !important;
+  }
 }
 
 @media (max-width: 680px) {
-  #sv-workflow.sv-vpage,
-  .sv-vpage--workflow {
-    padding-top: 20px !important;
-    padding-bottom: 32px !important;
-    scroll-margin-top: 125px !important;
-  }
+  #sv-how .sv-comic-panel-frame,
   #sv-workflow .sv-comic-panel-frame,
   .sv-vpage--workflow .sv-comic-panel-frame {
-    margin-top: 10px !important;
-    padding: 14px 10px 18px !important;
+    padding: 18px 12px 22px !important;
   }
 }
 
@@ -2448,6 +2546,16 @@
   transform: translate(-1px, -1px);
 }
 
+.sv-comic-ctrl-btn--download {
+  text-decoration: none;
+  color: #fff;
+}
+
+.sv-comic-ctrl-btn--download:hover {
+  background: var(--comic-yellow);
+  color: var(--comic-ink);
+}
+
 .sv-comic-page-dots {
   display: flex;
   gap: 6px;
@@ -3358,14 +3466,6 @@
    RESPONSIVE MEDIA QUERIES
    ════════════════════════════════════════ */
 @media (max-width: 1024px) {
-  .sv-ambient-comic-grid-wrap {
-    display: none !important;
-  }
-
-  .sv-ambient-comic-grid--infinite-scroll {
-    animation: none !important;
-  }
-
   .sv-ambient-yellow-pill,
   .sv-ambient-pills-container {
     display: none !important;
@@ -3454,10 +3554,6 @@
 }
 
 @media (max-width: 760px) {
-  .sv-ambient-comic-grid-wrap {
-    display: none !important;
-  }
-
   .sv-comic-navbar {
     overflow: hidden;
   }
@@ -3471,8 +3567,36 @@
 
   .sv-comic-navbar-left {
     gap: 6px;
+    flex: 0 0 auto;
+    overflow: visible;
+  }
+
+  .sv-comic-main-logo {
+    gap: 4px;
+    flex-shrink: 0;
+  }
+
+  .sv-comic-main-logo-img {
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+  }
+
+  .sv-comic-main-logo-text {
+    display: none;
+  }
+
+  .sv-comic-creative-lab-capsule {
+    display: none;
+  }
+
+  .sv-comic-navbar-right {
     flex: 1 1 auto;
-    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 5px;
+    min-width: 0;
   }
 
   .sv-comic-navbar-actions {
@@ -3481,33 +3605,29 @@
   }
 
   .sv-comic-brand {
-    gap: 5px;
+    gap: 6px;
     min-width: 0;
     overflow: hidden;
   }
 
   .sv-comic-brand img {
-    width: 26px;
-    height: 26px;
+    width: 18px;
+    height: 18px;
     flex: 0 0 auto;
   }
 
+  .sv-comic-nav-link--intro {
+    padding: 4px 8px !important;
+    font-size: 10px !important;
+  }
+
   .sv-comic-brand span {
-    max-width: 105px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-size: 11px;
-    line-height: 1.15;
-    letter-spacing: 0.04em;
+    display: none;
   }
 
   .sv-comic-nav-link {
     padding: 5px 7px;
     font-size: 9.5px;
-  }
-
-  .sv-comic-nav-link--home span {
-    display: none;
   }
 
   .sv-coming-soon-banner {
@@ -3578,6 +3698,9 @@
   .sv-glitch-title--faq {
     font-size: clamp(14px, 4.4vw, 20px) !important;
     white-space: nowrap !important;
+    text-align: center !important;
+    margin: 0 auto 8px !important;
+    width: 100% !important;
   }
 
   .sv-glitch-title.sv-workflow-title-single-line,
@@ -3735,30 +3858,49 @@
     padding: 5px 8px;
   }
 
-  .sv-faq-container {
+  .sv-faq-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
     gap: 8px !important;
   }
 
-  .sv-faq-item {
-    border-width: 2.5px !important;
-    box-shadow: 3px 3px 0 #07080b !important;
+  .sv-faq-square-face {
+    padding: 8px !important;
   }
 
-  .sv-faq-question-btn {
-    padding: 8px 10px !important;
-    font-size: 11.5px !important;
-    line-height: 1.35 !important;
+  .sv-faq-square-badge-num {
+    font-size: 9px !important;
+    padding: 1px 4px !important;
   }
 
-  .sv-faq-badge {
-    font-size: 14px !important;
-    width: 20px !important;
-    height: 20px !important;
-  }
-
-  .sv-faq-answer {
-    padding: 0 10px 8px !important;
+  .sv-faq-square-badge-plus,
+  .sv-faq-square-badge-close {
+    width: 18px !important;
+    height: 18px !important;
     font-size: 11px !important;
+  }
+
+  .sv-faq-square-question {
+    font-size: 10.5px !important;
+    line-height: 1.25 !important;
+    -webkit-line-clamp: 4 !important;
+  }
+
+  .sv-faq-square-footer {
+    padding-top: 2px !important;
+  }
+
+  .sv-faq-square-tag,
+  .sv-faq-square-click-hint {
+    font-size: 7.5px !important;
+  }
+
+  .sv-faq-square-q-peek {
+    font-size: 8.5px !important;
+    margin-bottom: 3px !important;
+  }
+
+  .sv-faq-square-answer-scroll {
+    font-size: 9.5px !important;
     line-height: 1.35 !important;
   }
 
@@ -3835,87 +3977,590 @@
 }
 
 /* ════════════════════════════════════════
-   AEO FAQ SECTION STYLES
+   UNIFIED 3D FLIP CARD SYSTEM (Benefits, Audience, Why, Setup)
    ════════════════════════════════════════ */
-.sv-faq-container {
-  max-width: 980px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+.sv-flip-grid {
+  perspective: 1200px;
 }
 
-.sv-faq-item {
-  background: #0d0f14;
-  border: 4px solid #07080b;
-  box-shadow: 6px 6px 0 #07080b;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+/* Specific natural heights per section — exactly matching the old white boxes with zero blank space */
+.sv-comic-card-grid .sv-flip-card {
+  min-height: 168px;
+  height: 100%;
+}
+
+.sv-audience-grid .sv-flip-card {
+  min-height: 130px;
+  height: 100%;
+}
+
+.sv-why-2x2-grid .sv-flip-card {
+  min-height: 154px;
+  height: 100%;
+}
+
+.sv-setup-grid .sv-flip-card {
+  min-height: 165px;
+  height: 100%;
+}
+
+.sv-flip-card {
+  position: relative;
+  width: 100%;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  outline: none;
+  user-select: none;
+  perspective: 1200px;
+}
+
+.sv-flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.42s cubic-bezier(0.2, 0.85, 0.4, 1.15), box-shadow 0.2s ease;
+}
+
+.sv-flip-card:hover .sv-flip-card-inner {
+  transform: translate(-2px, -2px);
+}
+
+.sv-flip-card.sv-flip-card--flipped .sv-flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.sv-flip-card.sv-flip-card--flipped:hover .sv-flip-card-inner {
+  transform: rotateY(180deg) translate(2px, -2px);
+}
+
+.sv-flip-card:focus-visible .sv-flip-card-face {
+  outline: 2px solid #ffd437;
+  outline-offset: 2px;
+}
+
+.sv-flip-card-face {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
   overflow: hidden;
 }
 
-.sv-faq-item--open {
-  border-color: #ffd437;
-  box-shadow: 6px 6px 0 #ffd437;
-  background: #121620;
+/* ── FRONT FACE: Black comic card with callout ── */
+.sv-flip-card-face--front {
+  background: #0b0d13;
+  border: 4px solid var(--comic-line, #07080b);
+  box-shadow: 6px 6px 0 var(--comic-line, #07080b);
+  justify-content: space-between;
+  padding: 14px 16px 12px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.sv-faq-question-btn {
-  width: 100%;
+.sv-flip-card:hover .sv-flip-card-face--front {
+  border-color: #ffd437;
+  box-shadow: 7px 7px 0 #ffd437;
+}
+
+.sv-flip-card-topbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 18px 24px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  color: #ffffff;
-  text-align: left;
+  width: 100%;
+}
+
+.sv-flip-card-topbar--setup {
+  justify-content: flex-end;
+}
+
+.sv-flip-card-badge-num {
+  display: inline-flex;
+  align-items: center;
+  background: #ffd437;
+  color: #07080b;
   font-family: Orbitron, "Space Grotesk", sans-serif;
-  font-size: clamp(14px, 2vw, 17px);
+  font-size: 10.5px;
+  font-weight: 900;
+  padding: 2px 7px;
+  border: 2px solid #07080b;
+  box-shadow: 1.5px 1.5px 0 #07080b;
+  letter-spacing: 0.05em;
+}
+
+.sv-flip-card-badge-section {
+  font-family: Orbitron, "Space Grotesk", sans-serif;
+  font-size: 9px;
+  font-weight: 900;
+  color: #94a3b8;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.sv-flip-card-callout-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  margin: 6px 0;
+}
+
+.sv-flip-card-callout {
+  font-family: Orbitron, "Space Grotesk", sans-serif;
+  font-size: clamp(13px, 1.2vw, 16px);
+  font-weight: 900;
+  text-align: center;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: #ffd437;
+  color: #07080b;
+  padding: 6px 14px;
+  border: 2px solid #07080b;
+  box-shadow: 2px 2px 0 #07080b;
+  display: inline-block;
+  max-width: 92%;
+}
+
+.sv-flip-card-click-hint {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  font-family: Orbitron, "Space Grotesk", sans-serif;
+  font-size: 8.5px;
   font-weight: 800;
-  letter-spacing: 0.04em;
-  gap: 16px;
+  color: #64748b;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding-top: 4px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
   transition: color 0.15s ease;
 }
 
-.sv-faq-question-btn:hover {
+.sv-flip-card:hover .sv-flip-card-click-hint {
   color: #ffd437;
 }
 
-.sv-faq-badge {
+/* ── BACK FACE: Classic white comic card (exact design from attached images) ── */
+.sv-flip-card-face--back {
+  background-color: var(--comic-paper, #fffdf0);
+  background-image: radial-gradient(circle, rgba(7, 8, 11, 0.1) 1.2px, transparent 1.3px);
+  background-size: 8px 8px;
+  border: 4px solid var(--comic-line, #07080b);
+  box-shadow: 6px 6px 0 var(--comic-line, #07080b);
+  transform: rotateY(180deg);
+  padding: 14px 16px 16px;
+  justify-content: flex-start;
+  color: var(--comic-ink, #07080b);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.sv-flip-card:hover .sv-flip-card-face--back {
+  box-shadow: 8px 8px 0 var(--comic-line, #07080b);
+}
+
+.sv-flip-card-face--back .sv-comic-card-tag {
+  display: inline-block;
+  padding: 3px 8px;
+  background: var(--comic-yellow, #ffd437);
+  color: var(--comic-ink, #07080b);
+  font-family: Orbitron, "Space Grotesk", sans-serif;
+  font-weight: 900;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border: 2px solid var(--comic-line, #07080b);
+  box-shadow: 2px 2px 0 var(--comic-line, #07080b);
+  margin-bottom: 8px;
+  align-self: flex-start;
+}
+
+.sv-flip-card-face--back h3 {
+  font-family: Orbitron, "Space Grotesk", sans-serif;
+  font-size: clamp(13px, 1.15vw, 15.5px);
+  font-weight: 900;
+  text-transform: uppercase;
+  margin: 0 0 6px 0;
+  line-height: 1.22;
+  color: var(--comic-ink, #07080b);
+  letter-spacing: 0.03em;
+}
+
+.sv-flip-card-face--back p {
+  margin: 0;
+  font-size: clamp(11px, 0.9vw, 12.5px);
+  font-weight: 650;
+  color: #333d4e;
+  line-height: 1.42;
+}
+
+/* Why-specific adjustments to fit 4-line description cleanly */
+.sv-why-2x2-grid .sv-flip-card-face--back {
+  padding: 12px 14px 14px;
+}
+
+.sv-why-2x2-grid .sv-flip-card-face--back .sv-comic-card-tag {
+  margin-bottom: 5px;
+}
+
+.sv-why-2x2-grid .sv-flip-card-face--back h3 {
+  font-size: clamp(12.5px, 1.05vw, 14.5px);
+  margin-bottom: 4px;
+}
+
+.sv-why-2x2-grid .sv-flip-card-face--back p {
+  font-size: clamp(10.5px, 0.85vw, 12px);
+  line-height: 1.36;
+}
+
+/* Setup-specific adjustments */
+.sv-setup-grid .sv-flip-card-face {
+  padding-top: 24px;
+}
+
+.sv-setup-grid .sv-setup-num {
+  position: absolute;
+  top: -12px;
+  left: 12px;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  background: var(--comic-red, #e50914);
+  color: #fff;
+  border: 3px solid var(--comic-line, #07080b);
+  box-shadow: 3px 3px 0 var(--comic-line, #07080b);
+  font-family: Orbitron, monospace;
+  font-size: 17px;
+  font-weight: 900;
+  transform: rotate(-5deg);
+  z-index: 5;
+}
+
+.sv-setup-card-face h3 {
+  font-size: clamp(14px, 1.25vw, 17px);
+  margin-bottom: 6px;
+}
+
+/* Flip card responsive adjustments */
+@media (max-width: 860px) {
+  .sv-flip-card-face--front {
+    padding: 10px 12px 10px;
+  }
+
+  .sv-flip-card-badge-num {
+    font-size: 9px !important;
+    padding: 1px 4px !important;
+  }
+
+  .sv-flip-card-callout {
+    font-size: clamp(11px, 1.2vw, 13.5px) !important;
+    padding: 4px 8px !important;
+  }
+
+  .sv-flip-card-click-hint {
+    font-size: 7.5px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .sv-flip-grid.sv-comic-card-grid,
+  .sv-flip-grid.sv-setup-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .sv-flip-grid.sv-audience-grid,
+  .sv-flip-grid.sv-why-2x2-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+/* ════════════════════════════════════════
+   AEO FAQ SECTION STYLES (2 ROWS × 4 SQUARE BLOCKS)
+   ════════════════════════════════════════ */
+#sv-faq.sv-vpage {
+  padding: clamp(10px, 1.8vh, 26px) 0;
+  justify-content: center;
+}
+
+#sv-faq .sv-comic-panel-frame {
+  padding: clamp(12px, 1.8vh, 22px) clamp(14px, 2.2vw, 28px);
+  max-width: 1140px;
+}
+
+#sv-faq .sv-wrap {
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.sv-faq-header-compact {
+  text-align: center;
+  margin-bottom: clamp(8px, 1.2vh, 16px);
+}
+
+.sv-faq-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(8px, 1.1vw, 14px);
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+  perspective: 1200px;
+}
+
+.sv-faq-square-card {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  min-height: 0;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  outline: none;
+  user-select: none;
+  perspective: 1200px;
+}
+
+.sv-faq-square-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.42s cubic-bezier(0.2, 0.85, 0.4, 1.15), box-shadow 0.2s ease;
+  border-radius: 4px;
+}
+
+.sv-faq-square-card:hover .sv-faq-square-inner {
+  transform: translate(-2px, -2px);
+}
+
+.sv-faq-square-card.sv-faq-square-card--flipped .sv-faq-square-inner {
+  transform: rotateY(180deg);
+}
+
+.sv-faq-square-card.sv-faq-square-card--flipped:hover .sv-faq-square-inner {
+  transform: rotateY(180deg) translate(2px, -2px);
+}
+
+.sv-faq-square-card:focus-visible .sv-faq-square-face {
+  outline: 2px solid #ffd437;
+  outline-offset: 2px;
+}
+
+.sv-faq-square-face {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding: clamp(10px, 1.1vw, 15px);
+  overflow: hidden;
+}
+
+.sv-faq-square-face--front {
+  background: #0d0f14;
+  border: 3px solid #07080b;
+  box-shadow: 4px 4px 0 #07080b;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.sv-faq-square-card:hover .sv-faq-square-face--front {
+  border-color: #ffd437;
+  box-shadow: 5px 5px 0 #ffd437;
+}
+
+.sv-faq-square-face--back {
+  background: #121722;
+  border: 3px solid #ffd437;
+  box-shadow: 5px 5px 0 #ffd437;
+  transform: rotateY(180deg);
+  justify-content: flex-start;
+}
+
+.sv-faq-square-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 2px;
+}
+
+.sv-faq-square-badge-num {
+  display: inline-flex;
+  align-items: center;
+  background: #ffd437;
+  color: #07080b;
+  font-family: Orbitron, "Space Grotesk", sans-serif;
+  font-size: 11px;
+  font-weight: 900;
+  padding: 2px 7px;
+  border: 2px solid #07080b;
+  box-shadow: 1px 1px 0 #07080b;
+  border-radius: 2px;
+  letter-spacing: 0.05em;
+}
+
+.sv-faq-square-badge-num--active {
+  background: #ffd437;
+  color: #07080b;
+  font-size: 10px;
+}
+
+.sv-faq-square-badge-plus {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 28px;
-  height: 28px;
-  border-radius: 4px;
+  width: 24px;
+  height: 24px;
+  border-radius: 2px;
   background: #ffd437;
   color: #07080b;
   font-weight: 900;
-  font-size: 14px;
+  font-size: 15px;
   border: 2px solid #07080b;
-  box-shadow: 2px 2px 0 #07080b;
-  flex-shrink: 0;
+  box-shadow: 1.5px 1.5px 0 #07080b;
   transition: transform 0.2s ease, background 0.2s ease;
 }
 
-.sv-faq-item--open .sv-faq-badge {
+.sv-faq-square-card:hover .sv-faq-square-badge-plus {
+  transform: scale(1.08);
+}
+
+.sv-faq-square-badge-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 2px;
   background: #ed1c24;
   color: #ffffff;
-  transform: rotate(180deg);
+  font-weight: 900;
+  font-size: 12px;
+  border: 2px solid #07080b;
+  box-shadow: 1.5px 1.5px 0 #07080b;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease;
 }
 
-.sv-faq-answer {
-  padding: 0 24px 22px;
-  color: #cbd2dc;
-  font-size: 15px;
-  line-height: 1.7;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  padding-top: 14px;
+.sv-faq-square-badge-close:hover {
+  transform: scale(1.1);
+  background: #ff333a;
 }
 
-.sv-faq-answer p {
+.sv-faq-square-question {
+  margin: auto 0;
+  font-family: Orbitron, "Space Grotesk", sans-serif;
+  font-size: clamp(11.5px, 0.96vw, 13.5px);
+  font-weight: 800;
+  color: #ffffff;
+  text-align: left;
+  line-height: 1.32;
+  letter-spacing: 0.02em;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.sv-faq-square-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-top: 4px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.sv-faq-square-tag {
+  font-size: 9.5px;
+  font-weight: 900;
+  color: #ffd437;
+  letter-spacing: 0.06em;
+}
+
+.sv-faq-square-click-hint {
+  font-size: 9px;
+  font-weight: 800;
+  color: #94a3b8;
+  letter-spacing: 0.04em;
+  transition: color 0.15s ease;
+}
+
+.sv-faq-square-card:hover .sv-faq-square-click-hint {
+  color: #ffd437;
+}
+
+.sv-faq-square-q-peek {
+  color: #ffd437;
+  font-family: Orbitron, sans-serif;
+  font-size: 9.5px;
+  font-weight: 700;
+  text-align: left;
+  line-height: 1.25;
+  margin-top: 2px;
+  margin-bottom: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-bottom: 1px solid rgba(255, 212, 55, 0.25);
+  padding-bottom: 3px;
+}
+
+.sv-faq-square-answer-scroll {
+  flex: 1;
+  overflow-y: auto;
+  text-align: left;
+  padding-right: 4px;
+  color: #e2e8f0;
+  font-size: clamp(10.5px, 0.88vw, 12px);
+  line-height: 1.44;
+  scrollbar-width: thin;
+  scrollbar-color: #ffd437 transparent;
+}
+
+.sv-faq-square-answer-scroll::-webkit-scrollbar {
+  width: 3px;
+}
+
+.sv-faq-square-answer-scroll::-webkit-scrollbar-thumb {
+  background: #ffd437;
+  border-radius: 2px;
+}
+
+.sv-faq-square-answer-scroll p {
   margin: 0;
+}
+
+.sv-faq-square-back-footer {
+  font-size: 8.5px;
+  font-weight: 800;
+  color: #94a3b8;
+  text-align: center;
+  margin-top: 4px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 860px) {
+  .sv-faq-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

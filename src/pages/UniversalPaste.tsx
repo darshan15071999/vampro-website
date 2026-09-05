@@ -6,13 +6,13 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import SEO from '../components/SEO';
 import { universalPasteMetadata } from '../seo/metadata';
 import WorkflowSlideshow from '../components/WorkflowSlideshow';
+import ScatterText from '../components/ScatterText';
 import { Button } from '@/components/ui/button';
 import { useEventOnomatopoeia } from '@/components/ui/onomatopoeia';
 import { useSignup } from '../context/SignupContext';
 import {
   Volume2,
   VolumeX,
-  ArrowLeft,
   FastForward,
   ChevronLeft,
   ChevronRight,
@@ -22,17 +22,17 @@ import {
   Copy,
   Scissors,
   Video,
-  RefreshCw
+  RefreshCw,
+  Download
 } from 'lucide-react';
 import './UniversalPaste.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Mouse click interaction: ONLY 'PASTE!'
-const SFX_WORDS = ['PASTE!'];
+// Mouse click interaction: ONLY 'PASTE'
+const SFX_WORDS = ['PASTE'];
 const HERO_AUDIO_SRC = '/assets/universal-paste/heroaudio.mp3';
 const SPIDERWEB_SHOT_AUDIO_SRC = '/assets/universal-paste/spiderweb-shot.mp3';
-const PAGE_FLIP_AUDIO_SRC = '/assets/universal-paste/page-flip.mp3';
 const INTRO_VIDEO_SRC = new URL('../Intro Animation.mp4', import.meta.url).href;
 const SECTION_SPIDERWEB_IN_SRC = new URL('../spiderweb in.mp4', import.meta.url).href;
 const HERO_SLIDE_DURATION_MS = 460;
@@ -43,28 +43,9 @@ const SCROLL_GLITCH_DURATION_MS = 800;
    (Pans both horizontally and vertically across 100% space)
    ════════════════════════════════════════ */
 const AmbientAlternatingComicGrid = () => {
-  const cells = Array.from({ length: 24 }, (_, index) => index);
-
   return (
     <div className="sv-ambient-comic-grid-wrap" aria-hidden="true">
-      <div className="sv-ambient-comic-grid sv-ambient-comic-grid--infinite-scroll">
-        {cells.map((index) => {
-          const isLogo = index % 2 === 0;
-          return (
-            <div key={index} className={`sv-grid-cell ${isLogo ? 'sv-grid-cell--logo' : 'sv-grid-cell--mascot'}`}>
-              <img
-                src={isLogo ? '/assets/universal-paste/universal-paste-transparent.png' : '/assets/universal-paste/superhero.png'}
-                alt=""
-                className={`sv-grid-cell-img ${isLogo ? 'sv-grid-cell-img--logo' : 'sv-grid-cell-img--mascot'}`}
-                loading="lazy"
-                decoding="async"
-                fetchPriority="low"
-                draggable={false}
-              />
-            </div>
-          );
-        })}
-      </div>
+      <div className="sv-ambient-comic-grid sv-ambient-comic-grid--infinite-scroll" />
     </div>
   );
 };
@@ -138,7 +119,7 @@ const SECTION_YELLOW_PILLS: Record<string, PillLayout[]> = {
 const UNIVERSAL_PASTE_FAQS = [
   {
     q: 'What is Vampro Universal Paste?',
-    a: 'Vampro Universal Paste is an Adobe Premiere Pro extension (UXP) that turns clipboard content, screenshots, window recordings, URLs, GIFs, images, and videos into timeline-ready assets with a single click.'
+    a: 'Vampro Universal Paste is an Adobe Premiere Pro extension (UXP) and native desktop companion that turns clipboard content, screenshots, window recordings, URLs, GIFs, images, and videos into timeline-ready assets with a single click.'
   },
   {
     q: 'How do I paste clipboard images directly into Adobe Premiere Pro?',
@@ -149,8 +130,16 @@ const UNIVERSAL_PASTE_FAQS = [
     a: 'Yes! The integrated companion app includes region screenshot snipping and screen recording tools. Captured media is automatically encoded, saved into dedicated project media bins, and placed directly onto your timeline sequence.'
   },
   {
+    q: 'How does 1-click timeline clip replacement work?',
+    a: 'Select any clip on your Premiere Pro timeline, copy a new asset (image, GIF, or video) to your clipboard, and click "Replace Clip". Universal Paste instantly swaps the media while preserving the original clip duration, timeline position, scale, and applied keyframe effects.'
+  },
+  {
     q: 'Does Universal Paste require saving files to my desktop first?',
     a: 'No. Universal Paste eliminates desktop clutter by automatically reading the system clipboard or downloading web media in the background, saving assets into an organized project folder, and importing them straight into Premiere Pro.'
+  },
+  {
+    q: 'Does Universal Paste work offline without external servers?',
+    a: 'Yes, 100%. All clipboard processing, screenshot snipping, screen recordings, and Premiere Pro timeline insertions execute completely offline on your local machine. Your assets, footage, and project files never leave your system.'
   },
   {
     q: 'What media formats are supported by Universal Paste?',
@@ -158,7 +147,7 @@ const UNIVERSAL_PASTE_FAQS = [
   },
   {
     q: 'Which versions of Adobe Premiere Pro are compatible?',
-    a: 'Vampro Universal Paste is compatible with Adobe Premiere Pro 25.6 and later releases on Windows 10/11 64-bit (with macOS support planned for the future).'
+    a: 'Vampro Universal Paste is compatible with Adobe Premiere Pro 24.0 (2024), 25.0+ (2025), and later releases on Windows 10/11 64-bit (with macOS support planned for the future).'
   }
 ];
 
@@ -199,14 +188,14 @@ const SectionSpiderwebOverlay = () => {
         src={SECTION_SPIDERWEB_IN_SRC}
         muted
         playsInline
-        preload="none"
+        preload="auto"
       />
       <video
         className="sv-spiderweb-video sv-spiderweb-video--out"
         src="/assets/universal-paste/spiderweb-out.mp4"
         muted
         playsInline
-        preload="none"
+        preload="auto"
       />
     </div>
   );
@@ -555,7 +544,15 @@ const ComicProductScreenTopBox = ({ featureKey }: { featureKey: 'clipboard' | 'c
   );
 };
 
-const HeroLiveComicBook = ({ isActive, onFlipSound }: { isActive: boolean; onFlipSound: () => void }) => {
+const HeroLiveComicBook = ({
+  isActive,
+  onFlipSound,
+  resetTrigger = 0
+}: {
+  isActive: boolean;
+  onFlipSound: () => void;
+  resetTrigger?: number;
+}) => {
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [slideDirection, setSlideDirection] = useState<'next' | 'prev'>('next');
   const [isAutoPlaying, setIsAutoPlaying] = useState<boolean>(true);
@@ -579,6 +576,14 @@ const HeroLiveComicBook = ({ isActive, onFlipSound }: { isActive: boolean; onFli
       return;
     }
   }, [isActive]);
+
+  useEffect(() => {
+    if (resetTrigger > 0) {
+      setCurrentPage(0);
+      setIsSliding(false);
+      setSlideDirection('prev');
+    }
+  }, [resetTrigger]);
 
   useEffect(() => {
     if (!isActive || !isAutoPlaying || isHovered) return;
@@ -789,6 +794,18 @@ const HeroLiveComicBook = ({ isActive, onFlipSound }: { isActive: boolean; onFli
         >
           {isAutoPlaying ? <Pause size={13} /> : <Play size={13} />}
         </button>
+
+        <a
+          href="/assets/universal-paste/Vampro%20Universal%20Paste%20Comic.pdf"
+          download="Vampro Universal Paste Comic.pdf"
+          className="sv-comic-ctrl-btn sv-comic-ctrl-btn--download"
+          title="Download Comic (PDF)"
+          aria-label="Download Vampro Universal Paste Comic PDF"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Download size={13} />
+        </a>
       </div>
     </div>
   );
@@ -812,12 +829,11 @@ type SimulatorTimelineItem = {
 };
 
 const SIMULATOR_ASSETS = [
-  // Backend placeholder: replace these records with API-provided image options when available.
-  { id: 'paste-logo', label: 'Paste Logo', src: '/assets/universal-paste/universal-paste-transparent.png' },
-  { id: 'hero-mark', label: 'Hero Mark', src: '/assets/universal-paste/superhero.png' },
-  { id: 'mascot-1', label: 'Mascot 1', src: '/assets/universal-paste/mascot_pose_1.jpg' },
-  { id: 'mascot-2', label: 'Mascot 2', src: '/assets/universal-paste/mascot_pose_2.jpg' },
-  { id: 'mascot-3', label: 'Mascot 3', src: '/assets/universal-paste/mascot_pose_3.jpg' },
+  { id: 'comic-cover', label: 'Comic Cover', src: '/assets/universal-paste/comic-pages/COVER.webp' },
+  { id: 'comic-page-1', label: 'Comic Page 1', src: '/assets/universal-paste/comic-pages/PAGE%201.webp' },
+  { id: 'comic-page-2', label: 'Comic Page 2', src: '/assets/universal-paste/comic-pages/PAGE%202.webp' },
+  { id: 'comic-page-3', label: 'Comic Page 3', src: '/assets/universal-paste/comic-pages/PAGE%203.webp' },
+  { id: 'comic-page-4', label: 'Comic Page 4', src: '/assets/universal-paste/comic-pages/PAGE%204_.webp' },
 ];
 const SIMULATOR_VIDEO_SRC = '/assets/universal-paste/superhero.mp4';
 const SIMULATOR_AUTOPILOT_STEPS: Array<{
@@ -842,7 +858,7 @@ const SIMULATOR_AUTOPILOT_STEPS: Array<{
       tracks: [
         {
           id: 'autopilot-clipboard',
-          name: 'Hero Mark.png',
+          name: 'Comic Page 1.webp',
           track: 'V1',
           color: '#ec4899',
           position: 38,
@@ -860,7 +876,7 @@ const SIMULATOR_AUTOPILOT_STEPS: Array<{
       tracks: [
         {
           id: 'autopilot-clipboard',
-          name: 'Hero Mark.png',
+          name: 'Comic Page 1.webp',
           track: 'V1',
           color: '#ec4899',
           position: 38,
@@ -886,7 +902,7 @@ const SIMULATOR_AUTOPILOT_STEPS: Array<{
       tracks: [
         {
           id: 'autopilot-clipboard',
-          name: 'Hero Mark.png',
+          name: 'Comic Page 1.webp',
           track: 'V1',
           color: '#ec4899',
           position: 38,
@@ -912,7 +928,7 @@ const SIMULATOR_AUTOPILOT_STEPS: Array<{
       tracks: [
         {
           id: 'autopilot-replace',
-          name: 'Mascot 3_replacement.png',
+          name: 'Comic Page 4_replacement.webp',
           track: 'V1',
           color: '#22c55e',
           position: 72,
@@ -940,18 +956,67 @@ const UniversalPaste = () => {
     });
   };
 
-  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
+  const [flippedFaqIndices, setFlippedFaqIndices] = useState<number[]>([]);
+  const [flippedBenefitIndices, setFlippedBenefitIndices] = useState<number[]>([]);
+  const [flippedAudienceIndices, setFlippedAudienceIndices] = useState<number[]>([]);
+  const [flippedWhyIndices, setFlippedWhyIndices] = useState<number[]>([]);
+  const [flippedSetupIndices, setFlippedSetupIndices] = useState<number[]>([]);
+
+  const toggleFaq = (idx: number) => {
+    setFlippedFaqIndices((prev) =>
+      prev.includes(idx) ? prev.filter((i) => i !== idx) : [...prev, idx]
+    );
+  };
+
+  const toggleBenefit = (idx: number) => {
+    setFlippedBenefitIndices((prev) =>
+      prev.includes(idx) ? prev.filter((i) => i !== idx) : [...prev, idx]
+    );
+  };
+
+  const toggleAudience = (idx: number) => {
+    setFlippedAudienceIndices((prev) =>
+      prev.includes(idx) ? prev.filter((i) => i !== idx) : [...prev, idx]
+    );
+  };
+
+  const toggleWhy = (idx: number) => {
+    setFlippedWhyIndices((prev) =>
+      prev.includes(idx) ? prev.filter((i) => i !== idx) : [...prev, idx]
+    );
+  };
+
+  const toggleSetup = (idx: number) => {
+    setFlippedSetupIndices((prev) =>
+      prev.includes(idx) ? prev.filter((i) => i !== idx) : [...prev, idx]
+    );
+  };
   const containerRef = useRef<HTMLDivElement>(null);
   const introOverlayRef = useRef<HTMLDivElement>(null);
   const [introPhase, setIntroPhase] = useState<IntroSequencePhase>('video');
   const [stripAnimWord, setStripAnimWord] = useState<StripAnimWord>('hero');
   const [soundEnabled, setSoundEnabled] = useState<boolean>(true);
+  const [heroComicResetTrigger, setHeroComicResetTrigger] = useState<number>(0);
 
-  // Track intro sound start to avoid double plays during transition
-  const introSoundStartedRef = useRef(false);
+  const handleHeroNavClick = useCallback((e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const heroSection = document.getElementById('sv-hero');
+    if (heroSection) {
+      heroSection.scrollIntoView({ behavior: 'smooth' });
+    }
+    setHeroComicResetTrigger((prev) => prev + 1);
+  }, []);
 
-  // Track sections that have already played their transition sound in this user session
-  const playedSectionsSession = useRef<Set<string>>(new Set());
+  useEffect(() => {
+    const video = introOverlayRef.current?.querySelector<HTMLVideoElement>('.sv-intro-video-placeholder-media');
+    if (!video) return;
+    const userActive = (navigator as Navigator & { userActivation?: { hasBeenActive?: boolean } }).userActivation?.hasBeenActive;
+    if (userActive && soundEnabled) {
+      video.muted = false;
+    } else {
+      video.muted = true;
+    }
+  }, [soundEnabled]);
 
   // Interactive Companion State (Why This Plugin Section)
   const [simulatorStarted, setSimulatorStarted] = useState(true);
@@ -967,24 +1032,46 @@ const UniversalPaste = () => {
     showClickBurst: true,
   });
 
+  // Audio pool for zero-latency web sound sync on every section scroll
+  const webAudioPoolRef = useRef<HTMLAudioElement[]>([]);
+  const lastWebSoundTimeRef = useRef<number>(0);
+
+  useEffect(() => {
+    try {
+      webAudioPoolRef.current = [
+        new Audio(SPIDERWEB_SHOT_AUDIO_SRC),
+        new Audio(SPIDERWEB_SHOT_AUDIO_SRC),
+        new Audio(SPIDERWEB_SHOT_AUDIO_SRC),
+      ];
+      webAudioPoolRef.current.forEach((a) => {
+        a.preload = 'auto';
+        a.volume = 0.68;
+      });
+    } catch {}
+  }, []);
+
   /* ── Audio helpers ── */
   const playSpiderwebShotSound = useCallback(() => {
     if (!soundEnabled) return;
-    try {
-      const audio = new Audio(SPIDERWEB_SHOT_AUDIO_SRC);
-      audio.volume = 0.72;
-      audio.currentTime = 0;
-      audio.play().catch(() => {});
-    } catch {}
-  }, [soundEnabled]);
+    const now = Date.now();
+    if (now - lastWebSoundTimeRef.current < 250) return;
+    lastWebSoundTimeRef.current = now;
 
-  const playPageFlipSound = useCallback(() => {
-    if (!soundEnabled) return;
     try {
-      const audio = new Audio(PAGE_FLIP_AUDIO_SRC);
-      audio.volume = 0.72;
-      audio.currentTime = 0;
-      audio.play().catch(() => {});
+      const pool = webAudioPoolRef.current;
+      const audio = pool.find((a) => a.paused || a.ended) || pool[0];
+      if (audio) {
+        audio.currentTime = 0;
+        audio.volume = 0.68;
+        const playPromise = audio.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(() => {});
+        }
+      } else {
+        const fallback = new Audio(SPIDERWEB_SHOT_AUDIO_SRC);
+        fallback.volume = 0.68;
+        fallback.play().catch(() => {});
+      }
     } catch {}
   }, [soundEnabled]);
 
@@ -998,12 +1085,9 @@ const UniversalPaste = () => {
       audio.volume = 0.72;
       audio.currentTime = 0;
       audio.play().catch(() => {
-        // Fallback to spiderweb sound
         playSpiderwebShotSound();
       });
-    } catch {
-      // Audio playback unavailable.
-    }
+    } catch {}
   }, [soundEnabled, playSpiderwebShotSound]);
 
   const stopWebVideo = useCallback((video?: HTMLVideoElement | null) => {
@@ -1029,7 +1113,11 @@ const UniversalPaste = () => {
   }, [stopWebVideo]);
 
   const handleStageClick = (e: React.MouseEvent) => {
-    playWebSwingSound();
+    const target = e.target as HTMLElement | null;
+    if (target && target.closest('button, a, input, select, textarea, [role="button"], .sv-comic-ctrl-btn, .sv-workflow-ctrl-btn, .sv-workflow-box, .sv-hero-comic-wrapper')) {
+      return;
+    }
+
     triggerSFX({
       x: e.clientX,
       y: e.clientY,
@@ -1042,34 +1130,44 @@ const UniversalPaste = () => {
     });
   };
 
-  const startIntroAudio = useCallback(() => {
-    if (introSoundStartedRef.current) return;
-    introSoundStartedRef.current = true;
-    playPageFlipSound();
-  }, [playPageFlipSound]);
+  const hasSkippedIntroRef = useRef(false);
 
   const skipToMascotSequence = useCallback(() => {
-    startIntroAudio();
+    if (hasSkippedIntroRef.current) return;
+    hasSkippedIntroRef.current = true;
+
     if (introOverlayRef.current) {
+      gsap.killTweensOf(introOverlayRef.current);
+      // Fallback timer in case requestAnimationFrame is throttled during tab reload
+      const fallbackTimer = window.setTimeout(() => {
+        setIntroPhase('mascot-fade');
+      }, 450);
+
       gsap.to(introOverlayRef.current, {
         opacity: 0,
         scale: 1.05,
         duration: 0.35,
         onComplete: () => {
+          window.clearTimeout(fallbackTimer);
           setIntroPhase('mascot-fade');
         },
       });
     } else {
       setIntroPhase('mascot-fade');
     }
-  }, [startIntroAudio]);
-
-  const skipAllToReady = useCallback(() => {
-    setIntroPhase('ready');
-    window.setTimeout(() => ScrollTrigger.refresh(), 100);
   }, []);
 
-  // Step 1: Video phase timeout / completion
+  const skipAllToReady = useCallback(() => {
+    hasSkippedIntroRef.current = true;
+    setIntroPhase('ready');
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    window.setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'instant' });
+      ScrollTrigger.refresh();
+    }, 100);
+  }, []);
+
+  // Step 1: Video phase timeout / completion (resilient against reload stalls)
   useEffect(() => {
     if (introPhase !== 'video') return;
 
@@ -1086,16 +1184,16 @@ const UniversalPaste = () => {
       skipToMascotSequence();
     };
 
-    const metadataFallback = window.setTimeout(() => {
-      const video = introOverlayRef.current?.querySelector<HTMLVideoElement>('.sv-intro-video-placeholder-media');
-      if (!video || video.readyState < 1) {
-        finishVideo();
-      }
-    }, 9000);
+    // Hard fail-safe timeout: Intro video is ~2.21 seconds.
+    // In ANY circumstance (autoplay block on reload, stall, background tab),
+    // advance within 3.2 seconds max so the user is NEVER stuck on reload.
+    const hardFailSafeTimeout = window.setTimeout(() => {
+      finishVideo();
+    }, 3200);
 
     return () => {
       cancelled = true;
-      window.clearTimeout(metadataFallback);
+      window.clearTimeout(hardFailSafeTimeout);
     };
   }, [introPhase, skipToMascotSequence]);
 
@@ -1104,13 +1202,9 @@ const UniversalPaste = () => {
     if (introPhase !== 'mascot-fade') return;
 
     setStripAnimWord('hero');
-    // Ensure intro page flip sound has started (triggers at t=-0.35s before cut, or now if skipped)
-    startIntroAudio();
 
-    // 250ms after mascot card appears (~550ms after page-flip started): spiderweb shot strikes HERO
     const timer1 = window.setTimeout(() => {
       setStripAnimWord('striking');
-      playSpiderwebShotSound();
     }, 250);
 
     const timer2 = window.setTimeout(() => {
@@ -1123,7 +1217,11 @@ const UniversalPaste = () => {
 
     const timer4 = window.setTimeout(() => {
       setIntroPhase('ready');
-      window.setTimeout(() => ScrollTrigger.refresh(), 100);
+      window.scrollTo({ top: 0, behavior: 'instant' });
+      window.setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'instant' });
+        ScrollTrigger.refresh();
+      }, 100);
     }, 1800);
 
     return () => {
@@ -1132,13 +1230,17 @@ const UniversalPaste = () => {
       window.clearTimeout(timer3);
       window.clearTimeout(timer4);
     };
-  }, [introPhase, startIntroAudio, playSpiderwebShotSound]);
+  }, [introPhase]);
 
   useEffect(() => {
     if (introPhase === 'checkered-grid') {
       const timer = window.setTimeout(() => {
         setIntroPhase('ready');
-        window.setTimeout(() => ScrollTrigger.refresh(), 100);
+        window.scrollTo({ top: 0, behavior: 'instant' });
+        window.setTimeout(() => {
+          window.scrollTo({ top: 0, behavior: 'instant' });
+          ScrollTrigger.refresh();
+        }, 100);
       }, 300);
       return () => window.clearTimeout(timer);
     }
@@ -1193,7 +1295,6 @@ const UniversalPaste = () => {
       if (pages.length === 0) return;
 
       pages.forEach((page) => {
-        const pageId = page.id || 'sv-section';
         const frame = page.querySelector<HTMLElement>('.sv-comic-panel-frame');
         const webStage = page.querySelector<HTMLElement>('.sv-section-spiderweb-stage');
         const videoIn = page.querySelector<HTMLVideoElement>('.sv-spiderweb-video--in');
@@ -1302,11 +1403,8 @@ const UniversalPaste = () => {
           void page.offsetWidth;
           page.classList.add('sv-glitch-active');
 
-          // Play transition sound ONLY ONCE PER SESSION for this section!
-          if (!playedSectionsSession.current.has(pageId)) {
-            playedSectionsSession.current.add(pageId);
-            playSpiderwebShotSound();
-          }
+          // Play web transition sound on every section scroll (debounced via audio pool)
+          playSpiderwebShotSound();
 
           setTimeout(() => {
             page.classList.remove('sv-glitch-active');
@@ -1516,22 +1614,50 @@ const UniversalPaste = () => {
 
           <div className="sv-intro-video-shell">
             <video
+              ref={(el) => {
+                if (el && !el.dataset.initPlay) {
+                  el.dataset.initPlay = 'true';
+                  const userActive = (navigator as Navigator & { userActivation?: { hasBeenActive?: boolean } }).userActivation?.hasBeenActive;
+                  if (userActive && soundEnabled) {
+                    el.muted = false;
+                    const p = el.play();
+                    if (p !== undefined) {
+                      p.catch(() => {
+                        el.muted = true;
+                        el.play().catch(() => {});
+                      });
+                    }
+                  } else {
+                    el.muted = true;
+                    el.play().catch(() => {});
+                  }
+                }
+              }}
               className="sv-intro-video-placeholder-media"
               src={INTRO_VIDEO_SRC}
-              muted
               playsInline
               autoPlay
+              muted
               preload="auto"
               onTimeUpdate={(e) => {
-                const video = e.currentTarget;
-                if (video.duration && video.currentTime >= video.duration - 0.35) {
-                  startIntroAudio();
+                const v = e.currentTarget;
+                if (v.duration && v.currentTime >= v.duration - 0.12) {
+                  skipToMascotSequence();
                 }
               }}
               onEnded={skipToMascotSequence}
+              onPause={(e) => {
+                const v = e.currentTarget;
+                if (!v.ended && v.currentTime > 0.4) {
+                  skipToMascotSequence();
+                }
+              }}
+              onStalled={() => {
+                window.setTimeout(skipToMascotSequence, 1000);
+              }}
               onError={(event) => {
                 event.currentTarget.style.display = 'none';
-                window.setTimeout(skipToMascotSequence, 900);
+                skipToMascotSequence();
               }}
             />
             <div className="sv-intro-video-placeholder-copy" aria-hidden="true">
@@ -1559,50 +1685,92 @@ const UniversalPaste = () => {
       <header className="sv-comic-navbar" onClick={(e) => e.stopPropagation()}>
         <div className="sv-comic-navbar-inner">
           <div className="sv-comic-navbar-left">
-            <Link to="/" className="sv-comic-nav-link sv-comic-nav-link--home">
-              <ArrowLeft size={15} /> <span>Home</span>
-            </Link>
-            <Link className="sv-comic-brand" to="/plugins/universal-paste">
-              <img src="/assets/universal-paste/universal-paste-transparent.png" alt="Vampro Universal Paste" />
-              <span>Universal Paste</span>
+            <Link to="/" className="sv-comic-main-logo group" title="Vampro Homepage">
+              <img
+                src="/header.png"
+                alt="Vampro Logo"
+                className="sv-comic-main-logo-img"
+                width={30}
+                height={30}
+                decoding="async"
+              />
+              <span className="sv-comic-main-logo-text font-bank-gothic">
+                <ScatterText text="VAMPRO" />
+              </span>
+              <span className="sv-comic-creative-lab-capsule animate-scatter-capsule">
+                <ScatterText text="Creative Lab" />
+              </span>
             </Link>
           </div>
 
-          <nav className="sv-comic-nav-links">
-            <a href="#sv-hero" className="sv-comic-nav-link">Hero</a>
-            <a href="#sv-benefits" className="sv-comic-nav-link">Benefits</a>
-            <a href="#sv-how" className="sv-comic-nav-link">How It Works</a>
-            <a href="#sv-workflow" className="sv-comic-nav-link">Workflow</a>
-            <a href="#sv-for" className="sv-comic-nav-link">For Editors</a>
-            <a href="#sv-why" className="sv-comic-nav-link">Why Vampro</a>
-            <a href="#sv-faq" className="sv-comic-nav-link">FAQ</a>
-            <a href="#sv-cta" className="sv-comic-nav-link">Get Plugin</a>
-          </nav>
+          {/* Center: Universal Paste Logo (Enlarged, centered, no text) */}
+          <div className="sv-comic-navbar-center">
+            <Link
+              to="/plugins/universal-paste"
+              className="sv-comic-center-logo"
+              title="Universal Paste"
+              aria-label="Universal Paste"
+            >
+              <img
+                src="/assets/universal-paste/universal-paste-transparent.png"
+                alt="Universal Paste Logo"
+                width={38}
+                height={38}
+                decoding="async"
+              />
+            </Link>
+          </div>
 
-          <div className="sv-comic-navbar-actions">
+          <div className="sv-comic-navbar-right">
+
             <button
               type="button"
-              className="sv-comic-nav-link"
-              style={{ padding: '8px 10px' }}
-              onClick={() => setSoundEnabled(!soundEnabled)}
-              title={soundEnabled ? 'Mute Audio' : 'Enable Audio'}
+              className="sv-comic-nav-link sv-comic-nav-link--intro"
+              onClick={() => {
+                window.scrollTo(0, 0);
+                window.location.href = '/plugins/universal-paste';
+                window.location.reload();
+              }}
+              title="Replay Intro Sequence"
             >
-              {soundEnabled ? <Volume2 size={16} /> : <VolumeX size={16} />}
+              Intro
             </button>
-            <Link
-              to="/blog"
-              className="sv-comic-nav-link"
-              style={{ background: '#ffffff', color: '#07080b', border: '2px solid #07080b' }}
-            >
-              Blogs ↗
-            </Link>
-            <Link
-              to="/docs/plugins/universal-paste"
-              className="sv-comic-nav-link"
-              style={{ background: '#ffd437', color: '#07080b' }}
-            >
-              Docs ↗
-            </Link>
+
+            <nav className="sv-comic-nav-links">
+              <a href="#sv-hero" className="sv-comic-nav-link" onClick={handleHeroNavClick}>Hero</a>
+              <a href="#sv-benefits" className="sv-comic-nav-link">Benefits</a>
+              <a href="#sv-how" className="sv-comic-nav-link">How It Works</a>
+              <a href="#sv-for" className="sv-comic-nav-link">For Editors</a>
+              <a href="#sv-why" className="sv-comic-nav-link">Why Vampro</a>
+              <a href="#sv-faq" className="sv-comic-nav-link">FAQ</a>
+              <a href="#sv-cta" className="sv-comic-nav-link">Get Plugin</a>
+            </nav>
+
+            <div className="sv-comic-navbar-actions">
+              <button
+                type="button"
+                className="sv-comic-nav-link"
+                style={{ padding: '8px 10px' }}
+                onClick={() => setSoundEnabled(!soundEnabled)}
+                title={soundEnabled ? 'Mute Audio' : 'Enable Audio'}
+              >
+                {soundEnabled ? <Volume2 size={16} /> : <VolumeX size={16} />}
+              </button>
+              <Link
+                to="/blog"
+                className="sv-comic-nav-link"
+                style={{ background: '#ffffff', color: '#07080b', border: '2px solid #07080b' }}
+              >
+                Blogs ↗
+              </Link>
+              <Link
+                to="/docs/plugins/universal-paste"
+                className="sv-comic-nav-link"
+                style={{ background: '#ffd437', color: '#07080b' }}
+              >
+                Docs ↗
+              </Link>
+            </div>
           </div>
         </div>
       </header>
@@ -1635,9 +1803,6 @@ const UniversalPaste = () => {
 
         {/* ── SECTION 1: HERO (RED BACKGROUND • BLACK BOX) ── */}
         <section className="sv-vpage sv-vpage--red" id="sv-hero">
-          {introPhase !== 'video' && introPhase !== 'mascot-fade' && <AmbientAlternatingComicGrid />}
-          <SectionYellowPills sectionId="hero" />
-
           <div className={`sv-hero-bg ${introPhase === 'mascot-fade' ? 'sv-hero-bg--cinematic-fade' : ''}`}>
             <img
               src="/assets/universal-paste/superhero.png"
@@ -1646,6 +1811,9 @@ const UniversalPaste = () => {
             />
             <div className="sv-hero-bg-overlay" />
           </div>
+
+          <AmbientAlternatingComicGrid />
+          <SectionYellowPills sectionId="hero" />
 
           <div className="sv-halftone" />
           <div className="sv-speed-lines" />
@@ -1699,26 +1867,29 @@ const UniversalPaste = () => {
                 </div>
 
                 <div className="sv-hero-comic-container">
-                  <HeroLiveComicBook isActive={introPhase === 'ready'} onFlipSound={playWebSwingSound} />
+                  <HeroLiveComicBook
+                    isActive={introPhase === 'ready'}
+                    onFlipSound={() => {}}
+                    resetTrigger={heroComicResetTrigger}
+                  />
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* ── SECTION 2: BENEFITS (BLACK BACKGROUND • RED BOX) ── */}
-        <section className="sv-vpage sv-vpage--noir" id="sv-benefits">
+        {/* ── SECTION 2: BENEFITS (RED BACKGROUND • BLACK BOX) ── */}
+        <section className="sv-vpage sv-vpage--red" id="sv-benefits">
           <AmbientAlternatingComicGrid />
           <SectionYellowPills sectionId="benefits" />
 
-          {/* Comic Halftone dots on black background */}
-          <div className="sv-halftone sv-halftone--noir" />
+          <div className="sv-halftone" />
           <div className="sv-speed-lines" />
 
           {/* Section-level Spiderweb Transition Overlay (Bottom-aligned) */}
           <SectionSpiderwebOverlay />
 
-          <div className="sv-comic-panel-frame sv-comic-panel-frame--red">
+          <div className="sv-comic-panel-frame sv-comic-panel-frame--black">
             {/* Box Internal Halftone Dots Layer */}
             <div className="sv-box-halftone-dots" />
 
@@ -1732,85 +1903,59 @@ const UniversalPaste = () => {
                   ONE PLUGIN. EVERY SOURCE.
                 </div>
                 <h2 className="sv-glitch-title">TURN MEDIA MOMENTS INTO TIMELINE ASSETS</h2>
-                <p className="sv-lead" style={{ color: '#fff' }}>
+                <p className="sv-lead" style={{ color: '#cbd2dc' }}>
                   Universal Paste eliminates browser saves, download folder hunting, and manual import rituals.
                 </p>
               </div>
 
-              <div className="sv-comic-card-grid">
-                <article className="sv-comic-card sv-interactive-glitch-elem">
-                  <div className="sv-comic-card-tag">CLIPBOARD</div>
-                  <h3>PASTE MEDIA DIRECTLY</h3>
-                  <p>Images, GIFs, copied files, text prompts, and supported URLs become organized project assets ready for your timeline.</p>
-                </article>
-
-                <article className="sv-comic-card sv-interactive-glitch-elem">
-                  <div className="sv-comic-card-tag" style={{ background: '#1d8fff', color: '#fff' }}>CAPTURE</div>
-                  <h3>SCREENSHOT & RECORD</h3>
-                  <p>Capture entire displays, application windows, or snipped regions through a local companion built for editor rhythm.</p>
-                </article>
-
-                <article className="sv-comic-card sv-interactive-glitch-elem">
-                  <div className="sv-comic-card-tag" style={{ background: '#ffd437', color: '#07080b' }}>TIMELINE</div>
-                  <h3>LESS FILE CHASING</h3>
-                  <p>Imported assets land in discoverable, date-stamped project bins - sent straight to playhead with zero drag-and-drop friction.</p>
-                </article>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ── SECTION 3: HOW IT WORKS (RED BACKGROUND • BLACK BOX) ── */}
-        <section className="sv-vpage sv-vpage--red" id="sv-how">
-          <AmbientAlternatingComicGrid />
-          <SectionYellowPills sectionId="how" />
-
-          <div className="sv-halftone" />
-          <div className="sv-speed-lines" />
-
-          {/* Section-level Spiderweb Transition Overlay (Bottom-aligned) */}
-          <SectionSpiderwebOverlay />
-
-          <div className="sv-comic-panel-frame sv-comic-panel-frame--black">
-            {/* Box Internal Halftone Dots Layer */}
-            <div className="sv-box-halftone-dots" />
-
-            <div className="sv-panel-header-tab">
-              <span>HOW IT WORKS</span>
-            </div>
-
-            <div className="sv-wrap">
-              <div>
-                <div className="sv-kicker sv-kicker-paste" style={{ background: '#ffd437', color: '#07080b' }}>
-                  FLOW
-                </div>
-                <h2 className="sv-glitch-title">THE 5-STEP WORKFLOW</h2>
-                <p className="sv-lead">
-                  The flow is intentionally simple: capture or fetch, preview, then place it where your cut needs it.
-                </p>
-              </div>
-
-              <div className="sv-steps-grid">
+              <div className="sv-comic-card-grid sv-flip-grid">
                 {[
-                  { n: '1', title: 'Copy', desc: 'Copy a URL, image, GIF, video reference, or file.' },
-                  { n: '2', title: 'Detect', desc: 'The companion reads clipboard and URL content locally.' },
-                  { n: '3', title: 'Capture', desc: 'Take screenshots or window recordings on demand.' },
-                  { n: '4', title: 'Preview', desc: 'Confirm the asset before it enters your Premiere project.' },
-                  { n: '5', title: 'Create', desc: 'Import to bin or place directly into the active timeline.' },
-                ].map((step) => (
-                  <div className="sv-step-card sv-interactive-glitch-elem" key={step.n}>
-                    <div className="sv-step-num">{step.n}</div>
-                    <h4>{step.title}</h4>
-                    <p>{step.desc}</p>
-                  </div>
-                ))}
+                  { tag: 'CLIPBOARD', tagBg: '#ffd437', tagColor: '#07080b', title: 'PASTE MEDIA DIRECTLY', desc: 'Images, GIFs, copied files, text prompts, and supported URLs become organized project assets ready for your timeline.' },
+                  { tag: 'CAPTURE', tagBg: '#1d8fff', tagColor: '#fff', title: 'SCREENSHOT & RECORD', desc: 'Capture entire displays, application windows, or snipped regions through a local companion built for editor rhythm.' },
+                  { tag: 'TIMELINE', tagBg: '#ffd437', tagColor: '#07080b', title: 'LESS FILE CHASING', desc: 'Imported assets land in discoverable, date-stamped project bins - sent straight to playhead with zero drag-and-drop friction.' },
+                ].map((item, idx) => {
+                  const isFlipped = flippedBenefitIndices.includes(idx);
+                  return (
+                    <article
+                      key={idx}
+                      className={`sv-flip-card ${isFlipped ? 'sv-flip-card--flipped' : ''}`}
+                      onClick={() => toggleBenefit(idx)}
+                      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleBenefit(idx); } }}
+                      tabIndex={0}
+                      role="button"
+                      aria-expanded={isFlipped}
+                    >
+                      <div className="sv-flip-card-inner">
+                        <div className="sv-flip-card-face sv-flip-card-face--front">
+                          <div className="sv-flip-card-topbar">
+                            <span className="sv-flip-card-badge-num">0{idx + 1}</span>
+                            <span className="sv-flip-card-badge-section">★ BENEFIT</span>
+                          </div>
+                          <div className="sv-flip-card-callout-wrap">
+                            <div className="sv-flip-card-callout" style={{ background: item.tagBg, color: item.tagColor }}>{item.tag}</div>
+                          </div>
+                          <div className="sv-flip-card-click-hint">
+                            <span>REVEAL DETAILS</span>
+                            <span>➔</span>
+                          </div>
+                        </div>
+                        <div className="sv-flip-card-face sv-flip-card-face--back">
+                          <div className="sv-comic-card-tag" style={{ background: item.tagBg, color: item.tagColor }}>{item.tag}</div>
+                          <h3>{item.title}</h3>
+                          <p>{item.desc}</p>
+                        </div>
+                      </div>
+                    </article>
+                  );
+                })}
               </div>
             </div>
           </div>
         </section>
 
-        {/* ── SECTION: WORKFLOW SHOWCASE (BLACK BACKGROUND • RED BOX) ── */}
-        <section className="sv-vpage sv-vpage--noir sv-vpage--workflow" id="sv-workflow">
+        {/* ── SECTION: HOW IT WORKS (BLACK BACKGROUND • RED BOX) ── */}
+        <section className="sv-vpage sv-vpage--noir sv-vpage--workflow" id="sv-how">
+          <div id="sv-workflow" style={{ position: 'absolute', top: 0 }} />
           <AmbientAlternatingComicGrid />
           <SectionYellowPills sectionId="workflow" />
 
@@ -1826,7 +1971,7 @@ const UniversalPaste = () => {
             <div className="sv-box-halftone-dots" />
 
             <div className="sv-panel-header-tab">
-              <span>COPY, CAPTURE, PASTE, REPLACE</span>
+              <span>HOW IT WORKS</span>
             </div>
 
             <div className="sv-wrap">
@@ -1840,7 +1985,7 @@ const UniversalPaste = () => {
                 <h2 className="sv-glitch-title sv-workflow-title-single-line">
                   COPY, CAPTURE, PASTE, REPLACE
                 </h2>
-                <p className="sv-lead" style={{ margin: '0 auto', color: '#cbd2dc', maxWidth: '780px', fontSize: '13px', lineHeight: '1.4' }}>
+                <p className="sv-lead sv-workflow-lead-single-line">
                   Watch how fast you can ingest URLs, grab screen clips, paste clipboard assets, and replace timeline cuts without breaking your creative flow.
                 </p>
               </div>
@@ -1850,19 +1995,18 @@ const UniversalPaste = () => {
           </div>
         </section>
 
-        {/* ── SECTION 4: FOR EDITORS (BLACK BACKGROUND • RED BOX) ── */}
-        <section className="sv-vpage sv-vpage--noir" id="sv-for">
+        {/* ── SECTION 4: FOR EDITORS (RED BACKGROUND • BLACK BOX) ── */}
+        <section className="sv-vpage sv-vpage--red" id="sv-for">
           <AmbientAlternatingComicGrid />
           <SectionYellowPills sectionId="for" />
 
-          {/* Comic Halftone dots on black background */}
-          <div className="sv-halftone sv-halftone--noir" />
+          <div className="sv-halftone" />
           <div className="sv-speed-lines" />
 
           {/* Section-level Spiderweb Transition Overlay (Bottom-aligned) */}
           <SectionSpiderwebOverlay />
 
-          <div className="sv-comic-panel-frame sv-comic-panel-frame--red">
+          <div className="sv-comic-panel-frame sv-comic-panel-frame--black">
             {/* Box Internal Halftone Dots Layer */}
             <div className="sv-box-halftone-dots" />
 
@@ -1872,44 +2016,72 @@ const UniversalPaste = () => {
 
             <div className="sv-wrap">
               <div>
-                <div className="sv-kicker sv-kicker-paste" style={{ background: '#07080b', color: '#fff' }}>
+                <div className="sv-kicker sv-kicker-paste" style={{ background: '#ffd437', color: '#07080b' }}>
                   AUDIENCE
                 </div>
                 <h2 className="sv-glitch-title">TAILORED FOR FAST-TURN CREATORS</h2>
-                <p className="sv-lead" style={{ color: '#fff' }}>
+                <p className="sv-lead" style={{ color: '#cbd2dc' }}>
                   Built for editors who keep moving between research, reference, screen capture, browser media, and the timeline.
                 </p>
               </div>
 
-              <div className="sv-audience-grid">
+              <div className="sv-audience-grid sv-flip-grid">
                 {[
-                  { title: 'Video Editors', desc: 'Pull visual references, screenshots, overlays, and quick inserts into projects faster.' },
-                  { title: 'Content Teams', desc: 'Reduce handoffs when social, product, and web references need to become edit material.' },
-                  { title: 'Tutorial Creators', desc: 'Capture screens, app windows, and snippets without leaving the editing rhythm.' },
-                  { title: 'Fast-Turn Editors', desc: 'Move from idea to timeline when deadlines leave no room for import rituals.' },
-                ].map((item) => (
-                  <div className="sv-comic-card sv-interactive-glitch-elem" key={item.title}>
-                    <h3>{item.title}</h3>
-                    <p>{item.desc}</p>
-                  </div>
-                ))}
+                  { tag: 'VIDEO EDITORS', title: 'Video Editors', desc: 'Pull visual references, screenshots, overlays, and quick inserts into projects faster.' },
+                  { tag: 'CONTENT TEAMS', title: 'Content Teams', desc: 'Reduce handoffs when social, product, and web references need to become edit material.' },
+                  { tag: 'TUTORIAL CREATORS', title: 'Tutorial Creators', desc: 'Capture screens, app windows, and snippets without leaving the editing rhythm.' },
+                  { tag: 'FAST-TURN EDITORS', title: 'Fast-Turn Editors', desc: 'Move from idea to timeline when deadlines leave no room for import rituals.' },
+                ].map((item, idx) => {
+                  const isFlipped = flippedAudienceIndices.includes(idx);
+                  return (
+                    <article
+                      key={item.tag}
+                      className={`sv-flip-card ${isFlipped ? 'sv-flip-card--flipped' : ''}`}
+                      onClick={() => toggleAudience(idx)}
+                      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleAudience(idx); } }}
+                      tabIndex={0}
+                      role="button"
+                      aria-expanded={isFlipped}
+                    >
+                      <div className="sv-flip-card-inner">
+                        <div className="sv-flip-card-face sv-flip-card-face--front">
+                          <div className="sv-flip-card-topbar">
+                            <span className="sv-flip-card-badge-num">0{idx + 1}</span>
+                            <span className="sv-flip-card-badge-section">★ AUDIENCE</span>
+                          </div>
+                          <div className="sv-flip-card-callout-wrap">
+                            <div className="sv-flip-card-callout">{item.tag}</div>
+                          </div>
+                          <div className="sv-flip-card-click-hint">
+                            <span>REVEAL DETAILS</span>
+                            <span>➔</span>
+                          </div>
+                        </div>
+                        <div className="sv-flip-card-face sv-flip-card-face--back">
+                          <h3>{item.tag}</h3>
+                          <p>{item.desc}</p>
+                        </div>
+                      </div>
+                    </article>
+                  );
+                })}
               </div>
             </div>
           </div>
         </section>
 
-        {/* ── SECTION 5: WHY VAMPRO (RED BACKGROUND • BLACK BOX) ── */}
-        <section className="sv-vpage sv-vpage--red sv-vpage--why" id="sv-why">
+        {/* ── SECTION 5: WHY VAMPRO (BLACK BACKGROUND • RED BOX) ── */}
+        <section className="sv-vpage sv-vpage--noir sv-vpage--why" id="sv-why">
           <AmbientAlternatingComicGrid />
           <SectionYellowPills sectionId="why" />
 
-          <div className="sv-halftone" />
+          <div className="sv-halftone sv-halftone--noir" />
           <div className="sv-speed-lines" />
 
           {/* Section-level Spiderweb Transition Overlay (Bottom-aligned) */}
           <SectionSpiderwebOverlay />
 
-          <div className="sv-comic-panel-frame sv-comic-panel-frame--black">
+          <div className="sv-comic-panel-frame sv-comic-panel-frame--red">
             {/* Box Internal Halftone Dots Layer */}
             <div className="sv-box-halftone-dots" />
 
@@ -1991,7 +2163,7 @@ const UniversalPaste = () => {
                             {activeMockTab === 'clipboard' && (
                               <div className="sv-preview-loaded-card sv-preview-loaded-card--large">
                                 <div className="sv-preview-img-wrap sv-preview-img-wrap--large">
-                                  <img src={selectedAsset.src} alt={selectedAsset.label} />
+                                  <img src={selectedAsset.src} alt={selectedAsset.label} loading="lazy" decoding="async" width={90} height={90} />
                                 </div>
                                 <div className="sv-preview-meta">
                                   <span className="sv-tag-badge">IMAGE/PNG • READY</span>
@@ -2025,14 +2197,14 @@ const UniversalPaste = () => {
 
                             {activeMockTab === 'video' && (
                               <div className="sv-video-preview">
-                                <video src={SIMULATOR_VIDEO_SRC} muted loop autoPlay playsInline controls />
+                                <video src={SIMULATOR_VIDEO_SRC} muted loop autoPlay playsInline controls preload="metadata" />
                               </div>
                             )}
 
                             {activeMockTab === 'replace' && (
                               <div className="sv-preview-loaded-card sv-preview-loaded-card--large">
                                 <div className="sv-preview-img-wrap sv-preview-img-wrap--large">
-                                  <img src={selectedAsset.src} alt={selectedAsset.label} />
+                                  <img src={selectedAsset.src} alt={selectedAsset.label} loading="lazy" decoding="async" width={90} height={90} />
                                 </div>
                                 <div className="sv-preview-meta">
                                   <span className="sv-tag-badge" style={{ background: '#4ade80', color: '#07080b' }}>REPLACE SOURCE</span>
@@ -2054,7 +2226,7 @@ const UniversalPaste = () => {
                                 onClick={() => setSelectedAssetId(asset.id)}
                                 title={asset.label}
                               >
-                                <img src={asset.src} alt={asset.label} />
+                                <img src={asset.src} alt={asset.label} loading="lazy" decoding="async" width={32} height={32} />
                               </button>
                             ))}
                           </div>
@@ -2122,7 +2294,7 @@ const UniversalPaste = () => {
                                         setSelectedTimelineItemId(item.id);
                                       }}
                                     >
-                                      {item.src && <img src={item.src} alt="" />}
+                                      {item.src && <img src={item.src} alt="" loading="lazy" decoding="async" width={20} height={20} />}
                                       <span>{item.name}</span>
                                     </button>
                                   ))}
@@ -2144,7 +2316,7 @@ const UniversalPaste = () => {
                                         setSelectedTimelineItemId(item.id);
                                       }}
                                     >
-                                      {item.src && <img src={item.src} alt="" />}
+                                      {item.src && <img src={item.src} alt="" loading="lazy" decoding="async" width={20} height={20} />}
                                       <span>{item.name}</span>
                                     </button>
                                   ))}
@@ -2168,38 +2340,47 @@ const UniversalPaste = () => {
                   </div>
 
                   {/* 2x2 Grid: 2 on top, 2 on bottom */}
-                  <div className="sv-why-2x2-grid">
-                    <div className="sv-comic-card sv-why-card sv-interactive-glitch-elem">
-                      <div className="sv-comic-card-tag" style={{ background: 'var(--comic-yellow)', color: '#07080b' }}>
-                        UNIFIED
-                      </div>
-                      <h3>Universal Ingestion</h3>
-                      <p>Single unified workflow for clipboard, capture, URLs, images, GIFs, and videos.</p>
-                    </div>
-
-                    <div className="sv-comic-card sv-why-card sv-interactive-glitch-elem">
-                      <div className="sv-comic-card-tag" style={{ background: '#1d8fff', color: '#fff' }}>
-                        ZERO LAG
-                      </div>
-                      <h3>Lightweight Engine</h3>
-                      <p>Local companion handles heavy fetching and encoding while Premiere stays snappy.</p>
-                    </div>
-
-                    <div className="sv-comic-card sv-why-card sv-interactive-glitch-elem">
-                      <div className="sv-comic-card-tag" style={{ background: '#ff00aa', color: '#fff' }}>
-                        HYGIENE
-                      </div>
-                      <h3>Automated Bins</h3>
-                      <p>Assets are organized in structured date-stamped folders for instant search.</p>
-                    </div>
-
-                    <div className="sv-comic-card sv-why-card sv-interactive-glitch-elem">
-                      <div className="sv-comic-card-tag" style={{ background: '#4ade80', color: '#07080b' }}>
-                        DIRECT
-                      </div>
-                      <h3>Playhead Drop</h3>
-                      <p>Media lands right at your playhead on Track V1/V2 with zero drag-and-drop friction.</p>
-                    </div>
+                  <div className="sv-why-2x2-grid sv-flip-grid">
+                    {[
+                      { tag: 'UNIFIED', tagBg: '#ffd437', tagColor: '#07080b', title: 'Universal Ingestion', desc: 'Single unified workflow for clipboard, capture, URLs, images, GIFs, and videos.' },
+                      { tag: 'ZERO LAG', tagBg: '#1d8fff', tagColor: '#fff', title: 'Lightweight Engine', desc: 'Local companion handles heavy fetching and encoding while Premiere stays snappy.' },
+                      { tag: 'HYGIENE', tagBg: '#ff00aa', tagColor: '#fff', title: 'Automated Bins', desc: 'Assets are organized in structured date-stamped folders for instant search.' },
+                      { tag: 'DIRECT', tagBg: '#4ade80', tagColor: '#07080b', title: 'Playhead Drop', desc: 'Media lands right at your playhead on Track V1/V2 with zero drag-and-drop friction.' },
+                    ].map((item, idx) => {
+                      const isFlipped = flippedWhyIndices.includes(idx);
+                      return (
+                        <article
+                          key={item.tag}
+                          className={`sv-flip-card ${isFlipped ? 'sv-flip-card--flipped' : ''}`}
+                          onClick={() => toggleWhy(idx)}
+                          onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleWhy(idx); } }}
+                          tabIndex={0}
+                          role="button"
+                          aria-expanded={isFlipped}
+                        >
+                          <div className="sv-flip-card-inner">
+                            <div className="sv-flip-card-face sv-flip-card-face--front">
+                              <div className="sv-flip-card-topbar">
+                                <span className="sv-flip-card-badge-num">0{idx + 1}</span>
+                                <span className="sv-flip-card-badge-section">★ WHY</span>
+                              </div>
+                              <div className="sv-flip-card-callout-wrap">
+                                <div className="sv-flip-card-callout" style={{ background: item.tagBg, color: item.tagColor }}>{item.tag}</div>
+                              </div>
+                              <div className="sv-flip-card-click-hint">
+                                <span>REVEAL DETAILS</span>
+                                <span>➔</span>
+                              </div>
+                            </div>
+                            <div className="sv-flip-card-face sv-flip-card-face--back">
+                              <div className="sv-comic-card-tag" style={{ background: item.tagBg, color: item.tagColor }}>{item.tag}</div>
+                              <h3>{item.title.toUpperCase()}</h3>
+                              <p>{item.desc}</p>
+                            </div>
+                          </div>
+                        </article>
+                      );
+                    })}
                   </div>
                 </div>
               </div>
@@ -2207,19 +2388,18 @@ const UniversalPaste = () => {
           </div>
         </section>
 
-        {/* ── SECTION 6: INSTALLATION & SETUP (BLACK BACKGROUND • RED BOX) ── */}
-        <section className="sv-vpage sv-vpage--noir sv-vpage--setup" id="sv-setup">
+        {/* ── SECTION 6: INSTALLATION & SETUP (RED BACKGROUND • BLACK BOX) ── */}
+        <section className="sv-vpage sv-vpage--red sv-vpage--setup" id="sv-setup">
           <AmbientAlternatingComicGrid />
           <SectionYellowPills sectionId="setup" />
 
-          {/* Comic Halftone dots on black background */}
-          <div className="sv-halftone sv-halftone--noir" />
+          <div className="sv-halftone" />
           <div className="sv-speed-lines" />
 
           {/* Section-level Spiderweb Transition Overlay (Bottom-aligned) */}
           <SectionSpiderwebOverlay />
 
-          <div className="sv-comic-panel-frame sv-comic-panel-frame--red">
+          <div className="sv-comic-panel-frame sv-comic-panel-frame--black">
             {/* Box Internal Halftone Dots Layer */}
             <div className="sv-box-halftone-dots" />
 
@@ -2229,99 +2409,53 @@ const UniversalPaste = () => {
 
             <div className="sv-wrap">
               <div>
-                <div className="sv-kicker sv-kicker-paste" style={{ background: '#07080b', color: '#fff' }}>
+                <div className="sv-kicker sv-kicker-paste" style={{ background: '#ffd437', color: '#07080b' }}>
                   SETUP
                 </div>
                 <h2 className="sv-glitch-title">READY IN THREE FAST STEPS</h2>
-                <p className="sv-lead" style={{ color: '#fff' }}>
+                <p className="sv-lead" style={{ color: '#cbd2dc' }}>
                   Install the plugin, launch the companion app, and keep the full paste pipeline running locally.
                 </p>
               </div>
 
-              <div className="sv-setup-grid">
+              <div className="sv-setup-grid sv-flip-grid">
                 {[
-                  {
-                    n: '1',
-                    tag: 'ADOBE EXCHANGE',
-                    title: 'Install the Plugin',
-                    desc: 'Install Universal Paste from Adobe Exchange and enable it inside Premiere Pro.',
-                  },
-                  {
-                    n: '2',
-                    tag: 'WINDOWS STORE',
-                    title: 'Run the Companion',
-                    desc: 'Install and run the companion app from the Windows Store so clipboard, capture, and media handling stay available.',
-                  },
-                  {
-                    n: '3',
-                    tag: 'OFFLINE ENGINE',
-                    title: 'Paste at Full Speed',
-                    desc: 'The entire package is processed offline with ultra fast local processing.',
-                  },
-                ].map((step) => (
-                  <article className="sv-setup-card sv-interactive-glitch-elem" key={step.n}>
-                    <div className="sv-setup-num">{step.n}</div>
-                    <div className="sv-comic-card-tag">{step.tag}</div>
-                    <h3>{step.title}</h3>
-                    <p>{step.desc}</p>
-                  </article>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ── SECTION 7: FAQ & INTEL (RED BACKGROUND • BLACK BOX) ── */}
-        <section className="sv-vpage sv-vpage--red" id="sv-faq">
-          <AmbientAlternatingComicGrid />
-          <SectionYellowPills sectionId="faq" />
-
-          <div className="sv-halftone" />
-          <div className="sv-speed-lines" />
-          <SectionSpiderwebOverlay />
-
-          <div className="sv-comic-panel-frame sv-comic-panel-frame--black">
-            <div className="sv-box-halftone-dots" />
-
-            <div className="sv-panel-header-tab">
-              <span>FAQ & INTEL</span>
-            </div>
-
-            <div className="sv-wrap">
-              <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-                <div className="sv-kicker sv-kicker-paste" style={{ margin: '0 auto 12px', background: '#ffd437', color: '#07080b' }}>
-                  ★ ANSWERS & INTEL ★
-                </div>
-                <h2 className="sv-glitch-title sv-glitch-title--faq">FREQUENTLY ASKED QUESTIONS</h2>
-                <p className="sv-lead" style={{ color: '#cbd2dc', maxWidth: '720px', margin: '0 auto' }}>
-                  Direct answers to how Universal Paste operates with Adobe Premiere Pro, supported media, file handling, and workflow automation.
-                </p>
-              </div>
-
-              <div className="sv-faq-container">
-                {UNIVERSAL_PASTE_FAQS.map((item, idx) => {
-                  const isOpen = openFaqIndex === idx;
+                  { n: '1', tag: 'ADOBE EXCHANGE', title: 'Install the Plugin', desc: 'Install Universal Paste from Adobe Exchange and enable it inside Premiere Pro.' },
+                  { n: '2', tag: 'WINDOWS STORE', title: 'Run the Companion', desc: 'Install and run the companion app from the Windows Store so clipboard, capture, and media handling stay available.' },
+                  { n: '3', tag: 'OFFLINE ENGINE', title: 'Paste at Full Speed', desc: 'The entire package is processed offline with ultra fast local processing.' },
+                ].map((step, idx) => {
+                  const isFlipped = flippedSetupIndices.includes(idx);
                   return (
-                    <article key={idx} className={`sv-faq-item ${isOpen ? 'sv-faq-item--open' : ''}`}>
-                      <button
-                        type="button"
-                        className="sv-faq-question-btn"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setOpenFaqIndex(isOpen ? null : idx);
-                        }}
-                        aria-expanded={isOpen}
-                      >
-                        <span>{item.q}</span>
-                        <span className="sv-faq-badge">
-                          {isOpen ? '−' : '+'}
-                        </span>
-                      </button>
-                      {isOpen && (
-                        <div className="sv-faq-answer">
-                          <p>{item.a}</p>
+                    <article
+                      key={step.n}
+                      className={`sv-flip-card ${isFlipped ? 'sv-flip-card--flipped' : ''}`}
+                      onClick={() => toggleSetup(idx)}
+                      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleSetup(idx); } }}
+                      tabIndex={0}
+                      role="button"
+                      aria-expanded={isFlipped}
+                    >
+                      <div className="sv-flip-card-inner">
+                        <div className="sv-flip-card-face sv-flip-card-face--front">
+                          <div className="sv-setup-num">{step.n}</div>
+                          <div className="sv-flip-card-topbar sv-flip-card-topbar--setup">
+                            <span className="sv-flip-card-badge-section" style={{ marginLeft: 'auto' }}>★ SETUP</span>
+                          </div>
+                          <div className="sv-flip-card-callout-wrap">
+                            <div className="sv-flip-card-callout">{step.tag}</div>
+                          </div>
+                          <div className="sv-flip-card-click-hint">
+                            <span>REVEAL DETAILS</span>
+                            <span>➔</span>
+                          </div>
                         </div>
-                      )}
+                        <div className="sv-flip-card-face sv-flip-card-face--back sv-setup-card-face">
+                          <div className="sv-setup-num">{step.n}</div>
+                          <div className="sv-comic-card-tag">{step.tag}</div>
+                          <h3>{step.title.toUpperCase()}</h3>
+                          <p>{step.desc}</p>
+                        </div>
+                      </div>
                     </article>
                   );
                 })}
@@ -2330,19 +2464,116 @@ const UniversalPaste = () => {
           </div>
         </section>
 
-        {/* ── SECTION 8: CTA (BLACK BACKGROUND • RED BOX) ── */}
-        <section className="sv-vpage sv-vpage--noir" id="sv-cta">
+        {/* ── SECTION 7: FAQ & INTEL (BLACK BACKGROUND • RED BOX) ── */}
+        <section className="sv-vpage sv-vpage--noir" id="sv-faq">
+          <AmbientAlternatingComicGrid />
+          <SectionYellowPills sectionId="faq" />
+
+          <div className="sv-halftone sv-halftone--noir" />
+          <div className="sv-speed-lines" />
+          <SectionSpiderwebOverlay />
+
+          <div className="sv-comic-panel-frame sv-comic-panel-frame--red">
+            <div className="sv-box-halftone-dots" />
+
+            <div className="sv-panel-header-tab">
+              <span>FAQ & INTEL</span>
+            </div>
+
+            <div className="sv-wrap sv-faq-wrap">
+              <div className="sv-faq-header-compact">
+                <div className="sv-kicker sv-kicker-paste" style={{ margin: '0 auto 6px', background: '#ffd437', color: '#07080b' }}>
+                  ★ ANSWERS & INTEL ★
+                </div>
+                <h2 className="sv-glitch-title sv-glitch-title--faq" style={{ textAlign: 'center', margin: '0 auto 6px', width: '100%', maxWidth: '100%' }}>
+                  FREQUENTLY ASKED QUESTIONS
+                </h2>
+                <p className="sv-lead sv-faq-lead">
+                  Direct answers to how Universal Paste operates with Adobe Premiere Pro, supported media, file handling, and workflow automation.
+                </p>
+              </div>
+
+              <div className="sv-faq-grid" role="region" aria-label="Frequently Asked Questions">
+                {UNIVERSAL_PASTE_FAQS.map((item, idx) => {
+                  const isFlipped = flippedFaqIndices.includes(idx);
+                  return (
+                    <article
+                      key={idx}
+                      className={`sv-faq-square-card ${isFlipped ? 'sv-faq-square-card--flipped' : ''}`}
+                      onClick={() => toggleFaq(idx)}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault();
+                          toggleFaq(idx);
+                        }
+                      }}
+                      tabIndex={0}
+                      role="button"
+                      aria-expanded={isFlipped}
+                      aria-label={`Question ${idx + 1}: ${item.q}`}
+                    >
+                      <div className="sv-faq-square-inner">
+                        {/* FRONT FACE: QUESTION */}
+                        <div className="sv-faq-square-face sv-faq-square-face--front">
+                          <div className="sv-faq-square-topbar">
+                            <span className="sv-faq-square-badge-num">0{idx + 1}</span>
+                            <span className="sv-faq-square-badge-plus" title="Click to reveal answer">+</span>
+                          </div>
+                          <h3 className="sv-faq-square-question">{item.q}</h3>
+                          <div className="sv-faq-square-footer">
+                            <span className="sv-faq-square-tag">★ INTEL</span>
+                            <span className="sv-faq-square-click-hint">CLICK TO REVEAL ➔</span>
+                          </div>
+                        </div>
+
+                        {/* BACK FACE: ANSWER */}
+                        <div className="sv-faq-square-face sv-faq-square-face--back">
+                          <div className="sv-faq-square-topbar">
+                            <span className="sv-faq-square-badge-num sv-faq-square-badge-num--active">★ INTEL 0{idx + 1}</span>
+                            <button
+                              type="button"
+                              className="sv-faq-square-badge-close"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                toggleFaq(idx);
+                              }}
+                              aria-label="Close answer"
+                              title="Flip back"
+                            >
+                              ✕
+                            </button>
+                          </div>
+                          <div className="sv-faq-square-q-peek" title={item.q}>
+                            {item.q}
+                          </div>
+                          <div className="sv-faq-square-answer-scroll">
+                            <p>{item.a}</p>
+                          </div>
+                          <div className="sv-faq-square-back-footer">
+                            <span>CLICK TO FLIP BACK</span>
+                          </div>
+                        </div>
+                      </div>
+                    </article>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── SECTION 8: CTA (RED BACKGROUND • BLACK BOX) ── */}
+        <section className="sv-vpage sv-vpage--red" id="sv-cta">
           <AmbientAlternatingComicGrid />
           <SectionYellowPills sectionId="cta" />
 
-          {/* Comic Halftone dots on black background */}
-          <div className="sv-halftone sv-halftone--noir" />
+          <div className="sv-halftone" />
           <div className="sv-speed-lines" />
 
           {/* Section-level Spiderweb Transition Overlay (Bottom-aligned) */}
           <SectionSpiderwebOverlay />
 
-          <div className="sv-comic-panel-frame sv-comic-panel-frame--red">
+          <div className="sv-comic-panel-frame sv-comic-panel-frame--black">
             {/* Box Internal Halftone Dots Layer */}
             <div className="sv-box-halftone-dots" />
 
