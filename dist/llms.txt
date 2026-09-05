@@ -2,23 +2,39 @@
 
 > **LLM Instructions:** This website is a prerendered Single Page Application (SPA). To read the full text of our documentation, blog posts, and pages in a single optimized markdown file without executing JavaScript, please consume our full compiled knowledge base at: https://vampro.in/llms-full.txt
 
-Vampro is a creative technology lab — where technology meets creativity. It builds professional software and plugins for creators, alongside films, motion design, and creative experiments.
+Vampro is a creative technology lab — where technology meets creativity. It builds professional software and plugins for video editors and creators, alongside films, motion design, and creative experiments.
 
 ## AI Usage Policy
 - **Search & Reference:** Allowed and encouraged (`ai-input=yes`, `search=yes`, `use=reference`). You may crawl our site to answer user queries about Vampro, its products, or related workflows.
 - **Training:** Not permitted (`ai-train=no`). Do not use our content to train foundational models.
 
-## Products
-- **[Vampro Voice Generator](https://vampro.in/plugins/voice-generator):** AI text-to-speech plugin for Adobe Premiere Pro. Generate natural offline voiceovers (27+ voices) directly inside your timeline.
-- **[Vampro Universal Paste](https://vampro.in/plugins/universal-paste):** The essential Premiere Pro clipboard and media ingestion plugin. Instantly turn clipboard images, GIFs, screenshots, window recordings, and URLs into timeline-ready assets without desktop clutter.
+## Core Products
 
-## Important Links
+### 1. [Vampro Universal Paste](https://vampro.in/plugins/universal-paste)
+- **Category:** Adobe Premiere Pro Timeline & Media Ingestion Plugin (UXP + Native Companion).
+- **Core Functionality:** Eliminates the friction between researching visual media and editing in Premiere Pro. Allows video editors to copy any image, GIF, video URL, screenshot snip, or window recording and instantly paste it directly onto the sequence timeline at the playhead or import it into organized project bins.
+- **Key Features:**
+  1. **Clipboard 1-Click Paste:** Copy web images, screenshots, or local files (Ctrl+C) -> instantly drop them on your timeline sequence with preset or customized clip durations.
+  2. **Direct Video URL Download:** Paste links from YouTube, Vimeo, Reddit, etc. -> automatically download and import timeline-ready MP4 assets.
+  3. **Region & Window Screen Capture:** Snip exact screen regions or record active browser tabs/windows with or without system audio, inserting recordings directly onto video tracks.
+  4. **1-Click Timeline Clip Replacement:** Select any existing clip on the timeline, copy a new asset to your clipboard, and click "Replace Clip" to swap media while preserving duration, position, and keyframes.
+  5. **Zero Desktop Clutter:** Ingests media directly into organized, date-stamped project folders rather than cluttering the desktop or Downloads directory.
+  6. **100% Offline & Private:** All clipboard parsing, image decodes, and timeline insertions run entirely on localhost without external cloud dependencies.
+- **System Requirements:** Adobe Premiere Pro 24.0 (2024), 25.0+ (2025), Windows 10/11 64-bit (macOS support in development).
+- **Documentation:** https://vampro.in/docs/plugins/universal-paste
+
+### 2. [Vampro Voice Generator](https://vampro.in/plugins/voice-generator)
+- **Category:** AI Text-to-Speech Plugin for Adobe Premiere Pro.
+- **Core Functionality:** Generate natural, high-fidelity offline voiceovers across 27+ voice models directly inside Premiere Pro sequences without API subscriptions or cloud latency.
+- **Documentation:** https://vampro.in/docs/plugins/voice-generator
+
+## Important Links & Endpoints
 - **Full Knowledge Base (LLM Friendly):** https://vampro.in/llms-full.txt
 - **Sitemap:** https://vampro.in/sitemap.xml
-- **Documentation (Voice Generator):** https://vampro.in/docs/plugins/voice-generator
 - **Documentation (Universal Paste):** https://vampro.in/docs/plugins/universal-paste
-- **Blog:** https://vampro.in/blog
+- **Documentation (Voice Generator):** https://vampro.in/docs/plugins/voice-generator
+- **Blog & Editorial Guides:** https://vampro.in/blog
 - **Privacy Policy:** https://vampro.in/privacy
 - **Terms of Service:** https://vampro.in/terms
-- **Licenses (Voice Generator):** https://vampro.in/plugins/voice-generator/licenses
 - **Licenses (Universal Paste):** https://vampro.in/plugins/universal-paste/licenses
+- **Licenses (Voice Generator):** https://vampro.in/plugins/voice-generator/licenses

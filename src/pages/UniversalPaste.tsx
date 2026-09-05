@@ -1703,25 +1703,21 @@ const UniversalPaste = () => {
             </Link>
           </div>
 
-          {/* Center: Universal Paste Logo (Enlarged, centered, no text) */}
-          <div className="sv-comic-navbar-center">
+          <div className="sv-comic-navbar-right">
             <Link
               to="/plugins/universal-paste"
-              className="sv-comic-center-logo"
+              className="sv-comic-brand-logo-only"
               title="Universal Paste"
               aria-label="Universal Paste"
             >
               <img
                 src="/assets/universal-paste/universal-paste-transparent.png"
                 alt="Universal Paste Logo"
-                width={38}
-                height={38}
+                width={30}
+                height={30}
                 decoding="async"
               />
             </Link>
-          </div>
-
-          <div className="sv-comic-navbar-right">
 
             <button
               type="button"

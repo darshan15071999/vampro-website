@@ -85,12 +85,22 @@ Vampro Universal Paste eliminates the friction between researching visual media 
 5. **Paste:** Click "Paste to Timeline" or "Import to Bin". Media appears instantly on your timeline.
 
 ### 3.6 Universal Paste FAQ & AEO Knowledge
+- **Q: What is Vampro Universal Paste?**
+  A: Vampro Universal Paste is an Adobe Premiere Pro extension (UXP) and native desktop companion that turns clipboard content, screenshots, window recordings, URLs, GIFs, images, and videos into timeline-ready assets with a single click.
+- **Q: How do I paste clipboard images directly into Adobe Premiere Pro?**
+  A: Simply copy any image, GIF, or screenshot (Ctrl+C), switch to Premiere Pro, open the Universal Paste panel, preview the detected asset, and click "Paste to Timeline". It places the asset directly at your playhead position without desktop saving.
+- **Q: Can I take screenshots or record screen videos directly into Premiere Pro?**
+  A: Yes. The companion app includes region screenshot snipping and screen recording tools. Captured media is automatically encoded, saved into dedicated project media bins, and placed directly onto your timeline sequence.
+- **Q: How does 1-click timeline clip replacement work?**
+  A: Select any clip on your Premiere Pro timeline, copy a new asset to your clipboard, and click "Replace Clip". Universal Paste instantly swaps the media while preserving the original clip duration, timeline position, scale, and applied keyframe effects.
 - **Q: Does Universal Paste save files to the desktop?**
   A: No. Universal Paste saves all ingested assets directly into organized, date-stamped project media folders, keeping your desktop clean and ensuring project files remain properly linked.
-- **Q: Does it require an active internet connection?**
-  A: Internet is only required when fetching external media URLs. Clipboard pasting, screenshot capture, window recording, and timeline insertion are 100% local and offline.
-- **Q: Is commercial use permitted?**
-  A: Yes, Universal Paste is a creative tool for commercial and personal video editing workflows. Users are responsible for complying with copyright and platform terms of third-party media they capture or download.
+- **Q: Does Universal Paste work offline without external servers?**
+  A: Yes, 100%. All clipboard processing, screenshot snipping, screen recordings, and Premiere Pro timeline insertions execute completely offline on your local machine. Your assets, footage, and project files never leave your system.
+- **Q: What media formats are supported by Universal Paste?**
+  A: Universal Paste supports PNG, JPG, JPEG, WebP, animated GIFs, MP4, WebM, clipboard bitmap buffers, and direct video/media URLs.
+- **Q: Which versions of Adobe Premiere Pro are compatible?**
+  A: Compatible with Adobe Premiere Pro 24.0 (2024), 25.0+ (2025), and later releases on Windows 10/11 64-bit (macOS support in development).
 
 ## 4. Content & Resources
 - **Blog (editing tips, AI workflows, creative automation):** https://vampro.in/blog

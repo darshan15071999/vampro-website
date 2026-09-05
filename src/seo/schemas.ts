@@ -233,7 +233,7 @@ export const universalPasteFaqSchema: SchemaType = {
       "name": "What is Vampro Universal Paste?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Vampro Universal Paste is an Adobe Premiere Pro extension (UXP) and desktop companion app that turns clipboard content, screenshots, window recordings, URLs, GIFs, images, and videos into timeline-ready assets with a single click."
+        "text": "Vampro Universal Paste is an Adobe Premiere Pro extension (UXP) and native desktop companion that turns clipboard content, screenshots, window recordings, URLs, GIFs, images, and videos into timeline-ready assets with a single click."
       }
     },
     {
@@ -254,10 +254,26 @@ export const universalPasteFaqSchema: SchemaType = {
     },
     {
       "@type": "Question",
+      "name": "How does 1-click timeline clip replacement work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Select any clip on your Premiere Pro timeline, copy a new asset (image, GIF, or video) to your clipboard, and click 'Replace Clip'. Universal Paste instantly swaps the media while preserving the original clip duration, timeline position, scale, and applied keyframe effects."
+      }
+    },
+    {
+      "@type": "Question",
       "name": "Does Universal Paste require saving files to my desktop first?",
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "No. Universal Paste eliminates desktop clutter by automatically reading the system clipboard or downloading web media in the background, saving assets into an organized project folder, and importing them straight into Premiere Pro."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does Universal Paste work offline without external servers?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, 100%. All clipboard processing, screenshot snipping, screen recordings, and Premiere Pro timeline insertions execute completely offline on your local machine. Your assets, footage, and project files never leave your system."
       }
     },
     {
@@ -273,7 +289,7 @@ export const universalPasteFaqSchema: SchemaType = {
       "name": "Which versions of Adobe Premiere Pro are compatible with Universal Paste?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Vampro Universal Paste is compatible with Adobe Premiere Pro 24.0 (2024) and later releases on Windows 10/11 64-bit (with macOS support planned)."
+        "text": "Vampro Universal Paste is compatible with Adobe Premiere Pro 24.0 (2024), 25.0+ (2025), and later releases on Windows 10/11 64-bit (with macOS support planned)."
       }
     }
   ]

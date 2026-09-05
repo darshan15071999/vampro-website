@@ -79,24 +79,19 @@ async function runPrerender() {
             }
           });
 
-          // Wait until there are no more than 2 network connections
+          // Wait for DOM to load, then allow React components to mount
           try {
             await page.goto(`http://localhost:${port}${route.path}`, { 
-              waitUntil: 'networkidle2', 
-              timeout: 20000 
+              waitUntil: 'domcontentloaded', 
+              timeout: 8000 
             });
+            await new Promise(r => setTimeout(r, 500));
           } catch (_timeoutErr) {
-            console.warn(`  ! Networkidle2 timed out for ${route.path}, continuing with current DOM state.`);
+            console.warn(`  ! Navigation timed out for ${route.path}, continuing with current DOM state.`);
           }
           
-          // Brief delay to ensure any immediate useEffect state updates or initial animations settle
-          await new Promise(r => setTimeout(r, 600));
-          
           // Extract the fully rendered HTML
-          let html = await page.evaluate(() => document.documentElement.outerHTML);
-          
-          // Add DOCTYPE because outerHTML omits it
-          html = '<!DOCTYPE html>\n' + html;
+          let html = await page.content();
           
           // Inject the intended route so main.tsx can safely fallback on 404s
           html = html.replace('<head>', `<head>\n  <meta name="prerender-route" content="${route.path}">`);

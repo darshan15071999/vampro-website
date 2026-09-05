@@ -611,33 +611,25 @@
   flex-shrink: 0;
 }
 
-.sv-comic-navbar-center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex: 0 0 auto;
-  margin: 0 auto;
-  padding: 0 clamp(8px, 1.2vw, 20px);
-  z-index: 10;
-}
-
-.sv-comic-center-logo {
+.sv-comic-brand-logo-only {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   text-decoration: none;
+  flex-shrink: 0;
+  margin-right: clamp(4px, 0.5vw, 8px);
   transition: transform 0.2s ease, filter 0.2s ease;
   outline: none;
 }
 
-.sv-comic-center-logo:hover {
-  transform: scale(1.15);
-  filter: drop-shadow(0 0 12px rgba(255, 212, 55, 0.75));
+.sv-comic-brand-logo-only:hover {
+  transform: scale(1.12);
+  filter: drop-shadow(0 0 10px rgba(255, 212, 55, 0.75));
 }
 
-.sv-comic-center-logo img {
-  width: clamp(38px, 2.8vw, 46px);
-  height: clamp(38px, 2.8vw, 46px);
+.sv-comic-brand-logo-only img {
+  width: clamp(28px, 2.2vw, 34px);
+  height: clamp(28px, 2.2vw, 34px);
   object-fit: contain;
   filter: drop-shadow(2px 2px 0 var(--comic-line));
 }
@@ -3990,7 +3982,7 @@
 }
 
 .sv-audience-grid .sv-flip-card {
-  min-height: 130px;
+  min-height: 145px;
   height: 100%;
 }
 
@@ -4219,17 +4211,71 @@
   line-height: 1.36;
 }
 
-/* Setup-specific adjustments */
+/* Audience section: Ensure all 4 boxes and callouts are perfectly equal in size */
+.sv-audience-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(10px, 1.4vw, 16px);
+  align-items: stretch;
+}
+
+.sv-audience-grid .sv-flip-card {
+  min-height: 145px;
+  height: 100%;
+}
+
+.sv-audience-grid .sv-flip-card-callout-wrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.sv-audience-grid .sv-flip-card-callout {
+  width: 100%;
+  max-width: 95%;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: clamp(11.5px, 0.92vw, 13.5px);
+  line-height: 1.15;
+  padding: 4px 6px;
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+
+.sv-audience-grid .sv-flip-card-face--back {
+  height: 100%;
+  box-sizing: border-box;
+  padding: 16px 16px;
+}
+
+/* Setup-specific adjustments: prevent number callouts from getting cropped */
+.sv-setup-grid {
+  padding-top: 18px;
+  row-gap: clamp(20px, 2.5vw, 26px);
+  overflow: visible !important;
+}
+
+.sv-setup-grid .sv-flip-card,
+.sv-setup-grid .sv-flip-card-inner,
 .sv-setup-grid .sv-flip-card-face {
-  padding-top: 24px;
+  overflow: visible !important;
+}
+
+.sv-setup-grid .sv-flip-card-face {
+  padding-top: 26px;
 }
 
 .sv-setup-grid .sv-setup-num {
   position: absolute;
-  top: -12px;
-  left: 12px;
-  width: 36px;
-  height: 36px;
+  top: -14px;
+  left: 14px;
+  width: 38px;
+  height: 38px;
   display: grid;
   place-items: center;
   background: var(--comic-red, #e50914);
@@ -4237,10 +4283,10 @@
   border: 3px solid var(--comic-line, #07080b);
   box-shadow: 3px 3px 0 var(--comic-line, #07080b);
   font-family: Orbitron, monospace;
-  font-size: 17px;
+  font-size: 18px;
   font-weight: 900;
   transform: rotate(-5deg);
-  z-index: 5;
+  z-index: 20;
 }
 
 .sv-setup-card-face h3 {

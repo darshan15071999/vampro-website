@@ -1,0 +1,43 @@
+# Global security headers for Cloudflare Pages
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+
+# Aggressive cache for immutable build assets and nested assets
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Cache media files for 30 days (root & subdirectories)
+/spoch/*
+  Cache-Control: public, max-age=2592000
+/*.png
+  Cache-Control: public, max-age=2592000
+/*.jpg
+  Cache-Control: public, max-age=2592000
+/*.jpeg
+  Cache-Control: public, max-age=2592000
+/*.svg
+  Cache-Control: public, max-age=2592000
+/*.webp
+  Cache-Control: public, max-age=2592000
+/*.mp4
+  Cache-Control: public, max-age=2592000
+/*.mp3
+  Cache-Control: public, max-age=2592000
+
+# AI / LLM knowledge bases: Open CORS and 1-day fresh cache
+/llms.txt
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+  Content-Type: text/plain; charset=utf-8
+
+/llms-full.txt
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+  Content-Type: text/plain; charset=utf-8
+
+# HTML pages: revalidate immediately for fresh deployments
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate

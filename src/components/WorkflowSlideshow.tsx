@@ -30,7 +30,7 @@ export const WORKFLOW_CARDS: WorkflowCardItem[] = [
   {
     id: 'clipboard',
     stepNum: '01',
-    stepBadge: 'STEP 1',
+    stepBadge: 'Clipboard',
     title: 'Clipboard',
     desc: 'Copy an image, GIF or URL, set the clip duration and paste it into your timeline in seconds',
     mediaType: 'image',
@@ -41,7 +41,7 @@ export const WORKFLOW_CARDS: WorkflowCardItem[] = [
   {
     id: 'video',
     stepNum: '02',
-    stepBadge: 'STEP 2',
+    stepBadge: 'Video',
     title: 'Video',
     desc: 'Copy a video URL (YouTube, Vimeo, Reddit, etc), and simply paste the link to directly download and insert it into your timeline',
     mediaType: 'image',
@@ -52,7 +52,7 @@ export const WORKFLOW_CARDS: WorkflowCardItem[] = [
   {
     id: 'capture',
     stepNum: '03',
-    stepBadge: 'STEP 3',
+    stepBadge: 'Capture',
     title: 'Capture',
     desc: 'Record specific tabs or screens, either full screen or selected area with or without audio and directly insert into your timeline.',
     mediaType: 'image',
@@ -63,7 +63,7 @@ export const WORKFLOW_CARDS: WorkflowCardItem[] = [
   {
     id: 'replace',
     stepNum: '04',
-    stepBadge: 'STEP 4',
+    stepBadge: 'Replace',
     title: 'Replace',
     desc: 'Click any timeline clip and replace it with the asset copied in the clipboard. Need to replace an image with a video, you can do it in seconds.',
     mediaType: 'image',
@@ -74,7 +74,7 @@ export const WORKFLOW_CARDS: WorkflowCardItem[] = [
   {
     id: 'action',
     stepNum: '05',
-    stepBadge: 'WALKTHROUGH',
+    stepBadge: 'See it in action',
     title: 'See it in action',
     desc: 'The complete walkthrough captured for you.',
     mediaType: 'video',
@@ -96,9 +96,31 @@ export const WorkflowSlideshow: React.FC<WorkflowSlideshowProps> = ({ onCardChan
   const [isPaused, setIsPaused] = useState(false);
   const [isUserHovering, setIsUserHovering] = useState(false);
   const [hasLoadedVideo, setHasLoadedVideo] = useState(false);
+  const [isInViewport, setIsInViewport] = useState(false);
+  const slideshowRef = useRef<HTMLDivElement | null>(null);
+  const boxesColRef = useRef<HTMLDivElement | null>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const touchStartX = useRef<number | null>(null);
   const touchEndX = useRef<number | null>(null);
+
+  // Monitor visibility so autoplay ONLY runs when the slideshow is visible in viewport
+  useEffect(() => {
+    const el = slideshowRef.current;
+    if (!el || typeof IntersectionObserver === 'undefined') {
+      setIsInViewport(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInViewport(entry.isIntersecting);
+      },
+      { threshold: 0.15 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   // Switch slide
   const goToSlide = useCallback((index: number) => {
@@ -109,13 +131,16 @@ export const WorkflowSlideshow: React.FC<WorkflowSlideshowProps> = ({ onCardChan
     }
     onCardChange?.(nextIndex);
 
-    // Scroll active card into view on small screens
+    // Scroll active card into view ONLY inside the local mobile track (NEVER scroll the browser window)
     const targetCard = cardRefs.current[nextIndex];
-    if (targetCard) {
-      targetCard.scrollIntoView({
+    const container = boxesColRef.current;
+    if (targetCard && container && container.scrollWidth > container.clientWidth) {
+      const cardLeft = targetCard.offsetLeft;
+      const cardWidth = targetCard.offsetWidth;
+      const containerWidth = container.clientWidth;
+      container.scrollTo({
+        left: cardLeft - (containerWidth / 2) + (cardWidth / 2),
         behavior: 'smooth',
-        block: 'nearest',
-        inline: 'center',
       });
     }
   }, [onCardChange]);
@@ -128,17 +153,17 @@ export const WorkflowSlideshow: React.FC<WorkflowSlideshowProps> = ({ onCardChan
     goToSlide(activeIndex - 1);
   }, [activeIndex, goToSlide]);
 
-  // Autoscroll timer: 3s pause per card (pauses on card 5 video to allow viewing)
+  // Autoscroll timer: 3s pause per card (pauses on card 5 video, or when paused/hovered/off-screen)
   useEffect(() => {
     const isVideoActive = activeIndex === 4;
-    if (isPaused || isUserHovering || isVideoActive) return;
+    if (isPaused || isUserHovering || isVideoActive || !isInViewport) return;
 
     const timer = setInterval(() => {
       nextSlide();
     }, AUTOSCROLL_DURATION_MS);
 
     return () => clearInterval(timer);
-  }, [isPaused, isUserHovering, activeIndex, nextSlide]);
+  }, [isPaused, isUserHovering, activeIndex, isInViewport, nextSlide]);
 
   // Touch swipe support for mobile
   const handleTouchStart = (e: React.TouchEvent) => {
@@ -167,6 +192,7 @@ export const WorkflowSlideshow: React.FC<WorkflowSlideshowProps> = ({ onCardChan
 
   return (
     <div
+      ref={slideshowRef}
       className="sv-workflow-slideshow"
       onMouseEnter={() => setIsUserHovering(true)}
       onMouseLeave={() => setIsUserHovering(false)}
@@ -175,7 +201,7 @@ export const WorkflowSlideshow: React.FC<WorkflowSlideshowProps> = ({ onCardChan
       <div className="sv-workflow-split-layout">
         
         {/* ─── LEFT COLUMN: 5 COMPACT DETAIL BOXES ─── */}
-        <div className="sv-workflow-boxes-col">
+        <div className="sv-workflow-boxes-col" ref={boxesColRef}>
           {WORKFLOW_CARDS.map((card, index) => {
             const isActive = index === activeIndex;
             const IconComponent = card.icon;
@@ -185,7 +211,10 @@ export const WorkflowSlideshow: React.FC<WorkflowSlideshowProps> = ({ onCardChan
                 key={card.id}
                 ref={(el) => { cardRefs.current[index] = el; }}
                 className={`sv-workflow-box ${isActive ? 'sv-workflow-box--active' : ''}`}
-                onClick={() => goToSlide(index)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  goToSlide(index);
+                }}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
@@ -204,9 +233,6 @@ export const WorkflowSlideshow: React.FC<WorkflowSlideshowProps> = ({ onCardChan
                 <div className="sv-workflow-box-header">
                   <div className="sv-workflow-box-header-left">
                     <span className="sv-workflow-box-num">{card.stepNum}</span>
-                    <span className="sv-workflow-box-badge" style={{ background: card.accentColor }}>
-                      {card.stepBadge}
-                    </span>
                     <h3 className="sv-workflow-box-title">{card.title}</h3>
                   </div>
 
@@ -276,7 +302,7 @@ export const WorkflowSlideshow: React.FC<WorkflowSlideshowProps> = ({ onCardChan
                     : 'AUTOPLAY 3s'}
                 </span>
                 <span className="sv-workflow-step-indicator" style={{ color: activeCard.accentColor }}>
-                  {activeCard.stepBadge} // {activeCard.title.toUpperCase()}
+                  {activeCard.title.toUpperCase()}
                 </span>
               </div>
 
@@ -288,7 +314,10 @@ export const WorkflowSlideshow: React.FC<WorkflowSlideshowProps> = ({ onCardChan
                 <button
                   type="button"
                   className="sv-workflow-ctrl-btn"
-                  onClick={() => setIsPaused(!isPaused)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setIsPaused(!isPaused);
+                  }}
                   title={isPaused ? 'Resume Autoplay' : 'Pause Autoplay'}
                   aria-label={isPaused ? 'Resume Autoplay' : 'Pause Autoplay'}
                 >
@@ -298,7 +327,10 @@ export const WorkflowSlideshow: React.FC<WorkflowSlideshowProps> = ({ onCardChan
                 <button
                   type="button"
                   className="sv-workflow-ctrl-btn"
-                  onClick={prevSlide}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    prevSlide();
+                  }}
                   title="Previous Step"
                   aria-label="Previous Step"
                 >
@@ -308,7 +340,10 @@ export const WorkflowSlideshow: React.FC<WorkflowSlideshowProps> = ({ onCardChan
                 <button
                   type="button"
                   className="sv-workflow-ctrl-btn"
-                  onClick={nextSlide}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    nextSlide();
+                  }}
                   title="Next Step"
                   aria-label="Next Step"
                 >
@@ -333,10 +368,10 @@ export const WorkflowSlideshow: React.FC<WorkflowSlideshowProps> = ({ onCardChan
                   />
                   <div className="sv-workflow-image-overlay">
                     <span className="sv-workflow-image-tag" style={{ background: activeCard.accentColor }}>
-                      {activeCard.stepBadge}
+                      {activeCard.title.toUpperCase()}
                     </span>
                     <span className="sv-workflow-image-caption">
-                      {activeCard.title}: {activeCard.desc}
+                      {activeCard.desc}
                     </span>
                   </div>
                 </div>
@@ -362,7 +397,7 @@ export const WorkflowSlideshow: React.FC<WorkflowSlideshowProps> = ({ onCardChan
 
                   <div className="sv-workflow-video-overlay-bar">
                     <span className="sv-workflow-image-tag" style={{ background: activeCard.accentColor }}>
-                      ★ WALKTHROUGH
+                      ★ {activeCard.title.toUpperCase()}
                     </span>
                     <a
                       href="https://youtu.be/sBH96I9fajo?si=5UYx7SEz2SpjKgzG"
@@ -376,41 +411,6 @@ export const WorkflowSlideshow: React.FC<WorkflowSlideshowProps> = ({ onCardChan
                   </div>
                 </div>
               )}
-
-              {/* Floating Left / Right Chevrons */}
-              <button
-                type="button"
-                className="sv-workflow-arrow sv-workflow-arrow--left"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  prevSlide();
-                }}
-                aria-label="Previous Slide"
-              >
-                <ChevronLeft size={20} />
-              </button>
-
-              <button
-                type="button"
-                className="sv-workflow-arrow sv-workflow-arrow--right"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  nextSlide();
-                }}
-                aria-label="Next Slide"
-              >
-                <ChevronRight size={20} />
-              </button>
-            </div>
-
-            {/* Bottom Caption Ribbon */}
-            <div className="sv-workflow-stage-footer">
-              <div className="sv-workflow-stage-footer-icon" style={{ background: activeCard.accentColor }}>
-                <activeCard.icon size={14} />
-              </div>
-              <div className="sv-workflow-stage-footer-text">
-                <strong>{activeCard.title}:</strong> {activeCard.desc}
-              </div>
             </div>
           </div>
         </div>
@@ -423,7 +423,10 @@ export const WorkflowSlideshow: React.FC<WorkflowSlideshowProps> = ({ onCardChan
             key={card.id}
             type="button"
             className={`sv-workflow-dot ${index === activeIndex ? 'sv-workflow-dot--active' : ''}`}
-            onClick={() => goToSlide(index)}
+            onClick={(e) => {
+              e.stopPropagation();
+              goToSlide(index);
+            }}
             aria-label={`Go to step ${index + 1}: ${card.title}`}
             style={{
               backgroundColor: index === activeIndex ? card.accentColor : undefined,
