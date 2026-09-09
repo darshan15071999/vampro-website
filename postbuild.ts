@@ -83,15 +83,19 @@ async function runPrerender() {
           try {
             await page.goto(`http://localhost:${port}${route.path}`, { 
               waitUntil: 'domcontentloaded', 
-              timeout: 8000 
+              timeout: 25000 
             });
-            await new Promise(r => setTimeout(r, 500));
+            await new Promise(r => setTimeout(r, 600));
           } catch (_timeoutErr) {
             console.warn(`  ! Navigation timed out for ${route.path}, continuing with current DOM state.`);
           }
           
           // Extract the fully rendered HTML
           let html = await page.content();
+          
+          // CRITICAL: Strip any temporary local build server URLs that might have leaked into HTML attributes
+          html = html.replaceAll(`http://localhost:${port}`, '');
+          html = html.replaceAll(`http://127.0.0.1:${port}`, '');
           
           // Inject the intended route so main.tsx can safely fallback on 404s
           html = html.replace('<head>', `<head>\n  <meta name="prerender-route" content="${route.path}">`);

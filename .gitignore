@@ -27,3 +27,9 @@ react-bits-repo/
 check-if-email-exists/
 vampro-universal-paste-landing/
 
+# Adobe / Media Project files
+*.aep
+*After Effects Auto-Save*
+*.aep Logs*
+
+

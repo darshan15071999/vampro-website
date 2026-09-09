@@ -5,27 +5,38 @@
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
 
-# Aggressive cache for immutable build assets and nested assets
+# Aggressive cache for immutable build assets and nested assets (Browser + Cloudflare Edge)
 /assets/*
-  Cache-Control: public, max-age=31536000, immutable
+  Cache-Control: public, max-age=31536000, s-maxage=31536000, immutable
+  Access-Control-Allow-Origin: *
 
-# Cache media files for 30 days (root & subdirectories)
+# Universal Paste media and static assets (Audio, Video, WebP comic pages)
+/assets/universal-paste/*
+  Cache-Control: public, max-age=31536000, s-maxage=31536000, immutable
+  Accept-Ranges: bytes
+  Access-Control-Allow-Origin: *
+
+# Cache media files across root and subdirectories
 /spoch/*
-  Cache-Control: public, max-age=2592000
+  Cache-Control: public, max-age=2592000, s-maxage=2592000
+  Accept-Ranges: bytes
+
 /*.png
-  Cache-Control: public, max-age=2592000
+  Cache-Control: public, max-age=2592000, s-maxage=2592000
 /*.jpg
-  Cache-Control: public, max-age=2592000
+  Cache-Control: public, max-age=2592000, s-maxage=2592000
 /*.jpeg
-  Cache-Control: public, max-age=2592000
+  Cache-Control: public, max-age=2592000, s-maxage=2592000
 /*.svg
-  Cache-Control: public, max-age=2592000
+  Cache-Control: public, max-age=2592000, s-maxage=2592000
 /*.webp
-  Cache-Control: public, max-age=2592000
+  Cache-Control: public, max-age=2592000, s-maxage=2592000
 /*.mp4
-  Cache-Control: public, max-age=2592000
+  Cache-Control: public, max-age=2592000, s-maxage=2592000
+  Accept-Ranges: bytes
 /*.mp3
-  Cache-Control: public, max-age=2592000
+  Cache-Control: public, max-age=2592000, s-maxage=2592000
+  Accept-Ranges: bytes
 
 # AI / LLM knowledge bases: Open CORS and 1-day fresh cache
 /llms.txt

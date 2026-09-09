@@ -33,8 +33,8 @@ gsap.registerPlugin(ScrollTrigger);
 const SFX_WORDS = ['PASTE'];
 const HERO_AUDIO_SRC = '/assets/universal-paste/heroaudio.mp3';
 const SPIDERWEB_SHOT_AUDIO_SRC = '/assets/universal-paste/spiderweb-shot.mp3';
-const INTRO_VIDEO_SRC = new URL('../Intro Animation.mp4', import.meta.url).href;
-const SECTION_SPIDERWEB_IN_SRC = new URL('../spiderweb in.mp4', import.meta.url).href;
+const INTRO_VIDEO_SRC = '/assets/universal-paste/intro-animation.mp4';
+const SECTION_SPIDERWEB_IN_SRC = '/assets/universal-paste/spiderweb-in.mp4';
 const HERO_SLIDE_DURATION_MS = 460;
 const SCROLL_GLITCH_DURATION_MS = 800;
 
@@ -188,14 +188,14 @@ const SectionSpiderwebOverlay = () => {
         src={SECTION_SPIDERWEB_IN_SRC}
         muted
         playsInline
-        preload="auto"
+        preload="none"
       />
       <video
         className="sv-spiderweb-video sv-spiderweb-video--out"
         src="/assets/universal-paste/spiderweb-out.mp4"
         muted
         playsInline
-        preload="auto"
+        preload="none"
       />
     </div>
   );
@@ -1184,12 +1184,11 @@ const UniversalPaste = () => {
       skipToMascotSequence();
     };
 
-    // Hard fail-safe timeout: Intro video is ~2.21 seconds.
-    // In ANY circumstance (autoplay block on reload, stall, background tab),
-    // advance within 3.2 seconds max so the user is NEVER stuck on reload.
+    // Failsafe timeout in case autoplay is blocked by strict browser policy:
+    // Allow ample time for initial video buffering while ensuring the visitor is never trapped.
     const hardFailSafeTimeout = window.setTimeout(() => {
       finishVideo();
-    }, 3200);
+    }, 7500);
 
     return () => {
       cancelled = true;
@@ -1298,10 +1297,19 @@ const UniversalPaste = () => {
         const frame = page.querySelector<HTMLElement>('.sv-comic-panel-frame');
         const webStage = page.querySelector<HTMLElement>('.sv-section-spiderweb-stage');
         const videoIn = page.querySelector<HTMLVideoElement>('.sv-spiderweb-video--in');
-        const videoOut = page.querySelector<HTMLVideoElement>('.sv-spiderweb-video--out');
+
+        // Hero frame is active at top=0 immediately when intro sequence completes
+        if (page.id === 'sv-hero') {
+          if (frame) {
+            gsap.set(frame, { scale: 1, opacity: 1, y: 0, clearProps: 'transformOrigin' });
+          }
+          return;
+        }
+
+        let isRevealed = false;
 
         const resetFrame = () => {
-          if (!frame) return;
+          if (!frame || isRevealed) return;
           gsap.killTweensOf(frame);
           frame.querySelectorAll<HTMLElement>('.sv-impact-smoke-burst').forEach((smoke) => {
             smoke.remove();
@@ -1328,6 +1336,8 @@ const UniversalPaste = () => {
         alignWebStageToSectionBottom();
 
         const triggerPasteIn = () => {
+          if (isRevealed) return;
+          isRevealed = true;
           alignWebStageToSectionBottom();
 
           const triggerImpact = () => {
@@ -1389,6 +1399,7 @@ const UniversalPaste = () => {
               .to(frame, {
                 y: 0,
                 scale: 1,
+                opacity: 1,
                 duration: 0.16,
                 ease: 'power2.out',
                 force3D: true,
@@ -1403,7 +1414,6 @@ const UniversalPaste = () => {
           void page.offsetWidth;
           page.classList.add('sv-glitch-active');
 
-          // Play web transition sound on every section scroll (debounced via audio pool)
           playSpiderwebShotSound();
 
           setTimeout(() => {
@@ -1411,38 +1421,29 @@ const UniversalPaste = () => {
           }, SCROLL_GLITCH_DURATION_MS);
         };
 
-        const triggerWebPullOut = () => {
-          alignWebStageToSectionBottom();
-          page.classList.remove('sv-panel-impact-active');
-          if (frame) {
-            gsap.killTweensOf(frame);
-            gsap.to(frame, {
-              scale: 0.05,
-              y: 40,
-              opacity: 0,
-              duration: 0.22,
-              ease: 'power2.in',
-              force3D: true,
-            });
-          }
-          playWebVideo(videoOut);
-        };
-
         ScrollTrigger.create({
           trigger: page,
-          start: 'top 78%',
-          end: 'bottom 22%',
+          start: 'top 88%',
+          once: true,
           onEnter: () => triggerPasteIn(),
-          onLeave: () => triggerWebPullOut(),
-          onEnterBack: () => triggerPasteIn(),
-          onLeaveBack: () => triggerWebPullOut(),
         });
       });
 
       ScrollTrigger.refresh();
     }, containerRef);
 
+    // Refresh ScrollTrigger when images and fonts finish loading to prevent layout drift
+    const handleSettle = () => {
+      ScrollTrigger.refresh();
+    };
+    window.addEventListener('load', handleSettle);
+    window.addEventListener('resize', handleSettle);
+    const settleTimer = window.setTimeout(handleSettle, 1200);
+
     return () => {
+      window.removeEventListener('load', handleSettle);
+      window.removeEventListener('resize', handleSettle);
+      window.clearTimeout(settleTimer);
       document.querySelectorAll<HTMLElement>('.sv-impact-smoke-burst').forEach((smoke) => {
         smoke.remove();
       });
@@ -1451,7 +1452,7 @@ const UniversalPaste = () => {
       });
       ctx.revert();
     };
-  }, [introPhase, playWebSwingSound, playWebVideo, stopWebVideo]);
+  }, [introPhase, playSpiderwebShotSound, playWebVideo, stopWebVideo]);
 
   useEffect(() => {
     const root = containerRef.current;
@@ -1646,15 +1647,6 @@ const UniversalPaste = () => {
                 }
               }}
               onEnded={skipToMascotSequence}
-              onPause={(e) => {
-                const v = e.currentTarget;
-                if (!v.ended && v.currentTime > 0.4) {
-                  skipToMascotSequence();
-                }
-              }}
-              onStalled={() => {
-                window.setTimeout(skipToMascotSequence, 1000);
-              }}
               onError={(event) => {
                 event.currentTarget.style.display = 'none';
                 skipToMascotSequence();
