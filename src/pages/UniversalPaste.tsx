@@ -34,7 +34,7 @@ const SFX_WORDS = ['PASTE'];
 const HERO_AUDIO_SRC = '/assets/universal-paste/heroaudio.mp3';
 const SPIDERWEB_SHOT_AUDIO_SRC = '/assets/universal-paste/spiderweb-shot.mp3';
 const INTRO_VIDEO_SRC = '/assets/universal-paste/intro-animation.mp4';
-const SECTION_SPIDERWEB_IN_SRC = '/assets/universal-paste/spiderweb-in.mp4';
+const SECTION_SPIDERWEB_IN_SRC = '/assets/universal-paste/spiderweb-in-v2.mp4';
 const HERO_SLIDE_DURATION_MS = 460;
 const SCROLL_GLITCH_DURATION_MS = 800;
 
