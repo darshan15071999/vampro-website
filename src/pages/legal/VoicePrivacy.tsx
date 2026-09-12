@@ -31,43 +31,78 @@ const Privacy = () => {
               <div id="privacy" className="scroll-mt-40 mb-10 border-b border-indigo-900/30 pb-10">
                 <h1 className="text-3xl font-extrabold text-white mb-2">Privacy Policy</h1>
                 <p className="gradient-blue-text font-semibold text-sm">Vampro Voice Generator Text-to-Speech</p>
-                <p className="text-slate-500 text-sm mt-3">Last Updated: June 2026</p>
+                <p className="text-slate-500 text-sm mt-3">Last Updated: September 2026</p>
                 <p className="text-slate-400 text-sm mt-4 leading-relaxed">
-                  Vampro Voice Generator is a local text-to-speech tool for Adobe Premiere Pro. We designed it to keep your content on your own machine. This policy explains what data stays local, what uses the network, and the controls available to you.
+                  Vampro Voice Generator is a text-to-speech tool for Adobe Premiere Pro offering both a 100% offline Local workflow and an optional ElevenLabs cloud workflow. The Local workflow keeps your content strictly on your own machine. The ElevenLabs workflow uses the API key you provide to generate speech through ElevenLabs. This policy explains what data stays local, what uses the network, and the controls available to you.
                 </p>
               </div>
 
-              {/* ── LOCAL PROCESSING ── */}
+              {/* ── WORKFLOWS & DATA PROCESSING ── */}
               <div className="mb-10 border-b border-indigo-900/30 pb-10">
-                <SectionTitle icon={Shield}>What Stays on Your Device</SectionTitle>
-                <p className="text-slate-400 text-sm leading-relaxed mb-5">Everything that matters stays local — your text, your audio, and your projects never leave your computer.</p>
-                <div className="space-y-3">
-                  {[
-                    ['All voice synthesis happens locally', 'The text you enter and the audio you generate are processed entirely on your computer by the companion service running on localhost (127.0.0.1). Your text and audio are never transmitted to us or any third party.'],
-                    ['Generated audio stored locally', 'Audio files are saved in the app\'s generated_audio folder on your device and are never uploaded anywhere.'],
-                    ['Voice settings & project metadata', 'All configuration, voice presets, speed/pitch settings, and project metadata remain on your local machine.'],
-                  ].map(([t, b]) => (
-                    <div key={t} className="flex gap-3 items-start">
-                      <CheckCircle size={14} className="text-green-400 flex-shrink-0 mt-1" />
-                      <div className="text-sm"><strong className="text-white">{t}.</strong> <span className="text-slate-400">{b}</span></div>
-                    </div>
-                  ))}
+                <SectionTitle icon={Shield}>Workflows & Data Processing</SectionTitle>
+                <p className="text-slate-400 text-sm leading-relaxed mb-5">Vampro Voice Generator provides two distinct generation modes with transparent data boundaries.</p>
+                
+                <div className="space-y-4 mb-6">
+                  <div className="glass-card rounded-2xl p-5 border-indigo-500/20">
+                    <h4 className="text-base font-bold text-white mb-2 flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-green-400" />
+                      1. Local Workflow (100% Offline & Private)
+                    </h4>
+                    <ul className="space-y-2 text-sm text-slate-400">
+                      <li className="flex items-start gap-2">
+                        <CheckCircle size={14} className="text-green-400 flex-shrink-0 mt-1" />
+                        <span><strong>Processed entirely on your device:</strong> Text-to-speech synthesis is handled locally by the companion service on <code className="text-indigo-300 text-xs bg-black/40 px-1 py-0.5 rounded">127.0.0.1</code> (localhost).</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle size={14} className="text-green-400 flex-shrink-0 mt-1" />
+                        <span><strong>Zero transmission:</strong> Local script text and audio are never transmitted to Vampro or any third party.</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle size={14} className="text-green-400 flex-shrink-0 mt-1" />
+                        <span><strong>Local storage:</strong> Generated audio files are saved in your app's local <code className="text-indigo-300 text-xs bg-black/40 px-1 py-0.5 rounded">generated_audio</code> folder and are never uploaded.</span>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div className="glass-card rounded-2xl p-5 border-cyan-500/20">
+                    <h4 className="text-base font-bold text-white mb-2 flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-cyan-400" />
+                      2. ElevenLabs Workflow (Cloud Speech via Your API Key)
+                    </h4>
+                    <ul className="space-y-2 text-sm text-slate-400">
+                      <li className="flex items-start gap-2">
+                        <CheckCircle size={14} className="text-cyan-400 flex-shrink-0 mt-1" />
+                        <span><strong>Direct API communication:</strong> When you select the ElevenLabs tab, the text you enter, selected voice, selected model, and voice settings are sent directly to ElevenLabs (<code className="text-cyan-300 text-xs bg-black/40 px-1 py-0.5 rounded">api.elevenlabs.io</code>) using your provided API key.</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle size={14} className="text-cyan-400 flex-shrink-0 mt-1" />
+                        <span><strong>Local API key storage:</strong> Your ElevenLabs API key is stored strictly on your local machine by the Adobe UXP panel so it can reload your voices and models. It is never transmitted to or stored on Vampro servers.</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle size={14} className="text-cyan-400 flex-shrink-0 mt-1" />
+                        <span><strong>Local audio download:</strong> Generated ElevenLabs audio is retrieved by the local companion service and saved directly into the same local <code className="text-indigo-300 text-xs bg-black/40 px-1 py-0.5 rounded">generated_audio</code> directory.</span>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
               </div>
 
               {/* ── NETWORK USAGE ── */}
               <div className="mb-10 border-b border-indigo-900/30 pb-10">
-                <SectionTitle icon={Globe}>What Uses the Network</SectionTitle>
-                <p className="text-slate-400 text-sm leading-relaxed mb-5">The app makes limited, transparent network requests — none of which involve your content.</p>
+                <SectionTitle icon={Globe}>What Uses the Network (And Only This)</SectionTitle>
+                <p className="text-slate-400 text-sm leading-relaxed mb-5">The app makes limited, clearly defined network requests:</p>
                 <div className="space-y-3">
-                  <InfoCard title="Update Checks">
+                  <InfoCard title="1. ElevenLabs API Requests (Optional)">
+                    When you choose to use the ElevenLabs tab, the local companion service contacts <code className="text-cyan-300 text-xs bg-black/40 px-1 py-0.5 rounded">api.elevenlabs.io</code> to load available voices, load models, and generate speech using your API key. If you remain on the Local tab, zero ElevenLabs calls are made.
+                  </InfoCard>
+                  <InfoCard title="2. Update Checks">
                     The app periodically contacts <span className="text-indigo-300 font-medium">vampro.in</span> to check whether a newer version or new voice models are available. These requests reveal your IP address, approximate time, and app version — like any web request. No content from your projects is sent.
                   </InfoCard>
-                  <InfoCard title="Model Downloads">
+                  <InfoCard title="3. Model Downloads">
                     If you accept (or have auto-update enabled), the service may download new voice models from <span className="text-indigo-300 font-medium">vampro.in</span> and/or <span className="text-indigo-300 font-medium">Hugging Face</span>. Only model files are downloaded; nothing is uploaded.
                   </InfoCard>
-                  <InfoCard title="First-Run Fallback">
-                    If the offline model bundle is not present, the service downloads the default voice model once from Hugging Face. Standard installations ship the model offline and skip this step entirely.
+                  <InfoCard title="4. First-Run Fallback (Local Engine Only)">
+                    If the offline model bundle is not present, the service downloads the default Kokoro voice model once from Hugging Face. Standard installations ship the model offline and skip this step entirely.
                   </InfoCard>
                 </div>
               </div>
@@ -76,7 +111,14 @@ const Privacy = () => {
               <div className="mb-10 border-b border-indigo-900/30 pb-10">
                 <SectionTitle icon={Eye}>What We Do Not Collect</SectionTitle>
                 <div className="grid sm:grid-cols-2 gap-3">
-                  {['No accounts or sign-ups', 'No telemetry or analytics', 'No advertising identifiers', 'No recording of your text or audio', 'No usage tracking', 'No project data collection'].map(item => (
+                  {[
+                    'No Vampro accounts or mandatory sign-ups',
+                    'No telemetry or analytics tracking',
+                    'No advertising identifiers or tracking cookies',
+                    'No recording or logging of your text or audio on Vampro servers',
+                    'No storage of your ElevenLabs API keys on our infrastructure',
+                    'No access to or collection of your Premiere Pro project files',
+                  ].map(item => (
                     <div key={item} className="flex items-center gap-2 text-sm text-slate-400">
                       <div className="w-1.5 h-1.5 bg-red-400 rounded-full flex-shrink-0" />
                       {item}
@@ -90,25 +132,26 @@ const Privacy = () => {
                 <SectionTitle icon={Fingerprint}>Your Controls</SectionTitle>
                 <div className="space-y-3">
                   {[
-                    ['Disable network access', 'Set the environment variable VAMPRO_FORCE_OFFLINE=1 — the service then makes zero network calls, including update checks and model downloads.'],
-                    ['Delete generated audio', 'Remove files from the generated_audio folder at any time. The app never auto-deletes your files.'],
-                    ['Local diagnostic logs', 'The service writes logs to its logs folder with automatic rotation and 14-day retention. Logs stay on your device and are never uploaded.'],
+                    ['Clear ElevenLabs Credentials', 'Use the "Clear Key" button in the ElevenLabs tab at any time to immediately purge your API key from local storage.'],
+                    ['Disable Network Access (Force Offline)', 'Set the environment variable VAMPRO_FORCE_OFFLINE=1 — the service then skips all Vampro and Hugging Face update/model-download calls. (Do not use the ElevenLabs tab if you want zero network requests).'],
+                    ['Delete Generated Audio', 'Remove files from the generated_audio folder on your device at any time. The app never auto-deletes your files.'],
+                    ['Local Diagnostic Logs', 'The service writes logs to its logs folder with automatic rotation and 14-day retention. Logs stay on your device and are never uploaded.'],
                   ].map(([t, b]) => (
                     <InfoCard key={t} title={t}>{b}</InfoCard>
                   ))}
                 </div>
               </div>
 
-              {/* ── DATA STORAGE & SHARING ── */}
+              {/* ── DATA STORAGE & THIRD PARTIES ── */}
               <div className="mb-10 border-b border-indigo-900/30 pb-10">
-                <SectionTitle icon={Lock}>Data Storage & Sharing</SectionTitle>
+                <SectionTitle icon={Lock}>Data Storage & Third-Party Services</SectionTitle>
                 {[
-                  ['Data Storage', 'Generated audio, voice settings, and metadata are stored locally on your device. We have no access to this data.'],
-                  ['Data Sharing', 'We do not sell or rent personal information. Disclosure occurs only when required by law.'],
-                  ['Third-Party Services', 'Model downloads are served by Hugging Face; their privacy practices apply to those requests.'],
+                  ['Data Storage', 'Generated audio, voice settings, and metadata are stored locally on your device in the app\'s generated_audio directory. We have no access to this data.'],
+                  ['ElevenLabs Requests', 'When using the ElevenLabs workflow, your requests are processed by ElevenLabs under their own terms and privacy practices. See https://elevenlabs.io/privacy.'],
+                  ['Hugging Face Downloads', 'Model downloads are served by Hugging Face; their privacy practices apply to those requests. See https://huggingface.co/privacy.'],
+                  ['Data Sharing', 'We do not sell, rent, or monetize your personal information or content. Disclosure occurs only if required by law.'],
                   ['Children\'s Privacy', 'This software is not intended for children under 13.'],
-                  ['International Users', 'Users are responsible for compliance with their local data protection laws.'],
-                  ['Policy Changes', 'This policy may be updated. New versions will be published on the official website.'],
+                  ['Policy Changes', 'This policy may be updated as new features are added. New versions will be published on the official website.'],
                 ].map(([t, b]) => (
                   <div key={t} className="mb-5">
                     <h3 className="text-sm font-bold text-white mb-1">{t}</h3>
@@ -120,17 +163,19 @@ const Privacy = () => {
               {/* ── SECURITY & VERIFICATION ── */}
               <div className="mb-10 border-b border-indigo-900/30 pb-10">
                 <SectionTitle icon={Server}>Security & Verification</SectionTitle>
-                <p className="text-slate-400 text-sm leading-relaxed mb-5">Vampro Voice Generator runs entirely on your computer, processes your text locally, and does not upload your content.</p>
-
-
+                <p className="text-slate-400 text-sm leading-relaxed mb-5">
+                  Vampro Voice Generator's Local workflow runs on your computer and processes text locally. The optional ElevenLabs workflow sends text and selected voice parameters to ElevenLabs using the API key you provide.
+                </p>
 
                 <InfoCard title="What the App Does on Your Machine">
                   <ul className="space-y-1.5">
                     {[
-                      'Runs a local service on 127.0.0.1:8000 — not reachable from the internet',
-                      'Processes text → audio locally; your text and audio never leave the device',
-                      'Network is used only to check for and download updates and models',
-                      'Reasonable security measures are implemented across the service',
+                      'Runs a local service on 127.0.0.1:8000 — accessible only locally on your machine',
+                      'Processes Local workflow text into audio locally; your Local text and audio never leave the device',
+                      'Sends text and selected voice settings to ElevenLabs only when you use the ElevenLabs workflow',
+                      'Stores your ElevenLabs API key strictly in Adobe UXP local storage, purgeable anytime via Clear Key',
+                      'Network is used only for update checks, model downloads, and user-initiated ElevenLabs API generation',
+                      'Diagnostic logs are stored locally in the logs directory with 14-day auto-rotation and never uploaded',
                     ].map(item => (
                       <li key={item} className="flex items-center gap-2">
                         <div className="w-1.5 h-1.5 bg-indigo-500 rounded-full flex-shrink-0" />

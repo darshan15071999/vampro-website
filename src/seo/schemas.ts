@@ -67,17 +67,28 @@ export const voiceGeneratorSchema: SchemaType = [
   {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    "name": "Vampro AI Voice Generator",
+    "name": "Vampro AI Voice Generator Text-to-Speech",
+    "alternateName": "Vampro Voice Generator ElevenLabs Plugin for Premiere Pro",
     "applicationCategory": "MultimediaApplication",
-    "operatingSystem": "Windows",
+    "operatingSystem": "Windows 10, Windows 11",
     "offers": {
       "@type": "Offer",
       "price": "0",
       "priceCurrency": "USD"
     },
-    "description": "Generate natural AI voiceovers directly inside Adobe Premiere Pro.",
+    "description": "AI-powered text-to-speech plugin for Adobe Premiere Pro supporting both 100% offline Kokoro voices and native ElevenLabs API integration with custom voice clones, multilingual models, and direct sequence timeline placement.",
     "url": "https://vampro.in/plugins/voice-generator",
     "image": "https://vampro.in/thumbnail.jpg",
+    "featureList": [
+      "Native ElevenLabs API Key integration",
+      "Access custom ElevenLabs voice clones and full community voice library",
+      "Eleven Multilingual v2, Turbo, and Flash model selection",
+      "Granular Stability, Similarity, Style Exaggeration, and Speaker Boost controls",
+      "100% offline local voice generation powered by Kokoro-82M",
+      "1-click audio insertion to Adobe Premiere Pro timeline at sequence playhead",
+      "Direct Project Bin media organization",
+      "1-click timeline clip modification and script updating"
+    ],
     "publisher": {
       "@type": "Organization",
       "name": "Vampro"
@@ -86,8 +97,8 @@ export const voiceGeneratorSchema: SchemaType = [
   {
     "@context": "https://schema.org",
     "@type": "Product",
-    "name": "Vampro AI Voice Generator",
-    "description": "AI-powered text-to-speech plugin for Adobe Premiere Pro. Generate natural voiceovers directly inside your timeline.",
+    "name": "Vampro AI Voice Generator Text-to-Speech",
+    "description": "Adobe Premiere Pro text-to-speech extension featuring ElevenLabs voice library integration and offline neural voices. Generate and modify voiceovers directly on your sequence timeline.",
     "brand": {
       "@type": "Brand",
       "name": "Vampro"

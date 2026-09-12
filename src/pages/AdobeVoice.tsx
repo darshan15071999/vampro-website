@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Store, Grid2x2, MonitorPlay, Download } from 'lucide-react';
+import { Store, Grid2x2, MonitorPlay, Download, Sparkles, Key, Sliders, Volume2 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import {
   Wand2, FileText, Shield, ArrowRight,
@@ -24,7 +24,8 @@ import SoftAurora from '../components/SoftAurora';
 import SpecularButton from '../components/SpecularButton';
 import { useSignup } from '../context/SignupContext';
 
-const FEATURES = ['🏗 Built for Premiere Pro', '🎙 Multiple AI Voices', '💾 Offline Voice Generation', '🔌 Integrated Workflow'];
+const FEATURES = ['🏗 Built for Premiere Pro', '🎙 27+ Local AI Voices', '⚡ ElevenLabs API Support', '💾 Offline & Cloud TTS', '🔌 Direct Timeline Insertion'];
+
 
 const TIMELINE_DATA = [
   {
@@ -88,6 +89,8 @@ const AdobeVoice = () => {
     });
   };
   
+  const [activeElevenView, setActiveElevenView] = useState<'waveform' | 'controls'>('waveform');
+
   const reasonImages = [
     "/reason1.png",
     "/reason2.png",
@@ -211,7 +214,7 @@ const AdobeVoice = () => {
               <ShinyText text="Text-to-Speech" speed={3} delay={0.5} className="gradient-blue-text" shineColor="#ffffff" color="#3B3BFF" />
             </h1>
             <p className="text-lg text-slate-400 max-w-3xl mx-auto mb-12 leading-relaxed font-light">
-              Generate natural sounding AI voiceovers from text in seconds directly inside Adobe Premiere Pro. Modify generated audio anytime by simply selecting the clip.
+              Generate natural sounding AI voiceovers from text in seconds directly inside Adobe Premiere Pro. Use built-in offline voices or connect your ElevenLabs API key for studio-grade voice models and custom clones. Modify generated audio anytime by simply selecting the clip.
             </p>
           </FadeInSection>
           <FadeInSection delay="200ms" className="flex flex-col sm:flex-row justify-center items-center gap-4">
@@ -397,6 +400,172 @@ const AdobeVoice = () => {
           
         </section>
 
+        {/* ELEVENLABS NATIVE INTEGRATION */}
+        <section className="py-16 md:py-24 relative overflow-hidden">
+          <div className="absolute left-0 right-0 z-0 pointer-events-none opacity-25" style={{ top: '-150px', bottom: '-150px', maskImage: 'linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)', WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)' }}>
+            {!isMobile && <ColorBends
+              colors={["#00e5ff", "#3b82f6", "#8b5cf6"]}
+              rotation={45}
+              speed={0.15}
+              scale={1.1}
+              frequency={1.2}
+              warpStrength={1}
+              mouseInfluence={0}
+              noise={0.15}
+              parallax={0.4}
+              iterations={1}
+              intensity={1.4}
+              bandWidth={6}
+              transparent
+              autoRotate={0}
+              color="#00b4d8"
+            />}
+          </div>
+
+          <div className="w-full px-6 md:px-10 lg:px-16 relative z-10 max-w-[1440px] mx-auto">
+            {/* Header */}
+            <FadeInSection className="text-center mb-14">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-300 text-xs font-semibold uppercase tracking-wider mb-4 shadow-[0_0_20px_rgba(6,182,212,0.2)]">
+                <Sparkles size={14} className="animate-pulse text-cyan-400" />
+                <span>Native ElevenLabs Integration</span>
+              </div>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 tracking-tight leading-tight">
+                <ShinyText text="Your ElevenLabs Voice Library" speed={3} shineColor="#ffffff" color="#ffffff" /><br />
+                <span className="bg-gradient-to-r from-cyan-400 via-sky-300 to-indigo-400 bg-clip-text text-transparent">Directly Inside Premiere Pro</span>
+              </h2>
+              <p className="text-slate-300 text-base sm:text-lg max-w-3xl mx-auto leading-relaxed font-light">
+                Connect your ElevenLabs API key once to unlock your entire custom voice library, world-class multilingual models, and surgical voice controls — then generate and insert broadcast-quality audio directly into your timeline at the playhead.
+              </p>
+            </FadeInSection>
+
+            {/* Interactive Showcase & Feature Grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+              {/* Left: Interactive Image Showcase (7 cols) */}
+              <FadeInSection delay="100ms" className="lg:col-span-7 flex flex-col items-center">
+                {/* Tab selector for the 2 real screenshots */}
+                <div className="inline-flex p-1.5 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-xl mb-6 shadow-[0_4px_20px_rgba(0,0,0,0.4)]">
+                  <button
+                    type="button"
+                    onClick={() => setActiveElevenView('waveform')}
+                    className={`flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 ${
+                      activeElevenView === 'waveform'
+                        ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-[0_0_20px_rgba(6,182,212,0.4)]'
+                        : 'text-slate-400 hover:text-white'
+                    }`}
+                  >
+                    <Volume2 size={16} />
+                    <span>Waveform & Timeline Ingestion</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setActiveElevenView('controls')}
+                    className={`flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 ${
+                      activeElevenView === 'controls'
+                        ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-[0_0_20px_rgba(6,182,212,0.4)]'
+                        : 'text-slate-400 hover:text-white'
+                    }`}
+                  >
+                    <Sliders size={16} />
+                    <span>API Key & Voice Controls</span>
+                  </button>
+                </div>
+
+                {/* Panel Mockup Container */}
+                <div className="relative w-full max-w-[560px] rounded-[28px] p-2 sm:p-3 bg-gradient-to-b from-white/15 via-white/5 to-white/10 border border-cyan-500/30 shadow-[0_12px_60px_rgba(0,180,216,0.2)] backdrop-blur-2xl group">
+                  <div className="relative rounded-[22px] overflow-hidden bg-[#0a0f1d] border border-white/10 aspect-[560/600]">
+                    <img
+                      src="/elevenlabs-panel-waveform.png"
+                      alt="ElevenLabs Voice Generator with Waveform Preview and Add to Timeline in Premiere Pro"
+                      className={`absolute inset-0 w-full h-full object-contain transition-all duration-500 ${
+                        activeElevenView === 'waveform' ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'
+                      }`}
+                    />
+                    <img
+                      src="/elevenlabs-panel-ready.png"
+                      alt="ElevenLabs API Key and Voice Parameter Controls in Premiere Pro"
+                      className={`absolute inset-0 w-full h-full object-contain transition-all duration-500 ${
+                        activeElevenView === 'controls' ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'
+                      }`}
+                    />
+                  </div>
+                  
+                  {/* Micro caption */}
+                  <div className="mt-3 px-3 py-2 flex items-center justify-between text-[11px] text-slate-400">
+                    <span className="flex items-center gap-1.5">
+                      <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+                      {activeElevenView === 'waveform' ? 'Generated clip ready for 1-click timeline placement' : 'Direct API access to custom voices, models & sliders'}
+                    </span>
+                    <span className="text-cyan-300 font-mono">ElevenLabs v2 API</span>
+                  </div>
+                </div>
+              </FadeInSection>
+
+              {/* Right: Key Value Points (5 cols) */}
+              <FadeInSection delay="200ms" className="lg:col-span-5 space-y-4">
+                {[
+                  {
+                    icon: <Key size={20} className="text-cyan-400" />,
+                    title: 'Bring Your Own API Key (Zero Markups)',
+                    desc: 'Input your ElevenLabs key directly into the panel. It stays saved securely on your local device and connects straight to official ElevenLabs endpoints. Clear it anytime with one click.'
+                  },
+                  {
+                    icon: <Sparkles size={20} className="text-sky-400" />,
+                    title: 'Instant Voice Library & Clones',
+                    desc: 'Hit "Load Voices & Models" to load all your personal voice clones, community voices, and official models including Eleven Multilingual v2, Turbo, and Flash.'
+                  },
+                  {
+                    icon: <Sliders size={20} className="text-indigo-400" />,
+                    title: 'Granular Voice Shaping Sliders',
+                    desc: 'Adjust Stability, Similarity, Style Exaggeration, Speaker Boost, Speed, and Pitch without ever switching back and forth to an external browser tab.'
+                  },
+                  {
+                    icon: <Layers size={20} className="text-cyan-400" />,
+                    title: 'Direct Timeline Ingestion & Modification',
+                    desc: 'Click "Add to timeline" or "Import to Bin" to place your clip right at the playhead. Need to rewrite a line? Simply select the timeline clip and click "Modify Selected Clip".'
+                  }
+                ].map((item, idx) => (
+                  <div
+                    key={idx}
+                    className="p-5 rounded-2xl bg-white/[0.04] border border-white/10 hover:border-cyan-500/40 hover:bg-white/[0.07] backdrop-blur-xl transition-all duration-300 group shadow-[0_4px_24px_rgba(0,0,0,0.2)]"
+                  >
+                    <div className="flex items-start gap-4">
+                      <div className="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                        {item.icon}
+                      </div>
+                      <div>
+                        <h4 className="text-base font-bold text-white mb-1 group-hover:text-cyan-200 transition-colors">
+                          {item.title}
+                        </h4>
+                        <p className="text-slate-400 text-sm leading-relaxed">
+                          {item.desc}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+
+                {/* Action Callout */}
+                <div className="pt-2 flex flex-col sm:flex-row gap-4">
+                  <button
+                    type="button"
+                    onClick={() => navigate('/docs/plugins/voice-generator')}
+                    className="flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold text-sm shadow-[0_0_25px_rgba(6,182,212,0.3)] hover:shadow-[0_0_35px_rgba(6,182,212,0.5)] transition-all cursor-pointer"
+                  >
+                    <span>Read ElevenLabs Setup Docs</span>
+                    <ArrowRight size={16} />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => navigate('/blog/elevenlabs-voice-generator-adobe-premiere-pro')}
+                    className="flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl border border-white/15 bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white font-medium text-sm backdrop-blur-lg transition-all cursor-pointer"
+                  >
+                    <span>Explore Workflow Guide</span>
+                  </button>
+                </div>
+              </FadeInSection>
+            </div>
+          </div>
+        </section>
 
         {/* WHO IS IT FOR */}
         <section className="py-16 md:py-24 relative">

@@ -4,19 +4,23 @@
 Vampro is a creative technology lab built on one idea: technology meets creativity. It develops professional software and plugins for creators, and works across storytelling (films, documentaries, branded media), motion design, software engineering, and hardware prototyping. Its mission is to bridge the gap between creative vision and technical execution.
 
 ## 2. Core Product: Vampro Voice Generator (Text-to-Speech)
-- **Type:** Software Plugin (UXP) for Adobe Premiere Pro, with a Windows companion app.
-- **Target Users:** Video editors, YouTube creators, marketing teams, educators.
+- **Type:** Dual-Engine Software Plugin (UXP) for Adobe Premiere Pro, with a Windows native companion app.
+- **Target Users:** Video editors, YouTube creators, marketing teams, educators, documentary filmmakers.
 - **URL:** https://vampro.in/plugins/voice-generator
 - **Documentation:** https://vampro.in/docs/plugins/voice-generator
+- **Tutorial Blog:** https://vampro.in/blog/elevenlabs-voice-generator-adobe-premiere-pro
 
-### 2.1 Documentation: Key Features
-- AI voiceovers inside Premiere Pro
-- Multiple voice options
-- Adjustable speed and pitch
-- Tone presets for narration styles
-- Local processing (offline voice generation on your machine)
-- Auto-startup
-- Fast workflow integration
+### 2.1 Documentation: Key Features & Architecture
+- **Dual-Engine Flexibility:** Toggle seamlessly between 100% offline Local TTS (Kokoro-82M) and ElevenLabs Cloud TTS directly in Premiere Pro.
+- **Native ElevenLabs API Key Integration:** Securely input your personal ElevenLabs API key. Credentials stay stored strictly in local Adobe UXP panel storage (never sent to Vampro servers) with a 1-click "Clear Key" button.
+- **Custom Voice Clones & Library Access:** "Load Voices & Models" queries your ElevenLabs account, instantly populating your custom cloned voices, library voices, and cutting-edge models (Eleven Multilingual v2, Turbo v2.5, Flash v2.5).
+- **Granular Voice Shaping:** Precision sliders for Stability, Similarity / Clarity, Style Exaggeration, Speaker Boost, Speed, and Pitch.
+- **Local Kokoro-82M Engine:** 27+ offline US/UK English voices with pre-packaged tone presets (Professional, Documentary, Voiceover, Dynamic, Casual, Serious, Comedic) for zero-latency, free generation.
+- **Interactive Audio Waveform Preview:** Visual waveform inspection before timeline placement.
+- **Direct Timeline Ingestion:** 1-click "Add to timeline" or "Import to Timeline" places audio at sequence playhead on the selected track.
+- **Project Bin Ingestion:** "Import to Bin" saves audio files cleanly into the Premiere Pro Project panel.
+- **1-Click Clip Modification:** Select any existing timeline audio clip and click "Modify Selected Clip" to reload text and voice parameters for instant revisions without manual re-aligning.
+- **Auto-Startup Companion:** Companion service runs locally on 127.0.0.1 and starts silently with Windows.
 
 ### 2.2 Documentation: System Requirements
 - **Operating System:** Windows 10 (64-bit), Windows 11 (64-bit) (macOS planned for future)
@@ -26,26 +30,31 @@ Vampro is a creative technology lab built on one idea: technology meets creativi
 
 ### 2.3 Documentation: Installation Guide
 - **Step 1 – Install Extension:** Install plugin from Adobe Marketplace and restart Premiere Pro.
-- **Step 2 – Install Voice Service:** Install and Run Vampro Voice Service Companion app from the Microsoft Store. It sets up the service, configures auto-startup, installs AI components.
+- **Step 2 – Install Voice Service:** Install and Run Vampro Voice Service Companion app from the Microsoft Store. It sets up the service, configures auto-startup, and installs offline AI components.
 - **Step 3 – Open Extension:** Go to Window → UXP Plugins → Vampro Voice Generator Text-to-Speech.
 
-### 2.4 Documentation: Quick Start
-1. **Enter Text:** Type or paste your script.
-2. **Select Voice:** Choose from available voices.
-3. **Choose Tone:** Optional presets: Professional, Voiceover, Documentary, etc.
-4. **Generate:** Click Generate Voice. Audio appears in Premiere Pro.
+### 2.4 Documentation: Quick Start & Workflows
+1. **Choose Workflow:** Click either the **Vampro Local** tab (offline Kokoro) or **ElevenLabs** tab (cloud models & custom clones).
+2. **Setup (ElevenLabs Only):** Paste your ElevenLabs API Key and click **Load Voices & Models**.
+3. **Enter Text:** Type or paste your script narration.
+4. **Configure Voice & Parameters:** Select voice and tune Stability, Similarity, Style, Speed, and Pitch.
+5. **Generate & Preview:** Click **Generate Voice** to render the waveform preview.
+6. **Insert:** Click **Add to timeline** (at playhead) or **Import to Bin**.
 
-### 2.5 Documentation: Voice Controls
-- **Speed:** 0.8x (Slow), 1.0x (Normal), 1.2x (Fast)
-- **Pitch:** Negative (deeper), Positive (higher)
-- **Tone Presets:** Professional, Documentary, Voiceover, Dynamic, Casual, Serious, Comedic.
+### 2.5 Documentation: ElevenLabs Voice Controls
+- **Stability (0.00 – 1.00):** Lower values = expressive and emotional; higher values = steady, consistent delivery (default: 0.50).
+- **Similarity / Clarity (0.00 – 1.00):** Controls adherence to original voice timbre and reduces artifacts (default: 0.75).
+- **Style Exaggeration (0.00 – 1.00):** Amplifies dramatic and stylistic inflection (default: 0.00).
+- **Speaker Boost (Toggle):** Enhances voice clarity and presence (default: On).
+- **Speed & Pitch:** Adjust tempo and vocal pitch offset directly.
 
 ### 2.6 Documentation: Troubleshooting & FAQ
-- **Voice Generation Fails:** Check http://127.0.0.1:8000/health — should return {"status": "ok"}.
+- **Voice Generation Fails:** Check http://127.0.0.1:8000/health — should return {"status": "ok"}. For ElevenLabs, verify API key validity and remaining quota.
 - **Service Not Running:** Restart Windows. The service auto-starts after login.
-- **Can't Connect:** Check firewall isn't blocking localhost. Verify Premiere Pro version.
-- **Internet required?** Internet required only for installation. AI for voice generation is completely local, on device.
-- **Commercial use?** Yes, but users are responsible for compliance.
+- **ElevenLabs Key Security:** Key is stored strictly on your local PC in panel storage. Erase anytime with "Clear Key".
+- **Can I use custom voice clones?** Yes, all personal voice clones in your ElevenLabs account populate into the voice selector.
+- **Internet required?** Local engine is 100% offline. ElevenLabs requires an active internet connection to communicate with api.elevenlabs.io.
+- **Commercial use?** Local Kokoro-82M voices are Apache-2.0 licensed for commercial use. ElevenLabs commercial usage is governed by your ElevenLabs subscription tier.
 
 ## 3. Core Product: Vampro Universal Paste (Media Ingestion & Clipboard Companion)
 - **Type:** Software Extension (UXP) for Adobe Premiere Pro, accompanied by a local desktop companion app.

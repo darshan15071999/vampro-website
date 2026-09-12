@@ -48,19 +48,19 @@ export const homeMetadata: PageMetadata = {
 
 export const pluginsMetadata: PageMetadata = {
   title: 'Professional Creative Plugins | Vampro',
-  description: 'Explore professional creative plugins from Vampro. AI-powered tools designed for Adobe Premiere Pro and creative workflows.',
+  description: 'Explore professional creative plugins from Vampro. AI-powered tools designed for Adobe Premiere Pro and creative workflows, including ElevenLabs Text-to-Speech and Universal Paste.',
   // /plugins client-redirects to the voice generator — canonical points at the target
   canonical: 'https://vampro.in/plugins/voice-generator',
-  keywords: 'Adobe Premiere Pro plugins, AI plugins, creative plugins, professional creative tools, voice generator plugin, universal paste plugin',
+  keywords: 'Adobe Premiere Pro plugins, ElevenLabs Premiere Pro, AI plugins, creative plugins, professional creative tools, voice generator plugin, universal paste plugin',
   schema: pluginsCollectionSchema,
   breadcrumbs: pluginsBreadcrumb
 };
 
 export const voiceMetadata: PageMetadata = {
-  title: 'AI Voice Generator for Adobe Premiere Pro | Vampro',
-  description: 'Generate natural AI voiceovers directly inside Adobe Premiere Pro. Write scripts, choose voices, and create professional narration.',
+  title: 'AI Voice Generator for Adobe Premiere Pro | ElevenLabs & Offline TTS | Vampro',
+  description: 'Generate natural AI voiceovers directly inside Adobe Premiere Pro. Connect your ElevenLabs API key for custom voice clones and multilingual models, or use offline Kokoro voices directly on your timeline.',
   canonical: 'https://vampro.in/plugins/voice-generator',
-  keywords: 'AI voice generator, text to speech, Adobe Premiere Pro plugin, voiceover, narration, creative plugin',
+  keywords: 'ElevenLabs Premiere Pro, ElevenLabs text to speech plugin, ElevenLabs Adobe Premiere, AI voice generator, text to speech, voice cloning Premiere Pro, timeline voiceover, Adobe Premiere Pro plugin, narration, creative plugin, Kokoro TTS',
   schema: voiceGeneratorSchema,
   breadcrumbs: voiceBreadcrumb
 };
@@ -110,10 +110,10 @@ export const docsHubMetadata: PageMetadata = {
 };
 
 export const docsVoiceMetadata: PageMetadata = {
-  title: 'Voice Generator Documentation | Vampro',
-  description: 'Documentation for Vampro AI Voice Generator Plugin for Adobe Premiere Pro. Installation, usage, and troubleshooting.',
+  title: 'Voice Generator & ElevenLabs Integration Docs | Vampro',
+  description: 'Comprehensive setup and workflow documentation for Vampro AI Voice Generator for Adobe Premiere Pro. Learn how to configure ElevenLabs API, customize voice clones, adjust stability/similarity, and insert audio directly into your timeline.',
   canonical: 'https://vampro.in/docs/plugins/voice-generator',
-  keywords: 'voice generator documentation, plugin installation, troubleshooting, tutorial',
+  keywords: 'voice generator documentation, ElevenLabs Premiere Pro guide, ElevenLabs API key setup, voice cloning tutorial, Adobe Premiere Pro plugin docs, troubleshooting',
   schema: docsSchema,
   breadcrumbs: docsVoiceBreadcrumb
 };

@@ -43,14 +43,14 @@ const Licenses = () => {
                 <h1 className="text-3xl md:text-4xl font-extrabold text-white mb-3 tracking-tight">Licenses</h1>
                 <p className="gradient-blue-text font-semibold text-base">Vampro Voice Generator Text-to-Speech</p>
                 <p className="text-slate-400 mt-5 leading-relaxed">
-                  Vampro Voice Generator is built on open-source technology. This page provides transparency about the licensing of every component, the AI models powering voice generation, and the voice engine used. All components ship under permissive licenses (Apache-2.0, MIT, BSD) that allow commercial use. No GPL-licensed components are included.
+                  Vampro Voice Generator is built with full transparency regarding licensing and open-source foundations. The application features a dual-engine architecture: a 100% offline local engine running on your computer, alongside native API integration with ElevenLabs. All shipped local software components and models use permissive licenses (Apache-2.0, MIT, BSD) that permit commercial use. No copyleft GPL or LGPL components are bundled.
                 </p>
               </div>
 
               {/* ── COMPONENT LICENSES ── */}
               <DocSection id="licensing" title="Component Licenses">
                 <p className="text-slate-400 text-sm leading-relaxed mb-5">
-                  All components used in Vampro Voice Generator are licensed under permissive open-source licenses that permit commercial use. No GPL-licensed code is included in the application.
+                  All components bundled in Vampro Voice Generator are licensed under permissive open-source licenses allowing commercial use. The ElevenLabs cloud integration communicates directly over standard HTTPS endpoints using your own credentials without proprietary wrappers or copyleft dependencies.
                 </p>
 
                 {/* License Table */}
@@ -66,8 +66,8 @@ const Licenses = () => {
                     </thead>
                     <tbody className="text-slate-300">
                       {[
-                        ['Kokoro-82M', 'TTS model weights', 'Apache-2.0', true],
-                        ['kokoro', 'TTS pipeline', 'Apache-2.0', true],
+                        ['Kokoro-82M', 'Local TTS model weights', 'Apache-2.0', true],
+                        ['kokoro', 'Local TTS pipeline', 'Apache-2.0', true],
                         ['misaki', 'G2P front end', 'MIT', true],
                         ['DeepPhonemizer', 'G2P engine', 'MIT', true],
                         ['OpenPhonemizer', 'G2P model weights', 'BSD-3-Clause-Clear', true],
@@ -76,7 +76,8 @@ const Licenses = () => {
                         ['fastapi / pydantic / loguru', 'Service framework', 'MIT', true],
                         ['uvicorn', 'ASGI server', 'BSD-3-Clause', true],
                         ['huggingface_hub', 'Model management', 'Apache-2.0', true],
-                        ['spaCy + en_core_web_sm', 'NLP processing', 'MIT', true],
+                        ['ElevenLabs API Client', 'Cloud speech synthesis (REST HTTPS)', 'Permissive / User Key', true],
+                        ['certifi', 'CA certificate bundle', 'MPL-2.0', true],
                       ].map(([comp, role, license, commercial]) => (
                         <tr key={comp as string} className="border-b border-indigo-900/15 hover:bg-indigo-900/10 transition-colors">
                           <td className="py-2.5 text-white font-medium">{comp as string}</td>
@@ -93,7 +94,7 @@ const Licenses = () => {
                   <div className="flex items-start gap-2">
                     <CheckCircle size={14} className="text-green-400 flex-shrink-0 mt-0.5" />
                     <p className="text-slate-400 text-sm">
-                      <span className="text-green-400 font-medium">No GPL components.</span> All shipped components use Apache-2.0, MIT, or BSD permissive licenses that allow commercial use.
+                      <span className="text-green-400 font-medium">Zero copyleft dependencies.</span> All shipped local code and neural network weights adhere strictly to Apache-2.0, MIT, and BSD permissive licenses.
                     </p>
                   </div>
                 </div>
@@ -105,6 +106,7 @@ const Licenses = () => {
                     ['DeepPhonemizer', 'https://github.com/as-ideas/DeepPhonemizer'],
                     ['OpenPhonemizer', 'https://github.com/NeuralVox/OpenPhonemizer'],
                     ['inflect', 'https://pypi.org/project/inflect/'],
+                    ['ElevenLabs API', 'https://elevenlabs.io/docs'],
                   ].map(([name, url]) => (
                     <a key={name} href={url} target="_blank" rel="noopener noreferrer"
                       className="inline-flex items-center gap-1.5 text-xs bg-indigo-500/10 text-indigo-300 px-3 py-1.5 rounded-full hover:bg-indigo-500/20 transition-colors">
@@ -115,41 +117,42 @@ const Licenses = () => {
               </DocSection>
 
               {/* ── VOICE MODELS ── */}
-              <DocSection id="voice-models" title="Voice Models">
+              <DocSection id="voice-models" title="Voice Models & Engines">
                 <p className="text-slate-400 text-sm leading-relaxed mb-5">
-                  The app ships with a bundled voice model for fully offline use. Additional models may be downloaded when available.
+                  The app supports two complementary generation engines depending on your workflow requirements:
                 </p>
 
-                <div className="glass-card rounded-xl p-5 mb-5">
-                  <div className="flex flex-wrap gap-4 mb-3">
-                    {[
-                      ['Model', 'Kokoro-82M'],
-                      ['Voices', '54 included'],
-                      ['License', 'Apache-2.0'],
-                    ].map(([label, value]) => (
-                      <div key={label}>
-                        <p className="text-xs text-slate-500">{label}</p>
-                        <p className="text-sm font-medium text-white">{value}</p>
-                      </div>
-                    ))}
+                <div className="grid sm:grid-cols-2 gap-4 mb-5">
+                  <div className="glass-card rounded-xl p-5 border-indigo-500/20">
+                    <h4 className="font-bold text-white text-sm mb-2 flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-green-400" />
+                      Local Kokoro Engine (Offline)
+                    </h4>
+                    <div className="space-y-1 text-xs text-slate-400 mb-3">
+                      <p><strong className="text-slate-300">Model:</strong> Kokoro-82M (v1.0)</p>
+                      <p><strong className="text-slate-300">License:</strong> Apache-2.0 (commercial use permitted)</p>
+                      <p><strong className="text-slate-300">Network:</strong> 100% offline; zero API keys or latency</p>
+                    </div>
+                    <p className="text-xs text-slate-400 leading-relaxed">
+                      Bundled locally with 27 natural English voices across US and UK accents, optimized for fast CPU inference.
+                    </p>
                   </div>
-                  <div className="space-y-1.5">
-                    {[
-                      'Voice synthesis runs fully offline — generating audio never requires the network',
-                      'The bundled model is licensed under Apache-2.0, permitting commercial use of generated audio',
-                      'Network access can be fully disabled by setting VAMPRO_FORCE_OFFLINE=1',
-                    ].map(item => (
-                      <div key={item} className="flex items-center gap-2 text-slate-400 text-sm">
-                        <div className="w-1.5 h-1.5 bg-green-400 rounded-full flex-shrink-0" />
-                        {item}
-                      </div>
-                    ))}
+
+                  <div className="glass-card rounded-xl p-5 border-cyan-500/20">
+                    <h4 className="font-bold text-white text-sm mb-2 flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-cyan-400" />
+                      ElevenLabs Engine (Cloud API)
+                    </h4>
+                    <div className="space-y-1 text-xs text-slate-400 mb-3">
+                      <p><strong className="text-slate-300">Models:</strong> Eleven Multilingual v2, Turbo v2.5, Flash v2.5</p>
+                      <p><strong className="text-slate-300">License:</strong> User's ElevenLabs account subscription</p>
+                      <p><strong className="text-slate-300">Network:</strong> Direct HTTPS calls to api.elevenlabs.io</p>
+                    </div>
+                    <p className="text-xs text-slate-400 leading-relaxed">
+                      Enables custom cloned voices, hyper-realistic voice acting, fine-grained stability and style sliders.
+                    </p>
                   </div>
                 </div>
-
-                <p className="text-slate-500 text-xs">
-                  Only models cleared for commercial use under permissive licenses are included. The default Kokoro-82M model is based on StyleTTS2 and is © hexgrad.
-                </p>
               </DocSection>
 
               {/* ── UPDATES ── */}
@@ -166,31 +169,29 @@ const Licenses = () => {
               </DocSection>
 
               {/* ── VOICES ── */}
-              <DocSection id="voice-architecture" title="Voices">
+              <DocSection id="voice-architecture" title="Voices & Custom Clones">
                 <p className="text-slate-400 text-sm leading-relaxed mb-5">
-                  Vampro Voice Generator includes 27 English voices, all running fully offline through the bundled Kokoro-82M model (Apache-2.0).
+                  Vampro Voice Generator provides rich options across both local and cloud tiers:
                 </p>
 
-                <div className="grid sm:grid-cols-2 gap-3 mb-5">
+                <div className="grid sm:grid-cols-3 gap-3 mb-5">
                   <div className="glass-card rounded-xl p-4">
-                    <p className="text-xs text-indigo-400 font-medium mb-1.5">🇺🇸 US English</p>
-                    <p className="text-sm text-slate-300">11 female, 8 male voices</p>
+                    <p className="text-xs text-indigo-400 font-medium mb-1.5">🇺🇸 US English (Local)</p>
+                    <p className="text-sm text-slate-300">11 female, 8 male offline voices</p>
                   </div>
                   <div className="glass-card rounded-xl p-4">
-                    <p className="text-xs text-indigo-400 font-medium mb-1.5">🇬🇧 UK English</p>
-                    <p className="text-sm text-slate-300">4 female, 4 male voices</p>
+                    <p className="text-xs text-indigo-400 font-medium mb-1.5">🇬🇧 UK English (Local)</p>
+                    <p className="text-sm text-slate-300">4 female, 4 male offline voices</p>
+                  </div>
+                  <div className="glass-card rounded-xl p-4 border-cyan-500/20">
+                    <p className="text-xs text-cyan-400 font-medium mb-1.5">⚡ ElevenLabs Clones & Library</p>
+                    <p className="text-sm text-slate-300">Unlimited custom clones & voice library</p>
                   </div>
                 </div>
 
                 <p className="text-slate-400 text-sm leading-relaxed mb-4">
-                  The voice menu is built dynamically, so new voices and models can be added in future updates without requiring changes to the extension panel. The architecture is engine-agnostic by design, allowing additional TTS models to be integrated as they become available.
+                  The voice menu is built dynamically, so new voices and models can be added in future updates without requiring changes to the extension panel.
                 </p>
-
-                <div className="glass-card rounded-xl p-4 border-indigo-500/15">
-                  <p className="text-slate-400 text-sm">
-                    <span className="text-white font-medium">Note:</span> Kokoro-82M is currently the best small, commercially-licensed, CPU-friendly local TTS model available. All voices are licensed for commercial use under Apache-2.0.
-                  </p>
-                </div>
               </DocSection>
 
             </div>

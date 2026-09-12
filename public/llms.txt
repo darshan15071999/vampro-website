@@ -24,9 +24,19 @@ Vampro is a creative technology lab — where technology meets creativity. It bu
 - **Documentation:** https://vampro.in/docs/plugins/universal-paste
 
 ### 2. [Vampro Voice Generator](https://vampro.in/plugins/voice-generator)
-- **Category:** AI Text-to-Speech Plugin for Adobe Premiere Pro.
-- **Core Functionality:** Generate natural, high-fidelity offline voiceovers across 27+ voice models directly inside Premiere Pro sequences without API subscriptions or cloud latency.
+- **Category:** Dual-Engine AI Text-to-Speech Plugin for Adobe Premiere Pro (Offline Local + Native ElevenLabs API).
+- **Core Functionality:** Generate natural, broadcast-quality AI voiceovers directly inside Adobe Premiere Pro sequences and project bins. Offers both a 100% offline Kokoro-82M engine (27+ voices, zero subscription, zero latency) and a native ElevenLabs API integration to access personal voice clones, the full ElevenLabs voice library, multilingual models, and fine-tuning sliders.
+- **Key Features:**
+  1. **Dual Engine Architecture:** Toggle between 100% offline Kokoro-82M local generation and ElevenLabs cloud API synthesis directly inside the panel.
+  2. **Bring Your Own ElevenLabs Key:** Secure local API key storage with 1-click "Clear Key" functionality. Zero middlemen or markup fees.
+  3. **Custom Voice Clones & Library:** Instantly loads your custom trained voice clones, community voices, and official ElevenLabs voices into Premiere Pro.
+  4. **State-of-the-Art Models:** Support for Eleven Multilingual v2, Eleven Turbo, and Eleven Flash models.
+  5. **Granular Voice Shaping:** Precision controls for Stability, Similarity / Clarity, Style Exaggeration, Speaker Boost, Speed, and Pitch.
+  6. **1-Click Timeline Playhead Placement:** Drop generated audio straight onto your sequence timeline at the playhead or import to Project Bins.
+  7. **1-Click Timeline Clip Modification:** Select any existing voice clip on the timeline to reload text and parameters in the panel for instant re-takes without re-alignment.
+- **System Requirements:** Adobe Premiere Pro 26.0+, Windows 10/11 64-bit (macOS support in development).
 - **Documentation:** https://vampro.in/docs/plugins/voice-generator
+- **Tutorial Blog:** https://vampro.in/blog/elevenlabs-voice-generator-adobe-premiere-pro
 
 ## Important Links & Endpoints
 - **Full Knowledge Base (LLM Friendly):** https://vampro.in/llms-full.txt

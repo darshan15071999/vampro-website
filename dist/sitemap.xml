@@ -31,6 +31,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://vampro.in/blog/elevenlabs-voice-generator-adobe-premiere-pro</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://vampro.in/blog/ai-speed-up-video-editing-workflow</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
