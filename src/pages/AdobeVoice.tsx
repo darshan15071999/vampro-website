@@ -458,7 +458,7 @@ const AdobeVoice = () => {
                 <div className="relative w-full max-w-[380px] h-[380px] sm:h-[406px] rounded-[24px] p-2 bg-white/5 border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.4)] backdrop-blur-[40px] hover:bg-white/10 hover:border-indigo-500/30 transition-all duration-300 group flex items-center justify-center">
                   <div className="relative rounded-2xl overflow-hidden bg-[#0a0f1d] border border-white/10 w-full h-full flex items-center justify-center">
                     <img
-                      src="/elevenlabs-panel-ready.png"
+                      src="/elevenlabs-panel-ready.png?v=2"
                       alt="ElevenLabs Voice Generator Controls and Timeline Integration in Premiere Pro"
                       className="w-full h-full object-contain"
                     />
