@@ -162,7 +162,7 @@ const Licenses = () => {
                 </p>
                 <DocList items={[
                   'Updates and new voice models are checked for automatically when the app is online',
-                  'The app stays fully functional offline — update checks are silent and non-blocking',
+                  'The app stays fully functional offline; update checks are silent and non-blocking',
                   'You may disable all network activity by setting VAMPRO_FORCE_OFFLINE=1',
                   'The panel extension may also be updated independently via the Adobe Marketplace',
                 ]} />

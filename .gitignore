@@ -29,6 +29,7 @@ vampro-universal-paste-landing/
 
 # Adobe / Media Project files
 *.aep
+*.psd
 *After Effects Auto-Save*
 *.aep Logs*
 

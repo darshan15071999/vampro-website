@@ -42,14 +42,14 @@ Vampro is a creative technology lab built on one idea: technology meets creativi
 6. **Insert:** Click **Add to timeline** (at playhead) or **Import to Bin**.
 
 ### 2.5 Documentation: ElevenLabs Voice Controls
-- **Stability (0.00 – 1.00):** Lower values = expressive and emotional; higher values = steady, consistent delivery (default: 0.50).
-- **Similarity / Clarity (0.00 – 1.00):** Controls adherence to original voice timbre and reduces artifacts (default: 0.75).
-- **Style Exaggeration (0.00 – 1.00):** Amplifies dramatic and stylistic inflection (default: 0.00).
+- **Stability (0.00 to 1.00):** Lower values = expressive and emotional; higher values = steady, consistent delivery (default: 0.50).
+- **Similarity / Clarity (0.00 to 1.00):** Controls adherence to original voice timbre and reduces artifacts (default: 0.75).
+- **Style Exaggeration (0.00 to 1.00):** Amplifies dramatic and stylistic inflection (default: 0.00).
 - **Speaker Boost (Toggle):** Enhances voice clarity and presence (default: On).
 - **Speed & Pitch:** Adjust tempo and vocal pitch offset directly.
 
 ### 2.6 Documentation: Troubleshooting & FAQ
-- **Voice Generation Fails:** Check http://127.0.0.1:8000/health — should return {"status": "ok"}. For ElevenLabs, verify API key validity and remaining quota.
+- **Voice Generation Fails:** Check http://127.0.0.1:8000/health, which should return {"status": "ok"}. For ElevenLabs, verify API key validity and remaining quota.
 - **Service Not Running:** Restart Windows. The service auto-starts after login.
 - **ElevenLabs Key Security:** Key is stored strictly on your local PC in panel storage. Erase anytime with "Clear Key".
 - **Can I use custom voice clones?** Yes, all personal voice clones in your ElevenLabs account populate into the voice selector.

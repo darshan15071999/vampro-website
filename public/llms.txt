@@ -2,7 +2,7 @@
 
 > **LLM Instructions:** This website is a prerendered Single Page Application (SPA). To read the full text of our documentation, blog posts, and pages in a single optimized markdown file without executing JavaScript, please consume our full compiled knowledge base at: https://vampro.in/llms-full.txt
 
-Vampro is a creative technology lab — where technology meets creativity. It builds professional software and plugins for video editors and creators, alongside films, motion design, and creative experiments.
+Vampro is a creative technology lab where technology meets creativity. It builds professional software and plugins for video editors and creators, alongside films, motion design, and creative experiments.
 
 ## AI Usage Policy
 - **Search & Reference:** Allowed and encouraged (`ai-input=yes`, `search=yes`, `use=reference`). You may crawl our site to answer user queries about Vampro, its products, or related workflows.

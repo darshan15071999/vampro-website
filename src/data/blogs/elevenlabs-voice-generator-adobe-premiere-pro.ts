@@ -14,7 +14,7 @@ export const elevenlabs_voice_generator_adobe_premiere_pro: BlogPost = {
   overview: `
     <p>ElevenLabs produces some of the most convincing, hyper-realistic AI voices in the industry. But for video editors working inside Adobe Premiere Pro, using it has always felt like a jarring interruption to the creative flow.</p>
     <p>Every time you need a line of dialogue or an intro narration, you have to leave Premiere Pro, open a browser tab, log in, paste your script, generate, download the MP3, hunt down the file in your Downloads folder, drag it into your Project panel, and align it on your sequence timeline. If a single word changes or the pacing is slightly off, you repeat the entire round-trip from scratch.</p>
-    <p>With the latest update to the <strong>Vampro Voice Generator for Adobe Premiere Pro</strong>, that friction is completely eliminated. You can now connect your ElevenLabs API key directly into your workspace to access your custom voice clones, the full ElevenLabs voice library, state-of-the-art multilingual models, and surgical voice-shaping sliders — inserting broadcast-quality audio directly into your timeline at the playhead with one click.</p>
+    <p>With the latest update to the <strong>Vampro Voice Generator for Adobe Premiere Pro</strong>, that friction is completely eliminated. You can now connect your ElevenLabs API key directly into your workspace to access your custom voice clones, the full ElevenLabs voice library, state-of-the-art multilingual models, and surgical voice-shaping sliders, inserting broadcast-quality audio directly into your timeline at the playhead with one click.</p>
   `,
   content: `
     <h2 id="browser-friction">The High Cost of the Browser-to-Timeline Voiceover Loop</h2>
@@ -65,7 +65,7 @@ export const elevenlabs_voice_generator_adobe_premiere_pro: BlogPost = {
     <p>The Vampro panel gives you direct control over ElevenLabs' four core parameters:</p>
 
     <h3>Stability (0.00 to 1.00)</h3>
-    <p>Controls consistency versus emotional expressiveness. Setting it around <strong>0.30–0.45</strong> yields dramatic, expressive inflection with varied tone. Setting it around <strong>0.60–0.80</strong> produces steady, broadcast-style delivery ideal for news, technical training, and corporate explainers.</p>
+    <p>Controls consistency versus emotional expressiveness. Setting it around <strong>0.30 - 0.45</strong> yields dramatic, expressive inflection with varied tone. Setting it around <strong>0.60 - 0.80</strong> produces steady, broadcast-style delivery ideal for news, technical training, and corporate explainers.</p>
 
     <h3>Similarity / Clarity (0.00 to 1.00)</h3>
     <p>Determines how strictly the AI mimics the original sample characteristics. A default of <strong>0.75</strong> offers the sweet spot of pristine clarity without introducing unwanted background noise or rasp.</p>
@@ -74,7 +74,7 @@ export const elevenlabs_voice_generator_adobe_premiere_pro: BlogPost = {
     <p>Amplifies the emotional intent of your text. For everyday narration, keep this at <strong>0.00</strong>. When you need intense drama, trailer narration, or bold voice acting, push this between <strong>0.20 and 0.40</strong>.</p>
 
     <h3>Speaker Boost (Toggle)</h3>
-    <p>Enables ElevenLabs' speaker enhancement filter, elevating clarity and making the voice sit prominently in the mix — especially useful when layering narration over background music and sound effects.</p>
+    <p>Enables ElevenLabs' speaker enhancement filter, elevating clarity and making the voice sit prominently in the mix, especially useful when layering narration over background music and sound effects.</p>
 
     <h3>Speed & Pitch Fine-Tuning</h3>
     <p>Adjust speaking tempo (e.g. <code>1.00x</code>) and subtle pitch shifts without degrading audio fidelity.</p>
@@ -90,50 +90,70 @@ export const elevenlabs_voice_generator_adobe_premiere_pro: BlogPost = {
 
     <h2 id="offline-vs-cloud">Local Kokoro vs. ElevenLabs: Choosing the Right Engine</h2>
     <p>Because Vampro gives you both engines in one unified interface, you can pick the best tool for each phase of production:</p>
-    <table style="width: 100%; border-collapse: collapse; margin-top: 1rem; margin-bottom: 1.5rem;">
-      <thead>
-        <tr style="border-bottom: 1px solid rgba(255,255,255,0.15); text-align: left;">
-          <th style="padding: 8px 12px; color: #fff;">Feature</th>
-          <th style="padding: 8px 12px; color: #38bdf8;">Vampro Local (Kokoro-82M)</th>
-          <th style="padding: 8px 12px; color: #00b4d8;">ElevenLabs Cloud API</th>
-        </tr>
-      </thead>
-      <tbody style="color: #cbd5e1; font-size: 0.9rem;">
-        <tr style="border-bottom: 1px solid rgba(255,255,255,0.08);">
-          <td style="padding: 8px 12px; font-weight: 600;">Internet Requirement</td>
-          <td style="padding: 8px 12px;">100% Offline (No connection needed)</td>
-          <td style="padding: 8px 12px;">Active Internet Connection Required</td>
-        </tr>
-        <tr style="border-bottom: 1px solid rgba(255,255,255,0.08);">
-          <td style="padding: 8px 12px; font-weight: 600;">Cost & Quota</td>
-          <td style="padding: 8px 12px;">Completely Free & Unlimited</td>
-          <td style="padding: 8px 12px;">Consumes your ElevenLabs character quota</td>
-        </tr>
-        <tr style="border-bottom: 1px solid rgba(255,255,255,0.08);">
-          <td style="padding: 8px 12px; font-weight: 600;">Voice Cloning</td>
-          <td style="padding: 8px 12px;">Pre-packaged 27 voices</td>
-          <td style="padding: 8px 12px;">Full support for custom cloned voices</td>
-        </tr>
-        <tr style="border-bottom: 1px solid rgba(255,255,255,0.08);">
-          <td style="padding: 8px 12px; font-weight: 600;">Languages</td>
-          <td style="padding: 8px 12px;">English (US & UK)</td>
-          <td style="padding: 8px 12px;">30+ languages (Eleven Multilingual v2)</td>
-        </tr>
-        <tr>
-          <td style="padding: 8px 12px; font-weight: 600;">Best Used For</td>
-          <td style="padding: 8px 12px;">Scratch tracks, fast iterations, travel editing</td>
-          <td style="padding: 8px 12px;">Final master voiceovers, branded client work</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="my-8 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm not-prose">
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-sm border-collapse m-0">
+          <thead class="bg-slate-50 border-b border-slate-200 text-slate-900">
+            <tr>
+              <th class="py-3.5 px-4 font-bold text-slate-900 text-sm">Feature</th>
+              <th class="py-3.5 px-4 font-bold text-sky-800 text-sm">
+                <span class="inline-flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-sky-500"></span>
+                  Vampro Local (Kokoro-82M)
+                </span>
+              </th>
+              <th class="py-3.5 px-4 font-bold text-indigo-800 text-sm">
+                <span class="inline-flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-[#3B3BFF]"></span>
+                  ElevenLabs Cloud API
+                </span>
+              </th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100 text-slate-700">
+            <tr class="hover:bg-slate-50/70 transition-colors">
+              <td class="py-3.5 px-4 font-semibold text-slate-900">Internet Requirement</td>
+              <td class="py-3.5 px-4 text-slate-700">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">100% Offline (No internet needed)</span>
+              </td>
+              <td class="py-3.5 px-4 text-slate-700">Active Internet Connection Required</td>
+            </tr>
+            <tr class="hover:bg-slate-50/70 transition-colors bg-slate-50/40">
+              <td class="py-3.5 px-4 font-semibold text-slate-900">Cost & Quota</td>
+              <td class="py-3.5 px-4 text-slate-700">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">Completely Free & Unlimited</span>
+              </td>
+              <td class="py-3.5 px-4 text-slate-700">Consumes your ElevenLabs character quota</td>
+            </tr>
+            <tr class="hover:bg-slate-50/70 transition-colors">
+              <td class="py-3.5 px-4 font-semibold text-slate-900">Voice Cloning</td>
+              <td class="py-3.5 px-4 text-slate-700">Pre-packaged 27 voices</td>
+              <td class="py-3.5 px-4 text-slate-700">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-800 border border-indigo-200">Full support for custom cloned voices</span>
+              </td>
+            </tr>
+            <tr class="hover:bg-slate-50/70 transition-colors bg-slate-50/40">
+              <td class="py-3.5 px-4 font-semibold text-slate-900">Languages</td>
+              <td class="py-3.5 px-4 text-slate-700">English (US & UK)</td>
+              <td class="py-3.5 px-4 font-medium text-slate-900">30+ languages (Eleven Multilingual v2)</td>
+            </tr>
+            <tr class="hover:bg-slate-50/70 transition-colors">
+              <td class="py-3.5 px-4 font-semibold text-slate-900">Best Used For</td>
+              <td class="py-3.5 px-4 text-slate-600">Scratch tracks, fast iterations, travel editing</td>
+              <td class="py-3.5 px-4 text-slate-600">Final master voiceovers, branded client work</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
 
     <h2 id="best-practices">5 Pro Tips for Editing with ElevenLabs in Premiere Pro</h2>
     <ol>
       <li><strong>Draft with Local, Master with ElevenLabs:</strong> Lay down your sequence pacing using Vampro Local for zero character cost. Once the client or director approves the picture lock, switch to ElevenLabs to generate the polished final takes.</li>
-      <li><strong>Punctuate for Breath & Pacing:</strong> ElevenLabs' neural models interpret commas, em dashes (—), and ellipses (...) as natural human breathing pauses. Use punctuation intentionally to shape pacing.</li>
+      <li><strong>Punctuate for Breath & Pacing:</strong> ElevenLabs' neural models interpret commas, dashes, and ellipses (...) as natural human breathing pauses. Use punctuation intentionally to shape pacing.</li>
       <li><strong>Keep Sentence Lengths Balanced:</strong> Avoid cramming massive paragraphs into a single generation. Generating audio in paragraph-sized chunks makes moving clips around your timeline vastly easier.</li>
       <li><strong>Assign Descriptive Filenames:</strong> Use the <code>Filename</code> field (e.g. <code>Intro_Hook_Take2</code>) so your Project Bin remains meticulously organized.</li>
-      <li><strong>Use 'Modify Selected Clip' for Quick Retakes:</strong> Don't delete audio from your timeline when making revisions. Select the clip, modify the wording in Vampro, and regenerate — Premiere Pro will swap the asset cleanly.</li>
+      <li><strong>Use 'Modify Selected Clip' for Quick Retakes:</strong> Don't delete audio from your timeline when making revisions. Select the clip, modify the wording in Vampro, and regenerate, and Premiere Pro will swap the asset cleanly.</li>
     </ol>
 
     <h2 id="summary">Wrap Up & Getting Started</h2>

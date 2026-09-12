@@ -81,7 +81,7 @@ const DocsVoice = () => {
               </DocSection>
 
               <DocSection id="installation" title="Installation Guide">
-                {[['Step 1 – Install Extension', 'Install plugin from Adobe Marketplace and restart Premiere Pro.'], ['Step 2 – Install Voice Service', 'Install and Run Vampro Voice Service Companion app from the Microsoft Store. It sets up the service, configures auto-startup, installs AI components.'], ['Step 3 – Open Extension', 'Go to Window → UXP Plugins → Vampro Voice Generator Text-to-Speech.']].map(([t, b]) => (
+                {[['Step 1: Install Extension', 'Install plugin from Adobe Marketplace and restart Premiere Pro.'], ['Step 2: Install Voice Service', 'Install and Run Vampro Voice Service Companion app from the Microsoft Store. It sets up the service, configures auto-startup, installs AI components.'], ['Step 3: Open Extension', 'Go to Window → UXP Plugins → Vampro Voice Generator Text-to-Speech.']].map(([t, b]) => (
                   <div key={t} className="mb-8">
                     <DocH3 blue>{t}</DocH3>
                     <p className="text-slate-400 text-sm leading-relaxed mb-4">{b}</p>
@@ -156,15 +156,15 @@ const DocsVoice = () => {
                 </p>
                 <div className="grid sm:grid-cols-2 gap-3 mb-6">
                   <div className="glass-card p-3.5 rounded-xl border-white/5">
-                    <h5 className="font-bold text-white text-xs mb-1">Stability (0.00 – 1.00)</h5>
+                    <h5 className="font-bold text-white text-xs mb-1">Stability (0.00 to 1.00)</h5>
                     <p className="text-slate-400 text-xs leading-relaxed">Determines voice consistency. Lower values yield more expressive, dynamic delivery; higher values ensure steady, uniform pronunciation. Default: 0.50.</p>
                   </div>
                   <div className="glass-card p-3.5 rounded-xl border-white/5">
-                    <h5 className="font-bold text-white text-xs mb-1">Similarity / Clarity (0.00 – 1.00)</h5>
+                    <h5 className="font-bold text-white text-xs mb-1">Similarity / Clarity (0.00 to 1.00)</h5>
                     <p className="text-slate-400 text-xs leading-relaxed">Controls how closely the output adheres to the original voice profile. Enhances clarity while preventing artifacts. Default: 0.75.</p>
                   </div>
                   <div className="glass-card p-3.5 rounded-xl border-white/5">
-                    <h5 className="font-bold text-white text-xs mb-1">Style Exaggeration (0.00 – 1.00)</h5>
+                    <h5 className="font-bold text-white text-xs mb-1">Style Exaggeration (0.00 to 1.00)</h5>
                     <p className="text-slate-400 text-xs leading-relaxed">Amplifies stylistic emotion, dramatic inflection, and theatrical flair. Default: 0.00.</p>
                   </div>
                   <div className="glass-card p-3.5 rounded-xl border-white/5">

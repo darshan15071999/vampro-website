@@ -93,10 +93,10 @@ const Privacy = () => {
                 <p className="text-slate-400 text-sm leading-relaxed mb-5">The app makes limited, clearly defined network requests:</p>
                 <div className="space-y-3">
                   <InfoCard title="1. ElevenLabs API Requests (Optional)">
-                    When you choose to use the ElevenLabs tab, the local companion service contacts <code className="text-cyan-300 text-xs bg-black/40 px-1 py-0.5 rounded">api.elevenlabs.io</code> to load available voices, load models, and generate speech using your API key. If you remain on the Local tab, zero ElevenLabs calls are made.
+                    When you choose to use the ElevenLabs tab, the local companion service contacts <code className="text-indigo-300 text-xs bg-black/40 px-1 py-0.5 rounded">api.elevenlabs.io</code> to load available voices, load models, and generate speech using your API key. If you remain on the Local tab, zero ElevenLabs calls are made.
                   </InfoCard>
                   <InfoCard title="2. Update Checks">
-                    The app periodically contacts <span className="text-indigo-300 font-medium">vampro.in</span> to check whether a newer version or new voice models are available. These requests reveal your IP address, approximate time, and app version — like any web request. No content from your projects is sent.
+                    The app periodically contacts <span className="text-indigo-300 font-medium">vampro.in</span> to check whether a newer version or new voice models are available. These requests reveal your IP address, approximate time, and app version, like any web request. No content from your projects is sent.
                   </InfoCard>
                   <InfoCard title="3. Model Downloads">
                     If you accept (or have auto-update enabled), the service may download new voice models from <span className="text-indigo-300 font-medium">vampro.in</span> and/or <span className="text-indigo-300 font-medium">Hugging Face</span>. Only model files are downloaded; nothing is uploaded.
@@ -133,7 +133,7 @@ const Privacy = () => {
                 <div className="space-y-3">
                   {[
                     ['Clear ElevenLabs Credentials', 'Use the "Clear Key" button in the ElevenLabs tab at any time to immediately purge your API key from local storage.'],
-                    ['Disable Network Access (Force Offline)', 'Set the environment variable VAMPRO_FORCE_OFFLINE=1 — the service then skips all Vampro and Hugging Face update/model-download calls. (Do not use the ElevenLabs tab if you want zero network requests).'],
+                    ['Disable Network Access (Force Offline)', 'Set the environment variable VAMPRO_FORCE_OFFLINE=1: the service then skips all Vampro and Hugging Face update/model-download calls. (Do not use the ElevenLabs tab if you want zero network requests).'],
                     ['Delete Generated Audio', 'Remove files from the generated_audio folder on your device at any time. The app never auto-deletes your files.'],
                     ['Local Diagnostic Logs', 'The service writes logs to its logs folder with automatic rotation and 14-day retention. Logs stay on your device and are never uploaded.'],
                   ].map(([t, b]) => (
@@ -170,7 +170,7 @@ const Privacy = () => {
                 <InfoCard title="What the App Does on Your Machine">
                   <ul className="space-y-1.5">
                     {[
-                      'Runs a local service on 127.0.0.1:8000 — accessible only locally on your machine',
+                      'Runs a local service on 127.0.0.1:8000, accessible only locally on your machine',
                       'Processes Local workflow text into audio locally; your Local text and audio never leave the device',
                       'Sends text and selected voice settings to ElevenLabs only when you use the ElevenLabs workflow',
                       'Stores your ElevenLabs API key strictly in Adobe UXP local storage, purgeable anytime via Clear Key',

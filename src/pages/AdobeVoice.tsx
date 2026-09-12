@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Store, Grid2x2, MonitorPlay, Download, Sparkles, Key, Sliders, Volume2 } from 'lucide-react';
+import { Store, Grid2x2, MonitorPlay, Download, Sparkles, Key, Sliders } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import {
   Wand2, FileText, Shield, ArrowRight,
@@ -88,9 +88,6 @@ const AdobeVoice = () => {
       window.open("https://exchange.adobe.com/apps/cc/d6d01a94/vampro-voice-generator-text-to-speech", "_blank");
     });
   };
-  
-  const [activeElevenView, setActiveElevenView] = useState<'waveform' | 'controls'>('waveform');
-
   const reasonImages = [
     "/reason1.png",
     "/reason2.png",
@@ -213,8 +210,9 @@ const AdobeVoice = () => {
               <ShinyText text="Vampro Voice Generator" speed={3} className="text-white" shineColor="#ffffff" color="#f0f0f0" /><br />
               <ShinyText text="Text-to-Speech" speed={3} delay={0.5} className="gradient-blue-text" shineColor="#ffffff" color="#3B3BFF" />
             </h1>
-            <p className="text-lg text-slate-400 max-w-3xl mx-auto mb-12 leading-relaxed font-light">
-              Generate natural sounding AI voiceovers from text in seconds directly inside Adobe Premiere Pro. Use built-in offline voices or connect your ElevenLabs API key for studio-grade voice models and custom clones. Modify generated audio anytime by simply selecting the clip.
+            <p className="text-base sm:text-lg text-slate-300 font-light max-w-4xl mx-auto mb-10 leading-relaxed">
+              <span className="block">Generate natural AI voiceovers from text in seconds inside Premiere Pro.</span>
+              <span className="block text-slate-400">Use offline models or ElevenLabs voices right at your timeline playhead.</span>
             </p>
           </FadeInSection>
           <FadeInSection delay="200ms" className="flex flex-col sm:flex-row justify-center items-center gap-4">
@@ -242,8 +240,11 @@ const AdobeVoice = () => {
         
         <div className="w-full px-6 md:px-10 lg:px-16 relative z-10">
           <FadeInSection className="text-center mb-0 relative z-20">
-            <h2 className="text-3xl md:text-5xl font-extrabold text-white mb-4 drop-shadow-md"><ShinyText text="How It Works" speed={2.5} shineColor="#ffffff" color="#ffffff" /></h2>
-            <p className="text-lg text-slate-300 font-light drop-shadow-md">A seamless process designed for editors.</p>
+            <h2 className="text-3xl md:text-5xl font-extrabold text-white mb-4 drop-shadow-md tracking-tight"><ShinyText text="How It Works" speed={2.5} shineColor="#ffffff" color="#ffffff" /></h2>
+            <p className="text-base sm:text-lg text-slate-300 font-light max-w-4xl mx-auto drop-shadow-md leading-relaxed">
+              <span className="block">A streamlined text-to-speech workflow designed specifically for editors.</span>
+              <span className="block text-slate-400">Write your narration, choose your voice, and insert directly to timeline.</span>
+            </p>
           </FadeInSection>
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-[1400px] mx-auto mt-8 relative z-10">
@@ -298,7 +299,15 @@ const AdobeVoice = () => {
         
         
         <div className="w-full px-6 md:px-10 lg:px-16 relative z-10">
-          <FadeInSection><h2 className="text-3xl md:text-5xl font-extrabold text-white mb-12 text-center drop-shadow-md"><ShinyText text="Complete Workflow Built Into Your Timeline" speed={3} shineColor="#ffffff" color="#ffffff" /></h2></FadeInSection>
+          <FadeInSection className="text-center mb-12">
+            <h2 className="text-3xl md:text-5xl font-extrabold text-white mb-4 drop-shadow-md tracking-tight">
+              <ShinyText text="Complete Workflow Built Into Your Timeline" speed={3} shineColor="#ffffff" color="#ffffff" />
+            </h2>
+            <p className="text-base sm:text-lg text-slate-300 font-light max-w-4xl mx-auto drop-shadow-md leading-relaxed">
+              <span className="block">Stay inside your creative flow without switching apps or export folders.</span>
+              <span className="block text-slate-400">Create, inspect, and update your audio assets directly in Premiere Pro.</span>
+            </p>
+          </FadeInSection>
           <div ref={reasonRef} className="grid lg:grid-cols-2 gap-12 items-center">
             <FadeInSection className="space-y-3">
               {[
@@ -340,7 +349,7 @@ const AdobeVoice = () => {
                   <h3 className="text-white font-bold text-xl md:text-2xl mb-2">
                     {['Seamless Integration', 'Lightning Fast', 'Content Optimized', 'Unlimited Voice Generation'][activeReason]}
                   </h3>
-                  <p className="text-slate-400 text-sm">
+                  <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
                     {['A unified workspace without leaving your timeline.', 'Voice generated directly in your desired location on the timeline.', 'Instant script updates and voice modifications.', 'Generate and modify voices as many times as you require.'][activeReason]}
                   </p>
                 </div>
@@ -372,9 +381,16 @@ const AdobeVoice = () => {
               color="#557ef7"
             />}
           </div>
-          
           <div className="w-full px-6 md:px-10 lg:px-16 relative z-10">
-            <FadeInSection><h2 className="text-3xl md:text-5xl font-extrabold text-white mb-12 text-center drop-shadow-md"><ShinyText text="Built for Creative Speed" speed={2.5} shineColor="#ffffff" color="#ffffff" /></h2></FadeInSection>
+            <FadeInSection className="text-center mb-12">
+              <h2 className="text-3xl md:text-5xl font-extrabold text-white mb-4 drop-shadow-md tracking-tight">
+                <ShinyText text="Built for Creative Speed" speed={2.5} shineColor="#ffffff" color="#ffffff" />
+              </h2>
+              <p className="text-base sm:text-lg text-slate-300 font-light max-w-4xl mx-auto drop-shadow-md leading-relaxed">
+                <span className="block">Engineered for speed with high-quality local and cloud speech models.</span>
+                <span className="block text-slate-400">Accelerate your turnaround without sacrificing natural vocal inflection.</span>
+              </p>
+            </FadeInSection>
             
             <FadeInSection delay="100ms" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {[
@@ -388,8 +404,8 @@ const AdobeVoice = () => {
                     <div className="w-full h-full rounded-[30px] border border-white/10 bg-white/5 overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.4)] backdrop-blur-[40px] hover:bg-white/10 transition-colors duration-300">
                       <div className="p-8 h-full w-full flex flex-col group cursor-default transition-all duration-300">
                         <div className="w-14 h-14 rounded-2xl text-indigo-400 group-hover:text-white group-hover:bg-[#3B3BFF] flex items-center justify-center mb-6 transition-all duration-300 border border-indigo-500/30 shadow-[0_0_15px_rgba(59,59,255,0.15)]">{f.icon}</div>
-                        <h4 className="font-bold text-white mb-3 text-2xl">{f.title}</h4>
-                        <p className="text-slate-300 text-lg leading-relaxed flex-grow">{f.desc}</p>
+                        <h4 className="font-bold text-white mb-2 text-xl sm:text-2xl">{f.title}</h4>
+                        <p className="text-slate-300 text-sm sm:text-base leading-relaxed flex-grow">{f.desc}</p>
                       </div>
                     </div>
                   </div>
@@ -401,163 +417,111 @@ const AdobeVoice = () => {
         </section>
 
         {/* ELEVENLABS NATIVE INTEGRATION */}
-        <section className="py-16 md:py-24 relative overflow-hidden">
-          <div className="absolute left-0 right-0 z-0 pointer-events-none opacity-25" style={{ top: '-150px', bottom: '-150px', maskImage: 'linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)', WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)' }}>
+        <section className="py-8 md:py-12 relative">
+          <div className="absolute left-0 right-0 z-0 pointer-events-none opacity-25" style={{ top: '-200px', bottom: '-200px', maskImage: 'linear-gradient(to bottom, transparent, black 15%, black 75%, transparent)', WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 15%, black 75%, transparent)' }}>
             {!isMobile && <ColorBends
-              colors={["#00e5ff", "#3b82f6", "#8b5cf6"]}
-              rotation={45}
-              speed={0.15}
-              scale={1.1}
-              frequency={1.2}
+              colors={["#ff5c7a", "#8a5cff", "#00ffd1"]}
+              rotation={90}
+              speed={0.2}
+              scale={1}
+              frequency={1}
               warpStrength={1}
               mouseInfluence={0}
               noise={0.15}
-              parallax={0.4}
+              parallax={0.5}
               iterations={1}
-              intensity={1.4}
+              intensity={1.5}
               bandWidth={6}
               transparent
               autoRotate={0}
-              color="#00b4d8"
+              color="#557ef7"
             />}
           </div>
 
-          <div className="w-full px-6 md:px-10 lg:px-16 relative z-10 max-w-[1440px] mx-auto">
+          <div className="w-full px-6 md:px-10 lg:px-16 relative z-10">
             {/* Header */}
-            <FadeInSection className="text-center mb-14">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-300 text-xs font-semibold uppercase tracking-wider mb-4 shadow-[0_0_20px_rgba(6,182,212,0.2)]">
-                <Sparkles size={14} className="animate-pulse text-cyan-400" />
-                <span>Native ElevenLabs Integration</span>
-              </div>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 tracking-tight leading-tight">
-                <ShinyText text="Your ElevenLabs Voice Library" speed={3} shineColor="#ffffff" color="#ffffff" /><br />
-                <span className="bg-gradient-to-r from-cyan-400 via-sky-300 to-indigo-400 bg-clip-text text-transparent">Directly Inside Premiere Pro</span>
+            <FadeInSection className="text-center mb-8">
+              <h2 className="text-3xl md:text-5xl font-extrabold text-white mb-4 drop-shadow-md tracking-tight">
+                <ShinyText text="Your ElevenLabs Voice Library" speed={3} shineColor="#ffffff" color="#ffffff" /> <span className="text-[#557ef7]">Directly Inside Premiere Pro</span>
               </h2>
-              <p className="text-slate-300 text-base sm:text-lg max-w-3xl mx-auto leading-relaxed font-light">
-                Connect your ElevenLabs API key once to unlock your entire custom voice library, world-class multilingual models, and surgical voice controls — then generate and insert broadcast-quality audio directly into your timeline at the playhead.
+              <p className="text-base sm:text-lg text-slate-300 font-light max-w-4xl mx-auto drop-shadow-md leading-relaxed">
+                <span className="block">Connect your API key to access custom voice clones and multilingual models.</span>
+                <span className="block text-slate-400">Generate broadcast audio and insert clips at your playhead with one click.</span>
               </p>
             </FadeInSection>
 
             {/* Interactive Showcase & Feature Grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-              {/* Left: Interactive Image Showcase (7 cols) */}
-              <FadeInSection delay="100ms" className="lg:col-span-7 flex flex-col items-center">
-                {/* Tab selector for the 2 real screenshots */}
-                <div className="inline-flex p-1.5 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-xl mb-6 shadow-[0_4px_20px_rgba(0,0,0,0.4)]">
-                  <button
-                    type="button"
-                    onClick={() => setActiveElevenView('waveform')}
-                    className={`flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 ${
-                      activeElevenView === 'waveform'
-                        ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-[0_0_20px_rgba(6,182,212,0.4)]'
-                        : 'text-slate-400 hover:text-white'
-                    }`}
-                  >
-                    <Volume2 size={16} />
-                    <span>Waveform & Timeline Ingestion</span>
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setActiveElevenView('controls')}
-                    className={`flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 ${
-                      activeElevenView === 'controls'
-                        ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-[0_0_20px_rgba(6,182,212,0.4)]'
-                        : 'text-slate-400 hover:text-white'
-                    }`}
-                  >
-                    <Sliders size={16} />
-                    <span>API Key & Voice Controls</span>
-                  </button>
-                </div>
-
+            <div className="flex flex-col lg:flex-row items-center justify-center gap-6 lg:gap-10 max-w-6xl mx-auto">
+              {/* Left: Premiere Pro CEP Panel Mockup */}
+              <FadeInSection delay="100ms" className="w-full lg:w-[380px] flex-shrink-0 flex flex-col items-center">
                 {/* Panel Mockup Container */}
-                <div className="relative w-full max-w-[560px] rounded-[28px] p-2 sm:p-3 bg-gradient-to-b from-white/15 via-white/5 to-white/10 border border-cyan-500/30 shadow-[0_12px_60px_rgba(0,180,216,0.2)] backdrop-blur-2xl group">
-                  <div className="relative rounded-[22px] overflow-hidden bg-[#0a0f1d] border border-white/10 aspect-[560/600]">
-                    <img
-                      src="/elevenlabs-panel-waveform.png"
-                      alt="ElevenLabs Voice Generator with Waveform Preview and Add to Timeline in Premiere Pro"
-                      className={`absolute inset-0 w-full h-full object-contain transition-all duration-500 ${
-                        activeElevenView === 'waveform' ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'
-                      }`}
-                    />
+                <div className="relative w-full max-w-[380px] h-[380px] sm:h-[406px] rounded-[24px] p-2 bg-white/5 border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.4)] backdrop-blur-[40px] hover:bg-white/10 hover:border-indigo-500/30 transition-all duration-300 group flex items-center justify-center">
+                  <div className="relative rounded-2xl overflow-hidden bg-[#0a0f1d] border border-white/10 w-full h-full flex items-center justify-center">
                     <img
                       src="/elevenlabs-panel-ready.png"
-                      alt="ElevenLabs API Key and Voice Parameter Controls in Premiere Pro"
-                      className={`absolute inset-0 w-full h-full object-contain transition-all duration-500 ${
-                        activeElevenView === 'controls' ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'
-                      }`}
+                      alt="ElevenLabs Voice Generator Controls and Timeline Integration in Premiere Pro"
+                      className="w-full h-full object-contain"
                     />
-                  </div>
-                  
-                  {/* Micro caption */}
-                  <div className="mt-3 px-3 py-2 flex items-center justify-between text-[11px] text-slate-400">
-                    <span className="flex items-center gap-1.5">
-                      <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-                      {activeElevenView === 'waveform' ? 'Generated clip ready for 1-click timeline placement' : 'Direct API access to custom voices, models & sliders'}
-                    </span>
-                    <span className="text-cyan-300 font-mono">ElevenLabs v2 API</span>
                   </div>
                 </div>
               </FadeInSection>
 
-              {/* Right: Key Value Points (5 cols) */}
-              <FadeInSection delay="200ms" className="lg:col-span-5 space-y-4">
-                {[
-                  {
-                    icon: <Key size={20} className="text-cyan-400" />,
-                    title: 'Bring Your Own API Key (Zero Markups)',
-                    desc: 'Input your ElevenLabs key directly into the panel. It stays saved securely on your local device and connects straight to official ElevenLabs endpoints. Clear it anytime with one click.'
-                  },
-                  {
-                    icon: <Sparkles size={20} className="text-sky-400" />,
-                    title: 'Instant Voice Library & Clones',
-                    desc: 'Hit "Load Voices & Models" to load all your personal voice clones, community voices, and official models including Eleven Multilingual v2, Turbo, and Flash.'
-                  },
-                  {
-                    icon: <Sliders size={20} className="text-indigo-400" />,
-                    title: 'Granular Voice Shaping Sliders',
-                    desc: 'Adjust Stability, Similarity, Style Exaggeration, Speaker Boost, Speed, and Pitch without ever switching back and forth to an external browser tab.'
-                  },
-                  {
-                    icon: <Layers size={20} className="text-cyan-400" />,
-                    title: 'Direct Timeline Ingestion & Modification',
-                    desc: 'Click "Add to timeline" or "Import to Bin" to place your clip right at the playhead. Need to rewrite a line? Simply select the timeline clip and click "Modify Selected Clip".'
-                  }
-                ].map((item, idx) => (
-                  <div
-                    key={idx}
-                    className="p-5 rounded-2xl bg-white/[0.04] border border-white/10 hover:border-cyan-500/40 hover:bg-white/[0.07] backdrop-blur-xl transition-all duration-300 group shadow-[0_4px_24px_rgba(0,0,0,0.2)]"
-                  >
-                    <div className="flex items-start gap-4">
-                      <div className="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+              {/* Right: 4 Square Type Boxes in 2x2 Grid fitting the left image height */}
+              <FadeInSection delay="200ms" className="w-full max-w-[540px] sm:max-w-[560px] flex flex-col justify-between">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full h-auto sm:h-[350px]">
+                  {[
+                    {
+                      icon: <Key size={20} />,
+                      title: 'Bring Your Own Key',
+                      desc: 'Zero markups. Saved locally on your PC, purgeable anytime.'
+                    },
+                    {
+                      icon: <Sparkles size={20} />,
+                      title: 'Voice Library & Clones',
+                      desc: 'Instant access to personal voice clones and curated voices.'
+                    },
+                    {
+                      icon: <Sliders size={20} />,
+                      title: 'Surgical Voice Sliders',
+                      desc: 'Fine-tune Stability, Similarity, Style, Speed, and Pitch directly.'
+                    },
+                    {
+                      icon: <Layers size={20} />,
+                      title: 'Timeline Insertion',
+                      desc: 'Insert audio at playhead or update existing clips in place.'
+                    }
+                  ].map((item, idx) => (
+                    <div
+                      key={idx}
+                      className="p-5 sm:p-6 rounded-2xl border border-white/10 bg-white/5 overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.4)] backdrop-blur-[40px] hover:bg-white/10 hover:border-indigo-500/30 transition-all duration-300 group cursor-default flex flex-col justify-center h-full"
+                    >
+                      <div className="w-10 h-10 rounded-xl text-indigo-400 group-hover:text-white group-hover:bg-[#3B3BFF] flex items-center justify-center transition-all duration-300 border border-indigo-500/30 shadow-[0_0_15px_rgba(59,59,255,0.15)] mb-3">
                         {item.icon}
                       </div>
-                      <div>
-                        <h4 className="text-base font-bold text-white mb-1 group-hover:text-cyan-200 transition-colors">
-                          {item.title}
-                        </h4>
-                        <p className="text-slate-400 text-sm leading-relaxed">
-                          {item.desc}
-                        </p>
-                      </div>
+                      <h4 className="text-sm sm:text-base font-bold text-white mb-1.5 group-hover:text-white transition-colors whitespace-nowrap">
+                        {item.title}
+                      </h4>
+                      <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
+                        {item.desc}
+                      </p>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
 
                 {/* Action Callout */}
-                <div className="pt-2 flex flex-col sm:flex-row gap-4">
+                <div className="mt-3.5 flex flex-row gap-3 w-full">
                   <button
                     type="button"
                     onClick={() => navigate('/docs/plugins/voice-generator')}
-                    className="flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold text-sm shadow-[0_0_25px_rgba(6,182,212,0.3)] hover:shadow-[0_0_35px_rgba(6,182,212,0.5)] transition-all cursor-pointer"
+                    className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#3B3BFF] hover:bg-[#2f2fdb] text-white font-bold text-sm shadow-[0_0_20px_rgba(59,59,255,0.35)] transition-all cursor-pointer whitespace-nowrap"
                   >
-                    <span>Read ElevenLabs Setup Docs</span>
-                    <ArrowRight size={16} />
+                    <span>Read Setup Docs</span>
+                    <ArrowRight size={14} />
                   </button>
                   <button
                     type="button"
                     onClick={() => navigate('/blog/elevenlabs-voice-generator-adobe-premiere-pro')}
-                    className="flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl border border-white/15 bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white font-medium text-sm backdrop-blur-lg transition-all cursor-pointer"
+                    className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-white/15 bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white font-medium text-sm backdrop-blur-lg transition-all cursor-pointer whitespace-nowrap"
                   >
                     <span>Explore Workflow Guide</span>
                   </button>
@@ -589,9 +553,16 @@ const AdobeVoice = () => {
             />}
         </div>
         
-        
         <div ref={whoRef} className="w-full relative z-10 pointer-events-none">
-          <FadeInSection className="text-center mb-8 px-6 md:px-10"><h2 className="text-3xl md:text-5xl font-extrabold text-white"><ShinyText text="Who Is It For?" speed={2.5} shineColor="#ffffff" color="#ffffff" /></h2></FadeInSection>
+          <FadeInSection className="text-center mb-8 px-6 md:px-10">
+            <h2 className="text-3xl md:text-5xl font-extrabold text-white mb-4 drop-shadow-md tracking-tight">
+              <ShinyText text="Who Is It For?" speed={2.5} shineColor="#ffffff" color="#ffffff" />
+            </h2>
+            <p className="text-base sm:text-lg text-slate-300 font-light max-w-4xl mx-auto drop-shadow-md leading-relaxed">
+              <span className="block">Tailored for creators, editors, and teams seeking faster turnaround.</span>
+              <span className="block text-slate-400">From solo YouTube channels to commercial agencies, elevate your narration.</span>
+            </p>
+          </FadeInSection>
           <div className="w-full relative pointer-events-auto">
             <DOMCircularGallery bend={2.5}>
               {[
@@ -608,7 +579,7 @@ const AdobeVoice = () => {
                       <div className={`absolute inset-0 bg-gradient-to-t ${item.bgGlow} to-transparent opacity-0 transition-opacity duration-500 pointer-events-none group-hover:opacity-100`} />
                       <div className="relative z-10 transition-transform duration-500 -translate-y-[120px] group-hover:translate-y-0">
                         <h3 className="font-bold text-lg text-white mb-1">{item.title}</h3>
-                        <p className="text-slate-400 text-xs">{item.desc}</p>
+                        <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">{item.desc}</p>
                         <div className={`mt-2 h-1 ${item.bar} transition-all duration-500 rounded-full w-0 group-hover:w-4`} />
                       </div>
                     </div>
@@ -644,8 +615,11 @@ const AdobeVoice = () => {
         </div>
         <div className="w-full px-6 md:px-10 lg:px-16 relative z-10 mb-8">
             <FadeInSection className="text-center">
-              <h2 className="text-3xl md:text-5xl font-extrabold text-white mb-4"><ShinyText text="Getting Started" speed={2.5} shineColor="#ffffff" color="#ffffff" /></h2>
-              <p className="text-lg text-slate-400 font-light max-w-2xl mx-auto">Three quick steps to set everything up and start generating voiceovers.</p>
+              <h2 className="text-3xl md:text-5xl font-extrabold text-white mb-4 drop-shadow-md tracking-tight"><ShinyText text="Getting Started" speed={2.5} shineColor="#ffffff" color="#ffffff" /></h2>
+              <p className="text-base sm:text-lg text-slate-300 font-light max-w-4xl mx-auto drop-shadow-md leading-relaxed">
+                <span className="block">Three quick steps to set up your companion app and activate your extension.</span>
+                <span className="block text-slate-400">Start creating and inserting professional narration in less than two minutes.</span>
+              </p>
             </FadeInSection>
           </div>
           {/* Mobile: simple stacked steps — CardSwap's fixed 450px cards don't fit phones */}
@@ -658,7 +632,7 @@ const AdobeVoice = () => {
               <div key={step.title} className="rounded-2xl border border-white/10 bg-white/5 p-6 flex flex-col items-center text-center shadow-[0_0_20px_rgba(59,59,255,0.15)]">
                 <div className="mb-4 text-white p-3.5 bg-white/10 rounded-xl">{step.icon}</div>
                 <h3 className="text-xl font-bold text-white mb-2">{step.title}</h3>
-                <p className="text-slate-300 text-sm leading-relaxed">{step.desc}</p>
+                <p className="text-slate-300 text-sm sm:text-base leading-relaxed">{step.desc}</p>
               </div>
             ))}
           </div>
@@ -674,18 +648,18 @@ const AdobeVoice = () => {
             >
               <Card customClass="cursor-pointer hover:bg-white/10 transition-colors p-10 flex flex-col justify-center items-center text-center shadow-[0_0_30px_rgba(59,59,255,0.3)]">
                 <div className="mb-8 text-white p-5 bg-white/10 rounded-2xl"><Store size={56} /></div>
-                <h3 className="text-3xl font-bold text-white mb-4">1. Install Extension</h3>
-                <p className="text-slate-300 text-lg leading-relaxed">Get the Vampro Voice Generator Text-to-Speech extension from the Adobe Marketplace and install it.</p>
+                <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4">1. Install Extension</h3>
+                <p className="text-slate-300 text-base sm:text-lg leading-relaxed">Get the Vampro Voice Generator Text-to-Speech extension from the Adobe Marketplace and install it.</p>
               </Card>
               <Card customClass="cursor-pointer hover:bg-white/10 transition-colors p-10 flex flex-col justify-center items-center text-center shadow-[0_0_30px_rgba(59,59,255,0.3)]">
                 <div className="mb-8 text-white p-5 bg-white/10 rounded-2xl"><Download size={56} /></div>
-                <h3 className="text-3xl font-bold text-white mb-4">2. Run Companion App</h3>
-                <p className="text-slate-300 text-lg leading-relaxed">Download and install the Vampro Voice Service companion app from the Microsoft Store, then launch it.</p>
+                <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4">2. Run Companion App</h3>
+                <p className="text-slate-300 text-base sm:text-lg leading-relaxed">Download and install the Vampro Voice Service companion app from the Microsoft Store, then launch it.</p>
               </Card>
               <Card customClass="cursor-pointer hover:bg-white/10 transition-colors p-10 flex flex-col justify-center items-center text-center shadow-[0_0_30px_rgba(59,59,255,0.3)]">
                 <div className="mb-8 text-white p-5 bg-white/10 rounded-2xl"><MonitorPlay size={56} /></div>
-                <h3 className="text-3xl font-bold text-white mb-4">3. Open Premiere Pro</h3>
-                <p className="text-slate-300 text-lg leading-relaxed">Inside Premiere Pro, go to Window → UXP Plugins and select Vampro Voice Generator to start using the plugin.</p>
+                <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4">3. Open Premiere Pro</h3>
+                <p className="text-slate-300 text-base sm:text-lg leading-relaxed">Inside Premiere Pro, go to Window → UXP Plugins and select Vampro Voice Generator to start using the plugin.</p>
               </Card>
             </CardSwap>
           </div>
@@ -713,7 +687,11 @@ const AdobeVoice = () => {
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[500px] h-[250px] pointer-events-none z-0" style={{ background: 'radial-gradient(ellipse, rgba(59,59,255,0.15) 0%, transparent 70%)' }} />
           <div className="w-full px-6 md:px-10 lg:px-16 max-w-3xl mx-auto relative z-10 pointer-events-none">
             <FadeInSection>
-              <h2 className="text-3xl md:text-5xl font-extrabold text-white mb-12"><ShinyText text="Before You Download" speed={3} shineColor="#ffffff" color="#ffffff" /></h2>
+              <h2 className="text-3xl md:text-5xl font-extrabold text-white mb-4 drop-shadow-md tracking-tight"><ShinyText text="Before You Download" speed={3} shineColor="#ffffff" color="#ffffff" /></h2>
+              <p className="text-base sm:text-lg text-slate-300 font-light max-w-4xl mx-auto drop-shadow-md mb-10 leading-relaxed">
+                <span className="block">Check system requirements and compatibility before getting started.</span>
+                <span className="block text-slate-400">Both the companion service and Premiere Pro extension are free to use.</span>
+              </p>
               <TiltCard>
                 <div className="w-full h-full">
                   <div className="w-full h-full rounded-[30px] border border-white/10 bg-white/5 overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.4)] backdrop-blur-[40px] hover:bg-white/10 transition-colors duration-300 pointer-events-auto relative z-20 mb-12">
@@ -722,7 +700,7 @@ const AdobeVoice = () => {
                         <h4 className="font-bold text-slate-400 mb-6 uppercase tracking-widest text-xs flex items-center gap-2"><CheckCircle size={14} className="text-green-400" /> Requirements</h4>
                         <ul className="space-y-4">
                           {REQUIREMENTS.map(r => (
-                            <li key={r} className="flex items-center gap-3 text-white"><span className="text-green-400 font-bold">✔</span>{r}</li>
+                            <li key={r} className="flex items-center gap-3 text-white text-sm sm:text-base"><span className="text-green-400 font-bold">✔</span>{r}</li>
                           ))}
                         </ul>
                       </div>
@@ -730,7 +708,7 @@ const AdobeVoice = () => {
                         <div className="w-full max-w-[520px] aspect-[4/3] rounded-xl overflow-hidden border border-slate-700/50 shadow-[0_4px_20px_rgba(0,0,0,0.5)] relative">
                           <img src="/header.png" alt="Version preview" className="absolute inset-0 w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity" />
                         </div>
-                        <p className="mt-4 text-slate-500 text-sm font-medium tracking-wide">Version 1.1.0</p>
+                        <p className="mt-4 text-slate-400 text-sm font-medium tracking-wide">Version 1.1.0</p>
                       </div>
                     </div>
                   </div>
@@ -770,9 +748,9 @@ const AdobeVoice = () => {
                 <TiltCard key={i}>
                   <div className="bg-white/5 backdrop-blur-[40px] border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.4)] p-8 rounded-[2rem] text-center flex flex-col items-center cursor-pointer h-full hover:bg-white/10 hover:border-white/20 transition-all duration-300" onClick={item.action}>
                     <div className="w-12 h-12 bg-white/10 text-white rounded-xl flex items-center justify-center mb-4 border border-white/10">{item.icon}</div>
-                    <h3 className="text-lg font-bold text-white mb-2">{item.title}</h3>
-                    <p className="text-slate-400 mb-6 flex-grow text-sm">{item.desc}</p>
-                    <span className="text-white font-bold flex items-center gap-1.5 text-sm group-hover:text-slate-300 transition-colors">{item.cta} <ArrowRight size={14} /></span>
+                    <h3 className="text-xl font-bold text-white mb-2">{item.title}</h3>
+                    <p className="text-slate-300 mb-6 flex-grow text-sm sm:text-base leading-relaxed">{item.desc}</p>
+                    <span className="text-white font-bold flex items-center gap-1.5 text-sm sm:text-base group-hover:text-slate-300 transition-colors">{item.cta} <ArrowRight size={14} /></span>
                   </div>
                 </TiltCard>
               ))}
