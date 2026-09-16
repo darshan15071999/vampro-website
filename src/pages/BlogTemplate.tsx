@@ -468,16 +468,18 @@ const BlogTemplate = () => {
                       onClick={() => openSignup({
                         product: 'Universal Paste',
                         source: 'Blog Left Sidebar',
-                        title: 'Join Universal Paste Waitlist',
-                        subtitle: 'Get early access to native clipboard pasting in Premiere Pro.',
-                        buttonText: 'Join Waitlist',
-                        successTitle: "You're on the early access list!",
-                        successMessage: "We'll notify you as soon as early access builds are ready.",
-                        alwaysShow: true
+                        title: 'Get Universal Paste',
+                        subtitle: 'Get native clipboard pasting in Premiere Pro.',
+                        buttonText: 'Sign Up',
+                        successTitle: "Redirecting...",
+                        successMessage: "Thank you for signing up!",
+                        onSuccess: () => {
+                          window.location.href = '/plugins/universal-paste';
+                        }
                       })}
                       className="w-full py-2 bg-[#ffd437] hover:bg-[#ffdf6b] text-[#07080b] text-center text-xs font-black rounded-xl transition-all border-2 border-[#07080b] shadow-[2px_2px_0_#07080b]"
                     >
-                      ★ JOIN WAITLIST
+                      GET UNIVERSAL PASTE
                     </button>
                     <Link
                       to="/plugins/universal-paste"
@@ -563,29 +565,31 @@ const BlogTemplate = () => {
                 {/* Right Ad 2: Universal Paste Waitlist Card */}
                 <div className="rounded-2xl bg-gradient-to-br from-amber-50 to-yellow-50 border-2 border-[#ffd437] overflow-hidden shadow-sm relative group block hover:shadow-md transition-shadow">
                   <div className="absolute top-2 right-2 bg-slate-900 text-[#ffd437] text-[10px] uppercase font-black px-2 py-0.5 rounded z-10">
-                    Early Access
+                    Plugin
                   </div>
                   <div className="h-36 overflow-hidden relative">
-                    <img src="/banner-downloading-images-premiere.jpg" alt="Universal Paste Waitlist" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <img src="/banner-downloading-images-premiere.jpg" alt="Universal Paste Plugin" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                   </div>
                   <div className="p-4">
-                    <h5 className="font-extrabold text-slate-900 mb-1 text-sm leading-tight">Be First in Line</h5>
-                    <p className="text-xs text-slate-600 leading-relaxed mb-3">Join the private beta. Get early access builds, release updates, and creator perks.</p>
+                    <h5 className="font-extrabold text-slate-900 mb-1 text-sm leading-tight">Universal Paste</h5>
+                    <p className="text-xs text-slate-600 leading-relaxed mb-3">Copy images, GIFs, videos, and URLs and paste directly onto your timeline.</p>
                     <button
                       type="button"
                       onClick={() => openSignup({
                         product: 'Universal Paste',
                         source: 'Blog Right Sidebar',
-                        title: 'Join Universal Paste Waitlist',
-                        subtitle: 'Get early access to native clipboard pasting in Premiere Pro.',
-                        buttonText: 'Join Waitlist',
-                        successTitle: "You're on the early access list!",
-                        successMessage: "We'll notify you as soon as early access builds are ready.",
-                        alwaysShow: true
+                        title: 'Get Universal Paste',
+                        subtitle: 'Get native clipboard pasting in Premiere Pro.',
+                        buttonText: 'Sign Up',
+                        successTitle: "Redirecting...",
+                        successMessage: "Thank you for signing up!",
+                        onSuccess: () => {
+                          window.location.href = '/plugins/universal-paste';
+                        }
                       })}
                       className="w-full py-2.5 bg-[#07080b] hover:bg-slate-800 text-[#ffd437] text-center text-xs font-black rounded-xl transition-all border border-[#07080b] shadow-sm"
                     >
-                      ★ JOIN WAITLIST NOW
+                      GET UNIVERSAL PASTE ➔
                     </button>
                   </div>
                 </div>

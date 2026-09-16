@@ -37,6 +37,39 @@ const INTRO_VIDEO_SRC = '/assets/universal-paste/intro-animation.mp4';
 const SECTION_SPIDERWEB_IN_SRC = '/assets/universal-paste/spiderweb-in-v2.mp4';
 const HERO_SLIDE_DURATION_MS = 460;
 const SCROLL_GLITCH_DURATION_MS = 800;
+const WINDOWS_STORE_URL = 'https://apps.microsoft.com/detail/9NTSJD556CTB?hl=en-us&gl=IN&ocid=pdpshare';
+const ADOBE_EXCHANGE_URL = 'https://exchange.adobe.com/apps/cc/8d5c8b43/vampro-universal-paste';
+
+const WindowsStoreIcon = ({ size = 20, className = 'sv-store-icon' }: { size?: number; className?: string }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    className={className}
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden="true"
+  >
+    <rect x="2" y="2" width="9" height="9" fill="#f25022" />
+    <rect x="13" y="2" width="9" height="9" fill="#7fba00" />
+    <rect x="2" y="13" width="9" height="9" fill="#00a4ef" />
+    <rect x="13" y="13" width="9" height="9" fill="#ffb900" />
+  </svg>
+);
+
+const AdobeExchangeIcon = ({ size = 20, className = 'sv-store-icon', color = '#ffffff' }: { size?: number; className?: string; color?: string }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    className={className}
+    fill={color}
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden="true"
+  >
+    <path d="M13.966 22h-3.66l2.008-4.906h3.452L13.966 22zM24 2h-7.618L24 22V2zM0 2v20l7.618-20H0z" />
+  </svg>
+);
 
 /* ════════════════════════════════════════
    1. CONTINUOUSLY SCROLLING 2D CHECKERBOARD AMBIENT GRID
@@ -943,16 +976,33 @@ const SIMULATOR_AUTOPILOT_STEPS: Array<{
 const UniversalPaste = () => {
   const { openSignup } = useSignup();
 
-  const handleOpenWaitlist = (source: string) => {
+  const handleDownloadWindows = (source = 'Windows App') => {
     openSignup({
       product: 'Universal Paste',
       source,
-      title: 'Join Universal Paste Waitlist',
-      subtitle: 'Be the first to paste images, GIFs, videos, and URLs directly into Adobe Premiere Pro.',
-      buttonText: 'Join Waitlist',
-      successTitle: "You're on the list!",
-      successMessage: 'Thank you for joining the Universal Paste early access waitlist. We will notify you when early access opens.',
-      alwaysShow: true,
+      title: 'Sign up to download',
+      subtitle: 'Enter your details to get Universal Paste on Microsoft Windows Store.',
+      buttonText: 'Sign Up',
+      successTitle: 'Redirecting...',
+      successMessage: 'Thank you for signing up!',
+      onSuccess: () => {
+        window.open(WINDOWS_STORE_URL, '_blank');
+      },
+    });
+  };
+
+  const handleDownloadAdobe = (source = 'Adobe Extension') => {
+    openSignup({
+      product: 'Universal Paste',
+      source,
+      title: 'Sign up to download',
+      subtitle: 'Enter your details to get Universal Paste on Adobe Exchange.',
+      buttonText: 'Sign Up',
+      successTitle: 'Redirecting...',
+      successMessage: 'Thank you for signing up!',
+      onSuccess: () => {
+        window.open(ADOBE_EXCHANGE_URL, '_blank');
+      },
     });
   };
 
@@ -1763,26 +1813,7 @@ const UniversalPaste = () => {
         </div>
       </header>
 
-      {/* ── YELLOW COMING SOON BANNER JUST BELOW HEADER ── */}
-      <div
-        className="sv-coming-soon-banner"
-        onClick={() => handleOpenWaitlist('Top Yellow Bar')}
-        style={{ cursor: 'pointer' }}
-      >
-        <div className="sv-coming-soon-track">
-          <span>⚡ PLUGIN IN PROGRESS • COMING SOON TO ADOBE PREMIERE PRO • EARLY ACCESS WAITLIST OPEN ⚡</span>
-        </div>
-        <button
-          type="button"
-          className="sv-top-banner-waitlist-btn"
-          onClick={(e) => {
-            e.stopPropagation();
-            handleOpenWaitlist('Top Yellow Bar');
-          }}
-        >
-          ★ JOIN WAITLIST
-        </button>
-      </div>
+
 
       {/* ════════════════════════════════════════
           3. VERTICAL COMIC STRIP SPREADS (ALTERNATING RED / BLACK WITH OPPOSITE BOX COLORS)
@@ -1815,16 +1846,6 @@ const UniversalPaste = () => {
 
             <div className="sv-panel-header-tab">
               <span>HERO</span>
-              <button
-                type="button"
-                className="sv-header-tab-waitlist-btn"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleOpenWaitlist('Hero Callout');
-                }}
-              >
-                ★ JOIN WAITLIST
-              </button>
             </div>
 
             <div className="sv-wrap">
@@ -1840,12 +1861,45 @@ const UniversalPaste = () => {
                     Copy an image, grab a GIF, paste a video URL, capture a screen, or record a window, and send it straight into your Premiere Pro timeline.
                   </p>
 
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '14px', marginTop: '24px' }}>
+                  <div className="sv-hero-cta-group">
+                    <Button
+                      type="button"
+                      variant="primary"
+                      size="lg"
+                      className="sv-interactive-glitch-elem sv-store-btn sv-store-btn--windows"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleDownloadWindows('Windows App');
+                      }}
+                      title="Get Vampro Universal Paste on Microsoft Windows Store"
+                    >
+                      <WindowsStoreIcon size={20} />
+                      <span>WINDOWS STORE</span>
+                      <span className="sv-store-btn-arrow">↗</span>
+                    </Button>
+
+                    <Button
+                      type="button"
+                      variant="red"
+                      size="lg"
+                      className="sv-interactive-glitch-elem sv-store-btn sv-store-btn--adobe"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleDownloadAdobe('Adobe Extension');
+                      }}
+                      title="Get Vampro Universal Paste on Adobe Exchange"
+                    >
+                      <AdobeExchangeIcon size={20} color="#ffffff" />
+                      <span>ADOBE EXCHANGE</span>
+                      <span className="sv-store-btn-arrow">↗</span>
+                    </Button>
+
                     <a href="#sv-why" onClick={(e) => e.stopPropagation()}>
-                      <Button variant="primary" size="lg" className="sv-interactive-glitch-elem">
+                      <Button variant="outline" size="lg" className="sv-interactive-glitch-elem">
                         WHY THIS PLUGIN ➔
                       </Button>
                     </a>
+
                     <Link to="/docs/plugins/universal-paste" onClick={(e) => e.stopPropagation()}>
                       <Button variant="outline" size="lg" className="sv-interactive-glitch-elem">
                         READ DOCS
@@ -2582,11 +2636,44 @@ const UniversalPaste = () => {
                 </p>
 
                 <div className="sv-cta-btn-group" style={{ display: 'flex', justifyContent: 'center', gap: '16px', flexWrap: 'wrap' }}>
+                  <Button
+                    type="button"
+                    variant="primary"
+                    size="lg"
+                    className="sv-interactive-glitch-elem sv-store-btn sv-store-btn--windows"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleDownloadWindows('Windows App');
+                    }}
+                    title="Get Vampro Universal Paste on Microsoft Windows Store"
+                  >
+                    <WindowsStoreIcon size={20} />
+                    <span>WINDOWS STORE</span>
+                    <span className="sv-store-btn-arrow">↗</span>
+                  </Button>
+
+                  <Button
+                    type="button"
+                    variant="red"
+                    size="lg"
+                    className="sv-interactive-glitch-elem sv-store-btn sv-store-btn--adobe"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleDownloadAdobe('Adobe Extension');
+                    }}
+                    title="Get Vampro Universal Paste on Adobe Exchange"
+                  >
+                    <AdobeExchangeIcon size={20} color="#ffffff" />
+                    <span>ADOBE EXCHANGE</span>
+                    <span className="sv-store-btn-arrow">↗</span>
+                  </Button>
+
                   <Link to="/docs/plugins/universal-paste" onClick={(e) => e.stopPropagation()}>
                     <Button variant="outline" size="lg" className="sv-interactive-glitch-elem">
                       EXPLORE SETUP & WORKFLOWS ➔
                     </Button>
                   </Link>
+
                   <Link to="/blog" onClick={(e) => e.stopPropagation()}>
                     <Button
                       variant="outline"
@@ -2604,17 +2691,6 @@ const UniversalPaste = () => {
                       READ BLOGS ➔
                     </Button>
                   </Link>
-                  <Button
-                    variant="primary"
-                    size="lg"
-                    className="sv-interactive-glitch-elem sv-cta-waitlist-btn"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleOpenWaitlist('Bottom CTA');
-                    }}
-                  >
-                    ★ JOIN THE WAITLIST ➔
-                  </Button>
                 </div>
               </div>
 

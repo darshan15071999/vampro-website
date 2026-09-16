@@ -100,11 +100,11 @@ export const SignupProvider = ({ children }: { children: ReactNode }) => {
       setModalConfig({
         product,
         source: sourceOrConfig.source || 'General',
-        title: sourceOrConfig.title || (product === 'Universal Paste' ? 'Join Universal Paste Waitlist' : 'Sign up to download'),
-        subtitle: sourceOrConfig.subtitle || (product === 'Universal Paste' ? 'Be the first to paste web media directly into Adobe Premiere Pro.' : 'Join the ecosystem of professional creators.'),
-        buttonText: sourceOrConfig.buttonText || (product === 'Universal Paste' ? 'Join Waitlist' : 'Sign Up'),
-        successTitle: sourceOrConfig.successTitle || (product === 'Universal Paste' ? "You're on the list!" : 'Redirecting...'),
-        successMessage: sourceOrConfig.successMessage || (product === 'Universal Paste' ? 'Thank you for joining the Universal Paste waitlist. We will notify you when early access opens.' : 'Thank you for signing up!'),
+        title: sourceOrConfig.title || 'Sign up to download',
+        subtitle: sourceOrConfig.subtitle || 'Join the ecosystem of professional creators.',
+        buttonText: sourceOrConfig.buttonText || 'Sign Up',
+        successTitle: sourceOrConfig.successTitle || 'Redirecting...',
+        successMessage: sourceOrConfig.successMessage || 'Thank you for signing up!',
         onSuccess: sourceOrConfig.onSuccess || onSuccess,
         alwaysShow: sourceOrConfig.alwaysShow,
       });

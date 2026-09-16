@@ -69,11 +69,11 @@ const SignupModal = () => {
 
     const isUniversalPaste = modalConfig.product === 'Universal Paste';
     const distinctSource = isUniversalPaste
-      ? `Universal Paste - ${modalConfig.source}`
+      ? `Plugin: Universal Paste - ${modalConfig.source}`
       : `Plugin: Voice Generator - ${modalConfig.source}`;
-    const distinctTitle = isUniversalPaste
-      ? 'Universal Paste Waitlist'
-      : 'Voice Generator';
+    const distinctTitle = modalConfig.title || (isUniversalPaste
+      ? 'Universal Paste'
+      : 'Voice Generator');
 
     try {
       // 1. Submit lead to Brevo CRM via /api/lead
@@ -127,15 +127,13 @@ const SignupModal = () => {
           setEmail('');
           setCreatorType('Solo Creator');
         }, 500);
-      }, isUniversalPaste ? 2200 : 1500);
+      }, 1500);
 
     } catch (err: any) {
       setError(err.message || 'Failed to complete signup. Please try again.');
       setIsSubmitting(false);
     }
   };
-
-  const isUniversalPaste = modalConfig.product === 'Universal Paste';
 
   return (
     <div className="fixed inset-0 z-[999999] flex items-center justify-center p-4">
@@ -162,14 +160,14 @@ const SignupModal = () => {
             </div>
             <h3 className="text-2xl font-bold text-white mb-3">
               <ShinyText
-                text={modalConfig.successTitle || (isUniversalPaste ? "You're on the list!" : "Redirecting...")}
+                text={modalConfig.successTitle || "Redirecting..."}
                 speed={2}
                 shineColor="#ffffff"
                 color="#ffffff"
               />
             </h3>
             <p className="text-slate-400 font-light leading-relaxed">
-              {modalConfig.successMessage || (isUniversalPaste ? "Thank you for joining the Universal Paste waitlist." : "Thank you for signing up!")}
+              {modalConfig.successMessage || "Thank you for signing up!"}
             </p>
           </div>
         ) : (
@@ -177,14 +175,14 @@ const SignupModal = () => {
             <div className="mb-8 text-center">
               <h2 className="text-3xl font-extrabold text-white mb-3">
                 <ShinyText
-                  text={modalConfig.title || (isUniversalPaste ? "Join Early Access Waitlist" : "Sign up to download")}
+                  text={modalConfig.title || "Sign up to download"}
                   speed={3}
                   shineColor="#ffffff"
                   color="#ffffff"
                 />
               </h2>
               <p className="text-slate-400 font-light text-sm tracking-wide">
-                {modalConfig.subtitle || (isUniversalPaste ? "Be the first to paste web media directly into Adobe Premiere Pro." : "Join the ecosystem of professional creators.")}
+                {modalConfig.subtitle || "Join the ecosystem of professional creators."}
               </p>
             </div>
 
@@ -254,10 +252,10 @@ const SignupModal = () => {
                   <div className="flex items-center justify-center gap-2 font-bold text-lg text-white">
                     {isSubmitting ? (
                       <>
-                        <Loader2 size={20} className="animate-spin" /> {isUniversalPaste ? 'Joining Waitlist...' : 'Signing up...'}
+                        <Loader2 size={20} className="animate-spin" /> Signing up...
                       </>
                     ) : (
-                      modalConfig.buttonText || (isUniversalPaste ? 'Join Waitlist' : 'Sign Up')
+                      modalConfig.buttonText || 'Sign Up'
                     )}
                   </div>
                 </SpecularButton>

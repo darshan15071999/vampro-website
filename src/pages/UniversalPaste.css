@@ -820,8 +820,8 @@
 .sv-vpage-container {
   position: relative;
   width: 100%;
-  padding-top: 106px;
-  /* 72px header + 34px banner */
+  padding-top: 72px;
+  /* 72px header */
   background: #08090d;
   overflow-x: hidden;
 }
@@ -829,7 +829,7 @@
 .sv-vpage {
   position: relative;
   width: 100%;
-  min-height: calc(100dvh - 106px);
+  min-height: calc(100dvh - 72px);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -837,7 +837,7 @@
   padding: clamp(20px, 2.8vh, 48px) 0;
   overflow: visible;
   box-sizing: border-box;
-  scroll-margin-top: 106px;
+  scroll-margin-top: 72px;
 }
 
 .sv-vpage:not(#sv-hero) {
@@ -860,7 +860,7 @@
 #sv-workflow.sv-vpage,
 .sv-vpage--workflow {
   justify-content: center;
-  scroll-margin-top: 106px;
+  scroll-margin-top: 72px;
 }
 
 #sv-how .sv-comic-panel-frame,
@@ -2763,7 +2763,7 @@
    10. SECTION 5: WHY VAMPRO (2x2 GRID & AUTHENTIC SPEECH BUBBLE CALLOUT)
    ════════════════════════════════════════ */
 .sv-vpage--why {
-  min-height: calc(100dvh - 106px);
+  min-height: calc(100dvh - 72px);
   padding: clamp(16px, 2.2vh, 32px) 0;
 }
 
@@ -4617,3 +4617,108 @@
     animation: none !important;
   }
 }
+
+/* ════════════════════════════════════════
+   STORE ACTION BUTTONS (Windows Store & Adobe Exchange)
+   ════════════════════════════════════════ */
+.sv-store-btn-link {
+  text-decoration: none !important;
+  display: inline-flex;
+}
+
+.sv-hero-cta-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 24px;
+  align-items: center;
+}
+
+.sv-store-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  font-family: Orbitron, "Space Grotesk", sans-serif !important;
+  font-weight: 900 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.07em !important;
+  cursor: pointer !important;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease !important;
+}
+
+.sv-store-btn--windows {
+  background: #ffd437 !important;
+  color: #07080b !important;
+  border: 3.5px solid #07080b !important;
+  box-shadow: 5px 5px 0 #07080b !important;
+}
+
+.sv-store-btn--windows:hover {
+  background: #ffe17d !important;
+  transform: translate(-2px, -2px) !important;
+  box-shadow: 7px 7px 0 #07080b !important;
+}
+
+.sv-store-btn--adobe {
+  background: #ea1a24 !important;
+  color: #ffffff !important;
+  border: 3.5px solid #07080b !important;
+  box-shadow: 5px 5px 0 #07080b !important;
+}
+
+.sv-store-btn--adobe:hover {
+  background: #ff2a34 !important;
+  transform: translate(-2px, -2px) !important;
+  box-shadow: 7px 7px 0 #07080b !important;
+}
+
+.sv-store-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  display: block;
+}
+
+.sv-store-btn-arrow {
+  font-size: 1.15em;
+  font-weight: 900;
+  line-height: 1;
+  transition: transform 0.2s ease;
+  margin-left: 2px;
+}
+
+.sv-store-btn:hover .sv-store-btn-arrow {
+  transform: translate(2px, -2px);
+}
+
+@media (max-width: 640px) {
+  .sv-hero-cta-group {
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+  }
+
+  .sv-hero-cta-group a,
+  .sv-hero-cta-group button {
+    width: 100% !important;
+    justify-content: center !important;
+    text-align: center !important;
+  }
+}
+
+@media (min-width: 641px) {
+  .sv-hero-cta-group .sv-store-btn {
+    padding: 11px 18px !important;
+    font-size: 13.5px !important;
+    height: 48px !important;
+  }
+
+  .sv-hero-cta-group button {
+    padding: 11px 18px !important;
+    font-size: 13.5px !important;
+    height: 48px !important;
+  }
+}
+
+
