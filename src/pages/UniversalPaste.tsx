@@ -2647,7 +2647,6 @@ const UniversalPaste = () => {
                     }}
                     title="Get Vampro Universal Paste on Microsoft Windows Store"
                   >
-                    <WindowsStoreIcon size={20} />
                     <span>WINDOWS STORE</span>
                     <span className="sv-store-btn-arrow">↗</span>
                   </Button>
@@ -2663,7 +2662,6 @@ const UniversalPaste = () => {
                     }}
                     title="Get Vampro Universal Paste on Adobe Exchange"
                   >
-                    <AdobeExchangeIcon size={20} color="#ffffff" />
                     <span>ADOBE EXCHANGE</span>
                     <span className="sv-store-btn-arrow">↗</span>
                   </Button>

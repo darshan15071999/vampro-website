@@ -150,7 +150,7 @@ const AdobeVoice = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#04030A] text-white flex flex-col">
+    <div className="min-h-screen bg-[#04030A] text-white flex flex-col overflow-x-hidden">
       <SEO {...voiceMetadata} />
       {/* Announcement */}
       <div className="bg-gradient-to-r from-[#3B3BFF] via-[#1B2A6B] to-[#3B3BFF] text-white py-2.5 px-4 flex items-center justify-center gap-4 sticky top-[64px] md:top-[96px] z-40">
@@ -172,7 +172,7 @@ const AdobeVoice = () => {
           />}
         </div>
         {/* HERO — dark with waveform and text particles */}
-      <section className="relative min-h-[calc(100vh-96px)] flex flex-col items-center justify-start md:justify-center pt-[160px] md:pt-36 pb-10 overflow-hidden ">
+      <section className="relative min-h-0 md:min-h-[calc(100vh-96px)] flex flex-col items-center justify-start md:justify-center pt-24 md:pt-36 pb-8 md:pb-10 overflow-hidden">
           
           <div className="absolute inset-0 z-0 opacity-40 md:opacity-80" style={{ maskImage: 'radial-gradient(ellipse at 50% 50%, black 20%, transparent 80%)', WebkitMaskImage: 'radial-gradient(ellipse at 50% 50%, black 20%, transparent 80%)' }}>
             {!isMobile && <SoftAurora
@@ -234,10 +234,7 @@ const AdobeVoice = () => {
       </section>
 
       {/* HOW IT WORKS */}
-      <section className="py-12 md:py-16 relative">
-        
-        
-        
+      <section className="py-10 md:py-16 relative">
         <div className="w-full px-6 md:px-10 lg:px-16 relative z-10">
           <FadeInSection className="text-center mb-0 relative z-20">
             <h2 className="text-3xl md:text-5xl font-extrabold text-white mb-4 drop-shadow-md tracking-tight"><ShinyText text="How It Works" speed={2.5} shineColor="#ffffff" color="#ffffff" /></h2>
@@ -247,10 +244,10 @@ const AdobeVoice = () => {
             </p>
           </FadeInSection>
           
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-[1400px] mx-auto mt-8 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center max-w-[1400px] mx-auto mt-8 relative z-10">
             {/* Left: YouTube Video */}
             <FadeInSection delay="100ms">
-              <div className="relative w-full aspect-video rounded-[2rem] overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.6)] border-none">
+              <div className="relative w-full aspect-video rounded-2xl md:rounded-[2rem] overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.6)] border border-white/10 bg-black/40">
                 <iframe
                   className="absolute inset-0 w-full h-full"
                   src="https://www.youtube.com/embed/_-GJ3CX9iuI"
@@ -261,19 +258,45 @@ const AdobeVoice = () => {
               </div>
             </FadeInSection>
             
-            {/* Right: Radial Orbital Timeline */}
+            {/* Right: Timeline (Mobile clean step list, Desktop Radial Orbital Timeline) */}
             <FadeInSection delay="200ms">
-              <RadialOrbitalTimeline autoPlay={true} timelineData={TIMELINE_DATA} />
+              {/* Mobile clean step list */}
+              <div className="lg:hidden w-full max-w-md mx-auto space-y-3">
+                {TIMELINE_DATA.map((step, idx) => {
+                  const Icon = step.icon;
+                  return (
+                    <div
+                      key={step.id}
+                      className="flex items-center gap-4 p-4 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl shadow-[0_4px_20px_rgba(0,0,0,0.3)]"
+                    >
+                      <div className="w-10 h-10 rounded-xl bg-[#3B3BFF]/20 border border-[#3B3BFF]/40 text-white flex items-center justify-center flex-shrink-0 shadow-[0_0_12px_rgba(59,59,255,0.3)]">
+                        <Icon size={18} />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 mb-0.5">
+                          <span className="text-[10px] font-bold uppercase tracking-wider text-indigo-400">Step {idx + 1}</span>
+                          <h4 className="font-bold text-white text-sm truncate">{step.title}</h4>
+                        </div>
+                        <p className="text-slate-300 text-xs leading-relaxed">{step.content}</p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* Desktop animated orbital timeline */}
+              <div className="hidden lg:block">
+                <RadialOrbitalTimeline autoPlay={true} timelineData={TIMELINE_DATA} />
+              </div>
             </FadeInSection>
           </div>
         </div>
-        
       </section>
 
       </div>
       
 {/* WHY CREATORS */}
-        <section className="py-16 md:py-24 relative">
+        <section className="py-10 md:py-20 relative">
           <div className="absolute left-0 right-0 z-0 pointer-events-none opacity-25" style={{ top: '-200px', bottom: '-200px', maskImage: 'linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)', WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)' }}>
             {!isMobile && <ColorBends
               colors={["#ff5c7a", "#8a5cff", "#00ffd1"]}
@@ -294,12 +317,8 @@ const AdobeVoice = () => {
             />}
           </div>
         
-
-        
-        
-        
         <div className="w-full px-6 md:px-10 lg:px-16 relative z-10">
-          <FadeInSection className="text-center mb-12">
+          <FadeInSection className="text-center mb-8 md:mb-12">
             <h2 className="text-3xl md:text-5xl font-extrabold text-white mb-4 drop-shadow-md tracking-tight">
               <ShinyText text="Complete Workflow Built Into Your Timeline" speed={3} shineColor="#ffffff" color="#ffffff" />
             </h2>
@@ -308,28 +327,28 @@ const AdobeVoice = () => {
               <span className="block text-slate-400">Create, inspect, and update your audio assets directly in Premiere Pro.</span>
             </p>
           </FadeInSection>
-          <div ref={reasonRef} className="grid lg:grid-cols-2 gap-12 items-center">
+          <div ref={reasonRef} className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             <FadeInSection className="space-y-3">
               {[
                 { title: 'Stay Inside Premiere Pro', desc: 'No more jumping between tools and your editing timeline.' },
-                { title: 'Reduce Production Time', desc: 'Generate narration in seconds and insert directly inside yor timeline at your playhead location.' },
+                { title: 'Reduce Production Time', desc: 'Generate narration in seconds and insert directly inside your timeline at your playhead location.' },
                 { title: 'Built for Ultra-Smooth Workflows', desc: 'Change the generated voice instantly by simply selecting the clip and modifying the script, voice, and tone.' },
                 { title: 'Unlimited Offline Voice Generation', desc: 'Paste a script, select a voice, and generate audio, completely processed on your machine.' },
               ].map((item, i) => (
-                  <div key={i} onClick={() => { setActiveReason(i); setAutoPlayReason(false); }} onMouseEnter={() => { setActiveReason(i); setAutoPlayReason(false); }} className="flex gap-4 cursor-pointer p-5 rounded-3xl transition-all duration-300 bg-transparent backdrop-blur-xl border border-white/5 shadow-[0_8px_32px_rgba(0,0,0,0.4)] hover:bg-white/5 group">
+                  <div key={i} onClick={() => { setActiveReason(i); setAutoPlayReason(false); }} onMouseEnter={() => { setActiveReason(i); setAutoPlayReason(false); }} className="flex gap-4 cursor-pointer p-4 sm:p-5 rounded-2xl sm:rounded-3xl transition-all duration-300 bg-transparent backdrop-blur-xl border border-white/5 shadow-[0_8px_32px_rgba(0,0,0,0.4)] hover:bg-white/5 group">
                     <div className="flex flex-col items-center pt-1.5">
                       <div className={`w-3 h-3 rounded-full transition-all duration-500 ${activeReason === i ? 'bg-[#3B3BFF] shadow-[0_0_15px_#3B3BFF] scale-125' : 'bg-white/20'}`} />
                       <div className={`w-[2px] h-full mt-3 rounded-full transition-all duration-500 ${activeReason === i ? 'bg-gradient-to-b from-[#3B3BFF]/50 to-transparent' : 'bg-white/10'}`} />
                     </div>
                     <div>
-                      <h4 className={`font-bold text-lg mb-1 transition-colors duration-300 ${activeReason === i ? 'text-[#ffffff] drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]' : 'text-white/70 group-hover:text-white'}`}>{item.title}</h4>
-                      <p className={`text-sm leading-relaxed transition-colors duration-300 ${activeReason === i ? 'text-slate-200' : 'text-slate-400 group-hover:text-slate-300'}`}>{item.desc}</p>
+                      <h4 className={`font-bold text-base sm:text-lg mb-1 transition-colors duration-300 ${activeReason === i ? 'text-[#ffffff] drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]' : 'text-white/70 group-hover:text-white'}`}>{item.title}</h4>
+                      <p className={`text-xs sm:text-sm leading-relaxed transition-colors duration-300 ${activeReason === i ? 'text-slate-200' : 'text-slate-400 group-hover:text-slate-300'}`}>{item.desc}</p>
                     </div>
                   </div>
                 ))}
             </FadeInSection>
             <FadeInSection delay="200ms">
-              <div className="relative aspect-video rounded-[30px] border border-white/5 bg-transparent overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.4)] backdrop-blur-xl transition-colors duration-300">
+              <div className="relative aspect-video rounded-2xl sm:rounded-[30px] border border-white/10 bg-[#07060F] overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.4)] backdrop-blur-xl transition-colors duration-300">
                 {reasonImages.map((src, index) => (
                   <img 
                     key={index} 
@@ -342,14 +361,14 @@ const AdobeVoice = () => {
                     alt={`Feature ${index + 1}`} 
                   />
                 ))}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#07060F]/70 via-[#07060F]/20 to-transparent flex flex-col justify-end p-8 animate-fade-up z-20">
-                  <div className="w-10 h-10 bg-[#3B3BFF] rounded-xl flex items-center justify-center mb-4 animate-glow-pulse">
+                <div className="absolute inset-0 bg-gradient-to-t from-[#07060F]/80 via-[#07060F]/30 to-transparent flex flex-col justify-end p-5 sm:p-8 animate-fade-up z-20">
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 bg-[#3B3BFF] rounded-xl flex items-center justify-center mb-3 sm:mb-4 animate-glow-pulse">
                     {[<Layers size={18} />, <Zap size={18} />, <MonitorPlay size={18} />, <Wand2 size={18} />][activeReason]}
                   </div>
-                  <h3 className="text-white font-bold text-xl md:text-2xl mb-2">
+                  <h3 className="text-white font-bold text-lg sm:text-xl md:text-2xl mb-1 sm:mb-2">
                     {['Seamless Integration', 'Lightning Fast', 'Content Optimized', 'Unlimited Voice Generation'][activeReason]}
                   </h3>
-                  <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+                  <p className="text-slate-300 text-xs sm:text-sm md:text-base leading-relaxed">
                     {['A unified workspace without leaving your timeline.', 'Voice generated directly in your desired location on the timeline.', 'Instant script updates and voice modifications.', 'Generate and modify voices as many times as you require.'][activeReason]}
                   </p>
                 </div>
@@ -361,7 +380,7 @@ const AdobeVoice = () => {
       </section>
 
       {/* FEATURES */}
-        <section className="py-16 md:py-24 relative">
+        <section className="py-10 md:py-20 relative">
           <div className="absolute left-0 right-0 z-0 pointer-events-none opacity-25" style={{ top: '-200px', bottom: '-200px', maskImage: 'linear-gradient(to bottom, transparent, black 15%, black 75%, transparent)', WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 15%, black 75%, transparent)' }}>
             {!isMobile && <ColorBends
               colors={["#ff5c7a", "#8a5cff", "#00ffd1"]}
@@ -382,7 +401,7 @@ const AdobeVoice = () => {
             />}
           </div>
           <div className="w-full px-6 md:px-10 lg:px-16 relative z-10">
-            <FadeInSection className="text-center mb-12">
+            <FadeInSection className="text-center mb-8 md:mb-12">
               <h2 className="text-3xl md:text-5xl font-extrabold text-white mb-4 drop-shadow-md tracking-tight">
                 <ShinyText text="Built for Creative Speed" speed={2.5} shineColor="#ffffff" color="#ffffff" />
               </h2>
@@ -392,7 +411,7 @@ const AdobeVoice = () => {
               </p>
             </FadeInSection>
             
-            <FadeInSection delay="100ms" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <FadeInSection delay="100ms" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
               {[
                   { icon: <Zap size={22} />, title: 'Instant AI Voice Generation', desc: 'Generate narration from text in seconds. The companion application bundles the entire package for offline use with ultra fast processing.' },
                   { icon: <Mic size={22} />, title: 'Multiple Voice Profiles', desc: 'Choose from 27+ natural voices (both male and female) with 7+ unique tone profiles and dedicated presets for each voice.' },
@@ -401,9 +420,9 @@ const AdobeVoice = () => {
                 ].map((f, i) => (
                 <TiltCard key={i} className="h-full">
                   <div className="w-full h-full">
-                    <div className="w-full h-full rounded-[30px] border border-white/10 bg-white/5 overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.4)] backdrop-blur-[40px] hover:bg-white/10 transition-colors duration-300">
-                      <div className="p-8 h-full w-full flex flex-col group cursor-default transition-all duration-300">
-                        <div className="w-14 h-14 rounded-2xl text-indigo-400 group-hover:text-white group-hover:bg-[#3B3BFF] flex items-center justify-center mb-6 transition-all duration-300 border border-indigo-500/30 shadow-[0_0_15px_rgba(59,59,255,0.15)]">{f.icon}</div>
+                    <div className="w-full h-full rounded-2xl md:rounded-[30px] border border-white/10 bg-white/5 overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.4)] backdrop-blur-[40px] hover:bg-white/10 transition-colors duration-300">
+                      <div className="p-6 sm:p-8 h-full w-full flex flex-col group cursor-default transition-all duration-300">
+                        <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl text-indigo-400 group-hover:text-white group-hover:bg-[#3B3BFF] flex items-center justify-center mb-5 sm:mb-6 transition-all duration-300 border border-indigo-500/30 shadow-[0_0_15px_rgba(59,59,255,0.15)]">{f.icon}</div>
                         <h4 className="font-bold text-white mb-2 text-xl sm:text-2xl">{f.title}</h4>
                         <p className="text-slate-300 text-sm sm:text-base leading-relaxed flex-grow">{f.desc}</p>
                       </div>
@@ -509,11 +528,11 @@ const AdobeVoice = () => {
                 </div>
 
                 {/* Action Callout */}
-                <div className="mt-3.5 flex flex-row gap-3 w-full">
+                <div className="mt-3.5 flex flex-col sm:flex-row gap-3 w-full">
                   <button
                     type="button"
                     onClick={() => navigate('/docs/plugins/voice-generator')}
-                    className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#3B3BFF] hover:bg-[#2f2fdb] text-white font-bold text-sm shadow-[0_0_20px_rgba(59,59,255,0.35)] transition-all cursor-pointer whitespace-nowrap"
+                    className="flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-[#3B3BFF] hover:bg-[#2f2fdb] text-white font-bold text-sm shadow-[0_0_20px_rgba(59,59,255,0.35)] transition-all cursor-pointer text-center"
                   >
                     <span>Read Setup Docs</span>
                     <ArrowRight size={14} />
@@ -521,7 +540,7 @@ const AdobeVoice = () => {
                   <button
                     type="button"
                     onClick={() => navigate('/blog/elevenlabs-voice-generator-adobe-premiere-pro')}
-                    className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-white/15 bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white font-medium text-sm backdrop-blur-lg transition-all cursor-pointer whitespace-nowrap"
+                    className="flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl border border-white/15 bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white font-medium text-sm backdrop-blur-lg transition-all cursor-pointer text-center"
                   >
                     <span>Explore Workflow Guide</span>
                   </button>
@@ -532,7 +551,7 @@ const AdobeVoice = () => {
         </section>
 
         {/* WHO IS IT FOR */}
-        <section className="py-16 md:py-24 relative">
+        <section className="py-10 md:py-20 relative">
           <div className="absolute left-0 right-0 z-0 pointer-events-none" style={{ top: '-200px', bottom: '-200px', opacity: 0.25, maskImage: 'linear-gradient(to bottom, transparent, black 15%, black 75%, transparent)', WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 15%, black 75%, transparent)' }}>
             {!isMobile && <ColorBends
               colors={["#ff5c7a", "#8a5cff", "#00ffd1"]}
@@ -563,7 +582,36 @@ const AdobeVoice = () => {
               <span className="block text-slate-400">From solo YouTube channels to commercial agencies, elevate your narration.</span>
             </p>
           </FadeInSection>
-          <div className="w-full relative pointer-events-auto">
+
+          {/* Mobile: Responsive clean card grid */}
+          <div className="md:hidden w-full px-6 grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-lg mx-auto pointer-events-auto">
+            {[
+              { title: 'YouTube Creators', desc: 'Narration without recording equipment.', image: '/creator.png', border: 'border-red-500/30', accent: 'bg-red-500', glow: 'shadow-[0_0_20px_rgba(239,68,68,0.15)]' },
+              { title: 'Video Editors', desc: 'Generate voiceovers quickly.', image: '/editor.png', border: 'border-violet-500/30', accent: 'bg-violet-500', glow: 'shadow-[0_0_20px_rgba(139,92,246,0.15)]' },
+              { title: 'Marketing Teams', desc: 'Produce demos faster.', image: '/marketing.png', border: 'border-green-500/30', accent: 'bg-green-500', glow: 'shadow-[0_0_20px_rgba(34,197,94,0.15)]' },
+              { title: 'Educators', desc: 'Scripts into spoken explanations.', image: '/educator.png', border: 'border-yellow-500/30', accent: 'bg-yellow-500', glow: 'shadow-[0_0_20px_rgba(234,179,8,0.15)]' },
+            ].map((item, i) => (
+              <div
+                key={i}
+                className={`relative rounded-2xl overflow-hidden border ${item.border} bg-white/5 backdrop-blur-xl p-5 flex flex-col justify-end ${item.glow} min-h-[140px]`}
+              >
+                <img
+                  src={item.image}
+                  className="absolute inset-0 w-full h-full object-cover opacity-20"
+                  alt={item.title}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#07060F]/95 via-[#07060F]/60 to-transparent pointer-events-none" />
+                <div className="relative z-10">
+                  <div className={`w-8 h-1 ${item.accent} rounded-full mb-2`} />
+                  <h3 className="font-bold text-base text-white mb-1">{item.title}</h3>
+                  <p className="text-slate-300 text-xs leading-relaxed">{item.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Desktop: Animated 3D Circular Gallery */}
+          <div className="hidden md:block w-full relative pointer-events-auto">
             <DOMCircularGallery bend={2.5}>
               {[
                 { title: 'YouTube Creators', desc: 'Narration without recording equipment.', image: '/creator.png', colorClass: 'red', shadow: 'shadow-[0_0_24px_rgba(239,68,68,0.15)] border-red-500/30', hoverShadow: 'group-hover:shadow-[0_0_24px_rgba(239,68,68,0.15)] group-hover:border-red-500/30', bgGlow: 'from-red-500/20', bar: 'bg-red-500' },
@@ -593,7 +641,7 @@ const AdobeVoice = () => {
       </section>
 
       {/* GETTING STARTED */}
-      <section className="py-16 md:py-24 relative">
+      <section className="py-10 md:py-20 relative">
         <div className="absolute left-0 right-0 z-0 pointer-events-none" style={{ top: '-100px', bottom: '-200px', opacity: 0.25, maskImage: 'linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)', WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)' }}>
             {!isMobile && <ColorBends
               colors={["#ff5c7a", "#8a5cff", "#00ffd1"]}
@@ -683,40 +731,40 @@ const AdobeVoice = () => {
         </div>
 
         {/* DOWNLOAD */}
-        <section id="download" className="py-16 md:py-24 text-center relative scroll-mt-24 z-10">
+        <section id="download" className="py-10 md:py-20 text-center relative scroll-mt-24 z-10">
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[500px] h-[250px] pointer-events-none z-0" style={{ background: 'radial-gradient(ellipse, rgba(59,59,255,0.15) 0%, transparent 70%)' }} />
           <div className="w-full px-6 md:px-10 lg:px-16 max-w-3xl mx-auto relative z-10 pointer-events-none">
             <FadeInSection>
               <h2 className="text-3xl md:text-5xl font-extrabold text-white mb-4 drop-shadow-md tracking-tight"><ShinyText text="Before You Download" speed={3} shineColor="#ffffff" color="#ffffff" /></h2>
-              <p className="text-base sm:text-lg text-slate-300 font-light max-w-4xl mx-auto drop-shadow-md mb-10 leading-relaxed">
+              <p className="text-base sm:text-lg text-slate-300 font-light max-w-4xl mx-auto drop-shadow-md mb-8 md:mb-10 leading-relaxed">
                 <span className="block">Check system requirements and compatibility before getting started.</span>
                 <span className="block text-slate-400">Both the companion service and Premiere Pro extension are free to use.</span>
               </p>
               <TiltCard>
                 <div className="w-full h-full">
-                  <div className="w-full h-full rounded-[30px] border border-white/10 bg-white/5 overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.4)] backdrop-blur-[40px] hover:bg-white/10 transition-colors duration-300 pointer-events-auto relative z-20 mb-12">
-                    <div className="p-10 text-left flex flex-col md:flex-row items-center justify-between gap-8 h-full w-full">
+                  <div className="w-full h-full rounded-2xl sm:rounded-[30px] border border-white/10 bg-white/5 overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.4)] backdrop-blur-[40px] hover:bg-white/10 transition-colors duration-300 pointer-events-auto relative z-20 mb-8 md:mb-12">
+                    <div className="p-6 sm:p-10 text-left flex flex-col md:flex-row items-center justify-between gap-6 sm:gap-8 h-full w-full">
                       <div className="flex-1">
-                        <h4 className="font-bold text-slate-400 mb-6 uppercase tracking-widest text-xs flex items-center gap-2"><CheckCircle size={14} className="text-green-400" /> Requirements</h4>
-                        <ul className="space-y-4">
+                        <h4 className="font-bold text-slate-400 mb-4 sm:mb-6 uppercase tracking-widest text-xs flex items-center gap-2"><CheckCircle size={14} className="text-green-400" /> Requirements</h4>
+                        <ul className="space-y-3 sm:space-y-4">
                           {REQUIREMENTS.map(r => (
                             <li key={r} className="flex items-center gap-3 text-white text-sm sm:text-base"><span className="text-green-400 font-bold">✔</span>{r}</li>
                           ))}
                         </ul>
                       </div>
                       <div className="w-full md:w-auto flex flex-col items-center justify-center">
-                        <div className="w-full max-w-[520px] aspect-[4/3] rounded-xl overflow-hidden border border-slate-700/50 shadow-[0_4px_20px_rgba(0,0,0,0.5)] relative">
+                        <div className="w-full max-w-[520px] aspect-[4/3] rounded-xl overflow-hidden border border-slate-700/50 shadow-[0_4px_20px_rgba(0,0,0,0.5)] relative bg-[#0a0f1d]">
                           <img src="/header.png" alt="Version preview" className="absolute inset-0 w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity" />
                         </div>
-                        <p className="mt-4 text-slate-400 text-sm font-medium tracking-wide">Version 1.1.0</p>
+                        <p className="mt-3 sm:mt-4 text-slate-400 text-sm font-medium tracking-wide">Version 1.1.0</p>
                       </div>
                     </div>
                   </div>
                 </div>
               </TiltCard>
-              <div className="space-y-8 pointer-events-none">
-                <div><p className="text-4xl md:text-6xl font-black text-white mb-1 animate-blur-pulse tracking-tight">Completely free.</p></div>
-                <div className="flex flex-col sm:flex-row justify-center items-center gap-4 pointer-events-auto relative z-20">
+              <div className="space-y-6 sm:space-y-8 pointer-events-none">
+                <div><p className="text-3xl sm:text-4xl md:text-6xl font-black text-white mb-1 animate-blur-pulse tracking-tight">Completely free.</p></div>
+                <div className="flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-4 pointer-events-auto relative z-20">
                   <SpecularButton onClick={() => handleDownloadWindows('Download')}
                     className="w-full sm:w-auto rounded-2xl border border-white/10 bg-white/5 backdrop-blur-[40px] shadow-[0_8px_32px_rgba(0,0,0,0.4)] !px-5 !py-3 sm:!px-9 sm:!py-4">
                     <div className="flex items-center justify-center gap-2 font-bold text-base sm:text-lg text-white">
@@ -737,16 +785,16 @@ const AdobeVoice = () => {
         </section>
 
         {/* DOCS & LEGAL */}
-        <section className="py-16 md:py-24 relative z-10">
+        <section className="py-10 md:py-20 relative z-10">
           <div className="w-full px-6 md:px-10 lg:px-16 relative z-10">
-            <FadeInSection className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <FadeInSection className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
               {[
                 { icon: <FileText size={24} />, title: 'Documentation', desc: 'Guides, installation, and troubleshooting.', cta: 'Read Docs', action: () => navigate('/docs/plugins/voice-generator') },
                 { icon: <Shield size={24} />, title: 'Terms of Use', desc: 'Licensing, restrictions, and agreements.', cta: 'Full Terms', action: () => navigate('/terms') },
                 { icon: <Shield size={24} />, title: 'Privacy Policy', desc: 'Data handling and user information.', cta: 'Read Privacy', action: () => navigate('/privacy') },
               ].map((item, i) => (
                 <TiltCard key={i}>
-                  <div className="bg-white/5 backdrop-blur-[40px] border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.4)] p-8 rounded-[2rem] text-center flex flex-col items-center cursor-pointer h-full hover:bg-white/10 hover:border-white/20 transition-all duration-300" onClick={item.action}>
+                  <div className="bg-white/5 backdrop-blur-[40px] border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.4)] p-6 sm:p-8 rounded-2xl sm:rounded-[2rem] text-center flex flex-col items-center cursor-pointer h-full hover:bg-white/10 hover:border-white/20 transition-all duration-300" onClick={item.action}>
                     <div className="w-12 h-12 bg-white/10 text-white rounded-xl flex items-center justify-center mb-4 border border-white/10">{item.icon}</div>
                     <h3 className="text-xl font-bold text-white mb-2">{item.title}</h3>
                     <p className="text-slate-300 mb-6 flex-grow text-sm sm:text-base leading-relaxed">{item.desc}</p>

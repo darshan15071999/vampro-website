@@ -23,7 +23,7 @@ const Button = React.forwardRef<HTMLButtonElement, React.ButtonHTMLAttributes<HT
 Button.displayName = "Button"
 
 const Card = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn("rounded-xl border bg-card text-card-foreground shadow", className)} {...props} />
+  <div ref={ref} className={cn("rounded-xl border border-[#2b5be3]/30 bg-[#07060F]/95 text-white shadow", className)} {...props} />
 ))
 Card.displayName = "Card"
 
@@ -250,13 +250,13 @@ export default function RadialOrbitalTimeline({
                   w-10 h-10 rounded-full flex items-center justify-center
                   ${
                     isExpanded
-                      ? "bg-white text-black"
+                      ? "bg-[#3B3BFF] text-white"
                       : "bg-[#07060F] text-white"
                   }
                   border-2 
                   ${
                     isExpanded
-                      ? "border-white shadow-lg shadow-white/30"
+                      ? "border-[#3B3BFF] shadow-lg shadow-[#3B3BFF]/50"
                       : "border-[#2b5be3]/40"
                   }
                   transition-all duration-300 transform
