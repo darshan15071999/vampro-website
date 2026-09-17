@@ -40,36 +40,7 @@ const SCROLL_GLITCH_DURATION_MS = 800;
 const WINDOWS_STORE_URL = 'https://apps.microsoft.com/detail/9NTSJD556CTB?hl=en-us&gl=IN&ocid=pdpshare';
 const ADOBE_EXCHANGE_URL = 'https://exchange.adobe.com/apps/cc/8d5c8b43/vampro-universal-paste';
 
-const WindowsStoreIcon = ({ size = 20, className = 'sv-store-icon' }: { size?: number; className?: string }) => (
-  <svg
-    width={size}
-    height={size}
-    viewBox="0 0 24 24"
-    className={className}
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    aria-hidden="true"
-  >
-    <rect x="2" y="2" width="9" height="9" fill="#f25022" />
-    <rect x="13" y="2" width="9" height="9" fill="#7fba00" />
-    <rect x="2" y="13" width="9" height="9" fill="#00a4ef" />
-    <rect x="13" y="13" width="9" height="9" fill="#ffb900" />
-  </svg>
-);
 
-const AdobeExchangeIcon = ({ size = 20, className = 'sv-store-icon', color = '#ffffff' }: { size?: number; className?: string; color?: string }) => (
-  <svg
-    width={size}
-    height={size}
-    viewBox="0 0 24 24"
-    className={className}
-    fill={color}
-    xmlns="http://www.w3.org/2000/svg"
-    aria-hidden="true"
-  >
-    <path d="M13.966 22h-3.66l2.008-4.906h3.452L13.966 22zM24 2h-7.618L24 22V2zM0 2v20l7.618-20H0z" />
-  </svg>
-);
 
 /* ════════════════════════════════════════
    1. CONTINUOUSLY SCROLLING 2D CHECKERBOARD AMBIENT GRID
@@ -1873,7 +1844,6 @@ const UniversalPaste = () => {
                       }}
                       title="Get Vampro Universal Paste on Microsoft Windows Store"
                     >
-                      <WindowsStoreIcon size={20} />
                       <span>WINDOWS STORE</span>
                       <span className="sv-store-btn-arrow">↗</span>
                     </Button>
@@ -1889,7 +1859,6 @@ const UniversalPaste = () => {
                       }}
                       title="Get Vampro Universal Paste on Adobe Exchange"
                     >
-                      <AdobeExchangeIcon size={20} color="#ffffff" />
                       <span>ADOBE EXCHANGE</span>
                       <span className="sv-store-btn-arrow">↗</span>
                     </Button>
