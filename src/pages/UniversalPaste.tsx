@@ -1342,6 +1342,14 @@ const UniversalPaste = () => {
           return;
         }
 
+        // On mobile: immediately set all frames visible without ScrollTrigger, eliminating scroll stutter and video overhead
+        if (window.innerWidth < 768) {
+          if (frame) {
+            gsap.set(frame, { scale: 1, opacity: 1, y: 0, clearProps: 'transformOrigin,transform' });
+          }
+          return;
+        }
+
         let isRevealed = false;
 
         const resetFrame = () => {

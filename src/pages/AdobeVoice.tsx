@@ -25,6 +25,8 @@ import SpecularButton from '../components/SpecularButton';
 import { useSignup } from '../context/SignupContext';
 
 const FEATURES = ['🏗 Built for Premiere Pro', '🎙 27+ Local AI Voices', '⚡ ElevenLabs API Support', '💾 Offline & Cloud TTS', '🔌 Direct Timeline Insertion'];
+const MOBILE_FEATURES_ROW1 = ['🏗 Premiere Pro', '🎙 27+ Local Voices', '⚡ ElevenLabs API'];
+const MOBILE_FEATURES_ROW2 = ['💾 Offline & Cloud TTS', '🔌 Timeline Insertion'];
 
 
 const TIMELINE_DATA = [
@@ -201,29 +203,45 @@ const AdobeVoice = () => {
         
         <div className="w-full px-6 md:px-10 lg:px-16 relative z-10 text-center">
           <FadeInSection>
-            <div className="flex flex-wrap justify-center gap-3 mb-8">
+            {/* Desktop pills */}
+            <div className="hidden sm:flex sm:flex-wrap sm:justify-center sm:gap-3 mb-8">
               {FEATURES.map(b => (
                 <span key={b} className="rounded-full border border-white/10 bg-white/5 backdrop-blur-md shadow-lg px-4 py-2 text-xs font-semibold text-indigo-200"><ShinyText text={b} speed={2} shineColor="#ffffff" color="#c7d2fe" /></span>
               ))}
             </div>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight mb-6 leading-[1.1]">
-              <ShinyText text="Vampro Voice Generator" speed={3} className="text-white" shineColor="#ffffff" color="#f0f0f0" /><br />
-              <ShinyText text="Text-to-Speech" speed={3} delay={0.5} className="gradient-blue-text" shineColor="#ffffff" color="#3B3BFF" />
+            {/* Mobile 2-row pills */}
+            <div className="flex flex-col items-center gap-1.5 mb-5 sm:hidden max-w-full px-1">
+              <div className="flex justify-center items-center gap-1.5 w-full">
+                {MOBILE_FEATURES_ROW1.map(b => (
+                  <span key={b} className="rounded-full border border-white/15 bg-white/10 backdrop-blur-md shadow px-2 py-0.5 text-[10px] font-medium text-indigo-200 whitespace-nowrap"><ShinyText text={b} speed={2} shineColor="#ffffff" color="#c7d2fe" /></span>
+                ))}
+              </div>
+              <div className="flex justify-center items-center gap-1.5 w-full">
+                {MOBILE_FEATURES_ROW2.map(b => (
+                  <span key={b} className="rounded-full border border-white/15 bg-white/10 backdrop-blur-md shadow px-2.5 py-0.5 text-[10px] font-medium text-indigo-200 whitespace-nowrap"><ShinyText text={b} speed={2} shineColor="#ffffff" color="#c7d2fe" /></span>
+                ))}
+              </div>
+            </div>
+            <h1 className="text-[20px] min-[380px]:text-[22px] min-[420px]:text-2xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight mb-3 sm:mb-6 leading-[1.15] whitespace-nowrap overflow-hidden text-ellipsis">
+              <span className="sm:hidden"><ShinyText text="Vampro Voice Generator" speed={3} className="text-white" shineColor="#ffffff" color="#f0f0f0" /></span>
+              <span className="hidden sm:inline">
+                <ShinyText text="Vampro Voice Generator" speed={3} className="text-white" shineColor="#ffffff" color="#f0f0f0" /><br />
+                <ShinyText text="Text-to-Speech" speed={3} delay={0.5} className="gradient-blue-text" shineColor="#ffffff" color="#3B3BFF" />
+              </span>
             </h1>
-            <p className="text-base sm:text-lg text-slate-300 font-light max-w-4xl mx-auto mb-10 leading-relaxed">
-              <span className="block">Generate natural AI voiceovers from text in seconds inside Premiere Pro.</span>
-              <span className="block text-slate-400">Use offline models or ElevenLabs voices right at your timeline playhead.</span>
+            <p className="text-xs sm:text-base md:text-lg text-slate-300 font-light max-w-sm sm:max-w-4xl mx-auto mb-6 sm:mb-10 text-center leading-relaxed">
+              Generate natural AI voiceovers from text inside Premiere Pro using local models or ElevenLabs at your playhead.
             </p>
           </FadeInSection>
-          <FadeInSection delay="200ms" className="flex flex-col sm:flex-row justify-center items-center gap-4">
+          <FadeInSection delay="200ms" className="flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-4">
             <SpecularButton onClick={() => handleDownloadWindows('Hero')}
-              className="w-full sm:w-auto rounded-2xl border border-white/10 bg-white/5 backdrop-blur-[40px] shadow-[0_8px_32px_rgba(0,0,0,0.4)] !px-5 !py-3 sm:!px-9 sm:!py-4">
+              className="w-full sm:w-auto rounded-2xl !border !border-white/30 sm:!border-white/10 !bg-white/20 sm:!bg-white/5 backdrop-blur-[40px] shadow-[0_8px_32px_rgba(0,0,0,0.5)] !px-5 !py-3.5 sm:!px-9 sm:!py-4">
               <div className="flex items-center justify-center gap-2 font-bold text-base sm:text-lg text-white">
                 <Grid2x2 size={25} /> Install Companion App
               </div>
             </SpecularButton>
             <SpecularButton onClick={() => handleDownloadAdobe('Hero')}
-              className="w-full sm:w-auto rounded-2xl border border-white/10 bg-white/5 backdrop-blur-[40px] shadow-[0_8px_32px_rgba(0,0,0,0.4)] !px-5 !py-3 sm:!px-9 sm:!py-4">
+              className="w-full sm:w-auto rounded-2xl !border !border-white/30 sm:!border-white/10 !bg-white/20 sm:!bg-white/5 backdrop-blur-[40px] shadow-[0_8px_32px_rgba(0,0,0,0.5)] !px-5 !py-3.5 sm:!px-9 sm:!py-4">
               <div className="flex items-center justify-center gap-2 font-bold text-base sm:text-lg text-white">
                 <Store size={22} /> Get the Extension
               </div>
@@ -237,10 +255,9 @@ const AdobeVoice = () => {
       <section className="py-10 md:py-16 relative">
         <div className="w-full px-6 md:px-10 lg:px-16 relative z-10">
           <FadeInSection className="text-center mb-0 relative z-20">
-            <h2 className="text-3xl md:text-5xl font-extrabold text-white mb-4 drop-shadow-md tracking-tight"><ShinyText text="How It Works" speed={2.5} shineColor="#ffffff" color="#ffffff" /></h2>
-            <p className="text-base sm:text-lg text-slate-300 font-light max-w-4xl mx-auto drop-shadow-md leading-relaxed">
-              <span className="block">A streamlined text-to-speech workflow designed specifically for editors.</span>
-              <span className="block text-slate-400">Write your narration, choose your voice, and insert directly to timeline.</span>
+            <h2 className="text-2xl sm:text-3xl md:text-5xl font-extrabold text-white mb-2 sm:mb-4 drop-shadow-md tracking-tight whitespace-nowrap"><ShinyText text="How It Works" speed={2.5} shineColor="#ffffff" color="#ffffff" /></h2>
+            <p className="text-xs sm:text-base md:text-lg text-slate-300 font-light max-w-sm sm:max-w-4xl mx-auto text-center drop-shadow-md leading-relaxed mb-6 sm:mb-8">
+              A streamlined text-to-speech workflow for editors to generate and insert voiceovers directly to your timeline.
             </p>
           </FadeInSection>
           
@@ -319,12 +336,11 @@ const AdobeVoice = () => {
         
         <div className="w-full px-6 md:px-10 lg:px-16 relative z-10">
           <FadeInSection className="text-center mb-8 md:mb-12">
-            <h2 className="text-3xl md:text-5xl font-extrabold text-white mb-4 drop-shadow-md tracking-tight">
+            <h2 className="text-[16px] min-[375px]:text-[18px] min-[410px]:text-xl sm:text-3xl md:text-5xl font-extrabold text-white mb-2 sm:mb-4 drop-shadow-md tracking-tight whitespace-nowrap overflow-hidden text-ellipsis">
               <ShinyText text="Complete Workflow Built Into Your Timeline" speed={3} shineColor="#ffffff" color="#ffffff" />
             </h2>
-            <p className="text-base sm:text-lg text-slate-300 font-light max-w-4xl mx-auto drop-shadow-md leading-relaxed">
-              <span className="block">Stay inside your creative flow without switching apps or export folders.</span>
-              <span className="block text-slate-400">Create, inspect, and update your audio assets directly in Premiere Pro.</span>
+            <p className="text-xs sm:text-base md:text-lg text-slate-300 font-light max-w-sm sm:max-w-4xl mx-auto text-center drop-shadow-md leading-relaxed">
+              Stay inside your creative flow without switching apps while creating and updating audio directly in Premiere Pro.
             </p>
           </FadeInSection>
           <div ref={reasonRef} className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
@@ -402,12 +418,11 @@ const AdobeVoice = () => {
           </div>
           <div className="w-full px-6 md:px-10 lg:px-16 relative z-10">
             <FadeInSection className="text-center mb-8 md:mb-12">
-              <h2 className="text-3xl md:text-5xl font-extrabold text-white mb-4 drop-shadow-md tracking-tight">
+              <h2 className="text-2xl sm:text-3xl md:text-5xl font-extrabold text-white mb-2 sm:mb-4 drop-shadow-md tracking-tight whitespace-nowrap">
                 <ShinyText text="Built for Creative Speed" speed={2.5} shineColor="#ffffff" color="#ffffff" />
               </h2>
-              <p className="text-base sm:text-lg text-slate-300 font-light max-w-4xl mx-auto drop-shadow-md leading-relaxed">
-                <span className="block">Engineered for speed with high-quality local and cloud speech models.</span>
-                <span className="block text-slate-400">Accelerate your turnaround without sacrificing natural vocal inflection.</span>
+              <p className="text-xs sm:text-base md:text-lg text-slate-300 font-light max-w-sm sm:max-w-4xl mx-auto text-center drop-shadow-md leading-relaxed">
+                Engineered with high-quality speech models to accelerate turnaround without sacrificing natural vocal inflection.
               </p>
             </FadeInSection>
             
@@ -460,12 +475,11 @@ const AdobeVoice = () => {
           <div className="w-full px-6 md:px-10 lg:px-16 relative z-10">
             {/* Header */}
             <FadeInSection className="text-center mb-8">
-              <h2 className="text-3xl md:text-5xl font-extrabold text-white mb-4 drop-shadow-md tracking-tight">
-                <ShinyText text="Your ElevenLabs Voice Library" speed={3} shineColor="#ffffff" color="#ffffff" /> <span className="text-[#557ef7]">Directly Inside Premiere Pro</span>
+              <h2 className="text-[17px] min-[380px]:text-[19px] min-[420px]:text-xl sm:text-3xl md:text-5xl font-extrabold text-white mb-2 sm:mb-4 drop-shadow-md tracking-tight whitespace-nowrap">
+                <ShinyText text="Your ElevenLabs Voice Library" speed={3} shineColor="#ffffff" color="#ffffff" /> <span className="hidden sm:inline text-[#557ef7]">Directly Inside Premiere Pro</span>
               </h2>
-              <p className="text-base sm:text-lg text-slate-300 font-light max-w-4xl mx-auto drop-shadow-md leading-relaxed">
-                <span className="block">Connect your API key to access custom voice clones and multilingual models.</span>
-                <span className="block text-slate-400">Generate broadcast audio and insert clips at your playhead with one click.</span>
+              <p className="text-xs sm:text-base md:text-lg text-slate-300 font-light max-w-sm sm:max-w-4xl mx-auto text-center drop-shadow-md leading-relaxed">
+                Connect your API key to access custom voice clones and insert broadcast audio directly into Premiere Pro.
               </p>
             </FadeInSection>
 
@@ -574,12 +588,11 @@ const AdobeVoice = () => {
         
         <div ref={whoRef} className="w-full relative z-10 pointer-events-none">
           <FadeInSection className="text-center mb-8 px-6 md:px-10">
-            <h2 className="text-3xl md:text-5xl font-extrabold text-white mb-4 drop-shadow-md tracking-tight">
+            <h2 className="text-2xl sm:text-3xl md:text-5xl font-extrabold text-white mb-2 sm:mb-4 drop-shadow-md tracking-tight whitespace-nowrap">
               <ShinyText text="Who Is It For?" speed={2.5} shineColor="#ffffff" color="#ffffff" />
             </h2>
-            <p className="text-base sm:text-lg text-slate-300 font-light max-w-4xl mx-auto drop-shadow-md leading-relaxed">
-              <span className="block">Tailored for creators, editors, and teams seeking faster turnaround.</span>
-              <span className="block text-slate-400">From solo YouTube channels to commercial agencies, elevate your narration.</span>
+            <p className="text-xs sm:text-base md:text-lg text-slate-300 font-light max-w-sm sm:max-w-4xl mx-auto text-center drop-shadow-md leading-relaxed">
+              Tailored for creators, editors, and teams seeking faster turnaround to elevate video narration effortlessly.
             </p>
           </FadeInSection>
 
@@ -663,10 +676,9 @@ const AdobeVoice = () => {
         </div>
         <div className="w-full px-6 md:px-10 lg:px-16 relative z-10 mb-8">
             <FadeInSection className="text-center">
-              <h2 className="text-3xl md:text-5xl font-extrabold text-white mb-4 drop-shadow-md tracking-tight"><ShinyText text="Getting Started" speed={2.5} shineColor="#ffffff" color="#ffffff" /></h2>
-              <p className="text-base sm:text-lg text-slate-300 font-light max-w-4xl mx-auto drop-shadow-md leading-relaxed">
-                <span className="block">Three quick steps to set up your companion app and activate your extension.</span>
-                <span className="block text-slate-400">Start creating and inserting professional narration in less than two minutes.</span>
+              <h2 className="text-2xl sm:text-3xl md:text-5xl font-extrabold text-white mb-2 sm:mb-4 drop-shadow-md tracking-tight whitespace-nowrap"><ShinyText text="Getting Started" speed={2.5} shineColor="#ffffff" color="#ffffff" /></h2>
+              <p className="text-xs sm:text-base md:text-lg text-slate-300 font-light max-w-sm sm:max-w-4xl mx-auto text-center drop-shadow-md leading-relaxed">
+                Three quick steps to set up your companion app and activate your extension in Premiere Pro in under two minutes.
               </p>
             </FadeInSection>
           </div>
@@ -735,10 +747,9 @@ const AdobeVoice = () => {
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[500px] h-[250px] pointer-events-none z-0" style={{ background: 'radial-gradient(ellipse, rgba(59,59,255,0.15) 0%, transparent 70%)' }} />
           <div className="w-full px-6 md:px-10 lg:px-16 max-w-3xl mx-auto relative z-10 pointer-events-none">
             <FadeInSection>
-              <h2 className="text-3xl md:text-5xl font-extrabold text-white mb-4 drop-shadow-md tracking-tight"><ShinyText text="Before You Download" speed={3} shineColor="#ffffff" color="#ffffff" /></h2>
-              <p className="text-base sm:text-lg text-slate-300 font-light max-w-4xl mx-auto drop-shadow-md mb-8 md:mb-10 leading-relaxed">
-                <span className="block">Check system requirements and compatibility before getting started.</span>
-                <span className="block text-slate-400">Both the companion service and Premiere Pro extension are free to use.</span>
+              <h2 className="text-2xl sm:text-3xl md:text-5xl font-extrabold text-white mb-2 sm:mb-4 drop-shadow-md tracking-tight whitespace-nowrap"><ShinyText text="Before You Download" speed={3} shineColor="#ffffff" color="#ffffff" /></h2>
+              <p className="text-xs sm:text-base md:text-lg text-slate-300 font-light max-w-sm sm:max-w-4xl mx-auto text-center drop-shadow-md mb-6 sm:mb-10 leading-relaxed">
+                Check system requirements and compatibility before getting started. Both companion service and extension are free.
               </p>
               <TiltCard>
                 <div className="w-full h-full">
@@ -766,13 +777,13 @@ const AdobeVoice = () => {
                 <div><p className="text-3xl sm:text-4xl md:text-6xl font-black text-white mb-1 animate-blur-pulse tracking-tight">Completely free.</p></div>
                 <div className="flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-4 pointer-events-auto relative z-20">
                   <SpecularButton onClick={() => handleDownloadWindows('Download')}
-                    className="w-full sm:w-auto rounded-2xl border border-white/10 bg-white/5 backdrop-blur-[40px] shadow-[0_8px_32px_rgba(0,0,0,0.4)] !px-5 !py-3 sm:!px-9 sm:!py-4">
+                    className="w-full sm:w-auto rounded-2xl !border !border-white/30 sm:!border-white/10 !bg-white/20 sm:!bg-white/5 backdrop-blur-[40px] shadow-[0_8px_32px_rgba(0,0,0,0.5)] !px-5 !py-3.5 sm:!px-9 sm:!py-4">
                     <div className="flex items-center justify-center gap-2 font-bold text-base sm:text-lg text-white">
                       <Grid2x2 size={25} /> Microsoft Store
                     </div>
                   </SpecularButton>
                   <SpecularButton onClick={() => handleDownloadAdobe('Download')}
-                    className="w-full sm:w-auto rounded-2xl border border-white/10 bg-white/5 backdrop-blur-[40px] shadow-[0_8px_32px_rgba(0,0,0,0.4)] !px-5 !py-3 sm:!px-9 sm:!py-4">
+                    className="w-full sm:w-auto rounded-2xl !border !border-white/30 sm:!border-white/10 !bg-white/20 sm:!bg-white/5 backdrop-blur-[40px] shadow-[0_8px_32px_rgba(0,0,0,0.5)] !px-5 !py-3.5 sm:!px-9 sm:!py-4">
                     <div className="flex items-center justify-center gap-2 font-bold text-base sm:text-lg text-white">
                       <Store size={22} /> Adobe Marketplace
                     </div>

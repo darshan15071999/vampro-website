@@ -3825,22 +3825,49 @@
     white-space: nowrap;
   }
 
-  /* Compact spiderweb overlay on mobile */
-  .sv-section-spiderweb-stage--bottom-aligned {
-    overflow: hidden;
-    height: clamp(100px, 18vh, 160px) !important;
-    max-height: 20vh !important;
+  /* Completely remove cheap spiderweb overlays and animations from mobile view */
+  .sv-section-spiderweb-stage,
+  .sv-section-spiderweb-stage--bottom-aligned,
+  .sv-spiderweb-video,
+  .sv-web-svg,
+  .sv-sidekick-web-effect {
+    display: none !important;
+    visibility: hidden !important;
     pointer-events: none !important;
-    bottom: 0 !important;
+    height: 0 !important;
+    width: 0 !important;
+    opacity: 0 !important;
   }
 
-  .sv-spiderweb-video {
-    height: 100% !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    object-fit: contain !important;
-    object-position: bottom center !important;
-    opacity: 0.82 !important;
+  /* Optimize mobile scroll performance - eliminate stutter and frame drops */
+  .sv-ambient-comic-grid--infinite-scroll {
+    animation: none !important;
+    transform: none !important;
+    will-change: auto !important;
+  }
+
+  /* Disable expensive scroll-triggered glitch animations on mobile */
+  .sv-vpage.sv-glitch-active .sv-comic-panel-frame,
+  .sv-vpage.sv-glitch-active .sv-glitch-title,
+  .sv-vpage.sv-glitch-active .sv-kicker,
+  .sv-vpage.sv-glitch-active .sv-box-halftone-dots,
+  .sv-vpage.sv-glitch-active .sv-comic-card,
+  .sv-vpage.sv-glitch-active .sv-step-card,
+  .sv-vpage.sv-glitch-active .sv-inspector-panel,
+  .sv-vpage.sv-glitch-active .sv-comic-speech-bubble-callout,
+  .sv-vpage.sv-glitch-active .sv-interactive-glitch-elem,
+  .sv-vpage.sv-glitch-active .sv-comic-2grid-top-box,
+  .sv-vpage.sv-glitch-active .sv-comic-2grid-bottom-box,
+  .sv-vpage.sv-glitch-active *::before {
+    animation: none !important;
+  }
+
+  .sv-vpage-container {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .sv-comic-panel-frame {
+    transform-style: flat !important;
   }
 
   .sv-intro-skip-btn {
