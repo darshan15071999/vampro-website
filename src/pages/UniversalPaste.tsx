@@ -952,7 +952,7 @@ const UniversalPaste = () => {
       product: 'Universal Paste',
       source,
       title: 'Sign up to download',
-      subtitle: 'Enter your details to get Universal Paste on Microsoft Windows Store.',
+      subtitle: 'Enter details to download for Windows Store.',
       buttonText: 'Sign Up',
       successTitle: 'Redirecting...',
       successMessage: 'Thank you for signing up!',
@@ -967,12 +967,27 @@ const UniversalPaste = () => {
       product: 'Universal Paste',
       source,
       title: 'Sign up to download',
-      subtitle: 'Enter your details to get Universal Paste on Adobe Exchange.',
+      subtitle: 'Enter details to download for Adobe Exchange.',
       buttonText: 'Sign Up',
       successTitle: 'Redirecting...',
       successMessage: 'Thank you for signing up!',
       onSuccess: () => {
         window.open(ADOBE_EXCHANGE_URL, '_blank');
+      },
+    });
+  };
+
+  const handleOpenPromoSignup = (source = 'Top Yellow Strip') => {
+    openSignup({
+      product: 'Universal Paste',
+      source,
+      title: 'Sign up to download',
+      subtitle: 'Enter details to get Universal Paste.',
+      buttonText: 'Sign Up',
+      successTitle: 'Redirecting...',
+      successMessage: 'Thank you for signing up!',
+      onSuccess: () => {
+        window.open(WINDOWS_STORE_URL, '_blank');
       },
     });
   };
@@ -1783,6 +1798,27 @@ const UniversalPaste = () => {
           </div>
         </div>
       </header>
+
+      {/* ── YELLOW PROMO STRIP JUST BELOW HEADER ── */}
+      <div
+        className="sv-coming-soon-banner"
+        onClick={() => handleOpenPromoSignup('Top Yellow Strip')}
+        style={{ cursor: 'pointer' }}
+      >
+        <div className="sv-coming-soon-track">
+          <span>⚡ Free for a limited time, sign up now! ⚡</span>
+        </div>
+        <button
+          type="button"
+          className="sv-top-banner-waitlist-btn"
+          onClick={(e) => {
+            e.stopPropagation();
+            handleOpenPromoSignup('Top Yellow Strip');
+          }}
+        >
+          SIGN UP NOW ➔
+        </button>
+      </div>
 
 
 

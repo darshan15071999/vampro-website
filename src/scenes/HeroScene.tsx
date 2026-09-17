@@ -1,6 +1,7 @@
-import { forwardRef, useEffect, useState } from 'react';
+import { forwardRef, useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
+import { AlertTriangle } from 'lucide-react';
 import { useWaitlist } from '../context/WaitlistContext';
 
 // Rotating hero word: each new word sketches itself in while the
@@ -51,6 +52,26 @@ const SketchRotator = () => {
 
 const HeroScene = forwardRef<HTMLElement>((_, ref) => {
   const { openModal, hasJoined } = useWaitlist();
+  const [showSubscribedWarning, setShowSubscribedWarning] = useState(false);
+  const warningTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (warningTimerRef.current) clearTimeout(warningTimerRef.current);
+    };
+  }, []);
+
+  const handleSubscribeClick = () => {
+    if (hasJoined) {
+      setShowSubscribedWarning(true);
+      if (warningTimerRef.current) clearTimeout(warningTimerRef.current);
+      warningTimerRef.current = setTimeout(() => {
+        setShowSubscribedWarning(false);
+      }, 4500);
+      return;
+    }
+    openModal('Hero');
+  };
 
   return (
     <section ref={ref} className="bp-scene relative w-full min-h-screen overflow-hidden flex flex-col justify-center" data-scene="hero">
@@ -66,10 +87,28 @@ const HeroScene = forwardRef<HTMLElement>((_, ref) => {
         </p>
         <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 w-full sm:w-auto">
           <Link to="/plugins/voice-generator" className="px-6 py-3 sm:px-10 sm:py-4 text-xs sm:text-sm font-medium tracking-widest uppercase border border-[var(--bp-accent)] text-[var(--bp-accent)] hover:bg-[var(--bp-accent)]/10 transition-colors duration-300 w-full sm:w-auto">Explore products</Link>
-          <button onClick={() => openModal('Hero')} className={`px-6 py-3 sm:px-10 sm:py-4 text-xs sm:text-sm font-medium tracking-widest uppercase border transition-colors duration-300 w-full sm:w-auto ${hasJoined ? 'border-[var(--bp-accent)]/30 text-[var(--bp-accent)]/50 cursor-default' : 'border-[var(--bp-accent)] text-[var(--bp-accent)] hover:bg-[var(--bp-accent)]/10'}`}>
+          <button
+            type="button"
+            onClick={handleSubscribeClick}
+            className={`px-6 py-3 sm:px-10 sm:py-4 text-xs sm:text-sm font-medium tracking-widest uppercase border transition-colors duration-300 w-full sm:w-auto cursor-pointer ${
+              hasJoined
+                ? 'border-[var(--bp-accent)]/50 text-[var(--bp-accent)] hover:bg-[var(--bp-accent)]/10'
+                : 'border-[var(--bp-accent)] text-[var(--bp-accent)] hover:bg-[var(--bp-accent)]/10'
+            }`}
+          >
             {hasJoined ? 'Subscribed to newsletter' : 'Subscribe to newsletter'}
           </button>
         </div>
+
+        {showSubscribedWarning && (
+          <div
+            role="alert"
+            className="mt-5 px-5 py-3 bg-amber-500/15 border border-amber-400/40 text-amber-300 text-xs sm:text-sm font-medium tracking-wide flex items-center justify-center gap-2.5 rounded-lg shadow-[0_4px_24px_rgba(245,158,11,0.2)] animate-fade-in transition-all"
+          >
+            <AlertTriangle size={18} className="text-amber-400 shrink-0" />
+            <span>You are already subscribed to the newsletter.</span>
+          </div>
+        )}
       </div>
 
       <div data-anim="hero-cue" className="hidden lg:flex absolute bottom-0 left-1/2 -translate-x-1/2 flex-col items-center gap-2" aria-hidden="true">

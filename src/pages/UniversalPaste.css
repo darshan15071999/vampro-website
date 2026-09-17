@@ -820,8 +820,8 @@
 .sv-vpage-container {
   position: relative;
   width: 100%;
-  padding-top: 72px;
-  /* 72px header */
+  padding-top: 106px;
+  /* 72px header + 34px banner */
   background: #08090d;
   overflow-x: hidden;
 }
@@ -829,7 +829,7 @@
 .sv-vpage {
   position: relative;
   width: 100%;
-  min-height: calc(100dvh - 72px);
+  min-height: calc(100dvh - 106px);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -837,7 +837,7 @@
   padding: clamp(20px, 2.8vh, 48px) 0;
   overflow: visible;
   box-sizing: border-box;
-  scroll-margin-top: 72px;
+  scroll-margin-top: 106px;
 }
 
 .sv-vpage:not(#sv-hero) {
@@ -860,7 +860,7 @@
 #sv-workflow.sv-vpage,
 .sv-vpage--workflow {
   justify-content: center;
-  scroll-margin-top: 72px;
+  scroll-margin-top: 106px;
 }
 
 #sv-how .sv-comic-panel-frame,
@@ -2763,7 +2763,7 @@
    10. SECTION 5: WHY VAMPRO (2x2 GRID & AUTHENTIC SPEECH BUBBLE CALLOUT)
    ════════════════════════════════════════ */
 .sv-vpage--why {
-  min-height: calc(100dvh - 72px);
+  min-height: calc(100dvh - 106px);
   padding: clamp(16px, 2.2vh, 32px) 0;
 }
 
