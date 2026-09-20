@@ -340,3 +340,119 @@ export const universalPasteHowToSchema: SchemaType = {
   ]
 };
 
+export const voiceStudioSchema: SchemaType = [
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Vampro Voice Studio",
+    "applicationCategory": "MultimediaApplication",
+    "operatingSystem": "Windows 10, Windows 11 (64-bit)",
+    "softwareRequirements": "Adobe Premiere Pro 24.0 or higher",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/PreOrder"
+    },
+    "description": "Premiere Pro AI voice and audio production suite. Combines private offline voice synthesis and cloning with optional ElevenLabs BYOK cloud intelligence, speech-to-speech conversion, vocal isolation, and stem separation directly on your timeline.",
+    "url": "https://vampro.in/plugins/voice-studio",
+    "image": "https://vampro.in/forest-studio.png",
+    "screenshot": "https://vampro.in/forest-studio.png",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Vampro"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Vampro Voice Studio for Adobe Premiere Pro",
+    "description": "Professional AI voice generation, speech-to-speech conversion, and audio stem separation plugin for Adobe Premiere Pro editors.",
+    "brand": {
+      "@type": "Brand",
+      "name": "Vampro"
+    },
+    "category": "Audio & Video Editing Software Plugin",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/PreOrder"
+    },
+    "url": "https://vampro.in/plugins/voice-studio"
+  }
+];
+
+export const voiceStudioFaqSchema: SchemaType = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is Vampro Voice Studio?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Vampro Voice Studio is an advanced Premiere Pro extension and Windows companion that provides offline voice synthesis, zero-latency local voice cloning, speech-to-speech conversion, stem separation (vocals/music), and optional ElevenLabs BYOK cloud generation."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does Vampro Voice Studio work completely offline?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Offline jobs execute locally on your Windows CPU or Vulkan GPU using embedded GGUF and ONNX models. Your project audio, source clips, and voice references never leave your computer."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I connect my own ElevenLabs API key?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Voice Studio supports a Bring Your Own Key (BYOK) model for ElevenLabs. Your key is stored securely in your Windows Credential Manager / DPAPI and is only used when you explicitly trigger cloud generation."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does stem separation work in Voice Studio?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Voice Studio uses an integrated native ONNX neural separator to split dialogue, vocals, and background accompaniment tracks directly from clips selected on your Premiere Pro timeline."
+      }
+    }
+  ]
+};
+
+export const voiceStudioHowToSchema: SchemaType = {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to Generate AI Voices in Adobe Premiere Pro with Voice Studio",
+  "description": "Step-by-step guide to generating natural AI voices, voice clones, or speech-to-speech conversions inside Premiere Pro.",
+  "totalTime": "PT1M",
+  "step": [
+    {
+      "@type": "HowToStep",
+      "position": 1,
+      "name": "Select Track or Enter Script",
+      "text": "Open Vampro Voice Studio inside Premiere Pro and enter your voiceover script or select existing timeline dialogue for speech-to-speech."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 2,
+      "name": "Choose Engine & Voice Profile",
+      "text": "Select Offline Engine for 100% private local generation, or ElevenLabs for cloud-rendered ultra-realistic voices."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 3,
+      "name": "Generate & Preview",
+      "text": "Render the audio take and audition variations in real time with interactive waveform controls."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 4,
+      "name": "Place to Timeline",
+      "text": "Click 'Place to Timeline' to insert the generated WAV asset directly onto your Premiere Pro audio track."
+    }
+  ]
+};
+

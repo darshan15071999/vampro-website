@@ -111,7 +111,32 @@ Vampro Universal Paste eliminates the friction between researching visual media 
 - **Q: Which versions of Adobe Premiere Pro are compatible?**
   A: Compatible with Adobe Premiere Pro 24.0 (2024), 25.0+ (2025), and later releases on Windows 10/11 64-bit (macOS support in development).
 
-## 4. Content & Resources
+## 4. Core Product: Vampro Voice Studio (AI Voice & Audio Production Suite)
+- **Type:** Premiere Pro UXP Plugin and Windows Companion Daemon.
+- **Target Users:** Professional video editors, documentary post-producers, commercial editors, sound designers, content creators.
+- **Product URL:** https://vampro.in/plugins/voice-studio
+- **Documentation URL:** https://vampro.in/docs/plugins/voice-studio
+- **Licenses URL:** https://vampro.in/plugins/voice-studio/licenses
+
+### 4.1 Overview & Architecture
+Vampro Voice Studio brings generative AI and deep neural audio processing directly onto the Adobe Premiere Pro timeline. It is engineered around a local-first philosophy, delivering 100% private offline voice cloning, speech-to-speech conversion, vocal isolation, and stem separation without sending raw timeline clips or audio to external servers. Editors who require ultra-high fidelity cloud voices can also connect their ElevenLabs account via Bring Your Own Key (BYOK) with Windows DPAPI encryption.
+
+### 4.2 Key Features & Capabilities
+1. **Offline Neural Engine:** Powered by local GGUF models (Chatterbox / audio.cpp) executing on CPU (AVX2) or Vulkan GPU for instantaneous, subscription-free speech generation and zero-shot voice cloning.
+2. **Optional ElevenLabs BYOK Mode:** Directly interfaces with ElevenLabs API using the editor's personal key. Encrypted locally with Windows DPAPI; zero middleware or cloud markup.
+3. **Speech-to-Speech (STS) Conversion:** Re-cast scratch dialogue or actor takes into target voices while preserving precise emotional delivery, inflection, pacing, and comedic timing.
+4. **Neural Stem Separation:** Built-in two-stem ONNX model (sherpa-onnx / Spleeter) splits mixed timeline clips into pristine dialogue/vocals and backing accompaniment.
+5. **Spectral Denoising & Cleaning:** Removes background noise, hum, and hiss using calibrated spectral profiles without destructive artifacts.
+6. **Multi-Track Timeline Routing:** Place generated speech or separated audio stems straight onto designated Premiere Pro sequence tracks at the playhead in 24-bit WAV format.
+7. **Complete Data Privacy:** Stores all operational files locally under `%LOCALAPPDATA%\Vampro\VoiceStudio`. Contains no telemetry, no tracking, and zero advertising.
+
+### 4.3 System Requirements
+- **Operating System:** Windows 10 (64-bit), Windows 11 (64-bit).
+- **Host Application:** Adobe Premiere Pro 24.0 or later.
+- **Hardware Acceleration:** CPU with AVX2 or Vulkan-compatible GPU.
+- **Local Storage:** 4 GB for runtime and offline neural packs.
+
+## 5. Content & Resources
 - **Blog (editing tips, AI workflows, creative automation):** https://vampro.in/blog
   - [7 Ways AI Can Speed Up Your Video Editing Workflow](https://vampro.in/blog/ai-speed-up-video-editing-workflow)
   - [AI Voiceovers vs Human Voiceovers: Which Should You Choose?](https://vampro.in/blog/ai-voiceovers-vs-human-voiceovers)
@@ -131,8 +156,9 @@ Vampro Universal Paste eliminates the friction between researching visual media 
 - **YouTube (stories behind the build):** https://youtube.com/@vamprotech
 - **Support:** support@vampro.in
 
-## 5. Legal & Policies
+## 6. Legal & Policies
 - **Privacy Policy:** https://vampro.in/privacy
 - **Terms of Service:** https://vampro.in/terms
-- **Licenses (Voice Generator):** https://vampro.in/plugins/voice-generator/licenses
+- **Licenses (Voice Studio):** https://vampro.in/plugins/voice-studio/licenses
 - **Licenses (Universal Paste):** https://vampro.in/plugins/universal-paste/licenses
+- **Licenses (Voice Generator):** https://vampro.in/plugins/voice-generator/licenses

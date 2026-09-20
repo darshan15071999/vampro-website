@@ -13,6 +13,7 @@ import StoryScene, { storyTimeline } from '../scenes/StoryScene';
 import ServicesScene, { servicesTimeline } from '../scenes/ServicesScene';
 import VoiceScene, { voiceTimeline } from '../scenes/VoiceScene';
 import UniversalPasteScene, { universalPasteTimeline } from '../scenes/UniversalPasteScene';
+import VoiceStudioScene, { voiceStudioTimeline } from '../scenes/VoiceStudioScene';
 import BlogScene, { blogTimeline } from '../scenes/BlogScene';
 import YoutubeScene, { youtubeTimeline } from '../scenes/YoutubeScene';
 import type { CameraRigHandle } from '../scenes/CameraRig';
@@ -38,6 +39,7 @@ const Home = () => {
   const servicesRef = useRef<HTMLElement>(null);
   const voiceRef = useRef<HTMLElement>(null);
   const universalPasteRef = useRef<HTMLElement>(null);
+  const voiceStudioRef = useRef<HTMLElement>(null);
   const blogRef = useRef<HTMLElement>(null);
   const youtubeRef = useRef<HTMLElement>(null);
   const rigRef = useRef<CameraRigHandle>(null);
@@ -105,6 +107,8 @@ const Home = () => {
         .add(voiceTimeline(voiceRef.current!), '-=0.2')
         .addLabel('universal-paste')
         .add(universalPasteTimeline(universalPasteRef.current!), '-=0.2')
+        .addLabel('voice-studio')
+        .add(voiceStudioTimeline(voiceStudioRef.current!), '-=0.2')
         .addLabel('blog')
         .add(blogTimeline(blogRef.current!), '-=0.2')
         .addLabel('youtube')
@@ -113,7 +117,7 @@ const Home = () => {
       ScrollTrigger.create({
         trigger: stage,
         start: 'top top',
-        end: '+=8500',
+        end: '+=9800',
         pin: true,
         scrub: true,
         animation: master,
@@ -188,6 +192,7 @@ const Home = () => {
         <ServicesScene ref={servicesRef} />
         <VoiceScene ref={voiceRef} />
         <UniversalPasteScene ref={universalPasteRef} />
+        <VoiceStudioScene ref={voiceStudioRef} />
         <BlogScene ref={blogRef} />
         <YoutubeScene ref={youtubeRef} />
       </div>

@@ -21,6 +21,8 @@ const DocsSignalScope = lazy(() => import('./pages/DocsSignalScope'));
 const UniversalPaste = lazy(() => import('./pages/UniversalPaste'));
 const DocsUniversalPaste = lazy(() => import('./pages/DocsUniversalPaste'));
 const DocsHub = lazy(() => import('./pages/DocsHub'));
+const VoiceStudio = lazy(() => import('./pages/VoiceStudio'));
+const DocsVoiceStudio = lazy(() => import('./pages/DocsVoiceStudio'));
 
 // Blogs
 const BlogTemplate = lazy(() => import('./pages/BlogTemplate'));
@@ -38,6 +40,9 @@ const SignalScopeTerms = lazy(() => import('./pages/legal/SignalScopeTerms'));
 const UniversalPastePrivacy = lazy(() => import('./pages/legal/UniversalPastePrivacy'));
 const UniversalPasteTerms = lazy(() => import('./pages/legal/UniversalPasteTerms'));
 const UniversalPasteLicenses = lazy(() => import('./pages/legal/UniversalPasteLicenses'));
+const VoiceStudioPrivacy = lazy(() => import('./pages/legal/VoiceStudioPrivacy'));
+const VoiceStudioTerms = lazy(() => import('./pages/legal/VoiceStudioTerms'));
+const VoiceStudioLicenses = lazy(() => import('./pages/legal/VoiceStudioLicenses'));
 
 // Context & Modals
 import { WaitlistProvider } from './context/WaitlistContext';
@@ -83,9 +88,10 @@ const App = () => {
     location.pathname.includes('licenses') ||
     location.pathname.startsWith('/blog');
 
-  // Hide particles on docs-style and universal-paste pages
+  // Hide particles on docs-style, universal-paste, and voice-studio pages
   const showParticles = location.pathname !== '/' &&
     !location.pathname.startsWith('/plugins/universal-paste') &&
+    !location.pathname.startsWith('/plugins/voice-studio') &&
     !location.pathname.startsWith('/docs') &&
     !location.pathname.includes('privacy') &&
     !location.pathname.includes('terms') &&
@@ -108,7 +114,7 @@ const App = () => {
         {showParticles && <FullPageParticles isDark={isDarkPage} />}
         <div className="relative" style={{ zIndex: 2 }}>
           <ScrollToTop />
-          {location.pathname !== '/plugins/universal-paste' && (
+          {location.pathname !== '/plugins/universal-paste' && location.pathname !== '/plugins/voice-studio' && (
             <Navbar searchOpen={searchOpen} openSearch={openSearch} />
           )}
           <SearchOverlay searchOpen={searchOpen} closeSearch={closeSearch} />
@@ -127,11 +133,13 @@ const App = () => {
                 <Route path="/plugins" element={<Navigate to="/plugins/voice-generator" replace />} />
                 <Route path="/plugins/voice-generator" element={<AdobeVoice />} />
                 <Route path="/plugins/universal-paste" element={<UniversalPaste />} />
+                <Route path="/plugins/voice-studio" element={<VoiceStudio />} />
                 <Route path="/software/signalscope" element={<AEOTracker />} />
                 <Route path="/games/spoch" element={<Spoch />} />
 
                 {/* Redirects */}
                 <Route path="/voice-generator" element={<Navigate to="/plugins/voice-generator" replace />} />
+                <Route path="/voice-studio" element={<Navigate to="/plugins/voice-studio" replace />} />
                 <Route path="/signalscope" element={<Navigate to="/software/signalscope" replace />} />
                 <Route path="/spoch" element={<Navigate to="/games/spoch" replace />} />
 
@@ -143,6 +151,7 @@ const App = () => {
                 <Route path="/docs" element={<DocsHub />} />
                 <Route path="/docs/plugins/voice-generator" element={<DocsVoice />} />
                 <Route path="/docs/plugins/universal-paste" element={<DocsUniversalPaste />} />
+                <Route path="/docs/plugins/voice-studio" element={<DocsVoiceStudio />} />
                 <Route path="/docs/games/spoch" element={<DocsSpoch />} />
                 <Route path="/docs/software/signalscope" element={<DocsSignalScope />} />
 
@@ -157,6 +166,9 @@ const App = () => {
                 <Route path="/plugins/universal-paste/privacy" element={<UniversalPastePrivacy />} />
                 <Route path="/plugins/universal-paste/terms" element={<UniversalPasteTerms />} />
                 <Route path="/plugins/universal-paste/licenses" element={<UniversalPasteLicenses />} />
+                <Route path="/plugins/voice-studio/privacy" element={<VoiceStudioPrivacy />} />
+                <Route path="/plugins/voice-studio/terms" element={<VoiceStudioTerms />} />
+                <Route path="/plugins/voice-studio/licenses" element={<VoiceStudioLicenses />} />
                 <Route path="/software/signalscope/privacy" element={<SignalScopePrivacy />} />
                 <Route path="/software/signalscope/terms" element={<SignalScopeTerms />} />
                 <Route path="/games/spoch/privacy" element={<SpochPrivacy />} />

@@ -83,7 +83,8 @@ const Navbar = ({ openSearch }: NavbarProps) => {
       href: '#',
       subItems: [
         { label: 'Voice Generator', href: '/plugins/voice-generator', description: 'AI text-to-speech for Premiere Pro' },
-        { label: 'Universal Paste', href: '/plugins/universal-paste', description: 'Turn clipboard content into timeline assets' }
+        { label: 'Universal Paste', href: '/plugins/universal-paste', description: 'Turn clipboard content into timeline assets' },
+        { label: 'Voice Studio', href: '/plugins/voice-studio', description: 'Offline voice cloning, STS & stem separation', comingSoon: true }
       ]
     },
     { label: 'Blog', href: '/blog' },
@@ -96,6 +97,7 @@ const Navbar = ({ openSearch }: NavbarProps) => {
     { label: 'Services', href: '/', sectionId: 'services' },
     { label: 'Voice Generator', href: '/plugins/voice-generator' },
     { label: 'Universal Paste', href: '/plugins/universal-paste' },
+    { label: 'Voice Studio', href: '/plugins/voice-studio', comingSoon: true },
     { label: 'Blog', href: '/blog' },
     { label: 'Docs', href: '/docs' },
     { label: 'YouTube', href: 'https://youtube.com/@vamprotech?si=vponnTvHyIzwDmON', external: true, icon: <PlayCircle size={13} /> },
@@ -173,7 +175,14 @@ const Navbar = ({ openSearch }: NavbarProps) => {
                               onClick={() => { setDropdownOpen(false); setIsMobileMenuOpen(false); }}
                               className={`block px-4 py-3 rounded-xl transition-all ${isLight ? 'hover:bg-slate-50' : 'hover:bg-white/5'}`}
                             >
-                              <div className={`text-sm font-semibold mb-1 ${isLight ? 'text-slate-800' : 'text-white'}`}>{sub.label}</div>
+                              <div className={`text-sm font-semibold mb-1 flex items-center justify-between ${isLight ? 'text-slate-800' : 'text-white'}`}>
+                                <span>{sub.label}</span>
+                                {(sub as any).comingSoon && (
+                                  <span className="text-[9px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                                    Coming Soon
+                                  </span>
+                                )}
+                              </div>
                               <div className={`text-xs ${isLight ? 'text-slate-500' : 'text-slate-400'}`}>{sub.description}</div>
                             </Link>
                           ))}
@@ -276,7 +285,14 @@ const Navbar = ({ openSearch }: NavbarProps) => {
                   )}
                   className={`block w-full text-left px-4 py-3 font-medium rounded-xl transition-colors ${isLight ? 'text-slate-700 hover:bg-slate-100' : 'text-white hover:bg-indigo-900/20'}`}
                 >
-                  {item.label}
+                  <div className="flex items-center justify-between">
+                    <span>{item.label}</span>
+                    {(item as any).comingSoon && (
+                      <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                        Coming Soon
+                      </span>
+                    )}
+                  </div>
                 </Element>
               );
             })}

@@ -1,0 +1,81 @@
+/* Voice Studio's world: a precision recording room inside the creative wild. */
+.vs-forest-theme{background-image:linear-gradient(#06100bf2,#06100bec),url('/forest-studio.png');background-size:cover;background-position:center;background-attachment:fixed}
+.vs-forest-theme .vs-header{background:#06100bdc}
+.vs-forest-hero{position:relative;isolation:isolate;min-height:740px;overflow:hidden;background:#07170e}
+.vs-forest-scene{position:absolute;inset:0;z-index:-1;overflow:hidden}
+.vs-forest-scene>img{width:100%;height:100%;object-fit:cover;object-position:center 52%;transform:translate(var(--forest-x),var(--forest-y)) scale(1.025);filter:brightness(calc(.78 + var(--refinement) * .17)) saturate(1.02);transition:transform .5s ease-out,filter .4s}
+.vs-forest-shade{position:absolute;inset:0;background:linear-gradient(90deg,#03100bea 0%,#03100bb3 25%,#03100b12 65%),linear-gradient(#03100b63 0%,transparent 29%,transparent 56%,#03100bb3 76%,#06100b 100%)}
+.vs-forest-light{position:absolute;inset:23% 6% 16% 34%;background:radial-gradient(ellipse,#a3ffbf25,transparent 60%);opacity:calc(var(--refinement) * .85);mix-blend-mode:screen;transition:opacity .35s;pointer-events:none}
+.vs-forest-content{position:relative;min-height:740px;display:flex;flex-direction:column;padding-top:25px;padding-bottom:23px}
+.vs-forest-topline{display:flex;align-items:center;justify-content:space-between;margin-bottom:35px}
+.vs-forest-topline .vs-eyebrow{margin:0;font-size:9px;letter-spacing:1.8px}
+.vs-forest-topline>span:last-child{font:7px var(--vs-mono);letter-spacing:1.8px;color:#b2c9b9;text-shadow:0 2px 15px #000}
+.vs-forest-copy{max-width:610px;padding:20px 0 27px;position:relative;z-index:2}
+.vs-forest-copy .vs-product-pill{font-size:8px;color:#b2c9b6;margin-bottom:24px}
+.vs-page .vs-forest-copy h1{font-size:clamp(62px,6.6vw,91px);line-height:1.06;letter-spacing:-3.8px;text-shadow:0 3px 30px #0210068c}
+.vs-page .vs-forest-copy h1 em{letter-spacing:-3.7px;color:#b4efbd}
+.vs-forest-copy>p{font-size:14px;line-height:1.9;color:#c1d1c4;max-width:365px;margin:23px 0 26px;text-shadow:0 2px 15px #000}
+.vs-forest-copy .vs-hero-actions{gap:23px}
+.vs-forest-copy .vs-hero-actions .vs-button{font-size:11px}
+.vs-forest-copy .vs-hero-facts{font-size:9px;color:#bacfbd;margin-top:21px}
+.vs-forest-copy .vs-status-dot{width:4px;height:4px}
+.vs-studio-location{position:absolute;left:67%;top:53%;display:flex;gap:9px;align-items:center;transform:translate(-50%,-50%);color:#e2f5e6;text-shadow:0 2px 8px #000;font:8px var(--vs-mono);letter-spacing:1.8px;pointer-events:none}
+.vs-studio-location>span:last-child{display:flex;flex-direction:column;gap:5px;white-space:nowrap}
+.vs-studio-location small{font:5px var(--vs-mono);letter-spacing:1px;color:#c8e6ce}
+.vs-location-ring{width:20px;height:20px;display:grid;place-items:center;border:1px solid #c4edc9;border-radius:50%;background:#14371cb3;box-shadow:0 0 0 6px #caffca18;transition:box-shadow .3s}
+.vs-location-ring:after{content:'';width:4px;height:4px;border-radius:50%;background:#b3ffbc}
+.vs-forest-stage-2 .vs-location-ring{box-shadow:0 0 0 11px #caffca15,0 0 30px #b1ffb96b}
+.vs-forest-interaction{margin-top:auto;position:relative;z-index:3;border:1px solid #a9d4b04d;background:linear-gradient(120deg,#10271cdc,#091b12e8);border-radius:9px;backdrop-filter:blur(20px);box-shadow:0 15px 65px #0005;max-width:100%;overflow:hidden}
+.vs-forest-stages{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid #a9d4b024}
+.vs-forest-stages button{padding:17px 25px;display:flex;align-items:center;gap:12px;background:transparent;color:#9fb8a8;text-align:left;position:relative;transition:background .2s,color .2s;min-height:66px}
+.vs-forest-stages button+button{border-left:1px solid #a9d4b024}
+.vs-forest-stages button[aria-pressed=true]{background:#6b9c6b24;color:#d0f7d7}
+.vs-forest-stages button[aria-pressed=true]:after{position:absolute;bottom:-1px;left:24px;right:24px;height:1px;background:#a6e9b4;content:'';box-shadow:0 0 12px #a6e9b4}
+.vs-forest-stage-icon{width:32px;height:32px;display:grid;place-items:center;background:#709c7712;border:1px solid #779b805e;border-radius:50%;flex-shrink:0}
+.vs-forest-stages button>span:nth-child(2){display:flex;align-items:center;gap:12px}
+.vs-forest-stages small{font:7px var(--vs-mono);color:#95b29d}
+.vs-forest-stages strong{font-size:12px;font-weight:500;white-space:nowrap}
+.vs-journey-arrow{margin-left:auto;color:#8cbd955e}
+.vs-forest-mixer{display:flex;align-items:center;gap:25px;padding:19px 25px 15px}
+.vs-mixer-title{display:flex;align-items:center;gap:11px;color:#c0ddc7;min-width:220px}
+.vs-mixer-title>div{display:flex;flex-direction:column;gap:5px}
+.vs-mixer-title strong{font-size:11px;font-weight:400}
+.vs-mixer-title span{font-size:8px;color:#94b29c}
+.vs-sound-button{height:36px;width:36px;display:grid;place-items:center;background:#c0efc6;color:#17331f!important;border-radius:50%;flex-shrink:0;transition:background .2s}
+.vs-sound-button:hover{background:#d9ffe1}
+.vs-refinement{flex:1;min-width:100px;max-width:340px}
+.vs-refinement>div{display:flex;align-items:center;justify-content:space-between;font:6px var(--vs-mono);letter-spacing:.8px;color:#a1c3a9;margin-bottom:9px}
+.vs-refinement>div>span{color:#e0f3e3;font-size:7px}
+.vs-refinement input{display:block;width:100%;height:4px;appearance:none;background:linear-gradient(90deg,#42684c,#afe9b8);border:0;border-radius:10px;cursor:ew-resize;margin:0}
+.vs-refinement input::-webkit-slider-thumb{appearance:none;width:14px;height:14px;border-radius:50%;background:#caffcf;border:3px solid #2a5335;box-shadow:0 0 0 1px #99d7a5,0 0 15px #aafaba4d}
+.vs-refinement input::-moz-range-thumb{width:11px;height:11px;border-radius:50%;background:#caffcf;border:2px solid #2a5335}
+.vs-journey-signal{display:flex;align-items:center;justify-content:center;gap:3px;flex:1;height:43px;max-width:220px;padding-left:15px}
+.vs-journey-signal i{flex:1;max-width:3px;background:#9edbad;border-radius:2px;opacity:.7;transition:height .15s}
+.vs-forest-demo-note{display:flex;align-items:center;justify-content:space-between;gap:25px;padding:0 25px 13px;font-size:8px;color:#a4bdac}
+.vs-forest-demo-note>span:last-child{color:#8da596;font-size:7px;white-space:nowrap}
+.vs-benefit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:42px}
+.vs-benefit-grid article{padding:26px 0 0;border-top:1px solid #a0d4ac42}
+.vs-benefit-grid svg{color:#a7d8b1;margin-bottom:23px}
+.vs-benefit-grid h3{font-size:23px;letter-spacing:-.55px;margin-bottom:16px}
+.vs-benefit-grid p{font-size:13px;line-height:1.85;max-width:320px}
+.vs-forest-theme .vs-workflow-section,.vs-forest-theme .vs-features-section,.vs-forest-theme .vs-faq-section{background:#08160fdb}
+.vs-forest-theme .vs-feature{background:linear-gradient(140deg,#163322aa,#09180deb);border-radius:9px}
+.vs-workflow-demo{margin-top:55px;scroll-margin-top:105px}
+.vs-workflow-demo-label{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;gap:20px}
+.vs-workflow-demo-label .vs-eyebrow{margin:0;font-size:8px}
+.vs-workflow-demo-label p{font-size:11px}
+.vs-forest-theme .vs-console{background:#0b1b12;box-shadow:0 20px 80px #0006;border-color:#8daa7766}
+.vs-forest-theme .vs-steps{margin-top:30px}
+.vs-forest-theme .vs-engine-panel{background:radial-gradient(ellipse at 88% 55%,#1f5c314a,transparent 55%),#091a11dc}
+.vs-setup-section{border-block:1px solid var(--vs-line);background:#0d2317bf}
+.vs-setup-link{display:flex;align-items:center;gap:7px;font-size:11px;color:#afd7b5!important;margin-top:31px}
+.vs-forest-theme .vs-availability-inner{background:linear-gradient(90deg,#04120be8,#04120bae),url('/forest-studio.png') center 49%/cover;border-color:#72967b7d}
+.vs-forest-theme .vs-cta-wave{display:none}
+.vs-forest-theme .vs-availability h2{font-size:55px}
+@media(min-width:1450px){.vs-forest-hero,.vs-forest-content{min-height:810px}.vs-forest-topline{margin-bottom:50px}.vs-forest-copy{padding-top:35px}}
+@media(max-width:1100px){.vs-forest-hero,.vs-forest-content{min-height:720px}.vs-forest-copy{max-width:550px}.vs-page .vs-forest-copy h1{font-size:76px}.vs-forest-copy>p{max-width:335px;font-size:13px}.vs-forest-mixer{gap:21px}.vs-mixer-title{min-width:200px}.vs-forest-stages button{padding-inline:20px}.vs-forest-stages strong{font-size:11px}.vs-forest-stages button>span:nth-child(2){gap:9px}.vs-journey-signal{max-width:170px}.vs-studio-location{left:73%;top:54%}}
+@media(max-width:850px){.vs-forest-hero,.vs-forest-content{min-height:710px}.vs-forest-topline>span:last-child{font-size:6px;letter-spacing:1px}.vs-forest-topline{margin-bottom:30px}.vs-page .vs-forest-copy h1{font-size:66px}.vs-forest-copy>p{max-width:325px;font-size:13px}.vs-forest-copy .vs-product-pill{font-size:7px}.vs-forest-copy{max-width:460px}.vs-forest-scene>img{object-position:58% center}.vs-studio-location{left:77%;top:54%}.vs-studio-location>span:last-child{font-size:7px;letter-spacing:1px}.vs-studio-location small{font-size:4px}.vs-forest-stages button{padding:16px 14px;gap:9px}.vs-forest-stages strong{font-size:9px}.vs-forest-stages small{display:none}.vs-forest-stage-icon{width:28px;height:28px}.vs-journey-arrow{width:13px}.vs-forest-mixer{gap:18px;padding-inline:18px}.vs-mixer-title{min-width:175px;gap:8px}.vs-mixer-title strong{font-size:10px}.vs-mixer-title span{font-size:7px}.vs-journey-signal{max-width:100px;gap:2px;padding-left:0}.vs-forest-demo-note{padding-inline:18px;font-size:7px}.vs-forest-demo-note>span:last-child{font-size:6px}.vs-benefit-grid{gap:25px}.vs-benefit-grid h3{font-size:19px}.vs-benefit-grid p{font-size:12px}.vs-workflow-demo-label p{font-size:9px}.vs-forest-theme .vs-availability h2{font-size:45px}}
+@media(max-width:640px){.vs-forest-theme{background-attachment:scroll;background-image:linear-gradient(#06100bf2,#06100bef),url('/forest-studio.png');background-size:auto 1500px;background-repeat:repeat-y}.vs-forest-hero,.vs-forest-content{min-height:945px}.vs-forest-content{padding-top:21px;padding-bottom:21px}.vs-forest-topline{margin-bottom:22px}.vs-forest-topline .vs-eyebrow{font-size:7px;letter-spacing:1.3px}.vs-forest-topline>span:last-child{display:none}.vs-forest-copy{padding:12px 0 0;max-width:none}.vs-forest-copy .vs-product-pill{font-size:6px;letter-spacing:.7px;margin-bottom:19px}.vs-page .vs-forest-copy h1{font-size:clamp(48px,11.4vw,66px);letter-spacing:-2.2px;line-height:1.06}.vs-page .vs-forest-copy h1 em{letter-spacing:-2.5px}.vs-forest-copy>p{font-size:12px;line-height:1.85;margin:18px 0 21px;max-width:310px}.vs-forest-copy .vs-hero-actions{gap:17px;flex-wrap:nowrap}.vs-forest-copy .vs-hero-actions .vs-button{font-size:9px;gap:10px;padding-inline:13px;min-height:43px}.vs-forest-copy .vs-hero-actions .vs-button-quiet{padding-inline:0;gap:7px}.vs-forest-copy .vs-hero-facts{font-size:8px;margin-top:18px;gap:19px}.vs-forest-scene>img{position:absolute;top:260px;left:0;width:100%;height:540px;object-fit:cover;object-position:59% center;transform:none;filter:brightness(calc(.93 + var(--refinement) * .1))}.vs-forest-shade{background:linear-gradient(#06120b 0%,#06120b 24%,#06120b25 43%,transparent 60%,#06120b9c 75%,#06100b 100%)}.vs-forest-light{inset:39% 0 16% 0}.vs-studio-location{left:52%;top:58%;transform:translateX(-50%);text-shadow:0 2px 8px #000}.vs-studio-location>span:last-child{font-size:7px;letter-spacing:1.2px}.vs-studio-location small{font-size:4px}.vs-forest-interaction{margin-top:auto;border-radius:7px;background:#0b2116eb}.vs-forest-stages button{flex-direction:column;gap:9px;padding:14px 4px;min-height:82px;text-align:center}.vs-forest-stages button>span:nth-child(2){display:block}.vs-forest-stages strong{font-size:8px;white-space:normal;line-height:1.25;display:block}.vs-forest-stages button[aria-pressed=true]:after{left:12px;right:12px}.vs-forest-stage-icon{width:28px;height:28px}.vs-journey-arrow{display:none}.vs-forest-mixer{display:grid;grid-template-columns:1fr 34px;gap:20px 13px;padding:18px 16px 17px}.vs-mixer-title{min-width:0;gap:9px}.vs-mixer-title strong{font-size:10px}.vs-mixer-title span{font-size:8px}.vs-sound-button{height:33px;width:33px}.vs-refinement{grid-column:1 / -1;max-width:none;padding-bottom:5px}.vs-refinement>div{font-size:6px;margin-bottom:14px}.vs-refinement>div>span{font-size:7px}.vs-refinement input{height:5px}.vs-refinement input::-webkit-slider-thumb{width:19px;height:19px}.vs-journey-signal{display:none}.vs-forest-demo-note{padding:0 16px 14px;display:flex;align-items:flex-start;flex-direction:column;gap:7px;font-size:8px}.vs-forest-demo-note>span:last-child{font-size:6px;white-space:normal}.vs-benefit-grid{grid-template-columns:1fr;gap:30px}.vs-benefit-grid article{padding-top:24px}.vs-benefit-grid svg{margin-bottom:18px}.vs-benefit-grid h3{font-size:24px}.vs-benefit-grid p{font-size:13px;max-width:none}.vs-workflow-demo{margin-top:35px}.vs-workflow-demo-label{align-items:flex-start;flex-direction:column;gap:7px;margin-bottom:20px}.vs-workflow-demo-label .vs-eyebrow{font-size:7px}.vs-workflow-demo-label p{font-size:10px}.vs-setup-link{font-size:10px;line-height:1.6;align-items:flex-start}.vs-setup-link svg{flex-shrink:0;margin-top:2px}.vs-forest-theme .vs-availability h2{font-size:35px;letter-spacing:-1.6px}.vs-forest-theme .vs-availability h2 em{margin-top:8px}.vs-forest-theme .vs-availability-inner{background-position:58% center}}
+@media(max-width:360px){.vs-page .vs-forest-copy h1{font-size:43px}.vs-page .vs-forest-copy h1 em{letter-spacing:-2.4px}.vs-forest-copy .vs-hero-actions{gap:13px}.vs-forest-copy .vs-hero-actions .vs-button{font-size:8px;padding-inline:10px}.vs-forest-copy .vs-hero-actions .vs-button-quiet{padding-inline:0}.vs-forest-stages strong{font-size:7px}}
+@media(prefers-reduced-motion:reduce){.vs-forest-scene>img{transform:none!important}.vs-forest-theme{background-attachment:scroll}}
+@media(min-width:641px) and (max-height:850px){.vs-forest-hero,.vs-forest-content{min-height:calc(100svh - 79px)}.vs-forest-content{padding-top:20px;padding-bottom:17px}.vs-forest-topline{margin-bottom:17px}.vs-forest-copy{padding:0 0 14px}.vs-page .vs-forest-copy h1{font-size:65px;letter-spacing:-2.8px}.vs-page .vs-forest-copy h1 em{letter-spacing:-2.8px}.vs-forest-copy .vs-product-pill{margin-bottom:14px;font-size:7px}.vs-forest-copy>p{font-size:12px;line-height:1.8;margin:16px 0 17px;max-width:365px}.vs-forest-copy .vs-button{min-height:41px}.vs-forest-copy .vs-hero-facts{margin-top:13px;font-size:8px}.vs-forest-stages button{min-height:54px;padding-block:11px}.vs-forest-mixer{padding-top:12px;padding-bottom:10px}.vs-forest-demo-note{padding-bottom:10px}.vs-studio-location{top:48%;left:69%}}

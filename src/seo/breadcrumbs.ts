@@ -99,3 +99,37 @@ export const licensesBreadcrumb = generateBreadcrumbSchema([
   { name: 'Home', item: 'https://vampro.in' },
   { name: 'Licenses', item: 'https://vampro.in/licenses' }
 ]);
+
+export const voiceStudioBreadcrumb = generateBreadcrumbSchema([
+  { name: 'Home', item: 'https://vampro.in' },
+  { name: 'Plugins', item: 'https://vampro.in/plugins' },
+  { name: 'Voice Studio', item: 'https://vampro.in/plugins/voice-studio' }
+]);
+
+export const docsVoiceStudioBreadcrumb = generateBreadcrumbSchema([
+  { name: 'Home', item: 'https://vampro.in' },
+  { name: 'Documentation', item: 'https://vampro.in/docs' },
+  { name: 'Plugins', item: 'https://vampro.in/docs/plugins' },
+  { name: 'Voice Studio Docs', item: 'https://vampro.in/docs/plugins/voice-studio' }
+]);
+
+export const voiceStudioPrivacyBreadcrumb = generateBreadcrumbSchema([
+  { name: 'Home', item: 'https://vampro.in' },
+  { name: 'Plugins', item: 'https://vampro.in/plugins' },
+  { name: 'Voice Studio', item: 'https://vampro.in/plugins/voice-studio' },
+  { name: 'Privacy Policy', item: 'https://vampro.in/plugins/voice-studio/privacy' }
+]);
+
+export const voiceStudioTermsBreadcrumb = generateBreadcrumbSchema([
+  { name: 'Home', item: 'https://vampro.in' },
+  { name: 'Plugins', item: 'https://vampro.in/plugins' },
+  { name: 'Voice Studio', item: 'https://vampro.in/plugins/voice-studio' },
+  { name: 'Terms of Service', item: 'https://vampro.in/plugins/voice-studio/terms' }
+]);
+
+export const voiceStudioLicensesBreadcrumb = generateBreadcrumbSchema([
+  { name: 'Home', item: 'https://vampro.in' },
+  { name: 'Plugins', item: 'https://vampro.in/plugins' },
+  { name: 'Voice Studio', item: 'https://vampro.in/plugins/voice-studio' },
+  { name: 'Licenses', item: 'https://vampro.in/plugins/voice-studio/licenses' }
+]);

@@ -4,12 +4,15 @@ import {
   pluginsCollectionSchema, docsCollectionSchema,
   signalScopeSchema, spochSchema, docsSchema,
   privacySchema, termsSchema, licensesSchema,
-  universalPasteSchema, universalPasteFaqSchema, universalPasteHowToSchema
+  universalPasteSchema, universalPasteFaqSchema, universalPasteHowToSchema,
+  voiceStudioSchema, voiceStudioFaqSchema, voiceStudioHowToSchema
 } from './schemas';
 import {
   homeBreadcrumb, pluginsBreadcrumb, voiceBreadcrumb, universalPasteBreadcrumb, signalScopeBreadcrumb, spochBreadcrumb,
   docsHubBreadcrumb, docsVoiceBreadcrumb, docsUniversalPasteBreadcrumb, docsSignalScopeBreadcrumb, docsSpochBreadcrumb,
-  privacyBreadcrumb, termsBreadcrumb, licensesBreadcrumb, blogBreadcrumb
+  privacyBreadcrumb, termsBreadcrumb, licensesBreadcrumb, blogBreadcrumb,
+  voiceStudioBreadcrumb, docsVoiceStudioBreadcrumb,
+  voiceStudioPrivacyBreadcrumb, voiceStudioTermsBreadcrumb, voiceStudioLicensesBreadcrumb
 } from './breadcrumbs';
 
 export interface PageMetadata {
@@ -32,8 +35,9 @@ const architectureItemList = {
     { "@type": "ListItem", "position": 1, "url": "https://vampro.in/plugins" },
     { "@type": "ListItem", "position": 2, "url": "https://vampro.in/plugins/voice-generator" },
     { "@type": "ListItem", "position": 3, "url": "https://vampro.in/plugins/universal-paste" },
-    { "@type": "ListItem", "position": 4, "url": "https://vampro.in/docs" },
-    { "@type": "ListItem", "position": 5, "url": "https://vampro.in/blog" }
+    { "@type": "ListItem", "position": 4, "url": "https://vampro.in/plugins/voice-studio" },
+    { "@type": "ListItem", "position": 5, "url": "https://vampro.in/docs" },
+    { "@type": "ListItem", "position": 6, "url": "https://vampro.in/blog" }
   ]
 };
 
@@ -77,6 +81,20 @@ export const universalPasteMetadata: PageMetadata = {
     universalPasteHowToSchema
   ],
   breadcrumbs: universalPasteBreadcrumb
+};
+
+export const voiceStudioMetadata: PageMetadata = {
+  title: 'Vampro Voice Studio | AI Voice Generation, Speech-to-Speech & Stem Separation for Premiere Pro',
+  description: 'Produce natural voiceovers, zero-latency local voice cloning, speech-to-speech conversions, and stem separation directly in Adobe Premiere Pro with Vampro Voice Studio. 100% private offline engine or Bring-Your-Own-Key ElevenLabs cloud mode.',
+  canonical: 'https://vampro.in/plugins/voice-studio',
+  keywords: 'voice studio, adobe premiere pro voice plugin, offline voice generator, speech to speech premiere pro, audio stem separation, elevenlabs byok, premiere pro voice cloning, chatterbox gguf, uxp audio plugin',
+  image: 'https://vampro.in/forest-studio.png',
+  schema: [
+    ...(Array.isArray(voiceStudioSchema) ? voiceStudioSchema : [voiceStudioSchema]),
+    voiceStudioFaqSchema,
+    voiceStudioHowToSchema
+  ],
+  breadcrumbs: voiceStudioBreadcrumb
 };
 
 // Preserved for future use — hidden from public sitemap
@@ -126,6 +144,16 @@ export const docsUniversalPasteMetadata: PageMetadata = {
   image: 'https://vampro.in/assets/universal-paste/superhero.png',
   schema: docsSchema,
   breadcrumbs: docsUniversalPasteBreadcrumb
+};
+
+export const docsVoiceStudioMetadata: PageMetadata = {
+  title: 'Voice Studio Documentation & Workflow Guide | Vampro',
+  description: 'Complete documentation for Vampro Voice Studio for Adobe Premiere Pro. Learn how to configure the local offline engine, connect ElevenLabs API key, clone voices, perform speech-to-speech conversion, and isolate audio stems.',
+  canonical: 'https://vampro.in/docs/plugins/voice-studio',
+  keywords: 'voice studio documentation, voice studio guide, premiere pro speech to speech docs, stem separation guide, elevenlabs byok setup, chatterbox gguf premiere pro',
+  image: 'https://vampro.in/forest-studio.png',
+  schema: docsSchema,
+  breadcrumbs: docsVoiceStudioBreadcrumb
 };
 
 // Preserved for future use — hidden from public sitemap
@@ -188,6 +216,10 @@ export const universalPastePrivacyMetadata: PageMetadata = { ...privacyMetadata,
 export const universalPasteTermsMetadata: PageMetadata = { ...termsMetadata, canonical: 'https://vampro.in/plugins/universal-paste/terms' };
 export const universalPasteLicensesMetadata: PageMetadata = { ...licensesMetadata, canonical: 'https://vampro.in/plugins/universal-paste/licenses' };
 
+export const voiceStudioPrivacyMetadata: PageMetadata = { ...privacyMetadata, canonical: 'https://vampro.in/plugins/voice-studio/privacy', breadcrumbs: voiceStudioPrivacyBreadcrumb };
+export const voiceStudioTermsMetadata: PageMetadata = { ...termsMetadata, canonical: 'https://vampro.in/plugins/voice-studio/terms', breadcrumbs: voiceStudioTermsBreadcrumb };
+export const voiceStudioLicensesMetadata: PageMetadata = { ...licensesMetadata, canonical: 'https://vampro.in/plugins/voice-studio/licenses', breadcrumbs: voiceStudioLicensesBreadcrumb };
+
 // Preserved for future use — noIndex applied
 export const signalScopePrivacyMetadata: PageMetadata = { ...privacyMetadata, canonical: 'https://vampro.in/software/signalscope/privacy', noIndex: true };
 export const signalScopeTermsMetadata: PageMetadata = { ...termsMetadata, canonical: 'https://vampro.in/software/signalscope/terms', noIndex: true };
@@ -214,4 +246,9 @@ export const allRoutesMetadata = [
   { path: '/plugins/universal-paste/privacy', ...universalPastePrivacyMetadata },
   { path: '/plugins/universal-paste/terms', ...universalPasteTermsMetadata },
   { path: '/plugins/universal-paste/licenses', ...universalPasteLicensesMetadata },
+  { path: '/plugins/voice-studio', ...voiceStudioMetadata },
+  { path: '/docs/plugins/voice-studio', ...docsVoiceStudioMetadata },
+  { path: '/plugins/voice-studio/privacy', ...voiceStudioPrivacyMetadata },
+  { path: '/plugins/voice-studio/terms', ...voiceStudioTermsMetadata },
+  { path: '/plugins/voice-studio/licenses', ...voiceStudioLicensesMetadata },
 ];

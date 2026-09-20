@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { Settings, Activity, Gamepad2, ArrowRight, Sparkles, Copy } from 'lucide-react';
+import { Settings, Activity, Gamepad2, ArrowRight, Sparkles, Copy, Mic } from 'lucide-react';
 import { motion } from 'framer-motion';
 import SEO from '../components/SEO';
 import HomeFooter from '../components/HomeFooter';
@@ -21,6 +21,13 @@ const DocsHub = () => {
       description: 'Setup and workflow documentation for Vampro Universal Paste plugin.',
       icon: <Copy className="text-[#6484e1] mb-4" size={32} />,
       link: '/docs/plugins/universal-paste',
+      bgClass: 'bg-[#2b5be3]/5 hover:bg-[#2b5be3]/10 border-[#2b5be3]/20 text-[#6484e1]'
+    },
+    {
+      title: 'Voice Studio',
+      description: 'Setup, offline & BYOK ElevenLabs modes, speech-to-speech, and stem separation.',
+      icon: <Mic className="text-[#6484e1] mb-4" size={32} />,
+      link: '/docs/plugins/voice-studio',
       bgClass: 'bg-[#2b5be3]/5 hover:bg-[#2b5be3]/10 border-[#2b5be3]/20 text-[#6484e1]'
     }
   ];
@@ -73,7 +80,7 @@ const DocsHub = () => {
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
           {publicCategories.map((cat, idx) => (
             <motion.button
               key={idx}
