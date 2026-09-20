@@ -51,10 +51,9 @@ export default function ForestJourney() {
     let visibility: IntersectionObserver | undefined;
     const onScroll = () => {
       const element = section.current; if (!element) return;
-      const header = document.querySelector('.vs-header')?.getBoundingClientRect().height || 80;
       const rect = element.getBoundingClientRect();
-      const height = element.offsetHeight - (window.innerHeight - header);
-      scene.current?.setProgress(Math.max(0, Math.min(1, (header - rect.top) / height)));
+      const height = element.offsetHeight - window.innerHeight;
+      scene.current?.setProgress(Math.max(0, Math.min(1, -rect.top / Math.max(1, height))));
     };
     import('./forestScene').then(({ createForestScene }) => {
       if (cancelled || !host.current) return;
@@ -142,14 +141,12 @@ export default function ForestJourney() {
 
   const go = (progress: number) => {
     if (!section.current) return;
-    const header = document.querySelector('.vs-header')?.getBoundingClientRect().height || 80;
-    const top = section.current.getBoundingClientRect().top + window.scrollY - header;
-    const distance = section.current.offsetHeight - (window.innerHeight - header);
+    const top = section.current.getBoundingClientRect().top + window.scrollY;
+    const distance = section.current.offsetHeight - window.innerHeight;
     window.scrollTo({ top: top + distance * progress, behavior: reducedRef.current ? 'instant' : 'smooth' });
   };
   const toggleSimple = () => {
-    const header = document.querySelector('.vs-header')?.getBoundingClientRect().height || 80;
-    const top = (section.current?.getBoundingClientRect().top || 0) + window.scrollY - header;
+    const top = (section.current?.getBoundingClientRect().top || 0) + window.scrollY;
     setSimple(!simple); stageRef.current = -1; stationRef.current = -2; setStage(0); setStation(-1);
     window.scrollTo({ top, behavior: 'instant' });
   };
