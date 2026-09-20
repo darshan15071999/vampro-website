@@ -27,7 +27,6 @@ import { voiceStudioMetadata } from '../seo/metadata';
 import StudioDemo from '../components/voice-studio/StudioDemo';
 import ForestJourney from '../components/voice-studio/ForestJourney';
 import { Waveform } from '../components/voice-studio/Waveform';
-import ScatterText from '../components/ScatterText';
 import { useWaitlist } from '../context/WaitlistContext';
 import './VoiceStudio.css';
 import './ForestTheme.css';
@@ -119,27 +118,24 @@ export default function VoiceStudio() {
       <SEO {...voiceStudioMetadata} />
       <a href="#main" className="vs-skip">Skip to content</a>
 
-      {/* Header with official Vampro logo and centered Voice Studio logo */}
+      {/* Header: Vampro Creative Lab logo on left, plugin logo in middle, navigation buttons on right */}
       <header className="vs-header">
         <div className="vs-header-inner">
           <div className="vs-header-left">
-            <button
-              className="vs-menu-button vs-icon-button"
-              id="vs-menu-button"
-              aria-label={menuOpen ? 'Close navigation' : 'Open navigation'}
-              aria-expanded={menuOpen}
-              aria-controls="vs-mobile-nav"
-              onClick={() => setMenuOpen(!menuOpen)}
-            >
-              {menuOpen ? <X /> : <Menu />}
-            </button>
-            <nav className="vs-desktop-nav" aria-label="Main navigation">
-              {navItems.map((n) => (
-                <a href={`#${n.id}`} key={n.id} aria-current={activeNav === n.id ? 'location' : undefined}>
-                  {n.label}
-                </a>
-              ))}
-            </nav>
+            <Link to="/" className="flex items-center gap-3 cursor-pointer group" title="Vampro Homepage">
+              <img
+                src="/header.png"
+                alt="Vampro Logo"
+                className="h-8 w-8 md:h-9 md:w-9 rounded-xl shadow-md object-cover border border-slate-200/20 group-hover:scale-105 transition-transform duration-300"
+                decoding="async"
+              />
+              <span className="font-bank-gothic text-xl tracking-[0.12em] text-white font-bold" style={{ fontWeight: 700 }}>
+                VAMPRO
+              </span>
+              <span className="hidden md:inline-flex items-center justify-center text-[11px] leading-normal uppercase tracking-[0.28em] font-semibold px-3.5 py-1.5 rounded-full transition-all duration-400 bg-white/5 text-indigo-300 border border-indigo-500/20">
+                Creative Lab
+              </span>
+            </Link>
           </div>
 
           <div className="vs-header-center">
@@ -157,23 +153,26 @@ export default function VoiceStudio() {
           </div>
 
           <div className="vs-header-right">
+            <nav className="vs-desktop-nav" aria-label="Main navigation">
+              {navItems.map((n) => (
+                <a href={`#${n.id}`} key={n.id} aria-current={activeNav === n.id ? 'location' : undefined}>
+                  {n.label}
+                </a>
+              ))}
+            </nav>
             <a href="#availability" onClick={handleWaitlistClick} className="vs-header-cta">
               Join Waitlist <ArrowUpRight size={14} />
             </a>
-            <Link to="/" className="vs-brand group" title="Vampro Homepage">
-              <img
-                src="/header.png"
-                alt="Vampro Logo"
-                className="h-8 w-8 md:h-9 md:w-9 rounded-xl shadow-md object-cover border border-slate-200/20 group-hover:scale-105 transition-transform duration-300"
-                decoding="async"
-              />
-              <span className="font-bank-gothic text-xl tracking-[0.12em] text-white" style={{ fontWeight: 700 }}>
-                <ScatterText text="VAMPRO" />
-              </span>
-              <span className="hidden md:inline-flex items-center justify-center text-[11px] leading-normal uppercase tracking-[0.3em] font-semibold px-3.5 py-1.5 rounded-full transition-all duration-400 animate-scatter-capsule bg-white/5 text-indigo-300 border border-indigo-500/20">
-                <ScatterText text="Creative Lab" />
-              </span>
-            </Link>
+            <button
+              className="vs-menu-button vs-icon-button"
+              id="vs-menu-button"
+              aria-label={menuOpen ? 'Close navigation' : 'Open navigation'}
+              aria-expanded={menuOpen}
+              aria-controls="vs-mobile-nav"
+              onClick={() => setMenuOpen(!menuOpen)}
+            >
+              {menuOpen ? <X /> : <Menu />}
+            </button>
           </div>
         </div>
         {menuOpen && (
@@ -497,11 +496,11 @@ export default function VoiceStudio() {
                   className="h-8 w-8 md:h-9 md:w-9 rounded-xl shadow-md object-cover border border-slate-200/20 group-hover:scale-105 transition-transform duration-300"
                   decoding="async"
                 />
-                <span className="font-bank-gothic text-xl tracking-[0.12em] text-white" style={{ fontWeight: 700 }}>
-                  <ScatterText text="VAMPRO" />
+                <span className="font-bank-gothic text-xl tracking-[0.12em] text-white font-bold" style={{ fontWeight: 700 }}>
+                  VAMPRO
                 </span>
-                <span className="hidden md:inline-flex items-center justify-center text-[11px] leading-normal uppercase tracking-[0.3em] font-semibold px-3.5 py-1.5 rounded-full transition-all duration-400 animate-scatter-capsule bg-white/5 text-indigo-300 border border-indigo-500/20">
-                  <ScatterText text="Creative Lab" />
+                <span className="hidden md:inline-flex items-center justify-center text-[11px] leading-normal uppercase tracking-[0.28em] font-semibold px-3.5 py-1.5 rounded-full transition-all duration-400 bg-white/5 text-indigo-300 border border-indigo-500/20">
+                  Creative Lab
                 </span>
               </Link>
               <p>At the intersection of<br />creativity and technology.</p>

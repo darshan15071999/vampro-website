@@ -62,20 +62,24 @@ async function runPrerender() {
           // Block heavy media and external analytics to speed up and stabilize prerendering
           await page.setRequestInterception(true);
           page.on('request', (req) => {
-            const url = req.url();
-            const resType = req.resourceType();
-            if (
-              resType === 'media' ||
-              url.endsWith('.mp4') ||
-              url.endsWith('.mp3') ||
-              url.endsWith('.webm') ||
-              url.endsWith('.ogg') ||
-              url.includes('google-analytics.com') ||
-              url.includes('clarity.ms')
-            ) {
-              req.abort();
-            } else {
-              req.continue();
+            try {
+              const url = req.url();
+              const resType = req.resourceType();
+              if (
+                resType === 'media' ||
+                url.endsWith('.mp4') ||
+                url.endsWith('.mp3') ||
+                url.endsWith('.webm') ||
+                url.endsWith('.ogg') ||
+                url.includes('google-analytics.com') ||
+                url.includes('clarity.ms')
+              ) {
+                req.abort().catch(() => {});
+              } else {
+                req.continue().catch(() => {});
+              }
+            } catch {
+              req.continue().catch(() => {});
             }
           });
 
@@ -83,11 +87,12 @@ async function runPrerender() {
           try {
             await page.goto(`http://localhost:${port}${route.path}`, { 
               waitUntil: 'domcontentloaded', 
-              timeout: 25000 
+              timeout: 15000 
             });
             await new Promise(r => setTimeout(r, 600));
           } catch (_timeoutErr) {
             console.warn(`  ! Navigation timed out for ${route.path}, continuing with current DOM state.`);
+            await page.evaluate(() => window.stop()).catch(() => {});
           }
           
           // Extract the fully rendered HTML
