@@ -153,10 +153,13 @@ ${pageContext}`
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          model: "meta/llama-3.2-11b-vision-instruct",
+          model: "nvidia/nemotron-3.5-super-vl-120b-a12b",
           messages: apiMessages,
           temperature: 0.3,
           max_tokens: 1024,
+          chat_template_kwargs: {
+            enable_thinking: false,
+          },
         })
       });
 
@@ -169,9 +172,13 @@ ${pageContext}`
       if (data.error) {
          throw new Error(data.error.message || "Unknown API error");
       }
+      const replyContent = data.choices?.[0]?.message?.content?.trim();
+      if (!replyContent) {
+        throw new Error("Received an empty response from the AI model");
+      }
       const assistantMessage: Message = {
         role: 'assistant',
-        content: data.choices[0].message.content
+        content: replyContent
       };
 
       setMessages((prev) => [...prev, assistantMessage]);
