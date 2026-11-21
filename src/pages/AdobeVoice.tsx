@@ -24,8 +24,8 @@ import SoftAurora from '../components/SoftAurora';
 import SpecularButton from '../components/SpecularButton';
 import { useSignup } from '../context/SignupContext';
 
-const FEATURES = ['🏗 Built for Premiere Pro', '🎙 27+ Local AI Voices', '⚡ ElevenLabs API Support', '💾 Offline & Cloud TTS', '🔌 Direct Timeline Insertion'];
-const MOBILE_FEATURES_ROW1 = ['🏗 Premiere Pro', '🎙 27+ Local Voices', '⚡ ElevenLabs API'];
+const FEATURES = ['🏗 Built for Premiere Pro', '🎙 27+ Local AI Voices', '⚡ ElevenLabs API (Coming Soon)', '💾 Offline & Cloud TTS', '🔌 Direct Timeline Insertion'];
+const MOBILE_FEATURES_ROW1 = ['🏗 Premiere Pro', '🎙 27+ Local Voices', '⚡ ElevenLabs (Soon)'];
 const MOBILE_FEATURES_ROW2 = ['💾 Offline & Cloud TTS', '🔌 Timeline Insertion'];
 
 
@@ -475,6 +475,10 @@ const AdobeVoice = () => {
           <div className="w-full px-6 md:px-10 lg:px-16 relative z-10">
             {/* Header */}
             <FadeInSection className="text-center mb-8">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/15 border border-amber-400/35 text-amber-300 text-[11px] sm:text-xs font-bold uppercase tracking-widest mb-4 shadow-[0_0_20px_rgba(245,158,11,0.15)]">
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+                Coming Soon
+              </div>
               <h2 className="text-[17px] min-[380px]:text-[19px] min-[420px]:text-xl sm:text-3xl md:text-5xl font-extrabold text-white mb-2 sm:mb-4 drop-shadow-md tracking-tight whitespace-nowrap">
                 <ShinyText text="Your ElevenLabs Voice Library" speed={3} shineColor="#ffffff" color="#ffffff" /> <span className="hidden sm:inline text-[#557ef7]">Directly Inside Premiere Pro</span>
               </h2>

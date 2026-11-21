@@ -105,9 +105,14 @@ const DocsVoiceStudio = () => {
                   </div>
 
                   <div className="glass-card rounded-xl p-5 border-cyan-500/20 bg-cyan-950/20">
-                    <div className="flex items-center gap-2 text-cyan-300 font-bold mb-2">
-                      <Cloud size={18} />
-                      <h4>2. ElevenLabs API (BYOK)</h4>
+                    <div className="flex items-center justify-between gap-2 mb-2">
+                      <div className="flex items-center gap-2 text-cyan-300 font-bold">
+                        <Cloud size={18} />
+                        <h4>2. ElevenLabs API (BYOK)</h4>
+                      </div>
+                      <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-300 border border-amber-400/35 shrink-0">
+                        Coming Soon
+                      </span>
                     </div>
                     <p className="text-xs text-slate-400 leading-relaxed">
                       Connect your personal ElevenLabs API key for access to community models and cloud voice clones. Your API key is encrypted locally using Windows DPAPI (CryptProtectData). Cloud jobs are only dispatched when explicitly confirmed.
@@ -248,7 +253,12 @@ const DocsVoiceStudio = () => {
                       <tr>
                         <td className="py-2.5 px-3 font-semibold text-white">Supported Languages</td>
                         <td className="py-2.5 px-3">English (Local Model)</td>
-                        <td className="py-2.5 px-3">Multilingual supported via ElevenLabs API</td>
+                        <td className="py-2.5 px-3">
+                          Multilingual supported via ElevenLabs API{' '}
+                          <span className="inline-flex items-center text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-300 border border-amber-400/35 align-middle ml-1">
+                            Coming Soon
+                          </span>
+                        </td>
                       </tr>
                       <tr>
                         <td className="py-2.5 px-3 font-semibold text-white">Voice Reference Length</td>

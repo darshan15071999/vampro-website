@@ -1,8 +1,28 @@
 import { forwardRef, useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
-import { AlertTriangle } from 'lucide-react';
+import { AlertTriangle, ChevronDown, ArrowUpRight } from 'lucide-react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useWaitlist } from '../context/WaitlistContext';
+
+const HOME_PRODUCTS = [
+  {
+    label: 'Voice Generator',
+    href: '/plugins/voice-generator',
+    description: 'AI text-to-speech for Premiere Pro',
+  },
+  {
+    label: 'Universal Paste',
+    href: '/plugins/universal-paste',
+    description: 'Turn clipboard content into timeline assets',
+  },
+  {
+    label: 'Voice Studio',
+    href: '/plugins/voice-studio',
+    description: 'Offline voice cloning, STS & stem separation',
+    comingSoon: true,
+  },
+];
 
 // Rotating hero word: each new word sketches itself in while the
 // previous ones stay behind as faint pencil ghosts (onion-skin style).
@@ -53,13 +73,33 @@ const SketchRotator = () => {
 const HeroScene = forwardRef<HTMLElement>((_, ref) => {
   const { openModal, hasJoined } = useWaitlist();
   const [showSubscribedWarning, setShowSubscribedWarning] = useState(false);
+  const [productsOpen, setProductsOpen] = useState(false);
   const warningTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const productsMenuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     return () => {
       if (warningTimerRef.current) clearTimeout(warningTimerRef.current);
     };
   }, []);
+
+  useEffect(() => {
+    if (!productsOpen) return;
+    const handlePointerDown = (e: MouseEvent) => {
+      if (productsMenuRef.current && !productsMenuRef.current.contains(e.target as Node)) {
+        setProductsOpen(false);
+      }
+    };
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setProductsOpen(false);
+    };
+    document.addEventListener('mousedown', handlePointerDown);
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('mousedown', handlePointerDown);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [productsOpen]);
 
   const handleSubscribeClick = () => {
     if (hasJoined) {
@@ -86,7 +126,66 @@ const HeroScene = forwardRef<HTMLElement>((_, ref) => {
           A creative lab at the intersection of creativity and technology.<br className="hidden md:block" /> From films to software, we turn ideas into real experiences.
         </p>
         <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 w-full sm:w-auto">
-          <Link to="/plugins/voice-generator" className="px-6 py-3 sm:px-10 sm:py-4 text-xs sm:text-sm font-medium tracking-widest uppercase border border-[var(--bp-accent)] text-[var(--bp-accent)] hover:bg-[var(--bp-accent)]/10 transition-colors duration-300 w-full sm:w-auto">Explore products</Link>
+          <div ref={productsMenuRef} className="relative w-full sm:w-auto z-30">
+            <button
+              type="button"
+              onClick={() => setProductsOpen((prev) => !prev)}
+              aria-expanded={productsOpen}
+              aria-haspopup="menu"
+              className={`px-6 py-3 sm:px-10 sm:py-4 text-xs sm:text-sm font-medium tracking-widest uppercase border border-[var(--bp-accent)] text-[var(--bp-accent)] transition-colors duration-300 w-full sm:w-auto cursor-pointer flex items-center justify-center gap-2.5 ${
+                productsOpen ? 'bg-[var(--bp-accent)]/15' : 'hover:bg-[var(--bp-accent)]/10'
+              }`}
+            >
+              <span>Explore products</span>
+              <ChevronDown
+                size={15}
+                className={`transition-transform duration-300 ${productsOpen ? 'rotate-180' : ''}`}
+              />
+            </button>
+
+            <AnimatePresence>
+              {productsOpen && (
+                <motion.div
+                  role="menu"
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 6 }}
+                  transition={{ duration: 0.18, ease: 'easeOut' }}
+                  className="absolute left-0 top-full -mt-px lg:top-auto lg:bottom-full lg:mt-0 lg:-mb-px min-w-full sm:w-80 border border-[var(--bp-accent)] bg-[var(--bp-bg)]/95 backdrop-blur-md shadow-[0_12px_40px_rgba(0,0,0,0.45)] text-left divide-y divide-[var(--bp-accent)]/20 z-40"
+                >
+                  {HOME_PRODUCTS.map((product) => (
+                    <Link
+                      key={product.href}
+                      role="menuitem"
+                      to={product.href}
+                      onClick={() => setProductsOpen(false)}
+                      className="group flex items-start justify-between gap-3 px-4 py-3.5 hover:bg-[var(--bp-accent)]/10 transition-colors"
+                    >
+                      <div className="min-w-0">
+                        <div className="flex items-center gap-2">
+                          <span className="text-xs sm:text-sm font-medium tracking-wider uppercase text-[var(--bp-ink-strong)] group-hover:text-[var(--bp-accent)] transition-colors">
+                            {product.label}
+                          </span>
+                          {product.comingSoon && (
+                            <span className="text-[9px] uppercase font-bold tracking-wider px-1.5 py-0.5 border border-emerald-400/40 bg-emerald-500/15 text-emerald-400 shrink-0">
+                              Coming Soon
+                            </span>
+                          )}
+                        </div>
+                        <p className="text-[11px] font-light tracking-wide text-[var(--bp-muted2)] mt-1 leading-snug">
+                          {product.description}
+                        </p>
+                      </div>
+                      <ArrowUpRight
+                        size={14}
+                        className="text-[var(--bp-accent)]/60 group-hover:text-[var(--bp-accent)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all shrink-0 mt-0.5"
+                      />
+                    </Link>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
           <button
             type="button"
             onClick={handleSubscribeClick}

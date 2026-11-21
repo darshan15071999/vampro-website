@@ -1,10 +1,12 @@
 import { type ReactNode } from 'react';
 import { ChevronDown } from 'lucide-react';
 
-export const DocSection = ({ id, title, accent = 'text-white', children }: { id: string; title: string; accent?: string; children: ReactNode }) => (
+export const DocSection = ({ id, title, accent = 'text-white', badge, children }: { id: string; title: string; accent?: string; badge?: ReactNode; children: ReactNode }) => (
   <div id={id} className="mb-12 border-b border-indigo-900/30 pb-12 scroll-mt-40">
-    <h2 className={`text-xl md:text-2xl font-extrabold ${accent} mb-6 flex items-center gap-2`}>
-      <div className="w-1 h-5 bg-[#3B3BFF] rounded-full" />{title}
+    <h2 className={`text-xl md:text-2xl font-extrabold ${accent} mb-6 flex flex-wrap items-center gap-2.5`}>
+      <div className="w-1 h-5 bg-[#3B3BFF] rounded-full" />
+      <span>{title}</span>
+      {badge}
     </h2>
     <div className="space-y-4">{children}</div>
   </div>

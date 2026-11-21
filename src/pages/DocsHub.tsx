@@ -25,7 +25,7 @@ const DocsHub = () => {
     },
     {
       title: 'Voice Studio',
-      description: 'Setup, offline & BYOK ElevenLabs modes, speech-to-speech, and stem separation.',
+      description: 'Setup, offline mode, ElevenLabs BYOK (Coming Soon), speech-to-speech, and stem separation.',
       icon: <Mic className="text-[#6484e1] mb-4" size={32} />,
       link: '/docs/plugins/voice-studio',
       bgClass: 'bg-[#2b5be3]/5 hover:bg-[#2b5be3]/10 border-[#2b5be3]/20 text-[#6484e1]'

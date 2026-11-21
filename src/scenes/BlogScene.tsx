@@ -29,7 +29,14 @@ const BlogScene = forwardRef<HTMLElement>((_, ref) => (
                 <span data-anim="blog-line" className="block h-px bg-[var(--bp-accent)]/20 origin-left w-4/5" />
                 <span data-anim="blog-line" className="block h-px bg-[var(--bp-accent)]/10 origin-left w-3/5" />
               </div>
-              <span className="bp-label">{post.category}</span>
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <span className="bp-label">{post.category}</span>
+                {post.comingSoon && (
+                  <span className="text-[9px] uppercase font-bold tracking-wider px-2 py-0.5 border border-amber-400/40 bg-amber-500/15 text-amber-300 shrink-0">
+                    Coming Soon
+                  </span>
+                )}
+              </div>
               <h3 className="mt-3 text-base md:text-lg font-bold tracking-wide text-[var(--bp-accent)] leading-snug line-clamp-2 group-hover:text-[var(--bp-accent)]/70 transition-colors">
                 {post.title}
               </h3>

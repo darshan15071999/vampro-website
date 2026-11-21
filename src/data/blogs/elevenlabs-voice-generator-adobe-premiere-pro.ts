@@ -10,6 +10,7 @@ export const elevenlabs_voice_generator_adobe_premiere_pro: BlogPost = {
   readingTime: "6 min read",
   category: "Workflows & Tutorials",
   product: "Voice Generator",
+  comingSoon: true,
   image: "/banner-elevenlabs-premiere.png",
   overview: `
     <p>ElevenLabs produces some of the most convincing, hyper-realistic AI voices in the industry. But for video editors working inside Adobe Premiere Pro, using it has always felt like a jarring interruption to the creative flow.</p>
@@ -28,7 +29,7 @@ export const elevenlabs_voice_generator_adobe_premiere_pro: BlogPost = {
     </ul>
     <p>Integrating ElevenLabs directly into Premiere Pro turns what used to be a five-minute distraction into a five-second action.</p>
 
-    <h2 id="introducing-elevenlabs">Introducing Native ElevenLabs in Premiere Pro</h2>
+    <h2 id="introducing-elevenlabs">Introducing Native ElevenLabs in Premiere Pro <span class="inline-flex items-center align-middle ml-2 px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider bg-amber-100 text-amber-800 border border-amber-300 not-prose">Coming Soon</span></h2>
     <p>The Vampro Voice Generator extension now features a flexible <strong>dual-engine architecture</strong>:</p>
     <ol>
       <li><strong>Vampro Local Engine:</strong> 100% offline, zero-latency, CPU-optimized speech powered by open-source Kokoro-82M (Apache-2.0). Perfect for rapid draft scratch tracks, quick mockups, or working without internet access.</li>

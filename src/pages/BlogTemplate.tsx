@@ -210,15 +210,22 @@ const BlogTemplate = () => {
                     <div className="absolute top-4 left-4 z-10 px-3 py-1 bg-white/90 backdrop-blur-md border border-indigo-200 text-indigo-600 text-xs font-semibold rounded-full shadow-sm">
                       {blogPost.category}
                     </div>
-                    {blogPost.product && (
-                      <div className={`absolute top-4 right-4 z-10 px-2.5 py-0.5 text-[10px] font-black uppercase rounded-full shadow-sm ${
-                        blogPost.product === 'Universal Paste'
-                          ? 'bg-[#ffd437] text-[#07080b] border border-black/30'
-                          : 'bg-indigo-600 text-white'
-                      }`}>
-                        {blogPost.product}
-                      </div>
-                    )}
+                    <div className="absolute top-4 right-4 z-10 flex items-center gap-1.5">
+                      {blogPost.comingSoon && (
+                        <div className="px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider rounded-full shadow-sm bg-amber-400 text-slate-950 border border-amber-500/40">
+                          Coming Soon
+                        </div>
+                      )}
+                      {blogPost.product && (
+                        <div className={`px-2.5 py-0.5 text-[10px] font-black uppercase rounded-full shadow-sm ${
+                          blogPost.product === 'Universal Paste'
+                            ? 'bg-[#ffd437] text-[#07080b] border border-black/30'
+                            : 'bg-indigo-600 text-white'
+                        }`}>
+                          {blogPost.product}
+                        </div>
+                      )}
+                    </div>
                     <img src={blogPost.image} alt={blogPost.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                   </div>
                   <div className="p-6 flex flex-col grow">
@@ -307,7 +314,7 @@ const BlogTemplate = () => {
           <div className="rounded-3xl overflow-hidden aspect-video sm:aspect-[21/9] lg:aspect-[3840/1116] w-full relative border border-slate-200 shadow-xl mb-6">
             <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent z-10 opacity-70"></div>
             <img src={currentPost.image} alt={currentPost.title} className="w-full h-full object-cover" />
-            <div className="absolute bottom-6 left-6 z-20 flex items-center gap-2">
+            <div className="absolute bottom-6 left-6 z-20 flex flex-wrap items-center gap-2">
               <span className="px-3 py-1 bg-white/90 backdrop-blur-md border border-indigo-200 text-indigo-600 text-xs font-semibold rounded-full shadow-sm">
                 {currentPost.category}
               </span>
@@ -320,10 +327,22 @@ const BlogTemplate = () => {
                   {currentPost.product}
                 </span>
               )}
+              {currentPost.comingSoon && (
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-bold uppercase tracking-wider rounded-full shadow-sm bg-amber-400 text-slate-950 border border-amber-500/40">
+                  <span className="w-1.5 h-1.5 rounded-full bg-slate-950 animate-pulse" />
+                  Coming Soon
+                </span>
+              )}
             </div>
           </div>
 
           <header className="w-full text-center mb-8">
+            {currentPost.comingSoon && (
+              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-100 border border-amber-300 text-amber-900 text-xs font-bold uppercase tracking-widest mb-4 shadow-sm">
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-600 animate-pulse" />
+                Coming Soon — Feature Preview
+              </div>
+            )}
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-black text-slate-900 mb-4 leading-tight tracking-tight">
               {currentPost.title}
             </h1>

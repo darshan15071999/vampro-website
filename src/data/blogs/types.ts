@@ -8,6 +8,7 @@ export interface BlogPost {
   readingTime: string;
   category: string;
   product?: string;
+  comingSoon?: boolean;
   image: string;
   overview: string;
   content: string;

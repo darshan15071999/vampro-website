@@ -12,14 +12,21 @@ const DocsVoice = () => {
     if (el) { const y = el.getBoundingClientRect().top + window.pageYOffset - 120; window.scrollTo({ top: y, behavior: 'smooth' }); }
   };
 
-  const navItems = [
+  const navItems: { id: string; label: string; comingSoon?: boolean }[] = [
     { id: 'intro', label: 'Introduction' }, { id: 'features', label: 'Key Features' },
     { id: 'requirements', label: 'System Requirements' }, { id: 'installation', label: 'Installation Guide' },
-    { id: 'quick-start', label: 'Quick Start' }, { id: 'elevenlabs', label: 'ElevenLabs Integration' },
+    { id: 'quick-start', label: 'Quick Start' }, { id: 'elevenlabs', label: 'ElevenLabs Integration', comingSoon: true },
     { id: 'controls', label: 'Voice Controls' }, { id: 'audio-management', label: 'Audio Management' },
     { id: 'troubleshooting', label: 'Troubleshooting' }, { id: 'faq', label: 'FAQ' },
     { id: 'releases', label: 'Release Notes' },
   ];
+
+  const comingSoonBadge = (
+    <span className="inline-flex items-center gap-1.5 text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 rounded-full bg-amber-500/15 text-amber-300 border border-amber-400/35 shrink-0">
+      <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+      Coming Soon
+    </span>
+  );
 
   return (
     <div className="dark-grid-bg min-h-screen flex flex-col pt-28">
@@ -30,7 +37,16 @@ const DocsVoice = () => {
           <h3 className="font-bold text-slate-400 mb-5 tracking-widest uppercase text-xs border-b border-indigo-900/30 pb-3">Knowledge Base</h3>
           <ul className="space-y-0.5 text-sm">
             {navItems.map(item => (
-              <li key={item.id}><a href={`#${item.id}`} onClick={e => scrollToDocSection(e as any, item.id)} className="block px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-indigo-900/30 transition-all font-medium">{item.label}</a></li>
+              <li key={item.id}>
+                <a href={`#${item.id}`} onClick={e => scrollToDocSection(e as any, item.id)} className="flex items-center justify-between gap-2 px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-indigo-900/30 transition-all font-medium">
+                  <span>{item.label}</span>
+                  {item.comingSoon && (
+                    <span className="text-[9px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-300 border border-amber-400/30 shrink-0">
+                      Soon
+                    </span>
+                  )}
+                </a>
+              </li>
             ))}
           </ul>
         </aside>
@@ -51,20 +67,28 @@ const DocsVoice = () => {
               <DocSection id="features" title="Key Features">
                 <ul className="space-y-2">
                   {[
-                    'AI voiceovers directly inside Adobe Premiere Pro',
-                    'Dual engine architecture: 100% offline Local TTS & ElevenLabs Cloud TTS',
-                    'Direct ElevenLabs API key integration with local secure credential storage',
-                    'Access your custom ElevenLabs voice clones & full community voice library',
-                    'Support for Eleven Multilingual v2, Eleven Turbo, and Eleven Flash models',
-                    'Fine-tuned voice shaping: Stability, Similarity, Style Exaggeration, and Speaker Boost',
-                    'Local Kokoro engine with 27+ offline voices and tone presets',
-                    'Adjustable speech speed and pitch controls',
-                    'Interactive audio waveform preview prior to timeline placement',
-                    'One-click "Add to timeline" at current playhead and "Import to Bin"',
-                    '1-click clip modification — select any timeline voice clip to reload text and regenerate',
-                    'Automatic companion service startup on Windows login',
+                    { text: 'AI voiceovers directly inside Adobe Premiere Pro' },
+                    { text: 'Dual engine architecture: 100% offline Local TTS & ElevenLabs Cloud TTS', comingSoon: true },
+                    { text: 'Direct ElevenLabs API key integration with local secure credential storage', comingSoon: true },
+                    { text: 'Access your custom ElevenLabs voice clones & full community voice library', comingSoon: true },
+                    { text: 'Support for Eleven Multilingual v2, Eleven Turbo, and Eleven Flash models', comingSoon: true },
+                    { text: 'Fine-tuned voice shaping: Stability, Similarity, Style Exaggeration, and Speaker Boost', comingSoon: true },
+                    { text: 'Local Kokoro engine with 27+ offline voices and tone presets' },
+                    { text: 'Adjustable speech speed and pitch controls' },
+                    { text: 'Interactive audio waveform preview prior to timeline placement' },
+                    { text: 'One-click "Add to timeline" at current playhead and "Import to Bin"' },
+                    { text: '1-click clip modification — select any timeline voice clip to reload text and regenerate' },
+                    { text: 'Automatic companion service startup on Windows login' },
                   ].map(f => (
-                    <li key={f} className="flex items-center gap-2 text-slate-300 text-sm"><CheckCircle size={14} className="text-green-400 flex-shrink-0" />{f}</li>
+                    <li key={f.text} className="flex flex-wrap items-center gap-2 text-slate-300 text-sm">
+                      <CheckCircle size={14} className="text-green-400 flex-shrink-0" />
+                      <span>{f.text}</span>
+                      {f.comingSoon && (
+                        <span className="text-[9px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-300 border border-amber-400/35">
+                          Coming Soon
+                        </span>
+                      )}
+                    </li>
                   ))}
                 </ul>
               </DocSection>
@@ -122,7 +146,10 @@ const DocsVoice = () => {
                 </ol>
               </DocSection>
 
-              <DocSection id="elevenlabs" title="ElevenLabs Integration">
+              <DocSection id="elevenlabs" title="ElevenLabs Integration" badge={comingSoonBadge}>
+                <div className="glass-card rounded-xl p-4 border-amber-400/30 mb-6 bg-amber-500/10 text-amber-200 text-xs sm:text-sm leading-relaxed">
+                  <strong className="text-amber-300">Coming Soon:</strong> Native ElevenLabs Cloud API integration is rolling out in an upcoming update. The documentation below previews how the workflow will operate once released.
+                </div>
                 <p className="text-slate-400 text-sm leading-relaxed mb-6">
                   Vampro Voice Generator now includes native integration with <span className="text-cyan-300 font-semibold">ElevenLabs</span>. In addition to the built-in 100% offline Kokoro engine, you can toggle to the ElevenLabs workflow to access your custom voice clones, the full ElevenLabs voice library, cutting-edge multilingual models, and fine-grained voice settings — rendering voiceovers directly into your Adobe Premiere Pro sequence or project bins.
                 </p>
@@ -198,7 +225,12 @@ const DocsVoice = () => {
                   ))}
                 </div>
 
-                <DocH3>ElevenLabs Cloud Controls</DocH3>
+                <DocH3>
+                  <span className="inline-flex flex-wrap items-center gap-2">
+                    <span>ElevenLabs Cloud Controls</span>
+                    {comingSoonBadge}
+                  </span>
+                </DocH3>
                 <DocList items={[
                   'Stability: 0.00 to 1.00 (expression vs consistency)',
                   'Similarity: 0.00 to 1.00 (voice fidelity and clarity)',
@@ -244,7 +276,7 @@ const DocsVoice = () => {
                 <div className="glass-card rounded-xl p-5 mb-4 border-cyan-500/20">
                   <div className="flex items-center justify-between mb-2">
                     <h3 className="text-base font-bold text-white">Version 1.2.0</h3>
-                    <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">Latest</span>
+                    {comingSoonBadge}
                   </div>
                   <p className="text-slate-400 text-sm"><strong className="text-cyan-300">New:</strong> Added native ElevenLabs integration! Editors can now enter their ElevenLabs API key to access custom voice clones, the complete ElevenLabs voice library, and advanced models including Eleven Multilingual v2, Eleven Turbo, and Eleven Flash directly inside Adobe Premiere Pro. Added full parameter shaping controls (Stability, Similarity, Style Exaggeration, Speaker Boost, Speed, and Pitch). Added real-time waveform visualization, one-click playhead insertion onto active timeline tracks, Project Bin ingestion, and timeline clip modification.</p>
                   <p className="text-slate-400 text-sm mt-2"><strong className="text-cyan-300">Improvements:</strong> Enhanced local key management with instant "Clear Key" option, streamlined service response times, and improved UI styling with responsive tab toggling between Local and ElevenLabs modes.</p>
