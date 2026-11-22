@@ -992,6 +992,19 @@ const UniversalPaste = () => {
     });
   };
 
+  const handleOpenAfterEffectsNotify = (source = 'Hero After Effects Callout') => {
+    openSignup({
+      product: 'Universal Paste',
+      source,
+      title: 'After Effects Waitlist',
+      subtitle: 'Get notified when Universal Paste launches for Adobe After Effects.',
+      buttonText: 'Notify Me',
+      successTitle: "You're on the list!",
+      successMessage: "We'll let you know as soon as Universal Paste for After Effects drops.",
+      alwaysShow: true,
+    });
+  };
+
   const [flippedFaqIndices, setFlippedFaqIndices] = useState<number[]>([]);
   const [flippedBenefitIndices, setFlippedBenefitIndices] = useState<number[]>([]);
   const [flippedAudienceIndices, setFlippedAudienceIndices] = useState<number[]>([]);
@@ -1919,6 +1932,37 @@ const UniversalPaste = () => {
                       </Button>
                     </Link>
                   </div>
+
+                  {/* After Effects Releasing Soon Callout */}
+                  <div
+                    className="sv-ae-callout sv-interactive-glitch-elem"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleOpenAfterEffectsNotify('Hero After Effects Callout');
+                    }}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        handleOpenAfterEffectsNotify('Hero After Effects Callout');
+                      }
+                    }}
+                    role="button"
+                    tabIndex={0}
+                    title="Get notified when Universal Paste releases for Adobe After Effects"
+                  >
+                    <div className="sv-ae-badge" aria-hidden="true">Ae</div>
+                    <div className="sv-ae-callout-copy">
+                      <div className="sv-ae-callout-top">
+                        <span className="sv-ae-pill">★ RELEASING SOON ★</span>
+                        <span className="sv-ae-title">ADOBE AFTER EFFECTS</span>
+                      </div>
+                      <p className="sv-ae-desc">
+                        Universal Paste is releasing soon for After Effects — paste directly into your comps.
+                      </p>
+                    </div>
+                    <span className="sv-ae-cta">NOTIFY ME ➔</span>
+                  </div>
                 </div>
 
                 <div className="sv-hero-comic-container">
@@ -2702,6 +2746,37 @@ const UniversalPaste = () => {
                       READ BLOGS ➔
                     </Button>
                   </Link>
+                </div>
+
+                {/* After Effects Releasing Soon Callout */}
+                <div
+                  className="sv-ae-callout sv-ae-callout--centered sv-interactive-glitch-elem"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleOpenAfterEffectsNotify('Bottom CTA After Effects Callout');
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      handleOpenAfterEffectsNotify('Bottom CTA After Effects Callout');
+                    }
+                  }}
+                  role="button"
+                  tabIndex={0}
+                  title="Get notified when Universal Paste releases for Adobe After Effects"
+                >
+                  <div className="sv-ae-badge" aria-hidden="true">Ae</div>
+                  <div className="sv-ae-callout-copy">
+                    <div className="sv-ae-callout-top">
+                      <span className="sv-ae-pill">★ RELEASING SOON ★</span>
+                      <span className="sv-ae-title">ADOBE AFTER EFFECTS</span>
+                    </div>
+                    <p className="sv-ae-desc">
+                      Also coming soon to Adobe After Effects — click to get notified on launch.
+                    </p>
+                  </div>
+                  <span className="sv-ae-cta">NOTIFY ME ➔</span>
                 </div>
               </div>
 

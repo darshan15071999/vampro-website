@@ -1,4 +1,5 @@
 import type { BlogPost } from './types';
+import { universal_paste_after_effects } from './universal-paste-after-effects';
 import { elevenlabs_voice_generator_adobe_premiere_pro } from './elevenlabs-voice-generator-adobe-premiere-pro';
 import { premiere_pro_feature_film_pasting_image_complicated } from './premiere-pro-feature-film-pasting-image-complicated';
 import { you_are_not_a_slow_video_editor_workflow_friction } from './you-are-not-a-slow-video-editor-workflow-friction';
@@ -17,6 +18,7 @@ import { ai_voiceovers_vs_human_voiceovers } from './ai-voiceovers-vs-human-voic
 import { ai_speed_up_video_editing_workflow } from './ai-speed-up-video-editing-workflow';
 
 export const allBlogPosts: BlogPost[] = [
+  universal_paste_after_effects,
   elevenlabs_voice_generator_adobe_premiere_pro,
   premiere_pro_feature_film_pasting_image_complicated,
   you_are_not_a_slow_video_editor_workflow_friction,
@@ -35,6 +37,7 @@ export const allBlogPosts: BlogPost[] = [
   premiere_workspace_design,
 ];
 
+export { universal_paste_after_effects } from './universal-paste-after-effects';
 export { elevenlabs_voice_generator_adobe_premiere_pro } from './elevenlabs-voice-generator-adobe-premiere-pro';
 export { premiere_pro_feature_film_pasting_image_complicated } from './premiere-pro-feature-film-pasting-image-complicated';
 export { you_are_not_a_slow_video_editor_workflow_friction } from './you-are-not-a-slow-video-editor-workflow-friction';
