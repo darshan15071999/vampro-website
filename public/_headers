@@ -5,9 +5,9 @@
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
 
-# Cache build and nested assets safely (avoid 1-year edge cache poisoning on deploys)
+# Cache build and nested assets safely (avoid edge cache poisoning on deploys)
 /assets/*
-  Cache-Control: public, max-age=3600, must-revalidate
+  Cache-Control: public, max-age=300, must-revalidate
   Access-Control-Allow-Origin: *
 
 # Universal Paste media and static assets (Audio, Video, WebP comic pages)

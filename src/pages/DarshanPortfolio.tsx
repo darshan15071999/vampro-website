@@ -70,6 +70,8 @@ export default function DarshanPortfolio() {
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
 
+    root.setAttribute('data-js', 'true');
+
     const revealObserver = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
@@ -79,7 +81,7 @@ export default function DarshanPortfolio() {
           }
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.05 }
     );
 
     root.querySelectorAll('[data-reveal]').forEach((el) => revealObserver.observe(el));
