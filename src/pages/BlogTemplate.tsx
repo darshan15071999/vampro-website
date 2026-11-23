@@ -24,7 +24,7 @@ const BlogTemplate = () => {
   const [sortOrder, setSortOrder] = useState('newest'); // 'newest' | 'oldest'
 
   // Extract unique topics and authors
-  const uniqueProducts = useMemo(() => ['All', 'Universal Paste', 'Voice Generator'], []);
+  const uniqueProducts = useMemo(() => ['All', 'Universal Paste', 'Voice Generator', 'Voice Studio'], []);
   const uniqueTopics = useMemo(() => ['All', ...Array.from(new Set(blogPosts.map(p => p.category)))], []);
   const uniqueAuthors = useMemo(() => ['All', ...Array.from(new Set(blogPosts.map(p => p.author)))], []);
 
@@ -35,6 +35,7 @@ const BlogTemplate = () => {
     if (selectedProduct !== 'All') {
       result = result.filter(p => {
         if (selectedProduct === 'Universal Paste') return p.product === 'Universal Paste';
+        if (selectedProduct === 'Voice Studio') return p.product === 'Voice Studio';
         if (selectedProduct === 'Voice Generator') return p.product === 'Voice Generator' || !p.product;
         return true;
       });
@@ -205,43 +206,61 @@ const BlogTemplate = () => {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredPosts.map((blogPost) => (
-                <Link key={blogPost.slug} to={`/blog/${blogPost.slug}`} className="group rounded-2xl border border-indigo-200/60 bg-white/60 backdrop-blur-md overflow-hidden hover:border-indigo-400 transition-all duration-300 shadow-sm hover:shadow-md flex flex-col">
-                  <div className="h-48 overflow-hidden relative shrink-0">
-                    <div className="absolute top-4 left-4 z-10 px-3 py-1 bg-white/90 backdrop-blur-md border border-indigo-200 text-indigo-600 text-xs font-semibold rounded-full shadow-sm">
-                      {blogPost.category}
-                    </div>
-                    <div className="absolute top-4 right-4 z-10 flex items-center gap-1.5">
-                      {blogPost.comingSoon && (
-                        <div className="px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider rounded-full shadow-sm bg-amber-400 text-slate-950 border border-amber-500/40">
-                          Coming Soon
-                        </div>
-                      )}
-                      {blogPost.product && (
-                        <div className={`px-2.5 py-0.5 text-[10px] font-black uppercase rounded-full shadow-sm ${
-                          blogPost.product === 'Universal Paste'
-                            ? 'bg-[#ffd437] text-[#07080b] border border-black/30'
-                            : 'bg-indigo-600 text-white'
-                        }`}>
-                          {blogPost.product}
-                        </div>
-                      )}
-                    </div>
-                    <img src={blogPost.image} alt={blogPost.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                  </div>
-                  <div className="p-6 flex flex-col grow">
-                    <h3 className="text-xl font-bold text-slate-900 mb-3 line-clamp-2 group-hover:text-indigo-600 transition-colors">{blogPost.title}</h3>
-                    <p className="text-slate-600 text-sm mb-4 line-clamp-3 leading-relaxed grow">{blogPost.summary}</p>
-                    <div className="flex items-center justify-between text-xs text-slate-500 mt-auto pt-4 border-t border-slate-100">
-                      <div className="flex items-center gap-2">
-                        {blogPost.authorImage ? <img src={blogPost.authorImage} alt={blogPost.author} className="w-5 h-5 rounded-full object-cover shadow-sm" /> : <User size={14} />}
-                        <span className="font-medium">{blogPost.author}</span>
+                <article key={blogPost.slug} className="group rounded-2xl border border-indigo-200/60 bg-white/60 backdrop-blur-md overflow-hidden hover:border-indigo-400 transition-all duration-300 shadow-sm hover:shadow-md flex flex-col">
+                  <Link to={`/blog/${blogPost.slug}`} className="flex flex-col grow">
+                    <div className="h-48 overflow-hidden relative shrink-0">
+                      <div className="absolute top-4 left-4 z-10 px-3 py-1 bg-white/90 backdrop-blur-md border border-indigo-200 text-indigo-600 text-xs font-semibold rounded-full shadow-sm">
+                        {blogPost.category}
                       </div>
+                      <div className="absolute top-4 right-4 z-10 flex items-center gap-1.5">
+                        {blogPost.comingSoon && (
+                          <div className="px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider rounded-full shadow-sm bg-amber-400 text-slate-950 border border-amber-500/40">
+                            Coming Soon
+                          </div>
+                        )}
+                        {blogPost.product && (
+                          <div className={`px-2.5 py-0.5 text-[10px] font-black uppercase rounded-full shadow-sm ${
+                            blogPost.product === 'Universal Paste'
+                              ? 'bg-[#ffd437] text-[#07080b] border border-black/30'
+                              : blogPost.product === 'Voice Studio'
+                                ? 'bg-emerald-600 text-white'
+                                : 'bg-indigo-600 text-white'
+                          }`}>
+                            {blogPost.product}
+                          </div>
+                        )}
+                      </div>
+                      <img src={blogPost.image} alt={blogPost.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    </div>
+                    <div className="p-6 pb-4 flex flex-col grow">
+                      <h3 className="text-xl font-bold text-slate-900 mb-3 line-clamp-2 group-hover:text-indigo-600 transition-colors">{blogPost.title}</h3>
+                      <p className="text-slate-600 text-sm line-clamp-3 leading-relaxed grow">{blogPost.summary}</p>
+                    </div>
+                  </Link>
+                  <div className="px-6 pb-6 mt-auto">
+                    <div className="flex items-center justify-between text-xs text-slate-500 pt-4 border-t border-slate-100">
+                      <Link
+                        to="/people/darshan"
+                        className="group/author flex items-center gap-2 hover:text-indigo-600 transition-colors"
+                        title={`View ${blogPost.author}'s portfolio`}
+                      >
+                        {blogPost.authorImage ? (
+                          <img
+                            src={blogPost.authorImage}
+                            alt={blogPost.author}
+                            className="w-6 h-6 rounded-full object-cover shadow-sm ring-1 ring-indigo-200 group-hover/author:ring-indigo-500 transition-all"
+                          />
+                        ) : (
+                          <User size={14} />
+                        )}
+                        <span className="font-medium group-hover/author:underline underline-offset-2">{blogPost.author}</span>
+                      </Link>
                       <div className="flex items-center gap-1.5 font-medium">
                         <Clock size={14} className="text-indigo-400" /> {blogPost.readingTime}
                       </div>
                     </div>
                   </div>
-                </Link>
+                </article>
               ))}
             </div>
           )}
@@ -322,7 +341,9 @@ const BlogTemplate = () => {
                 <span className={`px-3 py-1 text-xs font-extrabold rounded-full shadow-sm ${
                   isUniversalPaste
                     ? 'bg-[#ffd437] text-[#07080b] border border-black/30'
-                    : 'bg-indigo-600 text-white'
+                    : currentPost.product === 'Voice Studio'
+                      ? 'bg-emerald-600 text-white'
+                      : 'bg-indigo-600 text-white'
                 }`}>
                   {currentPost.product}
                 </span>
@@ -354,10 +375,20 @@ const BlogTemplate = () => {
 
           <div className="flex flex-wrap items-center justify-between gap-4 p-5 md:px-8 md:py-6 bg-white/60 backdrop-blur-md border border-indigo-100 shadow-sm rounded-3xl mb-12">
             <div className="flex items-center gap-6 text-sm text-slate-500">
-              <div className="flex items-center gap-3">
-                <img src={currentPost.authorImage || "/author.jpg"} alt={currentPost.author} className="w-10 h-10 rounded-full object-cover border border-slate-200 shadow-sm" />
-                <span className="font-semibold text-slate-800">{currentPost.author}</span>
-              </div>
+              <Link
+                to="/people/darshan"
+                className="group/author flex items-center gap-3 hover:text-indigo-600 transition-colors"
+                title={`View ${currentPost.author}'s portfolio`}
+              >
+                <img
+                  src={currentPost.authorImage || "/author.jpg"}
+                  alt={currentPost.author}
+                  className="w-10 h-10 rounded-full object-cover border border-indigo-200 shadow-sm group-hover/author:ring-2 group-hover/author:ring-indigo-400 transition-all"
+                />
+                <span className="font-semibold text-slate-800 group-hover/author:text-indigo-600 group-hover/author:underline underline-offset-2">
+                  {currentPost.author}
+                </span>
+              </Link>
               <div className="flex items-center gap-2">
                 <Clock size={14} /> <time dateTime={new Date(currentPost.date).toISOString().split('T')[0]}>{currentPost.date}</time> &middot; {currentPost.readingTime}
               </div>

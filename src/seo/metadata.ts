@@ -51,10 +51,11 @@ export const homeMetadata: PageMetadata = {
 };
 
 export const darshanPortfolioMetadata: PageMetadata = {
-  title: 'Darshan S | Creative Portfolio',
-  description: "Explore Darshan S's Coimbatore-rooted portfolio in marketing, film, design, web and app development, custom software and hardware.",
+  title: 'Darshan S | Full-Cycle Creative Strategy, Video Production & Marketing',
+  description: 'From concept ideation and video production to full-scale marketing. Darshan S handles the full cycle: ideation, creation, execution, and brand positioning.',
   canonical: 'https://vampro.in/people/darshan',
-  image: 'https://vampro.in/assets/people/darshan/portrait.jpg',
+  keywords: 'Darshan S, concept ideation, video production, full-scale marketing, brand positioning, creative execution, campaign strategy, Coimbatore creative portfolio',
+  image: 'https://vampro.in/og/darshan-portfolio.jpg',
   type: 'profile',
 };
 
@@ -64,6 +65,7 @@ export const pluginsMetadata: PageMetadata = {
   // /plugins client-redirects to the voice generator — canonical points at the target
   canonical: 'https://vampro.in/plugins/voice-generator',
   keywords: 'Adobe Premiere Pro plugins, ElevenLabs Premiere Pro, AI plugins, creative plugins, professional creative tools, voice generator plugin, universal paste plugin',
+  image: 'https://vampro.in/og/voice-generator.jpg',
   schema: pluginsCollectionSchema,
   breadcrumbs: pluginsBreadcrumb
 };
@@ -73,16 +75,17 @@ export const voiceMetadata: PageMetadata = {
   description: 'Generate natural AI voiceovers directly inside Adobe Premiere Pro. Connect your ElevenLabs API key for custom voice clones and multilingual models, or use offline Kokoro voices directly on your timeline.',
   canonical: 'https://vampro.in/plugins/voice-generator',
   keywords: 'ElevenLabs Premiere Pro, ElevenLabs text to speech plugin, ElevenLabs Adobe Premiere, AI voice generator, text to speech, voice cloning Premiere Pro, timeline voiceover, Adobe Premiere Pro plugin, narration, creative plugin, Kokoro TTS',
+  image: 'https://vampro.in/og/voice-generator.jpg',
   schema: voiceGeneratorSchema,
   breadcrumbs: voiceBreadcrumb
 };
 
 export const universalPasteMetadata: PageMetadata = {
-  title: 'Vampro Universal Paste | Paste Images, URLs & Screen Snips Into Premiere Pro',
-  description: 'Vampro Universal Paste is the essential Adobe Premiere Pro plugin that pastes clipboard media, screenshots, window recordings, GIFs, and web URLs directly onto your timeline with zero file chasing.',
+  title: 'Vampro Universal Paste | Copy Pasta Alternative to Paste Images, GIFs & Clips in Premiere Pro',
+  description: 'Looking for a Copy Pasta alternative for Adobe Premiere Pro and After Effects? Vampro Universal Paste pastes clipboard images, screenshots, GIFs, screen recordings, and video URLs directly onto your timeline with zero file chasing.',
   canonical: 'https://vampro.in/plugins/universal-paste',
-  keywords: 'universal paste, premiere pro paste clipboard, adobe premiere pro plugin, paste image into premiere pro, premiere pro screenshot, premiere pro screen recorder, paste url to timeline, uxp plugin, video editing workflow automation',
-  image: 'https://vampro.in/assets/universal-paste/superhero.png',
+  keywords: 'copy pasta premiere pro, copy pasta alternative, copy pasta plugin replacement, copy pasta after effects, copy pasta discontinued alternative, paste image from clipboard premiere pro, copy and paste images premiere pro, premiere pro clipboard plugin, universal paste, premiere pro paste clipboard, adobe premiere pro plugin, paste image into premiere pro, premiere pro screenshot, premiere pro screen recorder, paste url to timeline, uxp plugin, video editing workflow automation',
+  image: 'https://vampro.in/og/universal-paste.jpg',
   schema: [
     ...(Array.isArray(universalPasteSchema) ? universalPasteSchema : [universalPasteSchema]),
     universalPasteFaqSchema,
@@ -96,7 +99,7 @@ export const voiceStudioMetadata: PageMetadata = {
   description: 'Produce natural voiceovers, zero-latency local voice cloning, speech-to-speech conversions, and stem separation directly in Adobe Premiere Pro with Vampro Voice Studio. 100% private offline engine or Bring-Your-Own-Key ElevenLabs cloud mode.',
   canonical: 'https://vampro.in/plugins/voice-studio',
   keywords: 'voice studio, adobe premiere pro voice plugin, offline voice generator, speech to speech premiere pro, audio stem separation, elevenlabs byok, premiere pro voice cloning, chatterbox gguf, uxp audio plugin',
-  image: 'https://vampro.in/forest-studio.png',
+  image: 'https://vampro.in/og/voice-studio.jpg',
   schema: [
     ...(Array.isArray(voiceStudioSchema) ? voiceStudioSchema : [voiceStudioSchema]),
     voiceStudioFaqSchema,
@@ -131,6 +134,7 @@ export const docsHubMetadata: PageMetadata = {
   // /docs client-redirects to the voice generator docs — canonical points at the target
   canonical: 'https://vampro.in/docs/plugins/voice-generator',
   keywords: 'plugin documentation, installation guide, tutorials, Adobe Premiere Pro plugin docs',
+  image: 'https://vampro.in/og/docs.jpg',
   schema: docsCollectionSchema,
   breadcrumbs: docsHubBreadcrumb
 };
@@ -140,16 +144,17 @@ export const docsVoiceMetadata: PageMetadata = {
   description: 'Comprehensive setup and workflow documentation for Vampro AI Voice Generator for Adobe Premiere Pro. Learn how to configure ElevenLabs API, customize voice clones, adjust stability/similarity, and insert audio directly into your timeline.',
   canonical: 'https://vampro.in/docs/plugins/voice-generator',
   keywords: 'voice generator documentation, ElevenLabs Premiere Pro guide, ElevenLabs API key setup, voice cloning tutorial, Adobe Premiere Pro plugin docs, troubleshooting',
+  image: 'https://vampro.in/og/docs.jpg',
   schema: docsSchema,
   breadcrumbs: docsVoiceBreadcrumb
 };
 
 export const docsUniversalPasteMetadata: PageMetadata = {
-  title: 'Universal Paste Documentation & Workflow Guide | Vampro',
-  description: 'Complete setup guide, clipboard workflows, screen recording, URL import, and troubleshooting for Vampro Universal Paste on Adobe Premiere Pro.',
+  title: 'Universal Paste Docs | Copy Pasta Alternative Setup & Clipboard Guide | Vampro',
+  description: 'Complete setup guide for Vampro Universal Paste, the modern Copy Pasta alternative for Adobe Premiere Pro. Learn clipboard pasting, screen recording, URL import, clip replacement, and troubleshooting.',
   canonical: 'https://vampro.in/docs/plugins/universal-paste',
-  keywords: 'universal paste documentation, premiere pro clipboard guide, uxp plugin setup, premiere pro asset organization, screen recording docs',
-  image: 'https://vampro.in/assets/universal-paste/superhero.png',
+  keywords: 'universal paste documentation, copy pasta alternative setup, premiere pro clipboard guide, paste images premiere pro guide, uxp plugin setup, premiere pro asset organization, screen recording docs',
+  image: 'https://vampro.in/og/docs.jpg',
   schema: docsSchema,
   breadcrumbs: docsUniversalPasteBreadcrumb
 };
@@ -159,7 +164,7 @@ export const docsVoiceStudioMetadata: PageMetadata = {
   description: 'Complete documentation for Vampro Voice Studio for Adobe Premiere Pro. Learn how to configure the local offline engine, connect ElevenLabs API key, clone voices, perform speech-to-speech conversion, and isolate audio stems.',
   canonical: 'https://vampro.in/docs/plugins/voice-studio',
   keywords: 'voice studio documentation, voice studio guide, premiere pro speech to speech docs, stem separation guide, elevenlabs byok setup, chatterbox gguf premiere pro',
-  image: 'https://vampro.in/forest-studio.png',
+  image: 'https://vampro.in/og/docs.jpg',
   schema: docsSchema,
   breadcrumbs: docsVoiceStudioBreadcrumb
 };
@@ -213,6 +218,7 @@ export const blogMetadata: PageMetadata = {
   description: 'Tutorials, editing tips, AI workflow guides, and creative automation insights from the Vampro team.',
   canonical: 'https://vampro.in/blog',
   keywords: 'editing tips, AI workflows, creative automation, Premiere Pro tutorials, voice generation tips',
+  image: 'https://vampro.in/og/blog.jpg',
   breadcrumbs: blogBreadcrumb
 };
 

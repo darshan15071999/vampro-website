@@ -22,7 +22,7 @@ export default function SEO({
   description, 
   canonical, 
   keywords,
-  image = 'https://vampro.in/thumbnail.png',
+  image = 'https://vampro.in/thumbnail.jpg',
   schema,
   breadcrumbs,
   robots = 'index,follow',
@@ -45,6 +45,7 @@ export default function SEO({
   }
 
   const finalRobots = noIndex ? 'noindex,nofollow' : robots;
+  const isStandardOgJpg = image === 'https://vampro.in/thumbnail.jpg' || image.startsWith('https://vampro.in/og/');
 
   return (
     <Helmet>
@@ -70,6 +71,10 @@ export default function SEO({
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={image} />
+      {isStandardOgJpg && <meta property="og:image:type" content="image/jpeg" />}
+      {isStandardOgJpg && <meta property="og:image:width" content="1200" />}
+      {isStandardOgJpg && <meta property="og:image:height" content="630" />}
+      {isStandardOgJpg && <meta property="og:image:alt" content={title} />}
 
       {/* Twitter */}
       <meta name="twitter:card" content={twitterCard} />

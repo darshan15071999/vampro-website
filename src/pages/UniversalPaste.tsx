@@ -1932,37 +1932,6 @@ const UniversalPaste = () => {
                       </Button>
                     </Link>
                   </div>
-
-                  {/* After Effects Releasing Soon Callout */}
-                  <div
-                    className="sv-ae-callout sv-interactive-glitch-elem"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleOpenAfterEffectsNotify('Hero After Effects Callout');
-                    }}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        handleOpenAfterEffectsNotify('Hero After Effects Callout');
-                      }
-                    }}
-                    role="button"
-                    tabIndex={0}
-                    title="Get notified when Universal Paste releases for Adobe After Effects"
-                  >
-                    <div className="sv-ae-badge" aria-hidden="true">Ae</div>
-                    <div className="sv-ae-callout-copy">
-                      <div className="sv-ae-callout-top">
-                        <span className="sv-ae-pill">★ RELEASING SOON ★</span>
-                        <span className="sv-ae-title">ADOBE AFTER EFFECTS</span>
-                      </div>
-                      <p className="sv-ae-desc">
-                        Universal Paste is releasing soon for After Effects — paste directly into your comps.
-                      </p>
-                    </div>
-                    <span className="sv-ae-cta">NOTIFY ME ➔</span>
-                  </div>
                 </div>
 
                 <div className="sv-hero-comic-container">

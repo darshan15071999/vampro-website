@@ -197,19 +197,32 @@ export const universalPasteSchema: SchemaType = [
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     "name": "Vampro Universal Paste",
+    "alternateName": [
+      "Universal Paste for Premiere Pro",
+      "Copy Pasta Alternative for Premiere Pro"
+    ],
     "applicationCategory": "MultimediaApplication",
     "operatingSystem": "Windows 10, Windows 11, macOS",
-    "softwareRequirements": "Adobe Premiere Pro 24.0 or higher",
+    "softwareRequirements": "Adobe Premiere Pro 24.0 or higher (After Effects edition releasing soon)",
     "offers": {
       "@type": "Offer",
       "price": "0",
       "priceCurrency": "USD",
-      "availability": "https://schema.org/PreOrder"
+      "availability": "https://schema.org/InStock"
     },
-    "description": "Adobe Premiere Pro plugin and workflow companion that enables video editors to paste clipboard media, capture application screenshots, record windows, and ingest web media directly onto the sequence timeline.",
+    "featureList": [
+      "1-click copy and paste images and animated GIFs from clipboard into Adobe Premiere Pro",
+      "Modern actively maintained alternative to the discontinued Copy Pasta plugin",
+      "Built-in region screenshot snipping and window screen recording with system audio",
+      "Direct video URL fetching straight to timeline or project bins",
+      "1-click timeline clip replacement preserving scale, duration, and keyframes",
+      "Automatic organized project folder ingestion with zero desktop clutter",
+      "100% local offline clipboard processing on modern Adobe UXP architecture"
+    ],
+    "description": "The modern Copy Pasta alternative for Adobe Premiere Pro and upcoming After Effects workflows. Paste clipboard images, animated GIFs, screenshots, window recordings, and web video URLs directly onto your timeline without saving files to your desktop.",
     "url": "https://vampro.in/plugins/universal-paste",
-    "image": "https://vampro.in/assets/universal-paste/superhero.png",
-    "screenshot": "https://vampro.in/assets/universal-paste/superhero.png",
+    "image": "https://vampro.in/og/universal-paste.jpg",
+    "screenshot": "https://vampro.in/og/universal-paste.jpg",
     "publisher": {
       "@type": "Organization",
       "name": "Vampro"
@@ -219,7 +232,7 @@ export const universalPasteSchema: SchemaType = [
     "@context": "https://schema.org",
     "@type": "Product",
     "name": "Vampro Universal Paste for Adobe Premiere Pro",
-    "description": "The essential Premiere Pro plugin for editors. Paste clipboard media, grab URLs, capture window recordings, and drop assets directly into your timeline without desktop clutter.",
+    "description": "The modern Copy Pasta replacement and clipboard bridge for Adobe Premiere Pro. Paste clipboard images, GIFs, screenshots, screen recordings, and URLs directly onto your timeline with zero desktop clutter.",
     "brand": {
       "@type": "Brand",
       "name": "Vampro"
@@ -229,8 +242,9 @@ export const universalPasteSchema: SchemaType = [
       "@type": "Offer",
       "price": "0",
       "priceCurrency": "USD",
-      "availability": "https://schema.org/PreOrder"
+      "availability": "https://schema.org/InStock"
     },
+    "image": "https://vampro.in/og/universal-paste.jpg",
     "url": "https://vampro.in/plugins/universal-paste"
   }
 ];
@@ -293,6 +307,22 @@ export const universalPasteFaqSchema: SchemaType = {
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "Universal Paste supports PNG, JPG, JPEG, WebP, animated GIFs, MP4, WebM, clipboard bitmap buffers, and direct video/media URLs."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is Vampro Universal Paste a good alternative to the Copy Pasta plugin for Premiere Pro?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Because the original Copy Pasta plugin was discontinued, Vampro Universal Paste is a modern, actively maintained replacement built on Adobe UXP for Premiere Pro (with After Effects support releasing soon). In addition to pasting clipboard images and screenshots directly to your timeline, Universal Paste adds animated GIF conversion, built-in region screenshots and screen recording, direct video URL downloads, background removal, and 1-click timeline clip replacement."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between Copy Pasta and Vampro Universal Paste?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "While the older discontinued Copy Pasta plugin focused mainly on pasting static clipboard images, Vampro Universal Paste acts as a complete clipboard-to-timeline bridge for modern Premiere Pro workflows. It handles images, animated GIFs, web video URLs, built-in window screenshots and screen recordings with system audio, automatic project folder organization, and 1-click clip replacement that preserves scale and keyframes."
       }
     },
     {

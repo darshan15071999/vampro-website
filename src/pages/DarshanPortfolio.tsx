@@ -1,7 +1,7 @@
 import { useEffect, useRef, type PointerEvent } from 'react';
 import {
-  Building2, Calendar, Camera, Clapperboard, Code, Coffee, Cpu, Factory, Film, Globe,
-  GraduationCap, HeartPulse, Megaphone, Monitor, PenTool, Plus, Smartphone, Trophy, Wrench,
+  Building2, Calendar, Camera, Clapperboard, Coffee, Factory,
+  GraduationCap, HeartPulse, Megaphone, Monitor, Trophy,
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
@@ -9,33 +9,11 @@ import { darshanPortfolioMetadata } from '../seo/metadata';
 import DarshanCoimbatoreMap from './DarshanCoimbatoreMap';
 import DarshanGallery from './DarshanGallery';
 import DarshanHero, { LinkedInLink } from './DarshanHero';
+import DarshanServices from './DarshanServices';
 import { galleryAssets } from './darshanGalleryMedia';
 import './DarshanPortfolio.css';
 
 const linkedin = 'https://www.linkedin.com/in/darshan-s-34145a16b/';
-
-const serviceGroups = [
-  {
-    title: 'Creative production',
-    services: [
-      { icon: Megaphone, title: 'Marketing services', description: 'Campaign concepts, messaging and content planning built around what each audience needs to hear.' },
-      { icon: Film, title: 'Video editing', description: 'Shaping footage, sound and pacing into stories for social, campaigns and longer formats.' },
-      { icon: PenTool, title: 'Design', description: 'Visual direction, campaign graphics and layouts that carry an idea consistently across formats.' },
-      { icon: Camera, title: 'Shoots', description: 'Planning and capturing photo and video for brands, people, spaces and live events.' },
-      { icon: Clapperboard, title: 'Short films', description: 'Developing narrative ideas and carrying them through production, editing and the final cut.' },
-    ],
-  },
-  {
-    title: 'Development & hardware',
-    services: [
-      { icon: Globe, title: 'Web development', description: 'Responsive websites, from portfolio and campaign pages to interactive web experiences.' },
-      { icon: Smartphone, title: 'App development', description: 'Turning product ideas into apps with clear interfaces and practical workflows.' },
-      { icon: Code, title: 'Custom software', description: 'Building tools around specific needs, including plugins, utilities and workflow automation.' },
-      { icon: Wrench, title: 'Camera rigs', description: 'Designing and building camera setups around the movement, mounting and handling a shoot needs.' },
-      { icon: Cpu, title: 'Electronics', description: 'Prototyping and assembling electronic systems for custom hardware and creative projects.' },
-    ],
-  },
-];
 
 const industries = [
   { label: 'Media', icon: Camera },
@@ -132,41 +110,13 @@ export default function DarshanPortfolio() {
       ref={rootRef}
       onPointerMove={handlePagePointer}
     >
-      <SEO {...darshanPortfolioMetadata} author="Darshan S" twitterCard="summary" themeColor="#111310" />
+      <SEO {...darshanPortfolioMetadata} author="Darshan S" twitterCard="summary_large_image" themeColor="#111310" />
       <div className="darshan-scroll-progress" ref={progressRef} aria-hidden="true" />
       <div className="darshan-cursor-glow" aria-hidden="true" />
 
       <DarshanHero linkedin={linkedin} />
 
-      <section className="darshan-services" aria-labelledby="darshan-services-title" data-reveal>
-        <div className="darshan-container">
-          <h2 id="darshan-services-title">What I do</h2>
-          <div className="darshan-service-layout">
-            {serviceGroups.map(({ title, services }, groupIndex) => (
-              <div className="darshan-service-group" key={title}>
-                <h3>
-                  <span className="darshan-group-index">0{groupIndex + 1}</span>
-                  <span>{title}</span>
-                </h3>
-                <ul className="darshan-service-list">
-                  {services.map(({ icon: Icon, title: service, description }, index) => (
-                    <li key={service}>
-                      <details name={`darshan-services-${title}`} open={index === 0}>
-                        <summary>
-                          <Icon size={21} strokeWidth={1.75} aria-hidden="true" />
-                          <span>{service}</span>
-                          <Plus className="darshan-service-toggle" size={17} aria-hidden="true" />
-                        </summary>
-                        <p>{description}</p>
-                      </details>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <DarshanServices />
 
       <DarshanGallery />
 

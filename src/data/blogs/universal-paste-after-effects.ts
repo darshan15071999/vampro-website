@@ -19,13 +19,15 @@ export const universal_paste_after_effects: BlogPost = {
   readingTime: '5 min read',
   category: 'Workflow',
   product: 'Universal Paste',
+  comingSoon: true,
   image: `${assets}/blog-banner.jpg`,
   overview: `
+    <p><strong>Coming Soon:</strong> Vampro Universal Paste for Adobe After Effects is releasing soon. Here is a preview of the upcoming workflow.</p>
     <p>Say you're building a product demo in After Effects. You need a screenshot for the first shot, an animated reference for a transition, and a temporary product image while the final render is on its way. Each asset normally starts another round of saving, finding, and importing files.</p>
     <p>Vampro Universal Paste puts those steps inside one panel. The Windows companion prepares the media, and After Effects imports it into the Project panel or adds it as a layer at the playhead. Later, you can swap the source of an animated layer when the final asset arrives.</p>
   `,
   content: `
-    <h2 id="get-set-up">Open Universal Paste in After Effects</h2>
+    <h2 id="get-set-up">Open Universal Paste in After Effects <span class="inline-flex items-center align-middle ml-2 px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider bg-amber-100 text-amber-800 border border-amber-300 not-prose">Coming Soon</span></h2>
     <p>Start with After Effects 25 through 27 on 64-bit Windows 10 or 11 and <a href="https://apps.microsoft.com/detail/9ntsjd556ctb">Vampro Universal Paste Companion</a> v1.1.0 or newer. If you already use the companion with Premiere Pro, keep using that installation. It serves both apps.</p>
     <ol>
       <li>Install the After Effects edition and launch the companion.</li>

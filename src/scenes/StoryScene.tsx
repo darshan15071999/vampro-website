@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
 import { gsap } from 'gsap';
-import { Video, PenTool, Code, Cpu, Lightbulb, Users } from 'lucide-react';
+import { Video, PenTool, Code, Cpu, Lightbulb, User, Users } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { DimLine } from './wire';
 
@@ -58,20 +58,50 @@ const StoryScene = forwardRef<HTMLElement>((_, ref) => (
         <blockquote className="mt-8 border-l border-[var(--bp-accent)]/30 pl-5 text-sm md:text-base font-light tracking-wider text-[var(--bp-accent)]/80 leading-relaxed max-w-md">
           "We don't choose between creativity and technology. We build where they meet."
         </blockquote>
-        <section className="mt-6 max-w-md" aria-labelledby="about-people">
-          <Link
-            to="/people/darshan"
-            className="group block border-t border-[var(--bp-accent)]/25 pt-4 text-[var(--bp-ink-strong)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--bp-accent)]"
-          >
-            <h3 id="about-people" className="bp-label mb-2">People</h3>
-            <span className="flex items-center gap-3">
-              <img src="/assets/people/darshan/portrait.jpg" alt="" width={56} height={56} loading="lazy" className="size-14 shrink-0 rounded-sm object-cover" />
-              <span className="font-space text-sm leading-snug">
-                <span className="block font-semibold underline underline-offset-4 group-hover:text-[var(--bp-accent)]">Meet Darshan S</span>
-                <span className="mt-1 block text-[var(--bp-muted2)]">A creative practitioner behind Vampro, working across marketing, design and film.</span>
+        <section className="mt-6 max-w-md border-t border-[var(--bp-accent)]/25 pt-4" aria-labelledby="about-people">
+          <h3 id="about-people" className="bp-label mb-1">People</h3>
+          <p className="font-space text-sm font-medium text-[var(--bp-ink-strong)] mb-3.5">
+            Meet the brains behind Vampro
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <Link
+              to="/people/darshan"
+              className="group flex items-center gap-3 rounded-md border border-[var(--bp-accent)]/25 bg-[var(--bp-accent)]/[0.03] p-2.5 text-[var(--bp-ink-strong)] transition-colors hover:border-[var(--bp-accent)]/60 hover:bg-[var(--bp-accent)]/[0.08] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--bp-accent)]"
+            >
+              <img
+                src="/assets/people/darshan/portrait-blue.jpg"
+                alt="Darshan S"
+                width={48}
+                height={48}
+                loading="lazy"
+                className="size-12 shrink-0 rounded-sm object-cover"
+              />
+              <span className="min-w-0 font-space text-xs leading-snug">
+                <span className="block truncate font-semibold underline underline-offset-4 group-hover:text-[var(--bp-accent)]">
+                  Darshan S
+                </span>
+                <span className="mt-0.5 block truncate text-[11px] text-[var(--bp-muted2)]">
+                  View portfolio
+                </span>
               </span>
-            </span>
-          </Link>
+            </Link>
+
+            <div
+              className="flex items-center gap-3 rounded-md border border-dashed border-[var(--bp-accent)]/25 bg-[var(--bp-accent)]/[0.02] p-2.5"
+              aria-label="Blank profile placeholder"
+            >
+              <span
+                className="flex size-12 shrink-0 items-center justify-center rounded-sm border border-dashed border-[var(--bp-accent)]/30 bg-[var(--bp-accent)]/[0.04] text-[var(--bp-accent)]/40"
+                aria-hidden="true"
+              >
+                <User size={18} strokeWidth={1.5} />
+              </span>
+              <span className="min-w-0 flex-1 space-y-1.5" aria-hidden="true">
+                <span className="block h-2.5 w-20 rounded-xs bg-[var(--bp-ink-strong)]/15" />
+                <span className="block h-2 w-14 rounded-xs bg-[var(--bp-muted2)]/20" />
+              </span>
+            </div>
+          </div>
         </section>
       </div>
     </div>

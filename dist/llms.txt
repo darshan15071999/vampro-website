@@ -11,8 +11,8 @@ Vampro is a creative technology lab where technology meets creativity. It builds
 ## Core Products
 
 ### 1. [Vampro Universal Paste](https://vampro.in/plugins/universal-paste)
-- **Category:** Adobe Premiere Pro Timeline & Media Ingestion Plugin (UXP + Native Companion).
-- **Core Functionality:** Eliminates the friction between researching visual media and editing in Premiere Pro. Allows video editors to copy any image, GIF, video URL, screenshot snip, or window recording and instantly paste it directly onto the sequence timeline at the playhead or import it into organized project bins.
+- **Category:** Adobe Premiere Pro Timeline & Media Ingestion Plugin (UXP + Native Companion) and modern actively maintained alternative to the discontinued Copy Pasta plugin.
+- **Core Functionality:** Eliminates the friction between researching visual media and editing in Premiere Pro (with an Adobe After Effects edition releasing soon). Designed as a full-featured replacement for Copy Pasta, it allows video editors to copy any image, GIF, video URL, screenshot snip, or window recording and instantly paste it directly onto the sequence timeline at the playhead or import it into organized project bins.
 - **Key Features:**
   1. **Clipboard 1-Click Paste:** Copy web images, screenshots, or local files (Ctrl+C) -> instantly drop them on your timeline sequence with preset or customized clip durations.
   2. **Direct Video URL Download:** Paste links from YouTube, Vimeo, Reddit, etc. -> automatically download and import timeline-ready MP4 assets.
