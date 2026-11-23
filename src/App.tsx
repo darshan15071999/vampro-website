@@ -23,6 +23,7 @@ const DocsUniversalPaste = lazy(() => import('./pages/DocsUniversalPaste'));
 const DocsHub = lazy(() => import('./pages/DocsHub'));
 const VoiceStudio = lazy(() => import('./pages/VoiceStudio'));
 const DocsVoiceStudio = lazy(() => import('./pages/DocsVoiceStudio'));
+const DarshanPortfolio = lazy(() => import('./pages/DarshanPortfolio'));
 
 // Blogs
 const BlogTemplate = lazy(() => import('./pages/BlogTemplate'));
@@ -77,6 +78,7 @@ const App = () => {
   const location = useLocation();
   const [searchOpen, setSearchOpen] = useState(false);
   const searchInputRef = useRef<HTMLInputElement>(null);
+  const isPortfolio = location.pathname === '/people/darshan' || location.pathname === '/people/darshan/';
 
   // Determine if current page is "dark" for particle theming
   const isDarkPage = location.pathname.startsWith('/plugins') ||
@@ -92,6 +94,7 @@ const App = () => {
   const showParticles = location.pathname !== '/' &&
     !location.pathname.startsWith('/plugins/universal-paste') &&
     !location.pathname.startsWith('/plugins/voice-studio') &&
+    !isPortfolio &&
     !location.pathname.startsWith('/docs') &&
     !location.pathname.includes('privacy') &&
     !location.pathname.includes('terms') &&
@@ -130,6 +133,7 @@ const App = () => {
                 <Routes location={location}>
                 {/* Main Pages */}
                 <Route path="/" element={<Home />} />
+                <Route path="/people/darshan" element={<DarshanPortfolio />} />
                 <Route path="/plugins" element={<Navigate to="/plugins/voice-generator" replace />} />
                 <Route path="/plugins/voice-generator" element={<AdobeVoice />} />
                 <Route path="/plugins/universal-paste" element={<UniversalPaste />} />
@@ -183,7 +187,7 @@ const App = () => {
         </div>
         <WaitlistModal />
         <SignupModal />
-        <Chatbot />
+        {!isPortfolio && <Chatbot />}
       </div>
       </SignupProvider>
     </WaitlistProvider>

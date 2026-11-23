@@ -50,6 +50,14 @@ export const homeMetadata: PageMetadata = {
   breadcrumbs: homeBreadcrumb
 };
 
+export const darshanPortfolioMetadata: PageMetadata = {
+  title: 'Darshan S | Creative Portfolio',
+  description: "Explore Darshan S's Coimbatore-rooted portfolio in marketing, film, design, web and app development, custom software and hardware.",
+  canonical: 'https://vampro.in/people/darshan',
+  image: 'https://vampro.in/assets/people/darshan/portrait.jpg',
+  type: 'profile',
+};
+
 export const pluginsMetadata: PageMetadata = {
   title: 'Professional Creative Plugins | Vampro',
   description: 'Explore professional creative plugins from Vampro. AI-powered tools designed for Adobe Premiere Pro and creative workflows, including ElevenLabs Text-to-Speech and Universal Paste.',
@@ -231,6 +239,7 @@ export const spochTermsMetadata: PageMetadata = { ...termsMetadata, canonical: '
 // Only include PUBLIC pages in allRoutesMetadata (used for sitemap and prerendering)
 export const allRoutesMetadata = [
   { path: '/', ...homeMetadata },
+  { path: '/people/darshan', ...darshanPortfolioMetadata },
   { path: '/plugins', ...pluginsMetadata },
   { path: '/plugins/voice-generator', ...voiceMetadata },
   { path: '/docs', ...docsHubMetadata },

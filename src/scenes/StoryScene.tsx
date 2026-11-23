@@ -1,6 +1,7 @@
 import { forwardRef } from 'react';
 import { gsap } from 'gsap';
 import { Video, PenTool, Code, Cpu, Lightbulb, Users } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { DimLine } from './wire';
 
 const storyBoxes = [
@@ -57,6 +58,21 @@ const StoryScene = forwardRef<HTMLElement>((_, ref) => (
         <blockquote className="mt-8 border-l border-[var(--bp-accent)]/30 pl-5 text-sm md:text-base font-light tracking-wider text-[var(--bp-accent)]/80 leading-relaxed max-w-md">
           "We don't choose between creativity and technology. We build where they meet."
         </blockquote>
+        <section className="mt-6 max-w-md" aria-labelledby="about-people">
+          <Link
+            to="/people/darshan"
+            className="group block border-t border-[var(--bp-accent)]/25 pt-4 text-[var(--bp-ink-strong)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--bp-accent)]"
+          >
+            <h3 id="about-people" className="bp-label mb-2">People</h3>
+            <span className="flex items-center gap-3">
+              <img src="/assets/people/darshan/portrait.jpg" alt="" width={56} height={56} loading="lazy" className="size-14 shrink-0 rounded-sm object-cover" />
+              <span className="font-space text-sm leading-snug">
+                <span className="block font-semibold underline underline-offset-4 group-hover:text-[var(--bp-accent)]">Meet Darshan S</span>
+                <span className="mt-1 block text-[var(--bp-muted2)]">A creative practitioner behind Vampro, working across marketing, design and film.</span>
+              </span>
+            </span>
+          </Link>
+        </section>
       </div>
     </div>
   </section>
