@@ -10,8 +10,9 @@ import SearchOverlay from './components/SearchOverlay';
 import FullPageParticles from './components/FullPageParticles';
 import Chatbot from './components/Chatbot';
 
-// Pages — Home stays eager (primary landing page); the rest are code-split
+// Pages — Home & DarshanPortfolio stay eager; the rest are code-split
 import Home from './pages/Home';
+import DarshanPortfolio from './pages/DarshanPortfolio';
 const AdobeVoice = lazy(() => import('./pages/AdobeVoice'));
 const AEOTracker = lazy(() => import('./pages/AEOtracker'));
 const Spoch = lazy(() => import('./pages/Spoch'));
@@ -23,7 +24,6 @@ const DocsUniversalPaste = lazy(() => import('./pages/DocsUniversalPaste'));
 const DocsHub = lazy(() => import('./pages/DocsHub'));
 const VoiceStudio = lazy(() => import('./pages/VoiceStudio'));
 const DocsVoiceStudio = lazy(() => import('./pages/DocsVoiceStudio'));
-const DarshanPortfolio = lazy(() => import('./pages/DarshanPortfolio'));
 
 // Blogs
 const BlogTemplate = lazy(() => import('./pages/BlogTemplate'));
@@ -121,7 +121,7 @@ const App = () => {
             <Navbar searchOpen={searchOpen} openSearch={openSearch} />
           )}
           <SearchOverlay searchOpen={searchOpen} closeSearch={closeSearch} />
-          <AnimatePresence mode="wait">
+          <AnimatePresence initial={false} mode="wait">
             <motion.main
               key={location.pathname}
               variants={pageTransition}

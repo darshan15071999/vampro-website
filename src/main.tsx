@@ -17,19 +17,6 @@ const app = (
   </React.StrictMode>
 );
 
-const prerenderMeta = document.querySelector('meta[name="prerender-route"]');
-const expectedRoute = prerenderMeta ? prerenderMeta.getAttribute('content') : null;
-const currentPath = window.location.pathname;
-
-const isMatch = expectedRoute === currentPath || 
-                expectedRoute === currentPath + '/' || 
-                expectedRoute + '/' === currentPath;
-
-if (rootElement.hasChildNodes() && isMatch) {
-  ReactDOM.hydrateRoot(rootElement, app);
-} else {
-  if (rootElement.hasChildNodes()) {
-    rootElement.innerHTML = '';
-  }
-  ReactDOM.createRoot(rootElement).render(app);
-}
+// Render cleanly over prerendered SEO HTML to avoid React 19 hydration mismatches
+// from lazy-loaded routes and randomized animation styles.
+ReactDOM.createRoot(rootElement).render(app);

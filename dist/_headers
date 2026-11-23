@@ -5,9 +5,9 @@
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
 
-# Aggressive cache for immutable build assets and nested assets (Browser + Cloudflare Edge)
+# Cache build and nested assets safely (avoid 1-year edge cache poisoning on deploys)
 /assets/*
-  Cache-Control: public, max-age=31536000, s-maxage=31536000, immutable
+  Cache-Control: public, max-age=3600, must-revalidate
   Access-Control-Allow-Origin: *
 
 # Universal Paste media and static assets (Audio, Video, WebP comic pages)
