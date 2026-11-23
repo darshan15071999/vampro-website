@@ -246,7 +246,7 @@ const BlogTemplate = () => {
                       >
                         {blogPost.authorImage ? (
                           <img
-                            src={blogPost.authorImage}
+                            src={blogPost.authorImage === '/author.jpg' ? '/assets/people/darshan/portrait-blue.jpg' : blogPost.authorImage}
                             alt={blogPost.author}
                             className="w-6 h-6 rounded-full object-cover shadow-sm ring-1 ring-indigo-200 group-hover/author:ring-indigo-500 transition-all"
                           />
@@ -381,7 +381,7 @@ const BlogTemplate = () => {
                 title={`View ${currentPost.author}'s portfolio`}
               >
                 <img
-                  src={currentPost.authorImage || "/author.jpg"}
+                  src={!currentPost.authorImage || currentPost.authorImage === '/author.jpg' ? '/assets/people/darshan/portrait-blue.jpg' : currentPost.authorImage}
                   alt={currentPost.author}
                   className="w-10 h-10 rounded-full object-cover border border-indigo-200 shadow-sm group-hover/author:ring-2 group-hover/author:ring-indigo-400 transition-all"
                 />

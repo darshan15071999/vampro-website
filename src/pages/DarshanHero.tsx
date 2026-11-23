@@ -379,7 +379,7 @@ export default function DarshanHero({ linkedin }: { linkedin: string }) {
           <div className="darshan-portrait-backdrop" aria-hidden="true" />
           <figure className="darshan-hero-portrait">
             <div className="darshan-portrait-image-wrap">
-              <img src={`${galleryAssets}/portrait.jpg`} width={1024} height={1024} alt="Portrait of Darshan S" />
+              <img src={`${galleryAssets}/portrait-hd.jpg`} width={1024} height={1024} alt="Portrait of Darshan S" />
               <div className="darshan-portrait-corners" aria-hidden="true">
                 <span /><span /><span /><span />
               </div>
