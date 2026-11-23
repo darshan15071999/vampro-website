@@ -51,7 +51,7 @@ const SketchRotator = () => {
         <span
           key={`${wi}-${i}`}
           aria-hidden="true"
-          className="sketch-word-ghost col-start-1 row-start-1 whitespace-nowrap"
+          className="hidden sm:inline sketch-word-ghost col-start-1 row-start-1 whitespace-nowrap"
           style={{
             transform: `translate(${(ghosts.length - i) * 7}px, ${(ghosts.length - i) * -6}px) rotate(${(i % 2 ? -1 : 1) * 1.3}deg)`,
             opacity: 0.34 - (ghosts.length - i) * 0.09
@@ -114,18 +114,18 @@ const HeroScene = forwardRef<HTMLElement>((_, ref) => {
   };
 
   return (
-    <section ref={ref} className="bp-scene relative w-full min-h-screen overflow-hidden flex flex-col justify-center" data-scene="hero">
+    <section ref={ref} className="bp-scene relative w-full min-h-[100svh] overflow-hidden flex flex-col justify-center" data-scene="hero">
 
       {/* Content is pushed to the bottom on desktop to avoid overlapping the camera */}
-      <div data-anim="hero-copy" className="relative lg:absolute lg:bottom-[15vh] lg:left-0 w-full px-6 text-center z-10 flex flex-col items-center mt-12 lg:mt-0">
-        <h1 className="hero-outline text-[7.4vw] sm:text-4xl md:text-7xl lg:text-8xl font-bold tracking-wide leading-[0.95] md:leading-[0.85]">
+      <div data-anim="hero-copy" className="relative lg:absolute lg:bottom-[15vh] lg:left-0 w-full px-5 sm:px-6 text-center z-10 flex flex-col items-center pt-20 pb-8 lg:pt-0 lg:pb-0">
+        <h1 className="hero-outline text-[clamp(1.8rem,7.2vw,3.5rem)] md:text-6xl lg:text-8xl font-bold tracking-wide leading-[1.02] md:leading-[0.92] lg:leading-[0.85]">
           Where stories
           <span className="block"><SketchRotator /></span>
         </h1>
-        <p className="mt-8 text-base md:text-lg font-light tracking-wider text-[var(--bp-accent)]/80 max-w-4xl mx-auto leading-relaxed">
+        <p className="mt-6 md:mt-8 text-sm sm:text-base md:text-lg font-light tracking-wider text-[var(--bp-accent)]/80 max-w-xl lg:max-w-4xl mx-auto leading-relaxed">
           A creative lab at the intersection of creativity and technology.<br className="hidden md:block" /> From films to software, we turn ideas into real experiences.
         </p>
-        <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 w-full sm:w-auto">
+        <div className="mt-7 md:mt-8 flex flex-col sm:flex-row items-center justify-center gap-3.5 sm:gap-6 w-full max-w-sm sm:max-w-none sm:w-auto">
           <div ref={productsMenuRef} className="relative w-full sm:w-auto z-30">
             <button
               type="button"

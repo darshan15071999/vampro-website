@@ -720,7 +720,28 @@ html.light {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 4.5rem 0;
+  padding: 3rem 0;
+}
+
+@media (min-width: 768px) {
+  .home-static .bp-scene {
+    padding: 4rem 0;
+  }
+}
+
+.home-static .bp-scene[data-scene="hero"] {
+  padding: 0;
+}
+
+/* Ensure timeline mockups & video are fully visible in static mobile/tablet mode */
+.home-static [data-anim="up-clip"] {
+  opacity: 1 !important;
+  transform: scale(1) !important;
+}
+
+.home-static [data-anim="yt-video"] {
+  opacity: 0.88 !important;
+  mix-blend-mode: normal !important;
 }
 
 /* Elements that only make sense mid-animation (fracture layers, carets, playheads) */
@@ -1164,6 +1185,28 @@ html.light {
   color: #3b82f6;
   text-decoration: underline;
   font-weight: 500;
+}
+.prose table {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-collapse: collapse;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+  font-size: 0.9em;
+}
+.prose th,
+.prose td {
+  border: 1px solid #cbd5e1;
+  padding: 0.65em 0.85em;
+  text-align: left;
+  vertical-align: top;
+}
+.prose th {
+  background-color: #f1f5f9;
+  font-weight: 700;
+  color: #0f172a;
 }
 
 /* ═══ PROFILE GLASS CARD ═══ */

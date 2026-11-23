@@ -23,11 +23,27 @@ const DocsUniversalPaste = () => {
   ];
 
   return (
-    <div className="dark-grid-bg min-h-screen flex flex-col pt-28">
+    <div className="dark-grid-bg min-h-screen flex flex-col pt-20 md:pt-24 lg:pt-28">
       <SEO {...docsUniversalPasteMetadata} />
-      <div className="flex-grow w-full px-6 md:px-10 lg:px-16 flex flex-col md:flex-row gap-10 py-8 items-start">
+      <div className="flex-grow w-full px-4 sm:px-6 md:px-10 lg:px-16 flex flex-col md:flex-row gap-6 md:gap-10 py-6 md:py-8 items-start">
+        {/* Mobile horizontal section jump bar */}
+        <nav aria-label="Documentation sections" className="md:hidden w-full overflow-x-auto pb-1 -mx-1 px-1">
+          <div className="flex items-center gap-2 w-max">
+            {navItems.map(item => (
+              <a
+                key={item.id}
+                href={`#${item.id}`}
+                onClick={e => scrollToDocSection(e as any, item.id)}
+                className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-medium text-slate-300 bg-indigo-950/60 border border-indigo-500/25 hover:text-white hover:border-indigo-400/50 whitespace-nowrap"
+              >
+                {item.label}
+              </a>
+            ))}
+          </div>
+        </nav>
+
         {/* Sidebar */}
-        <aside className="md:w-56 lg:w-64 sticky top-32 hidden md:block max-h-[calc(100vh-160px)] overflow-y-auto docs-sidebar pr-4 flex-shrink-0">
+        <aside className="md:w-56 lg:w-64 sticky top-28 lg:top-32 hidden md:block max-h-[calc(100vh-140px)] overflow-y-auto docs-sidebar pr-4 flex-shrink-0">
           <h3 className="font-bold text-slate-400 mb-5 tracking-widest uppercase text-xs border-b border-indigo-900/30 pb-3">Knowledge Base</h3>
           <ul className="space-y-0.5 text-sm">
             {navItems.map(item => (
@@ -37,8 +53,8 @@ const DocsUniversalPaste = () => {
         </aside>
 
         {/* Content */}
-        <div className="flex-1 min-w-0">
-          <div className="glass-card rounded-[2rem] p-6 md:p-12 border-indigo-900/30" style={{ background: 'rgba(15,22,64,0.35)' }}>
+        <div className="flex-1 min-w-0 w-full">
+          <div className="glass-card rounded-2xl md:rounded-[2rem] p-5 sm:p-6 md:p-10 lg:p-12 border-indigo-900/30" style={{ background: 'rgba(15,22,64,0.35)' }}>
             <div className="text-slate-300">
 
               <div id="intro" className="mb-12 border-b border-indigo-900/30 pb-12 scroll-mt-40">

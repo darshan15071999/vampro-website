@@ -5,11 +5,11 @@ import { CornerMarks, WaveformBars } from './wire';
 
 const VoiceStudioScene = forwardRef<HTMLElement>((_, ref) => (
   <section ref={ref} className="bp-scene" data-scene="voice-studio">
-    <div className="w-full max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+    <div className="w-full max-w-2xl lg:max-w-6xl mx-auto px-5 sm:px-6 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
       
       {/* Copy / Info */}
       <div data-anim="vs-copy" className="order-1 lg:order-1">
-        <div className="flex items-center gap-2 mb-5">
+        <div className="flex flex-wrap items-center gap-2 mb-4 sm:mb-5">
           <p className="bp-label">Audio Intelligence Suite</p>
           <span className="px-2 py-0.5 border border-emerald-500/40 text-emerald-400 bg-emerald-500/10 text-[9px] uppercase font-bold tracking-wider rounded">
             Coming Soon
@@ -19,12 +19,12 @@ const VoiceStudioScene = forwardRef<HTMLElement>((_, ref) => (
           Voice Studio
           <span className="block text-[var(--bp-ink)]/60">for Adobe Premiere Pro</span>
         </h2>
-        <p className="mt-6 text-sm md:text-base font-light tracking-wider text-[var(--bp-muted2)] leading-relaxed max-w-md">
+        <p className="mt-5 sm:mt-6 text-sm md:text-base font-light tracking-wider text-[var(--bp-muted2)] leading-relaxed max-w-lg lg:max-w-md">
           Next-generation audio intelligence built directly into your timeline. Local voice cloning, neural speech-to-speech conversion, and stem isolation. Run 100% privately on your GPU or connect ElevenLabs with your own key.
         </p>
-        <div className="mt-8 flex flex-col sm:flex-row items-start gap-4">
-          <Link to="/plugins/voice-studio" className="bp-btn bp-btn-solid px-8 py-3.5 text-xs">Explore Voice Studio</Link>
-          <Link to="/docs/plugins/voice-studio" className="bp-btn px-8 py-3.5 text-xs">Read the docs</Link>
+        <div className="mt-7 sm:mt-8 flex flex-col sm:flex-row items-stretch sm:items-start gap-3 sm:gap-4">
+          <Link to="/plugins/voice-studio" className="bp-btn bp-btn-solid px-7 sm:px-8 py-3.5 text-xs text-center">Explore Voice Studio</Link>
+          <Link to="/docs/plugins/voice-studio" className="bp-btn px-7 sm:px-8 py-3.5 text-xs text-center">Read the docs</Link>
         </div>
       </div>
 
@@ -98,7 +98,7 @@ const VoiceStudioScene = forwardRef<HTMLElement>((_, ref) => (
         </div>
 
         {/* Bottom hardware telemetry */}
-        <div data-anim="vs-footer" className="flex items-center justify-between border-t border-[var(--bp-accent)]/15 pt-3 mt-4 text-[9px]">
+        <div data-anim="vs-footer" className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 border-t border-[var(--bp-accent)]/15 pt-3 mt-4 text-[9px]">
           <span className="bp-label text-slate-400">Engine: Vulkan GPU / AVX2</span>
           <span className="bp-label text-emerald-400">Privacy: 100% Local / Zero Telemetry</span>
         </div>

@@ -681,9 +681,18 @@
   line-height: 1.4 !important;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .sv-faq-lead {
     white-space: nowrap !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .sv-glitch-title--faq,
+  .sv-workflow-title-single-line {
+    white-space: normal !important;
+    font-size: clamp(20px, 6vw, 30px) !important;
+    line-height: 1.15 !important;
   }
 }
 
@@ -4633,6 +4642,30 @@
   .sv-faq-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
+  }
+}
+
+@media (max-width: 640px) {
+  .sv-faq-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .sv-hero-cta-group {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .sv-store-btn-link,
+  .sv-store-btn {
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 1023px) {
+  .sv-ambient-comic-grid--infinite-scroll,
+  .sv-ambient-yellow-pill {
+    animation: none !important;
   }
 }
 

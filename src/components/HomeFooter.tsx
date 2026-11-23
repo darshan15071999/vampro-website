@@ -12,10 +12,10 @@ const HomeFooter = () => {
   };
 
   return (
-    <footer className="dark-grid-bg text-slate-400 py-16 border-t border-indigo-900/30 relative overflow-hidden">
+    <footer className="dark-grid-bg text-slate-400 py-12 md:py-16 border-t border-indigo-900/30 relative overflow-hidden">
       <SpeedStreaks />
-      <div className="w-full px-6 md:px-10 lg:px-16 grid grid-cols-1 md:grid-cols-5 gap-12 relative z-10">
-        <div className="col-span-1 md:col-span-2">
+      <div className="w-full px-5 sm:px-6 md:px-10 lg:px-16 grid grid-cols-2 md:grid-cols-5 gap-8 md:gap-12 relative z-10">
+        <div className="col-span-2 md:col-span-2">
           <div className="flex items-center gap-3 mb-6">
             <img src="/header.png" alt="Vampro" className="h-10 w-10 rounded-xl border border-indigo-800/50" />
             <span className="font-bank-gothic text-2xl tracking-widest gradient-blue-text">VAMPRO</span>

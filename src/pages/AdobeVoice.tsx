@@ -71,10 +71,10 @@ const AdobeVoice = () => {
   const nav = useNavigate();
   const { openSignup } = useSignup();
 
-  const [isMobile, setIsMobile] = useState(() => typeof window !== 'undefined' ? window.innerWidth < 768 : false);
+  const [isMobile, setIsMobile] = useState(() => typeof window !== 'undefined' ? window.innerWidth < 1024 : false);
 
   useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    const handleResize = () => setIsMobile(window.innerWidth < 1024);
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
@@ -155,7 +155,7 @@ const AdobeVoice = () => {
     <div className="min-h-screen bg-[#04030A] text-white flex flex-col overflow-x-hidden">
       <SEO {...voiceMetadata} />
       {/* Announcement */}
-      <div className="bg-gradient-to-r from-[#3B3BFF] via-[#1B2A6B] to-[#3B3BFF] text-white py-2.5 px-4 flex items-center justify-center gap-4 sticky top-[64px] md:top-[96px] z-40">
+      <div className="bg-gradient-to-r from-[#3B3BFF] via-[#1B2A6B] to-[#3B3BFF] text-white py-2.5 px-4 flex items-center justify-center gap-4 sticky top-[64px] md:top-[80px] lg:top-[96px] z-40">
         <span className="text-[10px] sm:text-xs font-bold tracking-widest uppercase opacity-90 text-center leading-relaxed">From script to voiceover: without leaving Premiere Pro</span>
       </div>
 
@@ -222,12 +222,10 @@ const AdobeVoice = () => {
                 ))}
               </div>
             </div>
-            <h1 className="text-[20px] min-[380px]:text-[22px] min-[420px]:text-2xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight mb-3 sm:mb-6 leading-[1.15] whitespace-nowrap overflow-hidden text-ellipsis">
-              <span className="sm:hidden"><ShinyText text="Vampro Voice Generator" speed={3} className="text-white" shineColor="#ffffff" color="#f0f0f0" /></span>
-              <span className="hidden sm:inline">
-                <ShinyText text="Vampro Voice Generator" speed={3} className="text-white" shineColor="#ffffff" color="#f0f0f0" /><br />
-                <ShinyText text="Text-to-Speech" speed={3} delay={0.5} className="gradient-blue-text" shineColor="#ffffff" color="#3B3BFF" />
-              </span>
+            <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight mb-4 sm:mb-6 leading-[1.12]">
+              <ShinyText text="Vampro Voice Generator" speed={3} className="text-white" shineColor="#ffffff" color="#f0f0f0" />
+              <br />
+              <ShinyText text="Text-to-Speech" speed={3} delay={0.5} className="gradient-blue-text" shineColor="#ffffff" color="#3B3BFF" />
             </h1>
             <p className="text-xs sm:text-base md:text-lg text-slate-300 font-light max-w-sm sm:max-w-4xl mx-auto mb-6 sm:mb-10 text-center leading-relaxed">
               Generate natural AI voiceovers from text inside Premiere Pro using local models or ElevenLabs at your playhead.
@@ -275,36 +273,34 @@ const AdobeVoice = () => {
               </div>
             </FadeInSection>
             
-            {/* Right: Timeline (Mobile clean step list, Desktop Radial Orbital Timeline) */}
+            {/* Right: Timeline (Mobile/Tablet clean step list, Desktop Radial Orbital Timeline) */}
             <FadeInSection delay="200ms">
-              {/* Mobile clean step list */}
-              <div className="lg:hidden w-full max-w-md mx-auto space-y-3">
-                {TIMELINE_DATA.map((step, idx) => {
-                  const Icon = step.icon;
-                  return (
-                    <div
-                      key={step.id}
-                      className="flex items-center gap-4 p-4 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl shadow-[0_4px_20px_rgba(0,0,0,0.3)]"
-                    >
-                      <div className="w-10 h-10 rounded-xl bg-[#3B3BFF]/20 border border-[#3B3BFF]/40 text-white flex items-center justify-center flex-shrink-0 shadow-[0_0_12px_rgba(59,59,255,0.3)]">
-                        <Icon size={18} />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2 mb-0.5">
-                          <span className="text-[10px] font-bold uppercase tracking-wider text-indigo-400">Step {idx + 1}</span>
-                          <h4 className="font-bold text-white text-sm truncate">{step.title}</h4>
+              {isMobile ? (
+                <div className="w-full max-w-xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-3">
+                  {TIMELINE_DATA.map((step, idx) => {
+                    const Icon = step.icon;
+                    return (
+                      <div
+                        key={step.id}
+                        className="flex items-center gap-4 p-4 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl shadow-[0_4px_20px_rgba(0,0,0,0.3)]"
+                      >
+                        <div className="w-10 h-10 rounded-xl bg-[#3B3BFF]/20 border border-[#3B3BFF]/40 text-white flex items-center justify-center flex-shrink-0 shadow-[0_0_12px_rgba(59,59,255,0.3)]">
+                          <Icon size={18} />
                         </div>
-                        <p className="text-slate-300 text-xs leading-relaxed">{step.content}</p>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2 mb-0.5">
+                            <span className="text-[10px] font-bold uppercase tracking-wider text-indigo-400">Step {idx + 1}</span>
+                            <h4 className="font-bold text-white text-sm truncate">{step.title}</h4>
+                          </div>
+                          <p className="text-slate-300 text-xs leading-relaxed">{step.content}</p>
+                        </div>
                       </div>
-                    </div>
-                  );
-                })}
-              </div>
-
-              {/* Desktop animated orbital timeline */}
-              <div className="hidden lg:block">
+                    );
+                  })}
+                </div>
+              ) : (
                 <RadialOrbitalTimeline autoPlay={true} timelineData={TIMELINE_DATA} />
-              </div>
+              )}
             </FadeInSection>
           </div>
         </div>
@@ -336,7 +332,7 @@ const AdobeVoice = () => {
         
         <div className="w-full px-6 md:px-10 lg:px-16 relative z-10">
           <FadeInSection className="text-center mb-8 md:mb-12">
-            <h2 className="text-[16px] min-[375px]:text-[18px] min-[410px]:text-xl sm:text-3xl md:text-5xl font-extrabold text-white mb-2 sm:mb-4 drop-shadow-md tracking-tight whitespace-nowrap overflow-hidden text-ellipsis">
+            <h2 className="text-2xl sm:text-3xl md:text-5xl font-extrabold text-white mb-2 sm:mb-4 drop-shadow-md tracking-tight leading-tight">
               <ShinyText text="Complete Workflow Built Into Your Timeline" speed={3} shineColor="#ffffff" color="#ffffff" />
             </h2>
             <p className="text-xs sm:text-base md:text-lg text-slate-300 font-light max-w-sm sm:max-w-4xl mx-auto text-center drop-shadow-md leading-relaxed">
@@ -479,8 +475,9 @@ const AdobeVoice = () => {
                 <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
                 Coming Soon
               </div>
-              <h2 className="text-[17px] min-[380px]:text-[19px] min-[420px]:text-xl sm:text-3xl md:text-5xl font-extrabold text-white mb-2 sm:mb-4 drop-shadow-md tracking-tight whitespace-nowrap">
-                <ShinyText text="Your ElevenLabs Voice Library" speed={3} shineColor="#ffffff" color="#ffffff" /> <span className="hidden sm:inline text-[#557ef7]">Directly Inside Premiere Pro</span>
+              <h2 className="text-2xl sm:text-3xl md:text-5xl font-extrabold text-white mb-2 sm:mb-4 drop-shadow-md tracking-tight leading-tight">
+                <ShinyText text="Your ElevenLabs Voice Library" speed={3} shineColor="#ffffff" color="#ffffff" />{' '}
+                <span className="text-[#557ef7]">Directly Inside Premiere Pro</span>
               </h2>
               <p className="text-xs sm:text-base md:text-lg text-slate-300 font-light max-w-sm sm:max-w-4xl mx-auto text-center drop-shadow-md leading-relaxed">
                 Connect your API key to access custom voice clones and insert broadcast audio directly into Premiere Pro.
@@ -535,7 +532,7 @@ const AdobeVoice = () => {
                       <div className="w-10 h-10 rounded-xl text-indigo-400 group-hover:text-white group-hover:bg-[#3B3BFF] flex items-center justify-center transition-all duration-300 border border-indigo-500/30 shadow-[0_0_15px_rgba(59,59,255,0.15)] mb-3">
                         {item.icon}
                       </div>
-                      <h4 className="text-sm sm:text-base font-bold text-white mb-1.5 group-hover:text-white transition-colors whitespace-nowrap">
+                      <h4 className="text-sm sm:text-base font-bold text-white mb-1.5 group-hover:text-white transition-colors">
                         {item.title}
                       </h4>
                       <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
@@ -600,59 +597,61 @@ const AdobeVoice = () => {
             </p>
           </FadeInSection>
 
-          {/* Mobile: Responsive clean card grid */}
-          <div className="md:hidden w-full px-6 grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-lg mx-auto pointer-events-auto">
-            {[
-              { title: 'YouTube Creators', desc: 'Narration without recording equipment.', image: '/creator.png', border: 'border-red-500/30', accent: 'bg-red-500', glow: 'shadow-[0_0_20px_rgba(239,68,68,0.15)]' },
-              { title: 'Video Editors', desc: 'Generate voiceovers quickly.', image: '/editor.png', border: 'border-violet-500/30', accent: 'bg-violet-500', glow: 'shadow-[0_0_20px_rgba(139,92,246,0.15)]' },
-              { title: 'Marketing Teams', desc: 'Produce demos faster.', image: '/marketing.png', border: 'border-green-500/30', accent: 'bg-green-500', glow: 'shadow-[0_0_20px_rgba(34,197,94,0.15)]' },
-              { title: 'Educators', desc: 'Scripts into spoken explanations.', image: '/educator.png', border: 'border-yellow-500/30', accent: 'bg-yellow-500', glow: 'shadow-[0_0_20px_rgba(234,179,8,0.15)]' },
-            ].map((item, i) => (
-              <div
-                key={i}
-                className={`relative rounded-2xl overflow-hidden border ${item.border} bg-white/5 backdrop-blur-xl p-5 flex flex-col justify-end ${item.glow} min-h-[140px]`}
-              >
-                <img
-                  src={item.image}
-                  className="absolute inset-0 w-full h-full object-cover opacity-20"
-                  alt={item.title}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#07060F]/95 via-[#07060F]/60 to-transparent pointer-events-none" />
-                <div className="relative z-10">
-                  <div className={`w-8 h-1 ${item.accent} rounded-full mb-2`} />
-                  <h3 className="font-bold text-base text-white mb-1">{item.title}</h3>
-                  <p className="text-slate-300 text-xs leading-relaxed">{item.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Desktop: Animated 3D Circular Gallery */}
-          <div className="hidden md:block w-full relative pointer-events-auto">
-            <DOMCircularGallery bend={2.5}>
+          {/* Mobile & Tablet: Responsive clean card grid (avoids mounting 12 PixelCard canvases) */}
+          {isMobile ? (
+            <div className="w-full px-6 grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto pointer-events-auto">
               {[
-                { title: 'YouTube Creators', desc: 'Narration without recording equipment.', image: '/creator.png', colorClass: 'red', shadow: 'shadow-[0_0_24px_rgba(239,68,68,0.15)] border-red-500/30', hoverShadow: 'group-hover:shadow-[0_0_24px_rgba(239,68,68,0.15)] group-hover:border-red-500/30', bgGlow: 'from-red-500/20', bar: 'bg-red-500' },
-                { title: 'Video Editors', desc: 'Generate voiceovers quickly.', image: '/editor.png', colorClass: 'violet', shadow: 'shadow-[0_0_24px_rgba(139,92,246,0.15)] border-violet-500/30', hoverShadow: 'group-hover:shadow-[0_0_24px_rgba(139,92,246,0.15)] group-hover:border-violet-500/30', bgGlow: 'from-violet-500/20', bar: 'bg-violet-500' },
-                { title: 'Marketing Teams', desc: 'Produce demos faster.', image: '/marketing.png', colorClass: 'green', shadow: 'shadow-[0_0_24px_rgba(34,197,94,0.15)] border-green-500/30', hoverShadow: 'group-hover:shadow-[0_0_24px_rgba(34,197,94,0.15)] group-hover:border-green-500/30', bgGlow: 'from-green-500/20', bar: 'bg-green-500' },
-                { title: 'Educators', desc: 'Scripts into spoken explanations.', image: '/educator.png', colorClass: 'yellow', shadow: 'shadow-[0_0_24px_rgba(234,179,8,0.15)] border-yellow-500/30', hoverShadow: 'group-hover:shadow-[0_0_24px_rgba(234,179,8,0.15)] group-hover:border-yellow-500/30', bgGlow: 'from-yellow-500/20', bar: 'bg-yellow-500' },
+                { title: 'YouTube Creators', desc: 'Narration without recording equipment.', image: '/creator.png', border: 'border-red-500/30', accent: 'bg-red-500', glow: 'shadow-[0_0_20px_rgba(239,68,68,0.15)]' },
+                { title: 'Video Editors', desc: 'Generate voiceovers quickly.', image: '/editor.png', border: 'border-violet-500/30', accent: 'bg-violet-500', glow: 'shadow-[0_0_20px_rgba(139,92,246,0.15)]' },
+                { title: 'Marketing Teams', desc: 'Produce demos faster.', image: '/marketing.png', border: 'border-green-500/30', accent: 'bg-green-500', glow: 'shadow-[0_0_20px_rgba(34,197,94,0.15)]' },
+                { title: 'Educators', desc: 'Scripts into spoken explanations.', image: '/educator.png', border: 'border-yellow-500/30', accent: 'bg-yellow-500', glow: 'shadow-[0_0_20px_rgba(234,179,8,0.15)]' },
               ].map((item, i) => (
-                <TiltCard key={i}>
-                  <PixelCard variant={item.colorClass === 'red' ? 'red' : item.colorClass === 'violet' ? 'violet' : item.colorClass === 'green' ? 'green' : 'yellow'}>
-                    <div className={`group w-full h-full flex flex-col justify-end p-6 relative overflow-hidden cursor-pointer transition-all duration-500 border border-transparent rounded-[2rem] ${item.hoverShadow}`}>
-                      <img src={item.image} className="absolute inset-0 w-full h-full object-cover transition-all duration-700 opacity-0 scale-100 group-hover:opacity-10 group-hover:scale-105" alt={item.title} />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#07060F]/95 via-[#07060F]/40 to-transparent pointer-events-none" />
-                      <div className={`absolute inset-0 bg-gradient-to-t ${item.bgGlow} to-transparent opacity-0 transition-opacity duration-500 pointer-events-none group-hover:opacity-100`} />
-                      <div className="relative z-10 transition-transform duration-500 -translate-y-[120px] group-hover:translate-y-0">
-                        <h3 className="font-bold text-lg text-white mb-1">{item.title}</h3>
-                        <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">{item.desc}</p>
-                        <div className={`mt-2 h-1 ${item.bar} transition-all duration-500 rounded-full w-0 group-hover:w-4`} />
-                      </div>
-                    </div>
-                  </PixelCard>
-                </TiltCard>
+                <div
+                  key={i}
+                  className={`relative rounded-2xl overflow-hidden border ${item.border} bg-white/5 backdrop-blur-xl p-5 flex flex-col justify-end ${item.glow} min-h-[150px]`}
+                >
+                  <img
+                    src={item.image}
+                    className="absolute inset-0 w-full h-full object-cover opacity-20"
+                    alt={item.title}
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#07060F]/95 via-[#07060F]/60 to-transparent pointer-events-none" />
+                  <div className="relative z-10">
+                    <div className={`w-8 h-1 ${item.accent} rounded-full mb-2`} />
+                    <h3 className="font-bold text-base text-white mb-1">{item.title}</h3>
+                    <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">{item.desc}</p>
+                  </div>
+                </div>
               ))}
-            </DOMCircularGallery>
-          </div>
+            </div>
+          ) : (
+            <div className="w-full relative pointer-events-auto">
+              <DOMCircularGallery bend={2.5}>
+                {[
+                  { title: 'YouTube Creators', desc: 'Narration without recording equipment.', image: '/creator.png', colorClass: 'red', shadow: 'shadow-[0_0_24px_rgba(239,68,68,0.15)] border-red-500/30', hoverShadow: 'group-hover:shadow-[0_0_24px_rgba(239,68,68,0.15)] group-hover:border-red-500/30', bgGlow: 'from-red-500/20', bar: 'bg-red-500' },
+                  { title: 'Video Editors', desc: 'Generate voiceovers quickly.', image: '/editor.png', colorClass: 'violet', shadow: 'shadow-[0_0_24px_rgba(139,92,246,0.15)] border-violet-500/30', hoverShadow: 'group-hover:shadow-[0_0_24px_rgba(139,92,246,0.15)] group-hover:border-violet-500/30', bgGlow: 'from-violet-500/20', bar: 'bg-violet-500' },
+                  { title: 'Marketing Teams', desc: 'Produce demos faster.', image: '/marketing.png', colorClass: 'green', shadow: 'shadow-[0_0_24px_rgba(34,197,94,0.15)] border-green-500/30', hoverShadow: 'group-hover:shadow-[0_0_24px_rgba(34,197,94,0.15)] group-hover:border-green-500/30', bgGlow: 'from-green-500/20', bar: 'bg-green-500' },
+                  { title: 'Educators', desc: 'Scripts into spoken explanations.', image: '/educator.png', colorClass: 'yellow', shadow: 'shadow-[0_0_24px_rgba(234,179,8,0.15)] border-yellow-500/30', hoverShadow: 'group-hover:shadow-[0_0_24px_rgba(234,179,8,0.15)] group-hover:border-yellow-500/30', bgGlow: 'from-yellow-500/20', bar: 'bg-yellow-500' },
+                ].map((item, i) => (
+                  <TiltCard key={i}>
+                    <PixelCard variant={item.colorClass === 'red' ? 'red' : item.colorClass === 'violet' ? 'violet' : item.colorClass === 'green' ? 'green' : 'yellow'}>
+                      <div className={`group w-full h-full flex flex-col justify-end p-6 relative overflow-hidden cursor-pointer transition-all duration-500 border border-transparent rounded-[2rem] ${item.hoverShadow}`}>
+                        <img src={item.image} className="absolute inset-0 w-full h-full object-cover transition-all duration-700 opacity-0 scale-100 group-hover:opacity-10 group-hover:scale-105" alt={item.title} />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#07060F]/95 via-[#07060F]/40 to-transparent pointer-events-none" />
+                        <div className={`absolute inset-0 bg-gradient-to-t ${item.bgGlow} to-transparent opacity-0 transition-opacity duration-500 pointer-events-none group-hover:opacity-100`} />
+                        <div className="relative z-10 transition-transform duration-500 -translate-y-[120px] group-hover:translate-y-0">
+                          <h3 className="font-bold text-lg text-white mb-1">{item.title}</h3>
+                          <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">{item.desc}</p>
+                          <div className={`mt-2 h-1 ${item.bar} transition-all duration-500 rounded-full w-0 group-hover:w-4`} />
+                        </div>
+                      </div>
+                    </PixelCard>
+                  </TiltCard>
+                ))}
+              </DOMCircularGallery>
+            </div>
+          )}
         </div>
         
       </section>
@@ -686,47 +685,49 @@ const AdobeVoice = () => {
               </p>
             </FadeInSection>
           </div>
-          {/* Mobile: simple stacked steps — CardSwap's fixed 450px cards don't fit phones */}
-          <div className="md:hidden w-full px-6 space-y-5 max-w-md mx-auto">
-            {[
-              { icon: <Store size={32} />, title: '1. Install Extension', desc: 'Get the Vampro Voice Generator Text-to-Speech extension from the Adobe Marketplace and install it.' },
-              { icon: <Download size={32} />, title: '2. Run Companion App', desc: 'Download and install the Vampro Voice Service companion app from the Microsoft Store, then launch it.' },
-              { icon: <MonitorPlay size={32} />, title: '3. Open Premiere Pro', desc: 'Inside Premiere Pro, go to Window → UXP Plugins and select Vampro Voice Generator to start using the plugin.' }
-            ].map(step => (
-              <div key={step.title} className="rounded-2xl border border-white/10 bg-white/5 p-6 flex flex-col items-center text-center shadow-[0_0_20px_rgba(59,59,255,0.15)]">
-                <div className="mb-4 text-white p-3.5 bg-white/10 rounded-xl">{step.icon}</div>
-                <h3 className="text-xl font-bold text-white mb-2">{step.title}</h3>
-                <p className="text-slate-300 text-sm sm:text-base leading-relaxed">{step.desc}</p>
-              </div>
-            ))}
-          </div>
-
-          <div className="hidden md:flex w-full relative max-w-5xl mx-auto items-center justify-center" style={{ height: '650px' }}>
-            <CardSwap
-              width={450}
-              height={500}
-              cardDistance={60}
-              verticalDistance={45}
-              delay={3500}
-              pauseOnHover
-            >
-              <Card customClass="cursor-pointer hover:bg-white/10 transition-colors p-10 flex flex-col justify-center items-center text-center shadow-[0_0_30px_rgba(59,59,255,0.3)]">
-                <div className="mb-8 text-white p-5 bg-white/10 rounded-2xl"><Store size={56} /></div>
-                <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4">1. Install Extension</h3>
-                <p className="text-slate-300 text-base sm:text-lg leading-relaxed">Get the Vampro Voice Generator Text-to-Speech extension from the Adobe Marketplace and install it.</p>
-              </Card>
-              <Card customClass="cursor-pointer hover:bg-white/10 transition-colors p-10 flex flex-col justify-center items-center text-center shadow-[0_0_30px_rgba(59,59,255,0.3)]">
-                <div className="mb-8 text-white p-5 bg-white/10 rounded-2xl"><Download size={56} /></div>
-                <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4">2. Run Companion App</h3>
-                <p className="text-slate-300 text-base sm:text-lg leading-relaxed">Download and install the Vampro Voice Service companion app from the Microsoft Store, then launch it.</p>
-              </Card>
-              <Card customClass="cursor-pointer hover:bg-white/10 transition-colors p-10 flex flex-col justify-center items-center text-center shadow-[0_0_30px_rgba(59,59,255,0.3)]">
-                <div className="mb-8 text-white p-5 bg-white/10 rounded-2xl"><MonitorPlay size={56} /></div>
-                <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4">3. Open Premiere Pro</h3>
-                <p className="text-slate-300 text-base sm:text-lg leading-relaxed">Inside Premiere Pro, go to Window → UXP Plugins and select Vampro Voice Generator to start using the plugin.</p>
-              </Card>
-            </CardSwap>
-          </div>
+          {/* Mobile & Tablet: clean responsive step grid — avoids running GSAP CardSwap offscreen */}
+          {isMobile ? (
+            <div className="w-full px-6 grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5 max-w-4xl mx-auto">
+              {[
+                { icon: <Store size={28} />, title: '1. Install Extension', desc: 'Get the Vampro Voice Generator Text-to-Speech extension from the Adobe Marketplace and install it.' },
+                { icon: <Download size={28} />, title: '2. Run Companion App', desc: 'Download and install the Vampro Voice Service companion app from the Microsoft Store, then launch it.' },
+                { icon: <MonitorPlay size={28} />, title: '3. Open Premiere Pro', desc: 'Inside Premiere Pro, go to Window → UXP Plugins and select Vampro Voice Generator to start using the plugin.' }
+              ].map(step => (
+                <div key={step.title} className="rounded-2xl border border-white/10 bg-white/5 p-6 flex flex-col items-center text-center shadow-[0_0_20px_rgba(59,59,255,0.15)]">
+                  <div className="mb-4 text-white p-3.5 bg-white/10 rounded-xl">{step.icon}</div>
+                  <h3 className="text-lg sm:text-xl font-bold text-white mb-2">{step.title}</h3>
+                  <p className="text-slate-300 text-sm leading-relaxed">{step.desc}</p>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="flex w-full relative max-w-5xl mx-auto items-center justify-center" style={{ height: '650px' }}>
+              <CardSwap
+                width={450}
+                height={500}
+                cardDistance={60}
+                verticalDistance={45}
+                delay={3500}
+                pauseOnHover
+              >
+                <Card customClass="cursor-pointer hover:bg-white/10 transition-colors p-10 flex flex-col justify-center items-center text-center shadow-[0_0_30px_rgba(59,59,255,0.3)]">
+                  <div className="mb-8 text-white p-5 bg-white/10 rounded-2xl"><Store size={56} /></div>
+                  <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4">1. Install Extension</h3>
+                  <p className="text-slate-300 text-base sm:text-lg leading-relaxed">Get the Vampro Voice Generator Text-to-Speech extension from the Adobe Marketplace and install it.</p>
+                </Card>
+                <Card customClass="cursor-pointer hover:bg-white/10 transition-colors p-10 flex flex-col justify-center items-center text-center shadow-[0_0_30px_rgba(59,59,255,0.3)]">
+                  <div className="mb-8 text-white p-5 bg-white/10 rounded-2xl"><Download size={56} /></div>
+                  <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4">2. Run Companion App</h3>
+                  <p className="text-slate-300 text-base sm:text-lg leading-relaxed">Download and install the Vampro Voice Service companion app from the Microsoft Store, then launch it.</p>
+                </Card>
+                <Card customClass="cursor-pointer hover:bg-white/10 transition-colors p-10 flex flex-col justify-center items-center text-center shadow-[0_0_30px_rgba(59,59,255,0.3)]">
+                  <div className="mb-8 text-white p-5 bg-white/10 rounded-2xl"><MonitorPlay size={56} /></div>
+                  <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4">3. Open Premiere Pro</h3>
+                  <p className="text-slate-300 text-base sm:text-lg leading-relaxed">Inside Premiere Pro, go to Window → UXP Plugins and select Vampro Voice Generator to start using the plugin.</p>
+                </Card>
+              </CardSwap>
+            </div>
+          )}
         
       </section>
 

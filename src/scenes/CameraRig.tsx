@@ -251,8 +251,9 @@ const CameraRig = forwardRef<CameraRigHandle>((_, ref) => {
     const mount = mountRef.current;
     if (!mount) return;
 
-    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    const isCompact = window.innerWidth < 1024;
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: !isCompact, powerPreference: isCompact ? 'low-power' : 'default' });
+    renderer.setPixelRatio(isCompact ? 1 : Math.min(window.devicePixelRatio, 2));
     renderer.setSize(mount.clientWidth, mount.clientHeight);
     mount.appendChild(renderer.domElement);
 
@@ -279,19 +280,27 @@ const CameraRig = forwardRef<CameraRigHandle>((_, ref) => {
     let mouseX = 0;
     let mouseY = 0;
     
+    const hasFinePointer = window.matchMedia('(pointer: fine)').matches;
     const onMouseMove = (e: MouseEvent) => {
       mouseX = (e.clientX / window.innerWidth) * 2 - 1;
       mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
     };
-    window.addEventListener('mousemove', onMouseMove);
+    if (hasFinePointer) {
+      window.addEventListener('mousemove', onMouseMove, { passive: true });
+    }
 
     const clock = new THREE.Clock();
 
     // Follow the site theme: cyan lines on the dark sheet, deep blue ink on paper
     let lastLight: boolean | null = null;
+    let lastRenderTime = 0;
 
-    const render = () => {
+    const render = (now = 0) => {
       raf = requestAnimationFrame(render);
+      if (document.hidden) return;
+      const isCompactNow = window.innerWidth < 1024;
+      if (isCompactNow && now - lastRenderTime < 33) return;
+      lastRenderTime = now;
       const t = clock.getElapsedTime();
       smooth += (progressRef.current - smooth) * 0.07;
 
@@ -308,8 +317,9 @@ const CameraRig = forwardRef<CameraRigHandle>((_, ref) => {
       // Finale: lift slightly as the camera reassembles behind the film.
       const heroFade = smooth < 0.05 ? 1 : Math.max(0, 1 - (smooth - 0.05) / 0.15);
       const endLift = smooth > 0.9 ? ((smooth - 0.9) / 0.1) * 0.08 : 0;
-      // Minimal opacity so it doesn't clash with text
-      const baseOpacity = 0.35 * heroFade + 0.08 * (1 - heroFade) + endLift;
+      // Softer opacity on mobile/tablet so foreground cards stay crystal clear
+      const mobileDim = isCompactNow ? 0.65 : 1.0;
+      const baseOpacity = (0.35 * heroFade + 0.08 * (1 - heroFade) + endLift) * mobileDim;
 
       // Expand the explosion dynamically at the Services checkpoint (smooth ≈ 2)
       // This pushes all pieces much further outward from the center
@@ -335,10 +345,11 @@ const CameraRig = forwardRef<CameraRigHandle>((_, ref) => {
       const endScaleShift = endProgress * -0.75;
       
       const isMobile = window.innerWidth < 768;
-      const mobileScale = isMobile ? 0.55 : 1.0;
+      const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
+      const mobileScale = isMobile ? 0.58 : isTablet ? 0.8 : 1.0;
       
       rig.scale.setScalar(mobileScale * (1.35 * heroFade + 1.25 * (1 - heroFade) + endScaleShift));
-      rig.position.x = endShiftX * (isMobile ? 0.4 : 1.0);
+      rig.position.x = endShiftX * (isMobile ? 0.35 : isTablet ? 0.65 : 1.0);
       rig.position.y = (0.6 * heroFade - 0.2 * (1 - heroFade) + endShiftY) * mobileScale;
       
       // Scrub-driven turn + idle drift + mouse interaction

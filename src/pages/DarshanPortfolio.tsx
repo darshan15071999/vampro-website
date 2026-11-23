@@ -72,6 +72,14 @@ export default function DarshanPortfolio() {
 
     root.setAttribute('data-js', 'true');
 
+    const revealElements = Array.from(root.querySelectorAll('[data-reveal]'));
+    if (window.innerWidth < 1024) {
+      revealElements.forEach((el) => el.setAttribute('data-revealed', 'true'));
+      return () => {
+        window.removeEventListener('scroll', handleScroll);
+      };
+    }
+
     const revealObserver = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
@@ -81,10 +89,10 @@ export default function DarshanPortfolio() {
           }
         }
       },
-      { threshold: 0.05 }
+      { threshold: 0, rootMargin: '0px 0px 80px 0px' }
     );
 
-    root.querySelectorAll('[data-reveal]').forEach((el) => revealObserver.observe(el));
+    revealElements.forEach((el) => revealObserver.observe(el));
 
     return () => {
       window.removeEventListener('scroll', handleScroll);

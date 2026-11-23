@@ -60,13 +60,14 @@ export default function DarshanHero({ linkedin }: { linkedin: string }) {
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     let width = 0;
     let height = 0;
-    let dpr = Math.min(window.devicePixelRatio || 1, 2);
+    let dpr = window.innerWidth < 1024 ? 1 : Math.min(window.devicePixelRatio || 1, 2);
     let nodes: NodePoint[] = [];
     let raf = 0;
     let isVisible = true;
+    let lastDrawTime = 0;
 
     const initNodes = () => {
-      const count = width < 768 ? 28 : 56;
+      const count = width < 768 ? 16 : width < 1024 ? 26 : 56;
       const kinds: NodePoint['kind'][] = ['dot', 'dot', 'dot', 'cross', 'diamond'];
       nodes = Array.from({ length: count }, (_, i) => ({
         x: Math.random() * width,
@@ -82,7 +83,7 @@ export default function DarshanHero({ linkedin }: { linkedin: string }) {
     const resize = () => {
       width = hero.clientWidth;
       height = hero.clientHeight;
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      dpr = window.innerWidth < 1024 ? 1 : Math.min(window.devicePixelRatio || 1, 2);
       canvas.width = Math.max(1, Math.floor(width * dpr));
       canvas.height = Math.max(1, Math.floor(height * dpr));
       canvas.style.width = `${width}px`;
@@ -106,8 +107,15 @@ export default function DarshanHero({ linkedin }: { linkedin: string }) {
     });
     io.observe(hero);
 
-    const drawFrame = () => {
-      if (isVisible) {
+    const drawFrame = (now = 0) => {
+      if (!reducedMotion) {
+        raf = requestAnimationFrame(drawFrame);
+      }
+      if (document.hidden || !isVisible) return;
+      if (width < 1024 && now - lastDrawTime < 33) return;
+      lastDrawTime = now;
+
+      {
         ctx.clearRect(0, 0, width, height);
         const [r, g, b] = accentRef.current;
         const ptr = pointerRef.current;
@@ -251,13 +259,9 @@ export default function DarshanHero({ linkedin }: { linkedin: string }) {
           }
         }
       }
-
-      if (!reducedMotion) {
-        raf = requestAnimationFrame(drawFrame);
-      }
     };
 
-    drawFrame();
+    drawFrame(0);
 
     return () => {
       cancelAnimationFrame(raf);

@@ -5,7 +5,7 @@ import { CornerMarks } from './wire';
 
 const UniversalPasteScene = forwardRef<HTMLElement>((_, ref) => (
   <section ref={ref} className="bp-scene" data-scene="universal-paste">
-    <div className="w-full max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+    <div className="w-full max-w-2xl lg:max-w-6xl mx-auto px-5 sm:px-6 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
       
       {/* Wireframe UI */}
       <div data-anim="up-panel" className="bp-card relative p-4 order-2 lg:order-1">
@@ -76,12 +76,12 @@ const UniversalPasteScene = forwardRef<HTMLElement>((_, ref) => (
           Universal Paste
           <span className="block text-[var(--bp-ink)]/60">for Adobe Premiere Pro</span>
         </h2>
-        <p className="mt-6 text-sm md:text-base font-light tracking-wider text-[var(--bp-muted2)] leading-relaxed max-w-md">
+        <p className="mt-5 sm:mt-6 text-sm md:text-base font-light tracking-wider text-[var(--bp-muted2)] leading-relaxed max-w-lg lg:max-w-md">
           The universal sidekick for editors. Copy images, SVGs, texts, and web elements directly from your browser and paste them into your Premiere Pro timeline instantly.
         </p>
-        <div className="mt-8 flex flex-col sm:flex-row items-start gap-4">
-          <Link to="/plugins/universal-paste" className="bp-btn bp-btn-solid px-8 py-3.5 text-xs">Explore the plugin</Link>
-          <Link to="/docs/plugins/universal-paste" className="bp-btn px-8 py-3.5 text-xs">Read the docs</Link>
+        <div className="mt-7 sm:mt-8 flex flex-col sm:flex-row items-stretch sm:items-start gap-3 sm:gap-4">
+          <Link to="/plugins/universal-paste" className="bp-btn bp-btn-solid px-7 sm:px-8 py-3.5 text-xs text-center">Explore the plugin</Link>
+          <Link to="/docs/plugins/universal-paste" className="bp-btn px-7 sm:px-8 py-3.5 text-xs text-center">Read the docs</Link>
         </div>
       </div>
 

@@ -28,6 +28,12 @@
 
 @media (min-width: 768px) {
   .darshan-scroll-progress {
+    top: 5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .darshan-scroll-progress {
     top: 6rem;
   }
 }
@@ -50,16 +56,18 @@
   z-index: 2;
 }
 
-/* Scroll-triggered entrance reveal (progressive enhancement — visible before JS mounts) */
-.darshan-portfolio[data-js='true'] [data-reveal] {
-  opacity: 0;
-  transform: translateY(22px);
-  transition: opacity .65s cubic-bezier(.22, 1, .36, 1), transform .65s cubic-bezier(.22, 1, .36, 1);
-}
+/* Scroll-triggered entrance reveal (desktop only — mobile & tablet render immediately without hidden sections) */
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+  .darshan-portfolio[data-js='true'] [data-reveal] {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity .65s cubic-bezier(.22, 1, .36, 1), transform .65s cubic-bezier(.22, 1, .36, 1);
+  }
 
-.darshan-portfolio[data-js='true'] [data-reveal][data-revealed='true'] {
-  opacity: 1;
-  transform: translateY(0);
+  .darshan-portfolio[data-js='true'] [data-reveal][data-revealed='true'] {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .darshan-group-index {
@@ -1822,16 +1830,17 @@
 
 @media (max-width: 767px) {
   .darshan-container {
-    width: calc(100% - 2.5rem);
+    width: calc(100% - 2rem);
   }
 
-  .darshan-cursor-glow {
+  .darshan-cursor-glow,
+  .darshan-hero-orbs {
     display: none;
   }
 
   .darshan-hero {
     min-height: 0;
-    padding-block: calc(4rem + 2rem) 3.7rem;
+    padding-block: calc(4rem + 1.75rem) 3rem;
   }
 
   .darshan-hero-body {
@@ -1939,11 +1948,33 @@
   }
 
   .darshan-toolkit-group ul {
-    grid-template-columns: minmax(0, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .55rem;
   }
 
   .darshan-toolkit-gear ul {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .55rem;
+  }
+
+  .darshan-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .darshan-actions .darshan-primary {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .darshan-footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .darshan-footer .darshan-primary {
+    width: 100%;
+    justify-content: center;
   }
 
   .darshan-viewer-body > :is(img, video) {

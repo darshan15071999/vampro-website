@@ -140,10 +140,9 @@ const SpecularButton = ({
     const fx = fxRef.current;
     if (!btn || !fx) return;
 
-    // Skip WebGL on mobile devices to prevent hitting the browser's WebGL context limit.
-    // Mobile browsers often limit active contexts to 8, and crashing results in a broken image icon.
-    // The button will gracefully fallback to its CSS glassmorphism styles.
-    if (window.innerWidth < 768) return;
+    // Skip WebGL on mobile & tablet touch devices to preserve GPU memory and avoid
+    // browser WebGL context limits; CSS glassmorphism renders cleanly as fallback.
+    if (window.innerWidth < 1024 || window.matchMedia('(pointer: coarse)').matches) return;
 
     const dpr = window.devicePixelRatio || 1;
     const renderer = new Renderer({ alpha: true, premultipliedAlpha: true, antialias: true, dpr });

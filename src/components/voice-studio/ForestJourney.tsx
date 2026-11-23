@@ -21,7 +21,8 @@ function StationPanel({ index }: { index: number }) {
 export default function ForestJourney() {
   const section = useRef<HTMLElement>(null), host = useRef<HTMLDivElement>(null), scene = useRef<JourneyScene | null>(null);
   const intro = useRef<HTMLDivElement>(null), lens = useRef<HTMLDivElement>(null), progressBar = useRef<HTMLDivElement>(null);
-  const [ready, setReady] = useState(false), [failed, setFailed] = useState(false), [simple, setSimple] = useState(false);
+  const [ready, setReady] = useState(false), [failed, setFailed] = useState(false);
+  const [simple, setSimple] = useState(() => (typeof window !== 'undefined' ? window.innerWidth < 1024 : false));
   const [rain, setRain] = useState(true), [ambient, setAmbient] = useState(false), [stage, setStage] = useState(0), [station, setStation] = useState(-1);
   const [panels, setPanels] = useState<HTMLElement[]>([]);
   const stageRef = useRef(-1), stationRef = useRef(-2), progressRef = useRef(0);
@@ -159,7 +160,7 @@ export default function ForestJourney() {
       <div ref={host} className="fpv-scene"/>
       <div className="fpv-vignette"/>
       <div ref={lens} className={`fpv-lens ${rain && !fallback ? '' : 'is-dry'}`} aria-hidden="true">{Array.from({ length: 19 }, (_, i) => <i key={i} style={{ left: `${(i * 31 + 7) % 100}%`, top: `${(i * 17 + 9) % 93}%`, width: `${4 + i % 5 * 2}px`, height: `${9 + i % 4 * 5}px`, animationDelay: `${-i * 1.4}s` }}/>)}</div>
-      <div className="fpv-topline fpv-controls-only"><div><button aria-pressed={ambient} onClick={toggleAmbient} disabled={fallback} aria-label={ambient ? 'Turn forest sound off' : 'Turn forest sound on'}>{ambient ? <Volume2 size={15}/> : <VolumeX size={15}/>}<span>Sound {ambient ? 'on' : 'off'}</span></button><button aria-pressed={rain} onClick={() => setRain(!rain)} disabled={fallback} aria-label={rain ? 'Turn rain off' : 'Turn rain on'}><CloudRain size={15}/><span>Rain {rain ? 'on' : 'off'}</span></button><button onClick={toggleSimple} aria-pressed={simple}>{simple ? <Maximize size={14}/> : <Minimize size={14}/>}<span>{simple ? 'Immersive view' : 'Simple view'}</span></button><a href="#benefits">Skip journey <ArrowUpRight size={13}/></a></div></div>
+      <div className="fpv-topline fpv-controls-only"><div>{!fallback && <><button aria-pressed={ambient} onClick={toggleAmbient} aria-label={ambient ? 'Turn forest sound off' : 'Turn forest sound on'}>{ambient ? <Volume2 size={15}/> : <VolumeX size={15}/>}<span>Sound {ambient ? 'on' : 'off'}</span></button><button aria-pressed={rain} onClick={() => setRain(!rain)} aria-label={rain ? 'Turn rain off' : 'Turn rain on'}><CloudRain size={15}/><span>Rain {rain ? 'on' : 'off'}</span></button></>}<button onClick={toggleSimple} aria-pressed={simple}>{simple ? <Maximize size={14}/> : <Minimize size={14}/>}<span>{simple ? '3D view' : 'Simple view'}</span></button><a href="#benefits">Skip journey <ArrowUpRight size={13}/></a></div></div>
       <div className="fpv-intro" ref={intro} style={fallback ? { opacity: 1 } : undefined}>
         <span className="fpv-kicker">FROM UNTAMED SOUND TO YOUR NEXT GREAT TAKE</span>
         <h1>Raw sound.<br/><em>Refined by you.</em></h1>

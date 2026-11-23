@@ -5,6 +5,9 @@ const FullPageParticles = ({ isDark }: { isDark: boolean }) => {
   const mouse = useRef({ x: -9999, y: -9999 });
 
   useEffect(() => {
+    // Skip expensive full-screen particle canvas on mobile/tablet and reduced-motion devices
+    if (window.innerWidth < 1024 || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
@@ -15,7 +18,7 @@ const FullPageParticles = ({ isDark }: { isDark: boolean }) => {
 
     type P = { x: number; y: number; vx: number; vy: number; size: number; opacity: number; hue: number; pulse: number; pulseSpeed: number };
     const particles: P[] = [];
-    const COUNT = 120;
+    const COUNT = 75;
 
     for (let i = 0; i < COUNT; i++) {
       particles.push({
@@ -88,7 +91,7 @@ const FullPageParticles = ({ isDark }: { isDark: boolean }) => {
     return () => { cancelAnimationFrame(frame); window.removeEventListener('resize', setSize); window.removeEventListener('mousemove', onMouseMove); };
   }, [isDark]);
 
-  return <canvas ref={canvasRef} className="fixed inset-0 w-full h-full pointer-events-none" style={{ zIndex: 50 }} />;
+  return <canvas ref={canvasRef} className="hidden lg:block fixed inset-0 w-full h-full pointer-events-none" style={{ zIndex: 50 }} />;
 };
 
 export default FullPageParticles;

@@ -14,12 +14,12 @@ const storyBoxes = [
 ];
 
 const StoryCard = ({ icon: Icon, title, subtitle, dataAnim }: any) => (
-  <div data-anim={dataAnim} className="bp-card flex flex-col items-center justify-center p-5 text-center aspect-square">
-    <div className="w-10 h-10 rounded-xl border border-[var(--bp-accent)]/30 flex items-center justify-center mb-3">
-      <Icon size={18} className="text-[var(--bp-accent)]" strokeWidth={1.5} />
+  <div data-anim={dataAnim} className="bp-card flex flex-col items-center justify-center p-3.5 sm:p-5 text-center aspect-square">
+    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl border border-[var(--bp-accent)]/30 flex items-center justify-center mb-2.5 sm:mb-3">
+      <Icon size={17} className="text-[var(--bp-accent)]" strokeWidth={1.5} />
     </div>
-    <h3 className="text-[var(--bp-ink-strong)] font-semibold text-[13px] tracking-wide mb-1">{title}</h3>
-    <p className="text-[var(--bp-accent)]/60 text-[10px] tracking-wider">{subtitle}</p>
+    <h3 className="text-[var(--bp-ink-strong)] font-semibold text-xs sm:text-[13px] tracking-wide mb-1">{title}</h3>
+    <p className="text-[var(--bp-accent)]/60 text-[10px] tracking-wider leading-tight">{subtitle}</p>
   </div>
 );
 
@@ -35,10 +35,10 @@ const scatter = [
 
 const StoryScene = forwardRef<HTMLElement>((_, ref) => (
   <section ref={ref} id="about" className="bp-scene" data-scene="story">
-    <div className="w-full max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+    <div className="w-full max-w-2xl lg:max-w-6xl mx-auto px-5 sm:px-6 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
       <div data-anim="story-board">
-        <DimLine label="What we do" className="mb-6" />
-        <div className="grid grid-cols-3 gap-4">
+        <DimLine label="What we do" className="mb-5 sm:mb-6" />
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
           {storyBoxes.map((box, i) => (
             <StoryCard key={i} {...box} dataAnim="story-frame" />
           ))}

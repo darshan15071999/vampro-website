@@ -66,12 +66,12 @@ const faqs = [
 ];
 
 function FeatureVisual({ type }: { type: string }) {
-  if (type === 'voice') return <div className="vs-feature-visual vs-voice-visual" aria-hidden="true"><div className="vs-voice-orbit"><Mic size={29}/></div><div><span>YOUR VOICE</span><Waveform compact/><small>Reference captured <Check size={10}/></small></div></div>;
-  if (type === 'convert') return <div className="vs-feature-visual vs-convert-visual" aria-hidden="true"><div><small>SOURCE</small><Waveform compact variant={1}/></div><MoveRight size={20}/><div><small>NEW VOICE</small><Waveform compact variant={3}/></div></div>;
-  if (type === 'script') return <div className="vs-feature-visual vs-script-visual" aria-hidden="true"><span>“Some stories are seen.<br/><em>The best ones are felt.</em>”</span><AudioLines size={32}/></div>;
-  if (type === 'repair') return <div className="vs-feature-visual vs-repair-visual" aria-hidden="true"><div><small>VOICE</small><Waveform compact/></div><div><small>MUSIC</small><Waveform compact variant={5}/></div></div>;
-  if (type === 'timeline') return <div className="vs-feature-visual vs-timeline-visual" aria-hidden="true"><div><span>V1</span><i>YOUR STORY / SCENE 01</i></div><div><span>A1</span><i><AudioLines size={13}/> Voice Studio · take 03<Check size={12}/></i></div><b/></div>;
-  return <div className="vs-feature-visual vs-library-visual" aria-hidden="true">{['Narration · take 03', 'Brand film · take 02', 'Interview · take 01'].map((t,i)=><div key={t}><FileAudio size={14}/><span>{t}</span><small>{i === 0 ? 'LATEST' : 'SAVED'}</small></div>)}</div>;
+  if (type === 'voice') return <div className="vs-feature-visual vs-voice-visual" aria-hidden="true"><div className="vs-voice-orbit"><Mic size={29} /></div><div><span>YOUR VOICE</span><Waveform compact /><small>Reference captured <Check size={10} /></small></div></div>;
+  if (type === 'convert') return <div className="vs-feature-visual vs-convert-visual" aria-hidden="true"><div><small>SOURCE</small><Waveform compact variant={1} /></div><MoveRight size={20} /><div><small>NEW VOICE</small><Waveform compact variant={3} /></div></div>;
+  if (type === 'script') return <div className="vs-feature-visual vs-script-visual" aria-hidden="true"><span>“Some stories are seen.<br /><em>The best ones are felt.</em>”</span><AudioLines size={32} /></div>;
+  if (type === 'repair') return <div className="vs-feature-visual vs-repair-visual" aria-hidden="true"><div><small>VOICE</small><Waveform compact /></div><div><small>MUSIC</small><Waveform compact variant={5} /></div></div>;
+  if (type === 'timeline') return <div className="vs-feature-visual vs-timeline-visual" aria-hidden="true"><div><span>V1</span><i>YOUR STORY / SCENE 01</i></div><div><span>A1</span><i><AudioLines size={13} /> Voice Studio · take 03<Check size={12} /></i></div><b /></div>;
+  return <div className="vs-feature-visual vs-library-visual" aria-hidden="true">{['Narration · take 03', 'Brand film · take 02', 'Interview · take 01'].map((t, i) => <div key={t}><FileAudio size={14} /><span>{t}</span><small>{i === 0 ? 'LATEST' : 'SAVED'}</small></div>)}</div>;
 }
 
 export default function VoiceStudio() {
@@ -129,7 +129,7 @@ export default function VoiceStudio() {
                 className="h-8 w-8 md:h-9 md:w-9 rounded-xl shadow-md object-cover border border-slate-200/20 group-hover:scale-105 transition-transform duration-300"
                 decoding="async"
               />
-              <span className="font-bank-gothic text-xl tracking-[0.12em] text-white font-bold" style={{ fontWeight: 700 }}>
+              <span className="hidden sm:inline font-bank-gothic text-xl tracking-[0.12em] text-white font-bold" style={{ fontWeight: 700 }}>
                 VAMPRO
               </span>
               <span className="hidden md:inline-flex items-center justify-center text-[11px] leading-normal uppercase tracking-[0.28em] font-semibold px-3.5 py-1.5 rounded-full transition-all duration-400 bg-white/5 text-indigo-300 border border-indigo-500/20">

@@ -4,6 +4,8 @@ export default function CursorGrid() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (window.innerWidth < 1024 || !window.matchMedia('(pointer: fine)').matches) return;
+
     const updateMousePosition = (ev: MouseEvent) => {
       if (!containerRef.current) return;
       const { pageX, pageY } = ev;
@@ -11,7 +13,7 @@ export default function CursorGrid() {
       containerRef.current.style.setProperty('--mouse-y', `${pageY}px`);
     };
     
-    window.addEventListener('mousemove', updateMousePosition);
+    window.addEventListener('mousemove', updateMousePosition, { passive: true });
     return () => {
       window.removeEventListener('mousemove', updateMousePosition);
     };
@@ -20,7 +22,7 @@ export default function CursorGrid() {
   return (
     <div 
       ref={containerRef}
-      className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
+      className="hidden lg:block pointer-events-none absolute inset-0 z-0 overflow-hidden"
       style={{
         maskImage: 'radial-gradient(400px circle at var(--mouse-x, -1000px) var(--mouse-y, -1000px), black, transparent)',
         WebkitMaskImage: 'radial-gradient(400px circle at var(--mouse-x, -1000px) var(--mouse-y, -1000px), black, transparent)',

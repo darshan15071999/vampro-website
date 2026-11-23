@@ -126,26 +126,26 @@ const BlogTemplate = () => {
 
   if (!isPost) {
     return (
-      <div className="sketchbook-bg min-h-screen pt-32 flex flex-col relative">
+      <div className="sketchbook-bg min-h-screen pt-24 md:pt-28 lg:pt-32 flex flex-col relative">
         <SEO {...blogMetadata} />
-        <main className="flex-grow w-full max-w-[1800px] mx-auto px-6 md:px-10 lg:px-16 2xl:px-24 z-10 pb-20">
-          <div className="text-center mb-16">
-            <h1 className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight mb-6">
+        <main className="flex-grow w-full max-w-[1800px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16 2xl:px-24 z-10 pb-16 md:pb-20">
+          <div className="text-center mb-10 md:mb-16">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 tracking-tight mb-4 md:mb-6">
               Vampro Blogs
             </h1>
-            <p className="text-lg text-slate-600 max-w-2xl mx-auto font-light leading-relaxed">
+            <p className="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto font-light leading-relaxed">
               Insights, updates, tutorials, and editing best practices for Adobe Premiere Pro.
             </p>
           </div>
 
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center bg-white/60 backdrop-blur-md border border-indigo-200/60 rounded-2xl p-5 mb-10 gap-5 shadow-sm">
-            <div className="flex flex-wrap gap-5 w-full md:w-auto">
-              <div className="flex flex-col sm:flex-row sm:items-center gap-2">
-                <label className="text-sm font-semibold text-slate-700 whitespace-nowrap">Plugin</label>
+          <div className="flex flex-col lg:flex-row justify-between items-stretch lg:items-center bg-white/60 backdrop-blur-md border border-indigo-200/60 rounded-2xl p-4 sm:p-5 mb-8 md:mb-10 gap-4 sm:gap-5 shadow-sm">
+            <div className="grid grid-cols-1 sm:grid-cols-3 lg:flex lg:flex-wrap gap-3 sm:gap-4 w-full lg:w-auto">
+              <div className="flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-2">
+                <label className="text-xs sm:text-sm font-semibold text-slate-700 whitespace-nowrap">Plugin</label>
                 <select
                   value={selectedProduct}
                   onChange={(e) => setSelectedProduct(e.target.value)}
-                  className="bg-white border border-indigo-200 rounded-lg px-3 py-2 text-sm text-slate-700 focus:outline-none focus:border-indigo-400 focus:ring-1 focus:ring-indigo-400 min-w-[140px]"
+                  className="w-full sm:w-auto bg-white border border-indigo-200 rounded-lg px-3 py-2 text-sm text-slate-700 focus:outline-none focus:border-indigo-400 focus:ring-1 focus:ring-indigo-400 min-w-0 sm:min-w-[140px]"
                 >
                   {uniqueProducts.map(prod => (
                     <option key={prod} value={prod}>{prod === 'All' ? 'All Plugins' : prod}</option>
@@ -153,12 +153,12 @@ const BlogTemplate = () => {
                 </select>
               </div>
 
-              <div className="flex flex-col sm:flex-row sm:items-center gap-2">
-                <label className="text-sm font-semibold text-slate-700 whitespace-nowrap">Topic</label>
+              <div className="flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-2">
+                <label className="text-xs sm:text-sm font-semibold text-slate-700 whitespace-nowrap">Topic</label>
                 <select
                   value={selectedTopic}
                   onChange={(e) => setSelectedTopic(e.target.value)}
-                  className="bg-white border border-indigo-200 rounded-lg px-3 py-2 text-sm text-slate-700 focus:outline-none focus:border-indigo-400 focus:ring-1 focus:ring-indigo-400 min-w-[140px]"
+                  className="w-full sm:w-auto bg-white border border-indigo-200 rounded-lg px-3 py-2 text-sm text-slate-700 focus:outline-none focus:border-indigo-400 focus:ring-1 focus:ring-indigo-400 min-w-0 sm:min-w-[140px]"
                 >
                   {uniqueTopics.map(topic => (
                     <option key={topic} value={topic}>{topic}</option>
@@ -166,12 +166,12 @@ const BlogTemplate = () => {
                 </select>
               </div>
 
-              <div className="flex flex-col sm:flex-row sm:items-center gap-2">
-                <label className="text-sm font-semibold text-slate-700 whitespace-nowrap">Author</label>
+              <div className="flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-2">
+                <label className="text-xs sm:text-sm font-semibold text-slate-700 whitespace-nowrap">Author</label>
                 <select
                   value={selectedAuthor}
                   onChange={(e) => setSelectedAuthor(e.target.value)}
-                  className="bg-white border border-indigo-200 rounded-lg px-3 py-2 text-sm text-slate-700 focus:outline-none focus:border-indigo-400 focus:ring-1 focus:ring-indigo-400 min-w-[140px]"
+                  className="w-full sm:w-auto bg-white border border-indigo-200 rounded-lg px-3 py-2 text-sm text-slate-700 focus:outline-none focus:border-indigo-400 focus:ring-1 focus:ring-indigo-400 min-w-0 sm:min-w-[140px]"
                 >
                   {uniqueAuthors.map(author => (
                     <option key={author} value={author}>{author}</option>
@@ -180,12 +180,12 @@ const BlogTemplate = () => {
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row sm:items-center gap-2 w-full md:w-auto border-t md:border-t-0 border-indigo-200/50 pt-4 md:pt-0">
-              <label className="text-sm font-semibold text-slate-700 whitespace-nowrap">Sort by</label>
+            <div className="flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-2 w-full lg:w-auto border-t lg:border-t-0 border-indigo-200/50 pt-3 lg:pt-0">
+              <label className="text-xs sm:text-sm font-semibold text-slate-700 whitespace-nowrap">Sort by</label>
               <select
                 value={sortOrder}
                 onChange={(e) => setSortOrder(e.target.value)}
-                className="bg-white border border-indigo-200 rounded-lg px-3 py-2 text-sm text-slate-700 focus:outline-none focus:border-indigo-400 focus:ring-1 focus:ring-indigo-400 min-w-[140px]"
+                className="w-full sm:w-auto bg-white border border-indigo-200 rounded-lg px-3 py-2 text-sm text-slate-700 focus:outline-none focus:border-indigo-400 focus:ring-1 focus:ring-indigo-400 min-w-0 sm:min-w-[140px]"
               >
                 <option value="newest">Newest First</option>
                 <option value="oldest">Oldest First</option>
@@ -312,7 +312,7 @@ const BlogTemplate = () => {
   };
 
   return (
-    <div className="sketchbook-bg min-h-screen pt-28 flex flex-col relative">
+    <div className="sketchbook-bg min-h-screen pt-20 md:pt-24 lg:pt-28 flex flex-col relative">
       <SEO
         {...blogMetadata}
         title={`${currentPost.title} | Vampro Blog`}
@@ -325,15 +325,15 @@ const BlogTemplate = () => {
 
       <div className="flex-grow">
         {/* Banner */}
-        <div className="w-full max-w-[1800px] mx-auto px-6 md:px-10 lg:px-16 2xl:px-24 mt-4 mb-8 relative z-10">
+        <div className="w-full max-w-[1800px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16 2xl:px-24 mt-4 mb-6 md:mb-8 relative z-10">
           <Link to="/blog" className="inline-flex items-center gap-2 text-sm text-indigo-600 hover:text-indigo-500 transition-colors mb-4 font-medium">
             <ArrowLeft size={16} /> Back to Blog
           </Link>
 
-          <div className="rounded-3xl overflow-hidden aspect-video sm:aspect-[21/9] lg:aspect-[3840/1116] w-full relative border border-slate-200 shadow-xl mb-6">
+          <div className="rounded-2xl sm:rounded-3xl overflow-hidden aspect-video sm:aspect-[21/9] lg:aspect-[3840/1116] w-full relative border border-slate-200 shadow-xl mb-6">
             <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent z-10 opacity-70"></div>
             <img src={currentPost.image} alt={currentPost.title} className="w-full h-full object-cover" />
-            <div className="absolute bottom-6 left-6 z-20 flex flex-wrap items-center gap-2">
+            <div className="absolute bottom-3 left-3 sm:bottom-6 sm:left-6 z-20 flex flex-wrap items-center gap-2">
               <span className="px-3 py-1 bg-white/90 backdrop-blur-md border border-indigo-200 text-indigo-600 text-xs font-semibold rounded-full shadow-sm">
                 {currentPost.category}
               </span>
@@ -373,8 +373,8 @@ const BlogTemplate = () => {
             </p>
           </header>
 
-          <div className="flex flex-wrap items-center justify-between gap-4 p-5 md:px-8 md:py-6 bg-white/60 backdrop-blur-md border border-indigo-100 shadow-sm rounded-3xl mb-12">
-            <div className="flex items-center gap-6 text-sm text-slate-500">
+          <div className="flex flex-wrap items-center justify-between gap-4 p-4 sm:p-5 md:px-8 md:py-6 bg-white/60 backdrop-blur-md border border-indigo-100 shadow-sm rounded-2xl sm:rounded-3xl mb-8 md:mb-12">
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs sm:text-sm text-slate-500">
               <Link
                 to="/people/darshan"
                 className="group/author flex items-center gap-3 hover:text-indigo-600 transition-colors"
@@ -472,7 +472,7 @@ const BlogTemplate = () => {
           </div>
         </div>
 
-        <div className="w-full max-w-[1800px] mx-auto px-6 md:px-10 lg:px-16 2xl:px-24 flex flex-col lg:flex-row gap-8 lg:gap-12 xl:gap-20 2xl:gap-28 relative z-10 pb-20">
+        <div className="w-full max-w-[1800px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16 2xl:px-24 flex flex-col lg:flex-row gap-6 sm:gap-8 lg:gap-12 xl:gap-20 2xl:gap-28 relative z-10 pb-16 md:pb-20">
           {/* TOC Sidebar & Left Ad Callout */}
           <aside className="w-full lg:w-64 flex-shrink-0 lg:sticky top-32 h-fit order-2 lg:order-1 flex flex-col gap-6">
             <div className="p-6 rounded-2xl bg-white/70 backdrop-blur-md border border-slate-200 shadow-sm">
@@ -561,7 +561,7 @@ const BlogTemplate = () => {
           <article className="flex-1 min-w-0 mx-auto order-1 lg:order-2 text-slate-800 w-full flex flex-col gap-8">
 
             {/* Overview Box */}
-            <div id="overview" className={`rounded-3xl p-8 shadow-sm border relative overflow-hidden ${
+            <div id="overview" className={`rounded-2xl sm:rounded-3xl p-5 sm:p-8 shadow-sm border relative overflow-hidden ${
               isUniversalPaste
                 ? 'bg-amber-50/50 border-amber-200/80'
                 : 'bg-indigo-50/50 border-indigo-100'
@@ -578,7 +578,7 @@ const BlogTemplate = () => {
             </div>
 
             {/* Main Content */}
-            <div className="bg-white rounded-3xl p-8 md:p-12 shadow-xl border border-slate-200 relative overflow-hidden">
+            <div className="bg-white rounded-2xl sm:rounded-3xl p-5 sm:p-8 md:p-12 shadow-xl border border-slate-200 relative overflow-hidden">
               <div className={`absolute top-0 left-0 w-full h-2 ${
                 isUniversalPaste
                   ? 'bg-gradient-to-r from-[#ffd437] via-[#ed1c24] to-[#07080b]'

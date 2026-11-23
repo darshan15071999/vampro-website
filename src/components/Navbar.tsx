@@ -106,15 +106,15 @@ const Navbar = ({ openSearch }: NavbarProps) => {
   const isHomePage = location.pathname === '/';
 
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-400 ${
-      isHomePage
+    <nav className={`fixed top-0 left-0 right-0 w-full z-50 transition-all duration-300 ${
+      isHomePage && !scrolled && !isMobileMenuOpen
         ? 'bg-transparent border-b border-transparent'
         : isLight
-          ? 'bg-white/80 backdrop-blur-md border-b border-slate-200 shadow-sm'
-          : 'bg-[#07060F]/50 backdrop-blur-md border-b border-white/10 shadow-sm'
+          ? 'bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm'
+          : 'bg-[#07060F]/85 backdrop-blur-md border-b border-white/10 shadow-sm'
       }`}>
-      <div className="w-full px-6 md:px-10 lg:px-16">
-        <div className="flex justify-between items-center h-16 md:h-24">
+      <div className="w-full px-4 sm:px-6 md:px-10 lg:px-16">
+        <div className="flex justify-between items-center h-16 md:h-20 lg:h-24">
           {/* Logo */}
           <div className="flex items-center gap-3 cursor-pointer group" onClick={() => navigate('/')}>
             <img src="/header.png" alt="Vampro Logo" className="h-10 w-10 md:h-14 md:w-14 rounded-xl md:rounded-2xl shadow-md object-cover border border-slate-200/20 group-hover:scale-105 transition-transform duration-300" />
@@ -246,9 +246,14 @@ const Navbar = ({ openSearch }: NavbarProps) => {
             )}
 
             {isDocsPage && (
-              <button onClick={openSearch} className="text-slate-400 p-2"><Search size={20} /></button>
+              <button onClick={openSearch} aria-label="Search documentation" className="text-slate-400 p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center"><Search size={20} /></button>
             )}
-            <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className={`p-2 ${isLight && !scrolled ? 'text-[#07060F]' : scrolled && isLight ? 'text-[#07060F]' : 'text-white'}`}>
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label={isMobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+              aria-expanded={isMobileMenuOpen}
+              className={`p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg ${isLight ? 'text-[#07060F]' : 'text-white'}`}
+            >
               {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
@@ -262,7 +267,7 @@ const Navbar = ({ openSearch }: NavbarProps) => {
             initial="hidden"
             animate="visible"
             exit="exit"
-            className={`lg:hidden pb-4 pt-2 px-4 space-y-1 absolute w-full shadow-xl overflow-hidden ${isLight ? 'bg-white/95 backdrop-blur-xl' : 'bg-[#07060F]/95 backdrop-blur-xl border-t border-indigo-900/20'}`}
+            className={`lg:hidden pb-5 pt-2 px-4 space-y-1 absolute left-0 right-0 w-full max-h-[calc(100dvh-4rem)] overflow-y-auto shadow-2xl ${isLight ? 'bg-white/95 backdrop-blur-xl border-t border-slate-200' : 'bg-[#07060F]/95 backdrop-blur-xl border-t border-indigo-900/30'}`}
           >
             {mobileNavItems.map((item, i) => {
               const Element = item.external ? motion.a : MotionLink;

@@ -42,9 +42,11 @@ const YoutubeScene = forwardRef<HTMLElement>((_, ref) => (
         <CornerMarks inset={6} />
         <video
           data-anim="yt-video"
+          autoPlay
           loop
           muted
           playsInline
+          preload="metadata"
           className="w-full aspect-video object-cover opacity-40 mix-blend-screen"
         >
           <source src="/showreel.mp4" type="video/mp4" />
